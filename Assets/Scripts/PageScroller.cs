@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PageScroller : MonoBehaviour
 {
+    //a este singleton le pones los gameobjectpadre que contienen todo lo de su pagina gg
 
     public static PageScroller instance;
 
-    [SerializeField, Tooltip("Array of GameObjects to toggle between")]
+    [SerializeField]
     private GameObject[] objectsToToggle;
-    [SerializeField, Tooltip("Index of active object in the array")]
     private int activeIndex = 0;
 
     public TriggerScript esferaPrev;

@@ -62,7 +62,6 @@ public class PlayerModel
 
         _verticalVelocity -= _player.gravityValue * Time.deltaTime; //aplica gravedad extra
         _move = _player.transform.right * hor + _player.transform.forward * ver; //cargo mi vector movimiento
-        Debug.Log("move " + _move);
 
 
         if (_move.magnitude > 1) //normalizo
