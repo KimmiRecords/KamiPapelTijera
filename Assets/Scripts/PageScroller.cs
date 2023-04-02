@@ -78,4 +78,13 @@ public class PageScroller : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, TurnNextPage);
+        }
+    }
 }
