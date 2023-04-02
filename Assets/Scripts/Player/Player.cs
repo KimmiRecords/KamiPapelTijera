@@ -31,13 +31,13 @@ public class Player : MonoBehaviour
     private void Update()
     {
         _controller.CheckControls();
+
+        if (_controller.hor != 0 || _controller.ver != 0)
+        {
+            //print(_controller.hor + "//" + _controller.ver);
+            EventManager.Trigger(Evento.OnPlayerMove, _controller.hor, _controller.ver);
+        }
+
         _model.NewMove(_controller.hor, _controller.ver); //todo el tiempo, aunque no me mueva, pues caidas y bla
     }
-
-    //public void Move()
-    //{
-    //    _model.NewMove(_controller.hor, _controller.ver);
-    //}
-
-
 }

@@ -86,10 +86,22 @@ public class PlayerModel
         _move *= _playerSpeed * _speedModifier;
         _move.y = _verticalVelocity; //sigo cargando el vector movieminto
         _player.cc.Move(_move * Time.deltaTime); //aplico el vector movieminto al character controller, con el metodo .Move
+        //RotatePlayer(hor, ver);
 
         //if (agency) //esto es para cosass de la aanimacion
         //{
         //    pAnims.CheckMagnitude(_move.x + _move.z); //en el script de playerAnimations, chequea si me estoy moviendo o no
         //}
+    }
+
+    void RotatePlayer(float h, float v)
+    {
+        Vector3 direction = new Vector3(h, 0f, v);
+
+        if (direction.magnitude > 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            _player.transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+        }
     }
 }
