@@ -10,7 +10,7 @@ public class PageScroller : MonoBehaviour
 
     [SerializeField]
     private GameObject[] objectsToToggle;
-    private int activeIndex = 0;
+    int activeIndex = 0;
 
     public TriggerScript esferaPrev;
     public TriggerScript esferaNext;
@@ -30,11 +30,12 @@ public class PageScroller : MonoBehaviour
         EventManager.Subscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
         EventManager.Subscribe(Evento.OnPlayerPressedE, TurnNextPage);
 
+        CheckSpheres(activeIndex);
     }
 
     void TurnNextPage(params object[] parameters)
     {
-        if (esferaNext.triggerBool)
+        if (esferaNext.triggerBool) //pregunta si el player esta encima del trigger
         {
             if (activeIndex >= objectsToToggle.Length - 1)
             {
@@ -44,6 +45,7 @@ public class PageScroller : MonoBehaviour
             {
                 activeIndex++;
                 SetActiveObject();
+                CheckSpheres(activeIndex);
             }
         }
     }
@@ -60,9 +62,36 @@ public class PageScroller : MonoBehaviour
             {
                 activeIndex--;
                 SetActiveObject();
+                CheckSpheres(activeIndex);
             }
         }
     }
+
+    public void CheckSpheres(int currentPage)
+    {
+        //este metodo chequea, segun la currentPage, que esferas deberian estar activas
+        if (currentPage <= 0)
+        {
+            esferaPrev.OnExitBehaviour();
+            esferaPrev.gameObject.SetActive(false);
+        }
+        else
+        {
+            esferaPrev.gameObject.SetActive(true);
+
+        }
+
+        if (currentPage >= objectsToToggle.Length - 1)
+        {
+            esferaNext.OnExitBehaviour();
+            esferaNext.gameObject.SetActive(false);
+        }
+        else
+        {
+            esferaNext.gameObject.SetActive(true);
+        }
+    }
+
 
     private void SetActiveObject()
     {
@@ -77,6 +106,8 @@ public class PageScroller : MonoBehaviour
                 objectsToToggle[i].SetActive(false);
             }
         }
+
+        EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1);
     }
 
     private void OnDestroy()

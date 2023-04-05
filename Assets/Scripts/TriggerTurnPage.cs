@@ -11,9 +11,7 @@ public class TriggerTurnPage : TriggerScript
     {
         if (other.gameObject == requiredGameObject)
         {
-            triggerBool = true;
-            print("entroel player");
-            TooltipManager.instance.ShowTooltip(tooltipTextToShow);
+            OnEnterBehaviour();
         }
     }
 
@@ -21,11 +19,22 @@ public class TriggerTurnPage : TriggerScript
     {
         if (other.gameObject == requiredGameObject)
         {
-            triggerBool = false;
-            print("se salio el player");
-            TooltipManager.instance.HideTooltip();
-
+            OnExitBehaviour();
         }
+    }
+
+    public override void OnEnterBehaviour()
+    {
+        triggerBool = true;
+        //print("entroel player");
+        TooltipManager.instance.ShowTooltip(tooltipTextToShow);
+    }
+
+    public override void OnExitBehaviour()
+    {
+        triggerBool = false;
+        //print("se salio el player");
+        TooltipManager.instance.HideTooltip();
     }
 
 }

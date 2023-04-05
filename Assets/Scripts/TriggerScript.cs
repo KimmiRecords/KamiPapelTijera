@@ -21,7 +21,7 @@ public abstract class TriggerScript : MonoBehaviour
     {
         if (other.gameObject == requiredGameObject)
         {
-            triggerBool = true;
+            OnEnterBehaviour();
         }
     }
 
@@ -29,7 +29,17 @@ public abstract class TriggerScript : MonoBehaviour
     {
         if (other.gameObject == requiredGameObject)
         {
-            triggerBool = false;
+            OnExitBehaviour();
         }
+    }
+
+    public virtual void OnEnterBehaviour()
+    {
+        triggerBool = true;
+    }
+
+    public virtual void OnExitBehaviour()
+    {
+        triggerBool = false;
     }
 }

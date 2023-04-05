@@ -13,11 +13,12 @@ using UnityEngine;
 
 public enum Evento
 {
-    //eventos
     OnPlayerPressedE,
     OnPlayerPressedQ,
     OnPlayerPressedSpace,
-    OnPlayerMove //cuando hor o ver son != 0. los params son 0 hor y 1 ver
+    OnPlayerMove, //cuando hor o ver son != 0. los params son 0 hor y 1 ver
+
+    OnPlayerChangePage //param 0 currentpage
 }
 
 public class EventManager
