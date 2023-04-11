@@ -16,8 +16,15 @@ public abstract class TriggerScript : MonoBehaviour
     [HideInInspector]
     public bool triggerBool = false;
 
+    [SerializeField]
+    protected string tooltipTextToShow;
 
-    protected virtual void OnTriggerEnter(Collider other)
+    private void Start()
+    {
+        EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
+    }
+
+    protected virtual void OnTriggerEnter(Collider other) //cuando el player entra, se dispara el behaviour de entrar
     {
         if (other.gameObject == requiredGameObject)
         {
@@ -25,7 +32,7 @@ public abstract class TriggerScript : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)//cuando el player sale, se dispara el behaviour de salir
     {
         if (other.gameObject == requiredGameObject)
         {
@@ -36,10 +43,30 @@ public abstract class TriggerScript : MonoBehaviour
     public virtual void OnEnterBehaviour()
     {
         triggerBool = true;
+        print("entro el player");
+        TooltipManager.instance.ShowTooltip(tooltipTextToShow);
     }
 
     public virtual void OnExitBehaviour()
     {
         triggerBool = false;
+        print("se salio el player");
+        TooltipManager.instance.HideTooltip();
+    }
+
+    public virtual void Interact(params object[] parameter)
+    {
+        if (triggerBool)
+        {
+            print("interactue con " + gameObject.name);
+        }
+    }
+
+    protected void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
+        }
     }
 }
