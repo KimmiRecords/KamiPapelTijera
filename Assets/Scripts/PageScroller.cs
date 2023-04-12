@@ -44,7 +44,7 @@ public class PageScroller : MonoBehaviour
             else
             {
                 activeIndex++;
-                SetActiveObject();
+                SetOnPlayerChangePageTrigger();
                 CheckSpheres(activeIndex);
             }
         }
@@ -61,7 +61,7 @@ public class PageScroller : MonoBehaviour
             else
             {
                 activeIndex--;
-                SetActiveObject();
+                SetOnPlayerChangePageTrigger();
                 CheckSpheres(activeIndex);
             }
         }
@@ -92,6 +92,11 @@ public class PageScroller : MonoBehaviour
         }
     }
 
+    private void SetOnPlayerChangePageTrigger()
+    {
+        EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1);
+        Invoke("SetActiveObject", 2);
+    }
 
     private void SetActiveObject()
     {
@@ -107,8 +112,10 @@ public class PageScroller : MonoBehaviour
             }
         }
 
-        EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1);
+        //EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1);
     }
+
+    
 
     private void OnDestroy()
     {
