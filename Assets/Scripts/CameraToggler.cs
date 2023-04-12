@@ -12,6 +12,15 @@ public class CameraToggler : MonoBehaviour
 
     int currentCamera = 0;
 
+    [SerializeField]
+    int startingCamera;
+
+    private void Start()
+    {
+        currentCamera = startingCamera;
+    }
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse2))
