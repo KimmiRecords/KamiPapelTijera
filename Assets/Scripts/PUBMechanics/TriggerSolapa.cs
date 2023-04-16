@@ -15,7 +15,14 @@ public class TriggerSolapa : TriggerScript
         if (triggerBool)
         {
             solapaAfectada.CambiarEstado();
-            objetoParaMostrar.gameObject.SetActive(true);
+            Invoke("MostrarObjeto", 1);
+
         }
+    }
+
+    public void MostrarObjeto()
+    {
+        objetoParaMostrar.gameObject.SetActive(true);
+
     }
 }
