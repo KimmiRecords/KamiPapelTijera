@@ -10,7 +10,9 @@ public class PageScroller : MonoBehaviour
 
     [SerializeField]
     private GameObject[] objectsToToggle;
-    int activeIndex = 0;
+
+    [HideInInspector]
+    public int activeIndex = 0; //currentpage = activeindex - 1
 
     public TriggerScript esferaPrev;
     public TriggerScript esferaNext;

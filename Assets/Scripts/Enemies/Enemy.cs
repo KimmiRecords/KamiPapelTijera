@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, ICortable
 {
     [Tooltip("The health points of the enemy.")]
     public float hp = 100f;
@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        print("enemy: recibi dmage");
+        print("enemy: recibi " + dmg + " damage");
 
         hp -= dmg;
         if (hp <= 0)
@@ -48,5 +48,11 @@ public class Enemy : MonoBehaviour
         print("enemy: me mori");
         EnemySpawner.instance.AddDeadEnemy();
         Destroy(this.gameObject);
+    }
+
+    public void GetCut(float dmg)
+    {
+        print("enemy: me cortaron");
+        TakeDamage(dmg);
     }
 }

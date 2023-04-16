@@ -14,7 +14,10 @@ public class PlayerModel
     float _speedModifier;
     float _playerSpeed;
 
+
+
     Vector3 _move; //el vector en el que guardo la suma de todo el movimiento para finalmente aplicarsela al character controller
+    Vector3 lastNormalizedMove; //guardo el ultimo vector de movimeinto piola
 
     public PlayerModel(Player player)
     {
@@ -23,14 +26,12 @@ public class PlayerModel
         _playerSpeed = _player.walkingSpeed; 
         _speedModifier = 1;
         //initialGravityValue = gravityValue; mismo pero para cambiar la gravedad
-
     }
 
     public void NewJump()
     {
         Debug.Log("salto");
     }
-
 
     public void NewMove(float hor, float ver)
     {
@@ -67,6 +68,7 @@ public class PlayerModel
         if (_move.magnitude > 1) //normalizo
         {
             _move = _move.normalized;
+            lastNormalizedMove = _move;
         }
 
         if (_player.isJump)
@@ -88,20 +90,30 @@ public class PlayerModel
         _player.cc.Move(_move * Time.deltaTime); //aplico el vector movieminto al character controller, con el metodo .Move
         //RotatePlayer(hor, ver);
 
+
         //if (agency) //esto es para cosass de la aanimacion
         //{
         //    pAnims.CheckMagnitude(_move.x + _move.z); //en el script de playerAnimations, chequea si me estoy moviendo o no
         //}
     }
 
-    void RotatePlayer(float h, float v)
+    public void EnableTijeraHitbox()
     {
-        Vector3 direction = new Vector3(h, 0f, v);
-
-        if (direction.magnitude > 0.1f)
+        //Debug.Log("prendo la tijera");
+        _player.miTijeraHitbox.gameObject.SetActive(true);
+        if (_move.magnitude < 0.5)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            _player.transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            _player.miTijeraHitbox.transform.localPosition = lastNormalizedMove;
         }
+        else
+        {
+            _player.miTijeraHitbox.transform.localPosition = _move.normalized;
+        }
+    }
+
+    public void DisableTijeraHitbox()
+    {
+        //Debug.Log("apago la tijera");
+        _player.miTijeraHitbox.gameObject.SetActive(false);
     }
 }

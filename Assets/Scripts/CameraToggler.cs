@@ -20,7 +20,6 @@ public class CameraToggler : MonoBehaviour
         currentCamera = startingCamera;
     }
 
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse2))
@@ -43,8 +42,5 @@ public class CameraToggler : MonoBehaviour
 
             _virtualCameras[previousCamera].gameObject.SetActive(false); 
         }
-
-
-       
     }
 }

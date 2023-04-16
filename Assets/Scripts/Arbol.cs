@@ -2,22 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arbol : TriggerScript, ICortable
+public class Arbol : MonoBehaviour, ICortable
 {
     [SerializeField]
     Vector3 rotationVector;
 
-    public void GetCut()
-    {
-        print("me cortaron");
-        transform.Rotate(rotationVector);
-    }
+    [SerializeField]
+    Vector3 newPosition;
 
-    public override void Interact(params object[] parameter)
+    bool wasCut = false;
+
+    public void GetCut(float dmg)
     {
-        if (triggerBool)
+        if (!wasCut)
         {
-            GetCut();
+            print("me cortaron");
+            transform.Rotate(rotationVector);
+            transform.localPosition = newPosition;
+            wasCut = true;
         }
     }
 

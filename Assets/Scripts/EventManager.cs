@@ -17,8 +17,10 @@ public enum Evento
     OnPlayerPressedQ,
     OnPlayerPressedSpace,
     OnPlayerMove, //cuando hor o ver son != 0. los params son 0 hor y 1 ver
+    OnPlayerPrimaryClick,
 
-    OnPlayerChangePage //param 0 currentpage
+
+    OnPlayerChangePage//param 0 currentpage
 }
 
 public class EventManager

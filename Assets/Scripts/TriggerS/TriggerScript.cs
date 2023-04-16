@@ -43,14 +43,14 @@ public abstract class TriggerScript : MonoBehaviour
     public virtual void OnEnterBehaviour()
     {
         triggerBool = true;
-        print("entro el player");
+        //print("entro el player");
         TooltipManager.instance.ShowTooltip(tooltipTextToShow);
     }
 
     public virtual void OnExitBehaviour()
     {
         triggerBool = false;
-        print("se salio el player");
+        //print("se salio el player");
         TooltipManager.instance.HideTooltip();
     }
 
@@ -58,7 +58,7 @@ public abstract class TriggerScript : MonoBehaviour
     {
         if (triggerBool)
         {
-            print("interactue con " + gameObject.name);
+            //print("interactue con " + gameObject.name);
         }
     }
 

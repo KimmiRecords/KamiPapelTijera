@@ -30,6 +30,12 @@ public class PlayerController
             EventManager.Trigger(Evento.OnPlayerPressedQ);
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            //EventManager.Trigger(Evento.OnPlayerPrimaryClick);
+            _player.OnPrimaryClick();
+        }
+
         if (Input.GetButtonDown("Jump"))
         {
             _player.isJump = true;

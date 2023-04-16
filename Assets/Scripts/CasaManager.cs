@@ -58,4 +58,12 @@ public class CasaManager : MonoBehaviour
         _casaLowPolyAnim.SetBool("isOpen", false);
 
     }
+
+    private void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnPlayerChangePage, ChangePage);
+        }
+    }
 }
