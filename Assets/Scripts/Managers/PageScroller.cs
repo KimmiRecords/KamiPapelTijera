@@ -51,6 +51,7 @@ public class PageScroller : MonoBehaviour
                 activeIndex++;
                 SetOnPlayerChangePageTrigger();
                 CheckSpheres(activeIndex);
+                AudioManager.instance.PlayByName("PageTurn01");
             }
         }
     }
@@ -68,6 +69,8 @@ public class PageScroller : MonoBehaviour
                 activeIndex--;
                 SetOnPlayerChangePageTrigger();
                 CheckSpheres(activeIndex);
+                AudioManager.instance.PlayByName("PageTurn02");
+
             }
         }
     }

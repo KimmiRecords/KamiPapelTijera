@@ -17,6 +17,7 @@ public class Arbol : MonoBehaviour, ICortable
         if (!wasCut)
         {
             print("me cortaron");
+            AudioManager.instance.PlayByName("ShipCrash");
             transform.Rotate(rotationVector);
             transform.localPosition = newPosition;
             wasCut = true;

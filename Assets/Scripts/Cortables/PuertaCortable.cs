@@ -7,6 +7,8 @@ public class PuertaCortable : MonoBehaviour, ICortable
     public void GetCut(float dmg)
     {
         print("cortaste la puerta");
+        AudioManager.instance.PlayByName("ShipCrash");
+
         Destroy(gameObject);
     }
 }
