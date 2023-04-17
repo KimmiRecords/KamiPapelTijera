@@ -10,6 +10,7 @@ public class CofreCortable : MonoBehaviour, ICortable
         if (!wasCut)
         {
             print("cortaste el cofre. ganaste 15 pesos");
+            Destroy(gameObject);
             wasCut = true;
         }
     }

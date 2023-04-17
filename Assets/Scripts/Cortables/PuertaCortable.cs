@@ -7,18 +7,8 @@ public class PuertaCortable : MonoBehaviour, ICortable
     public void GetCut(float dmg)
     {
         print("cortaste la puerta");
+        AudioManager.instance.PlayByName("ShipCrash");
+
         Destroy(gameObject);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

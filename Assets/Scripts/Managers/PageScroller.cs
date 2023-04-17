@@ -11,6 +11,9 @@ public class PageScroller : MonoBehaviour
     [SerializeField]
     private GameObject[] objectsToToggle;
 
+    [SerializeField]
+    int animationDuration = 1;
+
     [HideInInspector]
     public int activeIndex = 0; //currentpage = activeindex - 1
 
@@ -48,6 +51,7 @@ public class PageScroller : MonoBehaviour
                 activeIndex++;
                 SetOnPlayerChangePageTrigger();
                 CheckSpheres(activeIndex);
+                AudioManager.instance.PlayByName("PageTurn01");
             }
         }
     }
@@ -65,6 +69,8 @@ public class PageScroller : MonoBehaviour
                 activeIndex--;
                 SetOnPlayerChangePageTrigger();
                 CheckSpheres(activeIndex);
+                AudioManager.instance.PlayByName("PageTurn02");
+
             }
         }
     }
@@ -97,7 +103,7 @@ public class PageScroller : MonoBehaviour
     private void SetOnPlayerChangePageTrigger()
     {
         EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1);
-        Invoke("SetActiveObject", 2);
+        Invoke("SetActiveObject", animationDuration);
     }
 
     private void SetActiveObject()
