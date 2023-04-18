@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -35,9 +36,11 @@ public class AudioManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<string, AudioSource> sound = new Dictionary<string, AudioSource>();
 
-    public bool playBGM; //si hay que darle play al bgm on start
+    //public bool playBGM; //si hay que darle play al bgm on start
     public string thisLevelBgm;
 
+
+    Dictionary<string, string> levelBGMs = new Dictionary<string, string>();
 
     void Awake()
     {
@@ -60,14 +63,28 @@ public class AudioManager : MonoBehaviour
             sound.Add(s, _allSounds[i]);
             //print("agregue el key " + s + " con value " + allSounds[i]+ " al diccionario");
         }
+
+        levelBGMs.Add("MainMenu", "4S_IntroBigChords");
+        levelBGMs.Add("SampleScene", "4S_MarimbaLoop");
+
+        SceneManager.sceneLoaded += StartLevelBGM;
     }
 
-    private void Start()
+    //private void Start()
+    //{
+    //    //if (playBGM)
+    //    //{
+    //    //    PlayBGM();
+    //    //}
+    //}
+
+    public void StartLevelBGM(Scene scene, LoadSceneMode lsm)
     {
-        if (playBGM)
-        {
-            PlayBGM();
-        }
+        print(scene.name);
+        StopBGM();
+        thisLevelBgm = levelBGMs[scene.name];
+        PlayBGM();
+        //PlayByName(thisLevelBgm);
     }
 
     public void PlayByName(string clipName) //el mas groso. le das el string y te da play a ese audio. muy global y sencillo.
@@ -76,24 +93,7 @@ public class AudioManager : MonoBehaviour
         sound = this.sound[clipName];
         sound.Play();
     }
-    public void StopByName(string clipName)
-    {
-        AudioSource sound;
-        sound = this.sound[clipName];
-        sound.Stop();
-    }
-
-    public void PlayOnEnd(string soundToEndName, string soundToPlayName)
-    {
-        AudioSource soundToEnd;
-        soundToEnd = this.sound[soundToEndName];
-
-        AudioSource soundToPlay;
-        soundToPlay = this.sound[soundToPlayName];
-        StartCoroutine(PlayOnOtherSoundEnd(soundToEnd, soundToPlay));
-    }
-
-    public void PlayByNamePitch(string clipName, float pitch)
+    public void PlayByName(string clipName, float pitch) //el mas groso. le das el string y te da play a ese audio. muy global y sencillo.
     {
         AudioSource sound;
         sound = this.sound[clipName]; //establezco que voy a estar laburando con el audio cuyo nombre es clipname
@@ -105,6 +105,26 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(SetPitchToOriginal(sound, originalPitch)); //le vuelvo a poner el pitch que tenia antes
     }
 
+    public void PlayRandom(params string[] clipNames)
+    {
+        int randomNumber = Random.Range(0, clipNames.Length);
+        PlayByName(clipNames[randomNumber]);
+    }
+    public void StopByName(string clipName)
+    {
+        AudioSource sound;
+        sound = this.sound[clipName];
+        sound.Stop();
+    }
+    public void PlayOnEnd(string soundToEndName, string soundToPlayName)
+    {
+        AudioSource soundToEnd;
+        soundToEnd = this.sound[soundToEndName];
+
+        AudioSource soundToPlay;
+        soundToPlay = this.sound[soundToPlayName];
+        StartCoroutine(PlayOnOtherSoundEnd(soundToEnd, soundToPlay));
+    }
     public IEnumerator SetPitchToOriginal(AudioSource sound, float originalPitch)
     {
         while (sound.isPlaying)
@@ -114,7 +134,6 @@ public class AudioManager : MonoBehaviour
 
         sound.pitch = originalPitch; 
     }
-
     public IEnumerator PlayOnOtherSoundEnd(AudioSource soundToEnd, AudioSource soundToPlay)
     {
         soundToEnd.loop = false;
@@ -129,7 +148,6 @@ public class AudioManager : MonoBehaviour
 
         soundToPlay.Play();
     }
-
     public void PlayBGM()
     {
         //print("reproduje el sonido " + thisLevelBgm);
@@ -149,7 +167,6 @@ public class AudioManager : MonoBehaviour
         float timer = Time.time / fadetime;
         sound[thisLevelBgm].volume = Mathf.Lerp(1, 0, timer);
     }
-
     public void StopAll()
     {
         for (int i = 0; i < _allSounds.Length; i++)
@@ -157,7 +174,6 @@ public class AudioManager : MonoBehaviour
             _allSounds[i].Stop();
         }
     }
-
     public void MuteAll()
     {
         for (int i = 0; i < _allSounds.Length; i++)

@@ -53,8 +53,7 @@ public class Enemy : MonoBehaviour, ICortable
     public void GetCut(float dmg)
     {
         print("enemy: me cortaron");
-        AudioManager.instance.PlayByName("ShipCrash");
-
+        AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
         TakeDamage(dmg);
     }
 }

@@ -9,8 +9,6 @@ public struct PageSpawnPositions
     public Vector3 exitSpawn;
 }
 
-
-
 public class PlayerPageSpawnManager : MonoBehaviour
 {
     //decime a que pagina pasaste, y yo te dire donde deberia spawnear el player.

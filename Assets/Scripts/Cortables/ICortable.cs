@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ICortable 
 {
-    public void GetCut(float dmg); //me cortan
+    public void GetCut(float dmg);
 }

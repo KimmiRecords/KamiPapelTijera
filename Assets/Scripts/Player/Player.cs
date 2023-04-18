@@ -20,6 +20,7 @@ public class Player : MonoBehaviour, IMojable
     public bool isJump;
 
     PlayerModel _model;
+    PlayerView _view;
     PlayerController _controller;
 
     public TijeraHitbox miTijeraHitbox;
@@ -30,6 +31,8 @@ public class Player : MonoBehaviour, IMojable
     void Start()
     {
         _model = new PlayerModel(this);
+        _view = new PlayerView();
+
         _controller = new PlayerController(this);
 
         miTijeraHitbox.tijeraDamage = tijeraDamage;
@@ -54,8 +57,8 @@ public class Player : MonoBehaviour, IMojable
     public void OnPrimaryClick()
     {
         //print("ataque con tijera");
-        //_view.startTijeraAnimation;
         StartCoroutine(TijeraCoroutine());
+        _view.StartTijeraAnimation();
     }
 
     IEnumerator TijeraCoroutine()
@@ -68,6 +71,7 @@ public class Player : MonoBehaviour, IMojable
     public void GetWet()
     {
         print("AAAA ME MOJO");
-        PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, true); //spawnea al player en el inicio de la pagina actual
+        _view.StartGetWetAnimation();
+        PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
 }

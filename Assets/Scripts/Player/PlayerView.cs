@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerView : MonoBehaviour
+public class PlayerView
 {
-    // Start is called before the first frame update
-    void Start()
+    public void StartTijeraAnimation()
     {
-        
+        AudioManager.instance.PlayByName("TijeraMiss", 1.1f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGetWetAnimation()
     {
-        
+        AudioManager.instance.PlayByName("ShipCrash", 0.5f);
     }
 }

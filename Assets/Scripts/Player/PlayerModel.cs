@@ -77,7 +77,7 @@ public class PlayerModel
                 _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
                 _player.isJump = false;
                 //AudioManager.instance.StopPasos();
-                AudioManager.instance.PlayByNamePitch("JumpSFX", 2f);
+                AudioManager.instance.PlayByName("JumpSFX", 2f);
                 //pAnims.PlayJumping();
                 //pAnims.StopLanding();
             }

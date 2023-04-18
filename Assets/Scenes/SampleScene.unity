@@ -1830,16 +1830,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c6e9ec45d7d2d7849bbe5a7be65644a8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6e9ec45d7d2d7849bbe5a7be65644a8, type: 3}
---- !u!1 &456734093 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c6e9ec45d7d2d7849bbe5a7be65644a8,
-    type: 3}
-  m_PrefabInstance: {fileID: 456734092}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &456734094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c6e9ec45d7d2d7849bbe5a7be65644a8,
@@ -2805,7 +2799,7 @@ MonoBehaviour:
   triggerBool: 0
   tooltipTextToShow: Toca E para tirar de la solapa
   solapaAfectada: {fileID: 1899589826}
-  objetoParaMostrar: {fileID: 456734093}
+  objetoParaMostrar: {fileID: 974871592}
   tiempoHastaMostrarObjeto: 0.7
 --- !u!4 &722623930 stripped
 Transform:
@@ -3478,7 +3472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &974871593
 Transform:
   m_ObjectHideFlags: 0
@@ -8057,20 +8051,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3012697686148106414, guid: 13b4dac6ac3b15848ab8dab34650a904,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3418241192452378395, guid: 13b4dac6ac3b15848ab8dab34650a904,
         type: 3}
       propertyPath: playBGM
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4910445085450890006, guid: 13b4dac6ac3b15848ab8dab34650a904,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6507274298222936860, guid: 13b4dac6ac3b15848ab8dab34650a904,
         type: 3}

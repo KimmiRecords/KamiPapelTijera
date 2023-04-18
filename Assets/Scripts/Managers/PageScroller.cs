@@ -21,7 +21,7 @@ public class PageScroller : MonoBehaviour
     public GameObject hojaMaster;
     public GameObject hojaMasterRev;
 
-    bool isNext;
+    public bool isNext;
 
     private void Awake()
     {

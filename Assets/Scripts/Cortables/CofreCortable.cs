@@ -10,7 +10,7 @@ public class CofreCortable : MonoBehaviour, ICortable
         if (!wasCut)
         {
             print("cortaste el cofre. ganaste 15 pesos");
-            AudioManager.instance.PlayByName("ShipCrash");
+            AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
             Destroy(gameObject);
             wasCut = true;
         }

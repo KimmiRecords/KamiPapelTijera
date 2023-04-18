@@ -9,18 +9,21 @@ public class TriggerSound : TriggerScript
 
     public override void OnEnterBehaviour()
     {
-        triggerBool = true;
         //print("entro el player");
+        triggerBool = true;
         TooltipManager.instance.ShowTooltip(tooltipTextToShow);
-
+        
         if (soundName == "4S_MarimbaLoopConPiano")
         {
+
             AudioManager.instance.PlayOnEnd("4S_MarimbaLoop", "4S_MarimbaLoopConPiano");
         }
         else
         {
             AudioManager.instance.PlayByName(soundName);
         }
+
+        Destroy(gameObject);
     }
 
 }
