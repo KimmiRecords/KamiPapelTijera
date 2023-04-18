@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+    public bool agency;
+
     private void Awake()
     {
         if (instance != this && instance != null)

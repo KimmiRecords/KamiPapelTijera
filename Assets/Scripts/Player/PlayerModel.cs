@@ -14,8 +14,6 @@ public class PlayerModel
     float _speedModifier;
     float _playerSpeed;
 
-
-
     Vector3 _move; //el vector en el que guardo la suma de todo el movimiento para finalmente aplicarsela al character controller
     Vector3 lastNormalizedMove; //guardo el ultimo vector de movimeinto piola
 

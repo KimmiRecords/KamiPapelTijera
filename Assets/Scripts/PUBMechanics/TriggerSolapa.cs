@@ -10,19 +10,32 @@ public class TriggerSolapa : TriggerScript
     [SerializeField]
     GameObject objetoParaMostrar;
 
+    [SerializeField]
+    float tiempoHastaMostrarObjeto;
+
+    bool isShowing;
+
     public override void Interact(params object[] parameter)
     {
         if (triggerBool)
         {
             solapaAfectada.CambiarEstado();
-            Invoke("MostrarObjeto", 1);
-
+            StartCoroutine(ToggleObject(objetoParaMostrar));
         }
     }
 
-    public void MostrarObjeto()
+    public IEnumerator ToggleObject(GameObject objeto)
     {
-        objetoParaMostrar.gameObject.SetActive(true);
+        yield return new WaitForSeconds(tiempoHastaMostrarObjeto);
 
+        if (isShowing)
+        {
+            objeto.SetActive(false);
+        }
+        else
+        {
+            objeto.SetActive(true);
+        }
+        isShowing = !isShowing;
     }
 }

@@ -24,6 +24,9 @@ public class Player : MonoBehaviour, IMojable
 
     public TijeraHitbox miTijeraHitbox;
 
+
+
+
     void Start()
     {
         _model = new PlayerModel(this);
@@ -34,7 +37,10 @@ public class Player : MonoBehaviour, IMojable
 
     private void Update()
     {
-        _controller.CheckControls();
+        if (LevelManager.instance.agency)
+        {
+            _controller.CheckControls();
+        }
 
         if (_controller.hor != 0 || _controller.ver != 0)
         {
@@ -62,6 +68,6 @@ public class Player : MonoBehaviour, IMojable
     public void GetWet()
     {
         print("AAAA ME MOJO");
-        PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1); //spawnea al player en el inicio de la pagina actual
+        PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, true); //spawnea al player en el inicio de la pagina actual
     }
 }
