@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
 
     public void StartLevelBGM(Scene scene, LoadSceneMode lsm)
     {
-        print(scene.name);
+        //print(scene.name);
         StopBGM();
         thisLevelBgm = levelBGMs[scene.name];
         PlayBGM();

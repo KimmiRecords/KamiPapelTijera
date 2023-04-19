@@ -47,7 +47,7 @@ public class PlayerPageSpawnManager : MonoBehaviour
             if (parameter[1] is bool)
             {
                 int currentPage = (int)parameter[0];
-                print("pongo al player en el spawn de la pagina " + currentPage);
+                //print("pongo al player en el spawn de la pagina " + currentPage);
                 _playerCC.enabled = false;
 
                 if ((bool)parameter[1])
@@ -60,7 +60,6 @@ public class PlayerPageSpawnManager : MonoBehaviour
                 }
 
                 _playerCC.enabled = true;
-                LevelManager.instance.agency = true;
                 //_player.transform.parent.position = _pageSpawnPositions[currentPage - 1];
             }
         }

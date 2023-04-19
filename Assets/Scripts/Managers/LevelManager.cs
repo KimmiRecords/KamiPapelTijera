@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     public bool agency;
+    public bool inDialogue;
+
 
     private void Awake()
     {
