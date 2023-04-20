@@ -11,6 +11,11 @@ public class PlayerView
 
     public void StartGetWetAnimation()
     {
-        AudioManager.instance.PlayByName("ShipCrash", 0.5f);
+        AudioManager.instance.PlayByName("ShipCrash", 0.4f);
+    }
+
+    public void StartGetGolpeadoAnimation()
+    {
+        AudioManager.instance.PlayByName("ShipCrash", 0.75f);
     }
 }

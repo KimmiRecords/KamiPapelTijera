@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    //esto todavia no se usa para nada. 
+
+
     public static EnemySpawner instance;
 
     [SerializeField]
@@ -34,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < numEnemies; i++)
         {
-            Enemy enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity)
+            Entity enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity)
                 .SetHP(Random.Range(minStatValue, maxStatValue))
                 .SetAttackDamage(Random.Range(minStatValue, maxStatValue))
                 .SetSpeed(Random.Range(minStatValue, maxStatValue));

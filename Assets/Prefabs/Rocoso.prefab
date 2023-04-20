@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &800921012541785600
+--- !u!1 &1127719464192760841
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,68 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4844363066895942198}
-  - component: {fileID: 4953003998730983416}
-  - component: {fileID: 3039831230134318592}
+  - component: {fileID: 6690140290626366434}
+  - component: {fileID: 699239927733961118}
+  - component: {fileID: 902718098205751472}
+  m_Layer: 0
+  m_Name: RocosoBoxCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6690140290626366434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127719464192760841}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.37109604, y: 0.37109604, z: 0.37109604}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7897264121734106300}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &699239927733961118
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127719464192760841}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 7, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &902718098205751472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127719464192760841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9061b05274536d145ba42fda45b0bf50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thisRocoso: {fileID: 2429854604947804655}
+--- !u!1 &1231572168594761324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6426847484859966042}
+  - component: {fileID: 6824791627489949588}
+  - component: {fileID: 3469385055474898540}
   m_Layer: 0
   m_Name: RocosoTrigger
   m_TagString: Untagged
@@ -18,41 +77,41 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4844363066895942198
+--- !u!4 &6426847484859966042
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 800921012541785600}
+  m_GameObject: {fileID: 1231572168594761324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.37109604, y: 0.37109604, z: 0.37109604}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8616136877328068409}
+  m_Father: {fileID: 7897264121734106300}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4953003998730983416
+--- !u!65 &6824791627489949588
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 800921012541785600}
+  m_GameObject: {fileID: 1231572168594761324}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 15, y: 15, z: 15}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3039831230134318592
+--- !u!114 &3469385055474898540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 800921012541785600}
+  m_GameObject: {fileID: 1231572168594761324}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecedc6a9b52c38149a10a60309009132, type: 3}
@@ -61,8 +120,8 @@ MonoBehaviour:
   requiredGameObject: {fileID: 0}
   triggerBool: 0
   tooltipTextToShow: Despertaste al Rocoso!
-  _thisRocoso: {fileID: 4301657642828886403}
---- !u!1 &1561741741154565221
+  _thisRocoso: {fileID: 2429854604947804655}
+--- !u!1 &2762359593020932993
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,58 +129,110 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5103205169864772494}
-  - component: {fileID: 1422625333515936242}
-  - component: {fileID: 1624959875378616540}
+  - component: {fileID: 4692066203251883459}
+  - component: {fileID: 1593964433056289674}
+  - component: {fileID: 8115178599190512818}
+  - component: {fileID: 5304467468798115202}
+  - component: {fileID: 2412841192040739279}
   m_Layer: 0
-  m_Name: RocosoBoxCollider
+  m_Name: RocosoAttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5103205169864772494
+  m_IsActive: 0
+--- !u!4 &4692066203251883459
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561741741154565221}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 2762359593020932993}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.8201223, y: 0, z: -0.84238803}
+  m_LocalScale: {x: 2.2753212, y: 2.2753212, z: 2.2753212}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8616136877328068409}
-  m_RootOrder: 1
+  m_Father: {fileID: 7897264121734106300}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1422625333515936242
+--- !u!33 &1593964433056289674
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2762359593020932993}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8115178599190512818
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2762359593020932993}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e95fdf142b50a3c4c86afb268533851a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5304467468798115202
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561741741154565221}
+  m_GameObject: {fileID: 2762359593020932993}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7, y: 7, z: 2}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1624959875378616540
+--- !u!114 &2412841192040739279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561741741154565221}
+  m_GameObject: {fileID: 2762359593020932993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9061b05274536d145ba42fda45b0bf50, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ac5214b8d739a04caaff39ad335c940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisRocoso: {fileID: 4301657642828886403}
---- !u!1 &8616136877315730641
+  headbuttDamage: 0
+--- !u!1 &7897264121734106301
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,39 +240,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8616136877315730640}
-  - component: {fileID: 8616136877315730642}
-  - component: {fileID: 8616136877315730643}
-  - component: {fileID: 4301657642828886403}
+  - component: {fileID: 7897264121734106300}
+  - component: {fileID: 7897264121734106302}
+  - component: {fileID: 7897264121734106303}
+  - component: {fileID: 2429854604947804655}
   m_Layer: 0
-  m_Name: RocosoSprite
+  m_Name: Rocoso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8616136877315730640
+--- !u!4 &7897264121734106300
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616136877315730641}
+  m_GameObject: {fileID: 7897264121734106301}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.69472, y: 2.69472, z: 2.69472}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8616136877328068409}
+  m_Children:
+  - {fileID: 4692066203251883459}
+  - {fileID: 6690140290626366434}
+  - {fileID: 6426847484859966042}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8616136877315730642
+--- !u!212 &7897264121734106302
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616136877315730641}
+  m_GameObject: {fileID: 7897264121734106301}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -207,14 +321,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8616136877315730643
+--- !u!95 &7897264121734106303
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616136877315730641}
+  m_GameObject: {fileID: 7897264121734106301}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 427c6fc2b1b381b47a29a34a68bcfc7e, type: 2}
@@ -227,13 +341,13 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4301657642828886403
+--- !u!114 &2429854604947804655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616136877315730641}
+  m_GameObject: {fileID: 7897264121734106301}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6771e40e38c8d28459a41ddbc0395e59, type: 3}
@@ -241,40 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 150
   speed: 2
-  attackDamage: 2
-  _anim: {fileID: 8616136877315730643}
-  _sr: {fileID: 8616136877315730642}
---- !u!1 &8616136877328068414
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8616136877328068409}
-  m_Layer: 0
-  m_Name: Rocoso
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8616136877328068409
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616136877328068414}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8616136877315730640}
-  - {fileID: 5103205169864772494}
-  - {fileID: 4844363066895942198}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  attackDamage: 5
+  _anim: {fileID: 7897264121734106303}
+  _sr: {fileID: 7897264121734106302}
+  _hitBox: {fileID: 2412841192040739279}

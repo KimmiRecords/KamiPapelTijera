@@ -21,7 +21,7 @@ public class PlayerModel
     {
         _player = player;
 
-        _playerSpeed = _player.walkingSpeed; 
+        _playerSpeed = _player.Speed; 
         _speedModifier = 1;
         //initialGravityValue = gravityValue; mismo pero para cambiar la gravedad
     }
