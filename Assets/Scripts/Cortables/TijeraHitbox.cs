@@ -13,8 +13,11 @@ public class TijeraHitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print("entre a un collider...");
         if (other.GetComponent<ICortable>() != null)
         {
+            print("...cortable");
+
             ICortable objetoCortable = other.GetComponent<ICortable>();
             objetoCortable.GetCut(tijeraDamage);
         }
