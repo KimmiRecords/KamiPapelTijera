@@ -34,10 +34,15 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < numEnemies; i++)
         {
-            Enemy enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-            enemy.hp = Random.Range(minStatValue, maxStatValue);
-            enemy.attackDamage = Random.Range(minStatValue, maxStatValue);
-            enemy.speed = Random.Range(minStatValue, maxStatValue);
+            Enemy enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity)
+                .SetHP(Random.Range(minStatValue, maxStatValue))
+                .SetAttackDamage(Random.Range(minStatValue, maxStatValue))
+                .SetSpeed(Random.Range(minStatValue, maxStatValue));
+
+
+            //enemy.hp = Random.Range(minStatValue, maxStatValue);
+            //enemy.attackDamage = Random.Range(minStatValue, maxStatValue);
+            //enemy.speed = Random.Range(minStatValue, maxStatValue);
             enemy.transform.parent = this.transform;
 
             //randomPositions[i] = new Vector3(Random.value, 1, Random.value);

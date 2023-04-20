@@ -28,14 +28,17 @@ public class TriggerSolapa : TriggerScript
     {
         yield return new WaitForSeconds(tiempoHastaMostrarObjeto);
 
-        if (isShowing)
+        if (objetoParaMostrar != null)
         {
-            objeto.SetActive(false);
+            if (isShowing)
+            {
+                objeto.SetActive(false);
+            }
+            else
+            {
+                objeto.SetActive(true);
+            }
+            isShowing = !isShowing;
         }
-        else
-        {
-            objeto.SetActive(true);
-        }
-        isShowing = !isShowing;
     }
 }

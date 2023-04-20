@@ -50,16 +50,13 @@ public abstract class TriggerScript : MonoBehaviour
     public virtual void OnExitBehaviour()
     {
         triggerBool = false;
-        //print("se salio el player");
+        print("se salio el player de " + gameObject.name);
         TooltipManager.instance.HideTooltip();
     }
 
     public virtual void Interact(params object[] parameter)
     {
-        if (triggerBool)
-        {
-            //print("interactue con " + gameObject.name);
-        }
+        //print("trigger script interact");
     }
 
     protected void OnDestroy()

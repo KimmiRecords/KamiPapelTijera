@@ -23,6 +23,8 @@ public class PageScroller : MonoBehaviour
 
     public bool isNext;
 
+    bool isTurning = false;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -37,23 +39,27 @@ public class PageScroller : MonoBehaviour
         EventManager.Subscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
         EventManager.Subscribe(Evento.OnPlayerPressedE, TurnNextPage);
         EventManager.Subscribe(Evento.OnPageFinishTurning, SetActiveObject);
-        CheckSpheres(activeIndex);
+        //CheckSpheres(activeIndex);
     }
 
     void TurnNextPage(params object[] parameters)
     {
         if (esferaNext.triggerBool) //pregunta si el player esta encima del trigger
         {
-            if (activeIndex >= objectsToToggle.Length - 1)
+            if (!isTurning)
             {
-                print("no hay mas paginas");
-            }
-            else
-            {
-                activeIndex++;
-                isNext = true;
-                SetOnPlayerChangePageTrigger();
-                AudioManager.instance.PlayByName("PageTurn01");
+                if (activeIndex >= objectsToToggle.Length - 1)
+                {
+                    print("no hay mas paginas");
+                }
+                else
+                {
+                    activeIndex++;
+                    isNext = true;
+                    SetOnPlayerChangePageTrigger();
+                    AudioManager.instance.PlayByName("PageTurn01");
+                    isTurning = true;
+                }
             }
         }
     }
@@ -61,16 +67,20 @@ public class PageScroller : MonoBehaviour
     {
         if (esferaPrev.triggerBool)
         {
-            if (activeIndex <= 0)
+            if (!isTurning)
             {
-                print("no hay mas paginas");
-            }
-            else
-            {
-                activeIndex--;
-                isNext = false;
-                SetOnPlayerChangePageTrigger();
-                AudioManager.instance.PlayByName("PageTurn02");
+                if (activeIndex <= 0)
+                {
+                    print("no hay mas paginas");
+                }
+                else
+                {
+                    activeIndex--;
+                    isNext = false;
+                    SetOnPlayerChangePageTrigger();
+                    AudioManager.instance.PlayByName("PageTurn02");
+                    isTurning = true;
+                }
             }
         }
     }
@@ -101,24 +111,22 @@ public class PageScroller : MonoBehaviour
 
     private void SetOnPlayerChangePageTrigger()
     {
-        LevelManager.instance.agency = false;  
+        LevelManager.instance.inDialogue = true;  
         CreateHoja(isNext);
         CheckSpheres(activeIndex);
         //EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1);
+        PUBManager.instance.ClosePUBs();
+
     }
 
     void CreateHoja(bool isNext)
     {
         if (isNext)
         {
-            //Hoja h = Instantiate(hoja, transform);
-            //h.transform.position = hojaPosition;
             Instantiate(hojaMaster, transform);
         }
         else
         {
-            //Hoja h = Instantiate(hojaRev, transform);
-            //h.transform.position = hojaPosition;
             Instantiate(hojaMasterRev, transform);
         }
     }
@@ -135,7 +143,12 @@ public class PageScroller : MonoBehaviour
                 objectsToToggle[i].SetActive(false);
             }
         }
+        PUBManager.instance.OpenPUBs();
         EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1, isNext);
+        LevelManager.instance.inDialogue = false;
+        isTurning = false;
+        esferaNext.triggerBool = false;
+
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
 
     private void OnDestroy()

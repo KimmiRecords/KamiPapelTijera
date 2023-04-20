@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class TooltipManager : MonoBehaviour
 {
+    //por ahora cambia el tooltiptext del player. 
+
     public static TooltipManager instance;
 
     [SerializeField]
-    TMPro.TextMeshPro tooltipTextComponent;
-    //por ahora cambia texto, pero despues podria cambiar sprites
+    TMPro.TextMeshProUGUI tooltipTextComponent;
+
+    [SerializeField]
+    GameObject tooltipObject;
 
     private void Awake()
     {
@@ -24,15 +27,17 @@ public class TooltipManager : MonoBehaviour
         }
     }
 
+
     public void ShowTooltip(string text)
     {
-        tooltipTextComponent.gameObject.SetActive(true);
+        tooltipObject.SetActive(true);
         tooltipTextComponent.text = text;
     }
 
     public void HideTooltip()
     {
-        tooltipTextComponent.gameObject.SetActive(false);
+        print("hide tooltip");
+        tooltipObject.SetActive(false);
         tooltipTextComponent.text = "";
     }
 }

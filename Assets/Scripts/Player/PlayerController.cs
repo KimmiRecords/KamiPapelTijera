@@ -32,29 +32,33 @@ public class PlayerController
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //EventManager.Trigger(Evento.OnPlayerPrimaryClick);
             _player.OnPrimaryClick();
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _player.isJump = true;
-            
-
-            //EventManager.Trigger(Evento.OnPlayerPressedSpace);
+            Application.Quit();
         }
 
-        if (Input.GetButtonUp("Jump"))
+        if (!LevelManager.instance.inDialogue)
         {
-            _player.isJump = false;
+            if (Input.GetButtonDown("Jump"))
+            {
+                _player.isJump = true;
+            }
+
+            if (Input.GetButtonUp("Jump"))
+            {
+                _player.isJump = false;
+            }
+
+            hor = Input.GetAxis("Horizontal");
+            ver = Input.GetAxis("Vertical");
         }
-
-        hor = Input.GetAxis("Horizontal");
-        ver = Input.GetAxis("Vertical");
-
-        //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        //{
-        //    _player.Move();
-        //}
+        else
+        {
+            hor = 0;
+            ver = 0;
+        }
     }
 }

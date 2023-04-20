@@ -32,9 +32,7 @@ public class Player : MonoBehaviour, IMojable
     {
         _model = new PlayerModel(this);
         _view = new PlayerView();
-
         _controller = new PlayerController(this);
-
         miTijeraHitbox.tijeraDamage = tijeraDamage;
     }
 
@@ -47,7 +45,6 @@ public class Player : MonoBehaviour, IMojable
 
         if (_controller.hor != 0 || _controller.ver != 0)
         {
-            //print(_controller.hor + "//" + _controller.ver);
             EventManager.Trigger(Evento.OnPlayerMove, _controller.hor, _controller.ver);
         }
 
@@ -56,7 +53,6 @@ public class Player : MonoBehaviour, IMojable
 
     public void OnPrimaryClick()
     {
-        //print("ataque con tijera");
         StartCoroutine(TijeraCoroutine());
         _view.StartTijeraAnimation();
     }
@@ -67,7 +63,6 @@ public class Player : MonoBehaviour, IMojable
         yield return new WaitForSeconds(0.1f);
         _model.DisableTijeraHitbox();
     }
-
     public void GetWet()
     {
         print("AAAA ME MOJO");
