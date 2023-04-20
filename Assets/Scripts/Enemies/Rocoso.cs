@@ -30,7 +30,7 @@ public class Rocoso : Enemy
     {
         if (!wasAwoken)
         {
-            print("el rocoso despierta");
+            //print("el rocoso despierta");
             _player = player;
             _anim.SetBool("isStart", true);
             wasAwoken = true;
@@ -39,21 +39,21 @@ public class Rocoso : Enemy
 
     public void RocosoCamina() //disparada por el final de la animacion de start
     {
-        print("el rocoso empieza a caminar");
+        //print("el rocoso empieza a caminar");
         _anim.SetBool("isWalk", true);
         StartCoroutine(RocosoCaminaCorrutina());
     }
 
     IEnumerator RocosoCaminaCorrutina()
     {
-        print("espero unos segundos caminando...");
+        //print("espero unos segundos caminando...");
         yield return new WaitForSeconds(3);
         RocosoAtaca();
     }
 
     public void RocosoAtaca()
     {
-        print("el rocoso ataca");
+        //print("el rocoso ataca");
         _anim.SetBool("isWalk", false);
         _anim.SetBool("isAttack", true);
     }
@@ -66,7 +66,7 @@ public class Rocoso : Enemy
 
     public IEnumerator EnrojecerSprite()
     {
-        print("enrojeci el sprite");
+        //print("enrojeci el sprite");
         _sr.material.color = Color.red;
         yield return new WaitForSeconds(0.25f);
         _sr.material.color = Color.white;

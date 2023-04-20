@@ -56,7 +56,7 @@ public abstract class TriggerScript : MonoBehaviour
 
     public virtual void Interact(params object[] parameter)
     {
-        print("trigger script interact");
+        //print("trigger script interact");
     }
 
     protected void OnDestroy()

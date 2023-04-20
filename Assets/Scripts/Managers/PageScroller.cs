@@ -59,7 +59,6 @@ public class PageScroller : MonoBehaviour
                     SetOnPlayerChangePageTrigger();
                     AudioManager.instance.PlayByName("PageTurn01");
                     isTurning = true;
-
                 }
             }
         }
@@ -148,6 +147,7 @@ public class PageScroller : MonoBehaviour
         EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1, isNext);
         LevelManager.instance.inDialogue = false;
         isTurning = false;
+        esferaNext.triggerBool = false;
 
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
 
