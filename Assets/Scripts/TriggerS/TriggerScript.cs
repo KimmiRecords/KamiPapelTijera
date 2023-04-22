@@ -7,11 +7,10 @@ public abstract class TriggerScript : MonoBehaviour
     //cuando se salen, pongo false
     //casi todo lo q sea trigger q responda al player va a heredar de esto
 
-    //este script se lo pones a un area o zona, por ejemplo. y despues alguien pregunta por ella y su triggerbool
-    //por ahora pide un gameobject con quien ser triggereado, y ese es normalmente el player. en el futuro voy a hacer que pregunte por cierto o ciertos layers
+    //este script se lo pones a un area o zona, por ejemplo.
+    //y despues alguien pregunta por ella y su triggerbool
 
-    [SerializeField]
-    protected GameObject requiredGameObject;
+    //el player es la layer 3
 
     [HideInInspector]
     public bool triggerBool = false;
@@ -26,7 +25,7 @@ public abstract class TriggerScript : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other) //cuando el player entra, se dispara el behaviour de entrar
     {
-        if (other.gameObject == requiredGameObject)
+        if (other.gameObject.layer == 3)
         {
             OnEnterBehaviour();
         }
@@ -34,7 +33,7 @@ public abstract class TriggerScript : MonoBehaviour
 
     protected virtual void OnTriggerExit(Collider other)//cuando el player sale, se dispara el behaviour de salir
     {
-        if (other.gameObject == requiredGameObject)
+        if (other.gameObject.layer == 3)
         {
             OnExitBehaviour();
         }

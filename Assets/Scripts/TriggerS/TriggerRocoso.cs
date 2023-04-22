@@ -11,7 +11,7 @@ public class TriggerRocoso : TriggerScript
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == requiredGameObject)
+        if (other.gameObject.layer == 3)
         {
             _player = other.GetComponent<Player>();
             OnEnterBehaviour();
