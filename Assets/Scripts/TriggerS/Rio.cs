@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class Rio : TriggerScript
 {
-    public override void OnEnterBehaviour()
+    protected override void OnTriggerEnter(Collider other)
     {
-        base.OnEnterBehaviour();
-        if (requiredGameObject.GetComponent<IMojable>() != null)
+        if (other.gameObject.layer == 3)
         {
-            IMojable player = requiredGameObject.GetComponent<IMojable>();
+            OnEnterBehaviour();
+            MojarPlayer(other);
+        }
+    }
+
+    public void MojarPlayer(Collider other)
+    {
+        if (other.gameObject.GetComponent<IMojable>() != null)
+        {
+            IMojable player = other.gameObject.GetComponent<IMojable>();
             player.GetWet();
         }
     }
