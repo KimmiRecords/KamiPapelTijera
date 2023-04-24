@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Arbol : MonoBehaviour, ICortable
 {
+    
     [SerializeField]
     Vector3 rotationVector;
 

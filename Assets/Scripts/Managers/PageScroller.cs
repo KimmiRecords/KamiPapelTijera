@@ -109,7 +109,7 @@ public class PageScroller : MonoBehaviour
         }
     }
 
-    private void SetOnPlayerChangePageTrigger()
+    private void SetOnPlayerChangePageTrigger() //aca EMPIEZA a girar la pagina
     {
         LevelManager.instance.inDialogue = true;  
         CreateHoja(isNext);
@@ -117,6 +117,19 @@ public class PageScroller : MonoBehaviour
         //EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1);
         PUBManager.instance.ClosePUBs();
 
+
+        for (int i = 0; i < objectsToToggle.Length; i++)
+        {
+            if (i == activeIndex)
+            {
+                objectsToToggle[i].SetActive(true);
+            }
+            else
+            {
+                objectsToToggle[i].SetActive(false);
+            }
+        }
+        PUBManager.instance.OpenPUBs();
     }
 
     void CreateHoja(bool isNext)
@@ -130,20 +143,20 @@ public class PageScroller : MonoBehaviour
             Instantiate(hojaMasterRev, transform);
         }
     }
-    void SetActiveObject(params object[] parameter)
+    void SetActiveObject(params object[] parameter) //esto recien se triggerea cuando TERMINA de cambiar la pagina
     {
-        for (int i = 0; i < objectsToToggle.Length; i++)
-        {
-            if (i == activeIndex)
-            {
-                objectsToToggle[i].SetActive(true);
-            }
-            else
-            {
-                objectsToToggle[i].SetActive(false);
-            }
-        }
-        PUBManager.instance.OpenPUBs();
+        //for (int i = 0; i < objectsToToggle.Length; i++)
+        //{
+        //    if (i == activeIndex)
+        //    {
+        //        objectsToToggle[i].SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        objectsToToggle[i].SetActive(false);
+        //    }
+        //}
+        //PUBManager.instance.OpenPUBs();
         EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1, isNext);
         LevelManager.instance.inDialogue = false;
         isTurning = false;
