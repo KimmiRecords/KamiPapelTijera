@@ -22,13 +22,13 @@ public class PUB : MonoBehaviour
 
     public void ClosePUB()
     {
-        _anim.Play("CasaDown");
+        //_anim.Play("CasaDown");
         _anim.SetBool("isOpen", false);
     }
     
     public void OpenPUB()
     {
-        _anim.Play("CasaUp");
+        //_anim.Play("CasaUp");
         _anim.SetBool("isOpen", true);
     }
 
