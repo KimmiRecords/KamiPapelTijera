@@ -11,6 +11,7 @@ public class Player : Entity, IMojable, IGolpeable
 
     public float jumpForce = 50f;
     public float gravityValue;          //gravedad extra para que quede linda la caida del salto
+    public float weaponCooldown;
     public CharacterController cc;
     public TijeraHitbox miTijeraHitbox;
 
@@ -24,15 +25,17 @@ public class Player : Entity, IMojable, IGolpeable
     PlayerController _controller;
     float maxHp;
 
+    bool readyToAttack = true;
+
     public float Speed 
     {
         get
         {
-            return speed;
+            return _speed;
         }
         set 
         {
-            speed = value;
+            _speed = value;
         }
     }
 
@@ -42,8 +45,8 @@ public class Player : Entity, IMojable, IGolpeable
         _model = new PlayerModel(this);
         _view = new PlayerView();
         _controller = new PlayerController(this);
-        miTijeraHitbox.tijeraDamage = attackDamage;
-        maxHp = hp;
+        miTijeraHitbox.tijeraDamage = _attackDamage;
+        maxHp = _hp;
     }
 
     private void Update()
@@ -63,15 +66,23 @@ public class Player : Entity, IMojable, IGolpeable
 
     public void OnPrimaryClick()
     {
-        StartCoroutine(TijeraCoroutine());
-        _view.StartTijeraAnimation();
+        if (readyToAttack)
+        {
+            StartCoroutine(TijeraCoroutine());
+            _view.StartTijeraAnimation();
+            readyToAttack = false;
+        }
     }
 
     IEnumerator TijeraCoroutine()
     {
+
         _model.EnableTijeraHitbox();
         yield return new WaitForSeconds(0.1f);
         _model.DisableTijeraHitbox();
+
+        yield return new WaitForSeconds(weaponCooldown);
+        readyToAttack = true;
     }
     public void GetWet()
     {
@@ -79,7 +90,6 @@ public class Player : Entity, IMojable, IGolpeable
         _view.StartGetWetAnimation();
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
-
     public void GetGolpeado(float dmg)
     {
         print("me han golpeao");
@@ -92,7 +102,6 @@ public class Player : Entity, IMojable, IGolpeable
         base.TakeDamage(dmg);
         StartCoroutine(EnrojecerSprite());
     }
-
     public IEnumerator EnrojecerSprite()
     {
         //print("enrojeci el sprite");
@@ -100,11 +109,10 @@ public class Player : Entity, IMojable, IGolpeable
         yield return new WaitForSeconds(0.25f);
         _renderer.material.color = Color.white;
     }
-
     public override void Die()
     {
         print("player: me mori");
-        hp = maxHp;
+        _hp = maxHp;
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
 }

@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class PageScroller : MonoBehaviour
 {
-    //a este singleton le pones los gameobjectpadre que contienen todo lo de su pagina gg
-    //por otra parte, la diea de cambiar de pagina es que isntancia una new hoja, espere a que gire, y luegpo spawnea los objetos
+    //este script se encarga de cambiar las paginas y algunas cosas mas
+
+    //cuando tocas E, instancia la hoja que debe girar, y dispara metodos
+    //entre ellos, cerrar/abrir pubs, luego mover al player
+    
+    //tambien chequea cual zona de cambio de pagina deberia mostrarse
 
     public static PageScroller instance;
 
     [SerializeField]
-    private GameObject[] objectsToToggle;
+    private GameObject[] objectsToToggle; //las 4 carpetas (buildingspagina1, 2, 3 y 4)
 
     [HideInInspector]
     public int activeIndex = 0; //currentpage = activeindex - 1
 
-    public TriggerScript esferaPrev;
-    public TriggerScript esferaNext;
+    public TriggerScript esferaPrev; //la zona para volver a pag anterior
+    public TriggerScript esferaNext; //la zona para ir a pag siguiente
 
-    public GameObject hojaMaster;
-    public GameObject hojaMasterRev;
+    public GameObject hojaMaster; //el prefab de la hoja que va para adelante
+    public GameObject hojaMasterRev; //idem para atras
 
+    [HideInInspector]
     public bool isNext;
 
     bool isTurning = false;
@@ -38,8 +43,7 @@ public class PageScroller : MonoBehaviour
 
         EventManager.Subscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
         EventManager.Subscribe(Evento.OnPlayerPressedE, TurnNextPage);
-        EventManager.Subscribe(Evento.OnPageFinishTurning, SetActiveObject);
-        //CheckSpheres(activeIndex);
+        EventManager.Subscribe(Evento.OnPageFinishTurning, FinishTurning);
     }
 
     void TurnNextPage(params object[] parameters)
@@ -111,14 +115,19 @@ public class PageScroller : MonoBehaviour
 
     private void SetOnPlayerChangePageTrigger() //aca EMPIEZA a girar la pagina
     {
-        LevelManager.instance.inDialogue = true;  
-        CreateHoja(isNext);
-        CheckSpheres(activeIndex);
-        //EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1);
+        LevelManager.instance.inDialogue = true;  //freezeo a kami
+        CreateHoja(isNext); //instancio la hoja que corresponda
+        CheckSpheres(activeIndex); //chequeo si hay que poner/sacar zona
         PUBManager.instance.ClosePUBs();
+        StartCoroutine(AbrirPUBsCorrutina());
+    }
 
+    public IEnumerator AbrirPUBsCorrutina()
+    {
+        yield return new WaitForSeconds(2);
+        EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1, isNext);
 
-        for (int i = 0; i < objectsToToggle.Length; i++)
+        for (int i = 0; i < objectsToToggle.Length; i++) //este es el core, el q prende y apaga la carpeta de cada pagina
         {
             if (i == activeIndex)
             {
@@ -143,21 +152,8 @@ public class PageScroller : MonoBehaviour
             Instantiate(hojaMasterRev, transform);
         }
     }
-    void SetActiveObject(params object[] parameter) //esto recien se triggerea cuando TERMINA de cambiar la pagina
+    void FinishTurning(params object[] parameter) //esto recien se triggerea cuando TERMINA de cambiar la pagina
     {
-        //for (int i = 0; i < objectsToToggle.Length; i++)
-        //{
-        //    if (i == activeIndex)
-        //    {
-        //        objectsToToggle[i].SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        objectsToToggle[i].SetActive(false);
-        //    }
-        //}
-        //PUBManager.instance.OpenPUBs();
-        EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1, isNext);
         LevelManager.instance.inDialogue = false;
         isTurning = false;
         esferaNext.triggerBool = false;
@@ -170,8 +166,7 @@ public class PageScroller : MonoBehaviour
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, TurnNextPage);
-            EventManager.Unsubscribe(Evento.OnPageFinishTurning, SetActiveObject);
-
+            EventManager.Unsubscribe(Evento.OnPageFinishTurning, FinishTurning);
         }
     }
 }

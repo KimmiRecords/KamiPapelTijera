@@ -117,7 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecedc6a9b52c38149a10a60309009132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredGameObject: {fileID: 0}
   triggerBool: 0
   tooltipTextToShow: Despertaste al Rocoso!
   _thisRocoso: {fileID: 2429854604947804655}
@@ -149,8 +148,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2762359593020932993}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8201223, y: 0, z: -0.84238803}
-  m_LocalScale: {x: 2.2753212, y: 2.2753212, z: 2.2753212}
+  m_LocalPosition: {x: -1.26, y: -0.78, z: 0}
+  m_LocalScale: {x: 4.5637336, y: 3.7996285, z: 3.7996285}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7897264121734106300}
@@ -232,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headbuttDamage: 0
+  didHit: 0
 --- !u!1 &7897264121734106301
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +310,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 870151379, guid: 06b85d05dfcae5747be78a7d8e6ee0cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 469d8150b8dbd1d4fac3ba1da35b89bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -331,7 +331,7 @@ Animator:
   m_GameObject: {fileID: 7897264121734106301}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 427c6fc2b1b381b47a29a34a68bcfc7e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 990bd4c3f05cf1a47bebbce46458cbe9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -353,9 +353,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6771e40e38c8d28459a41ddbc0395e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 150
-  speed: 2
-  attackDamage: 5
-  _anim: {fileID: 7897264121734106303}
+  _hp: 150
+  _speed: 2
+  _attackDamage: 5
+  anim: {fileID: 7897264121734106303}
   _sr: {fileID: 7897264121734106302}
   _hitBox: {fileID: 2412841192040739279}
+  wasAwoken: 0
+  startAnimationHasFinished: 0
+  target: {x: 0, y: 0, z: 0}
+  isHitting: 0

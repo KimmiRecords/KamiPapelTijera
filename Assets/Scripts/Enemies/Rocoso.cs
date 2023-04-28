@@ -12,29 +12,43 @@ public class Rocoso : Enemy
     //y hacer por separado los scripts de EnemySleepState, EnemyStartState, EnemyWalkState, EnemyPursuitState, etc
     //por ahora es que se acerca durante 2 seg y luego ataca.
 
-    [SerializeField]
-    Animator _anim; //mi animator
+    public Animator anim; //mi animator
+    public SpriteRenderer _sr; //y mi sprite renderer. esto y el metodo EnrojecerSprite deberia estar separado, tipo creado como EnemyView o algo asi
+    public RocosoHeadbuttHitBox _hitBox;
 
-    [SerializeField]
-    SpriteRenderer _sr; //y mi sprite renderer. esto y el metodo EnrojecerSprite deberia estar separado, tipo creado como EnemyView o algo asi
+    [HideInInspector]
+    public bool wasAwoken; //si el player ya se acerco y me despertó
+    [HideInInspector]
+    public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
+    [HideInInspector]
+    public Vector3 target;
+    [HideInInspector]
+    public bool isHitting;
 
-    [SerializeField]
-    RocosoHeadbuttHitBox _hitBox;
-
-    bool wasAwoken; //si el player ya se acerco y me despertó
     Player _player;
+    protected FiniteStateMachine fsm;
+
+
 
     private void Start()
     {
-        _hitBox.headbuttDamage = attackDamage;
+        fsm = new FiniteStateMachine();
+        fsm.AddState(State.RocosoSleep, new RocosoSleepState(fsm, this));
+        fsm.AddState(State.RocosoStart, new RocosoStartState(fsm, this));
+        fsm.AddState(State.RocosoWalk, new RocosoWalkState(fsm, this));
+        fsm.AddState(State.RocosoAttack, new RocosoAttackState(fsm, this));
+        fsm.ChangeState(State.RocosoSleep);
+
+        _hitBox.headbuttDamage = _attackDamage;
     }
 
     private void Update()
     {
-        if (_anim.GetBool("isWalk")) //todo el tiempo pregunto si estoy caminando
+        fsm.Update();
+
+        if (_player != null)
         {
-            Vector3 distance = _player.transform.position - transform.position; //calculo pa'donde
-            transform.position += distance.normalized * speed * Time.deltaTime; //voy pa'lla
+            target = _player.transform.position;
         }
     }
 
@@ -42,29 +56,14 @@ public class Rocoso : Enemy
     {
         if (!wasAwoken)
         {
-            //print("el rocoso despierta");
             _player = player;
-            _anim.SetBool("isStart", true);
             wasAwoken = true;
         }
     }
+
     public void RocosoCamina() //disparada por el final de la animacion de start
     {
-        //print("el rocoso empieza a caminar");
-        _anim.SetBool("isWalk", true);
-        StartCoroutine(RocosoCaminaCorrutina());
-    }
-    IEnumerator RocosoCaminaCorrutina()
-    {
-        //print("espero unos segundos caminando...");
-        yield return new WaitForSeconds(2);
-        RocosoComienzaAtaque();
-    }
-    public void RocosoComienzaAtaque()
-    {
-        //print("el rocoso ataca");
-        _anim.SetBool("isWalk", false);
-        _anim.SetBool("isAttack", true);
+        startAnimationHasFinished = true;
     }
 
     public override void TakeDamage(float dmg)
@@ -86,17 +85,16 @@ public class Rocoso : Enemy
         yield return new WaitForSeconds(0.1f);
         DisableHeadbuttHitbox();
     }
-
     public void EnableHeadbuttHitbox()
     {
         //Debug.Log("prendo el headbutt");
         _hitBox.gameObject.SetActive(true);
     }
-
     public void DisableHeadbuttHitbox()
     {
         //Debug.Log("apago el headbutt");
         _hitBox.gameObject.SetActive(false);
+        isHitting = false;
     }
 
 

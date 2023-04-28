@@ -7,6 +7,9 @@ public class RocosoHeadbuttHitBox : MonoBehaviour
     [HideInInspector]
     public float headbuttDamage;
 
+    [HideInInspector]
+    public bool didHit = false;
+
     private void OnTriggerEnter(Collider other)
     {
         //print("entre a un collider...");
@@ -16,6 +19,7 @@ public class RocosoHeadbuttHitBox : MonoBehaviour
 
             IGolpeable objetoGolpeable = other.GetComponent<IGolpeable>();
             objetoGolpeable.GetGolpeado(headbuttDamage);
+            didHit = true;
         }
     }
 }
