@@ -20,7 +20,7 @@ public class TriggerRocoso : TriggerScript
 
     public override void OnEnterBehaviour()
     {
-        print("el player entro a mi trigger, el rocoso debe despertar");
+        //print("el player entro a mi trigger, el rocoso debe despertar");
         _thisRocoso.RocosoDespierta(_player);
     }
 }

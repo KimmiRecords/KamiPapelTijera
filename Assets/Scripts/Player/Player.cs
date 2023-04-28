@@ -28,11 +28,11 @@ public class Player : Entity, IMojable, IGolpeable
     {
         get
         {
-            return speed;
+            return _speed;
         }
         set 
         {
-            speed = value;
+            _speed = value;
         }
     }
 
@@ -42,8 +42,8 @@ public class Player : Entity, IMojable, IGolpeable
         _model = new PlayerModel(this);
         _view = new PlayerView();
         _controller = new PlayerController(this);
-        miTijeraHitbox.tijeraDamage = attackDamage;
-        maxHp = hp;
+        miTijeraHitbox.tijeraDamage = _attackDamage;
+        maxHp = _hp;
     }
 
     private void Update()
@@ -104,7 +104,7 @@ public class Player : Entity, IMojable, IGolpeable
     public override void Die()
     {
         print("player: me mori");
-        hp = maxHp;
+        _hp = maxHp;
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
 }

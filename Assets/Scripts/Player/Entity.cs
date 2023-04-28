@@ -5,33 +5,33 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
-    protected float hp;
+    protected float _hp;
     [SerializeField]
-    protected float speed;
+    protected float _speed;
     [SerializeField]
-    protected float attackDamage;
+    protected float _attackDamage;
 
     public Entity SetHP(float desiredHp)
     {
-        hp = desiredHp;
+        _hp = desiredHp;
         return this;
     }
     public Entity SetSpeed(float desiredSpeed)
     {
-        speed = desiredSpeed;
+        _speed = desiredSpeed;
         return this;
     }
     public Entity SetAttackDamage(float desiredAtkDmg)
     {
-        attackDamage = desiredAtkDmg;
+        _attackDamage = desiredAtkDmg;
         return this;
     }
 
     public virtual void TakeDamage(float dmg)
     {
         print("entity: recibi " + dmg + " damage");
-        hp -= dmg;
-        if (hp <= 0)
+        _hp -= dmg;
+        if (_hp <= 0)
         {
             Die();
         }
