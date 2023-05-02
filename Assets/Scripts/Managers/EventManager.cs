@@ -19,7 +19,8 @@ public enum Evento
     OnPlayerMove, //cuando hor o ver son != 0. los params son 0 hor y 1 ver
     OnPlayerPrimaryClick,
     OnPageFinishTurning,
-
+    
+    OnPlayerChangeVida, //param 0 es float hp. param1 es max hp
     OnPlayerChangePage//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
 }
 

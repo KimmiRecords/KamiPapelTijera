@@ -29,7 +29,7 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void TakeDamage(float dmg)
     {
-        print("entity: recibi " + dmg + " damage");
+        //print("entity: recibi " + dmg + " damage");
         _hp -= dmg;
         if (_hp <= 0)
         {
@@ -40,7 +40,7 @@ public abstract class Entity : MonoBehaviour
     
     public virtual void Die()
     {
-        print("entity: me mori");
+        //print("entity: me mori");
         Destroy(this.gameObject);
     }
 

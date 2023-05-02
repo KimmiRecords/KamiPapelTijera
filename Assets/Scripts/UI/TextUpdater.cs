@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TextUpdater : MonoBehaviour
+public abstract class TextUpdater : MonoBehaviour
 {
     //los updaters de cosas de la ui agarran la info usando eventos
-    TextMeshProUGUI myText;
+    protected TextMeshProUGUI myText;
 
     [SerializeField]
-    string textoInicial = "Número de página: ";
+    protected Evento eventoQueMeInteresa;
 
-    void Start()
+    [SerializeField]
+    protected string textoInicial;
+
+    protected virtual void Start()
     {
         myText = GetComponent<TextMeshProUGUI>();
-        EventManager.Subscribe(Evento.OnPlayerChangePage, UpdateText); //ves? me suscribo al evento onplayerchangepage, asi cuando den el aviso, yo disparo el metodo UpdateText
+        EventManager.Subscribe(eventoQueMeInteresa, UpdateText); //ves? me suscribo al evento onplayerchangepage, asi cuando den el aviso, yo disparo el metodo UpdateText
     }
 
-    void UpdateText(params object[] parameter)
+    protected virtual void UpdateText(params object[] parameter)
     {
-        if (parameter[0] is int)
-        {
-            myText.text = textoInicial + (int)parameter[0]; //tuki, escribe "numero de pagina = x"
-        }
+        print("updateo el text");
+        
     }
 }

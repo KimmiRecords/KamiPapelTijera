@@ -20,12 +20,12 @@ public class Player : Entity, IMojable, IGolpeable
 
     [HideInInspector]
     public bool isJump;
+
     PlayerModel _model;
     PlayerView _view;
     PlayerController _controller;
-    float maxHp;
-
-    bool readyToAttack = true;
+    float _maxHp;
+    bool _readyToAttack = true;
 
     public float Speed 
     {
@@ -39,6 +39,19 @@ public class Player : Entity, IMojable, IGolpeable
         }
     }
 
+    public float Vida
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            _hp = value;
+            EventManager.Trigger(Evento.OnPlayerChangeVida, _hp, _maxHp);
+        }
+    }
+
 
     void Start()
     {
@@ -46,9 +59,9 @@ public class Player : Entity, IMojable, IGolpeable
         _view = new PlayerView();
         _controller = new PlayerController(this);
         miTijeraHitbox.tijeraDamage = _attackDamage;
-        maxHp = _hp;
+        _maxHp = _hp;
+        Vida = _maxHp;
     }
-
     private void Update()
     {
         if (LevelManager.instance.agency)
@@ -63,17 +76,15 @@ public class Player : Entity, IMojable, IGolpeable
 
         _model.NewMove(_controller.hor, _controller.ver); //todo el tiempo, aunque no me mueva, pues caidas y bla
     }
-
     public void OnPrimaryClick()
     {
-        if (readyToAttack)
+        if (_readyToAttack)
         {
             StartCoroutine(TijeraCoroutine());
             _view.StartTijeraAnimation();
-            readyToAttack = false;
+            _readyToAttack = false;
         }
     }
-
     IEnumerator TijeraCoroutine()
     {
 
@@ -82,7 +93,7 @@ public class Player : Entity, IMojable, IGolpeable
         _model.DisableTijeraHitbox();
 
         yield return new WaitForSeconds(weaponCooldown);
-        readyToAttack = true;
+        _readyToAttack = true;
     }
     public void GetWet()
     {
@@ -92,14 +103,17 @@ public class Player : Entity, IMojable, IGolpeable
     }
     public void GetGolpeado(float dmg)
     {
-        print("me han golpeao");
-        _view.StartGetWetAnimation();
+        //print("me han golpeao");
+        _view.StartGetWetAnimation(); //es solo x el sonido
         TakeDamage(dmg);
     }
-
     public override void TakeDamage(float dmg)
     {
-        base.TakeDamage(dmg);
+        Vida -= dmg;
+        if (Vida <= 0)
+        {
+            Die();
+        }
         StartCoroutine(EnrojecerSprite());
     }
     public IEnumerator EnrojecerSprite()
@@ -112,7 +126,7 @@ public class Player : Entity, IMojable, IGolpeable
     public override void Die()
     {
         print("player: me mori");
-        _hp = maxHp;
+        Vida = _maxHp;
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
 }

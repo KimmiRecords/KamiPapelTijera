@@ -15,7 +15,7 @@ public class RocosoWalkState : IState
 
     public void OnEnter()
     {
-        Debug.Log("entre a walk");
+        //Debug.Log("entre a walk");
         _rocoso.anim.SetBool("isWalk", true);
 
     }
@@ -35,14 +35,14 @@ public class RocosoWalkState : IState
 
         if (Vector3.Distance(_rocoso.target, _rocoso.transform.position) < 10)
         {
-            Debug.Log("ONUPDATE - me cambio a attack");
+            //Debug.Log("ONUPDATE - me cambio a attack");
             _fsm.ChangeState(State.RocosoAttack);
         }
     }
 
     public void OnExit()
     {
-        Debug.Log("salgo de walk");
+        //Debug.Log("salgo de walk");
 
     }
 
