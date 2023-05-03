@@ -31,6 +31,7 @@ public class DialogueManager : MonoBehaviour
         {
             instance = this;
         }
+        DontDestroyOnLoad(this);
     }
 
     private void Start()
@@ -66,6 +67,7 @@ public class DialogueManager : MonoBehaviour
         LevelManager.instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
+        EventManager.Trigger(Evento.OnDialogueEnd, 0);
     }
 
     public IEnumerator WriteText(string[] textos)
