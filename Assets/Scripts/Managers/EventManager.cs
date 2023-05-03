@@ -20,8 +20,6 @@ public enum Evento
     OnPlayerPrimaryClick,
     OnPageFinishTurning,
     
-    OnDialogueEnd,
-
     OnPlayerChangeVida, //param 0 es float hp. param1 es max hp
     OnPlayerChangePage//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
 }

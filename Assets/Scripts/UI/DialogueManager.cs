@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto
-    //
-    //si me dicen q va a haber 2 textos, los coordino con "dialogo"
 
     public static DialogueManager instance;
 
@@ -18,7 +16,6 @@ public class DialogueManager : MonoBehaviour
 
     bool input = false;
     bool waitingForInput = false;
-
     bool isShowing = false;
 
     private void Awake()
@@ -33,7 +30,6 @@ public class DialogueManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
     }
-
     private void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, CheckPlayerInput);
@@ -43,51 +39,41 @@ public class DialogueManager : MonoBehaviour
     {
         if (waitingForInput)
         {
-            print("recibi input true");
+            //print("recibi input true");
             input = true;
         }
     }
-
     public void ShowDialogue(string[] textos)
     {
         if (!isShowing)
         {
-            print("show dialogue");
+            //print("show dialogue");
             dialogueGlobe.SetActive(true);
             LevelManager.instance.inDialogue = true;
             StartCoroutine(WriteText(textos));
             isShowing = true;
         }
     }
-
     public void HideDialogue()
     {
-        print("hide dialogue");
+        //print("hide dialogue");
         dialogueTextComponent.text = ""; //esto es lo que deberia estar animado despues
         LevelManager.instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
-        EventManager.Trigger(Evento.OnDialogueEnd, 0);
     }
-
     public IEnumerator WriteText(string[] textos)
     {
         for (int i = 0; i < textos.Length; i++)
         {
-            print("ARRANCA EL WRITE TEXT - cambio el texto a " + textos[i]);
+            //print("ARRANCA EL WRITE TEXT - cambio el texto a " + textos[i]);
             dialogueTextComponent.text = textos[i]; //esto es lo que deberia estar animado despues
             waitingForInput = true;
 
-            //yield return new WaitForSeconds(1f);
-            print("espero...");
-
-            //while (!input)
-            //{
-            //}
             while (!input)
                 yield return null;
 
-            print("termine de esperar, waitforinput false");
+            //print("termine de esperar, waitforinput false");
             input = false;
             waitingForInput = false;
         }

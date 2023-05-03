@@ -8,16 +8,10 @@ public class MainMenuManager : MonoBehaviour
     AutoDialogue _autoDialogo;
 
     bool _isNewGameButtonDown = false;
-    bool _isStarted = false;
+    bool _dialogueStarted = false;
 
     [SerializeField]
     string sceneToLoadOnDialogueEnd;
-
-
-    private void Start()
-    {
-        EventManager.Subscribe(Evento.OnDialogueEnd, ChangeScene);
-    }
 
     public void OnNewGameButtonDown()
     {
@@ -26,31 +20,26 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (_isNewGameButtonDown && !_isStarted && Input.anyKeyDown)
+        if (_isNewGameButtonDown && !_dialogueStarted && Input.anyKeyDown)
         {
             _autoDialogo.StartDialogue();
-            _isStarted = true;
+            _dialogueStarted = true;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             EventManager.Trigger(Evento.OnPlayerPressedE);
+            if (_dialogueStarted && !LevelManager.instance.inDialogue)
+            {
+                 ChangeScene();
+            }
         }
     }
-
-
 
     public void ChangeScene(params object[] parameter)
     {
-        EventManager.Unsubscribe(Evento.OnDialogueEnd, ChangeScene);
+        //print("change scene");
         LevelManager.instance.GoToScene(sceneToLoadOnDialogueEnd);
     }
 
-    private void OnDestroy()
-    {
-        if (!gameObject.scene.isLoaded)
-        {
-            EventManager.Unsubscribe(Evento.OnDialogueEnd, ChangeScene);
-        }
-    }
 }

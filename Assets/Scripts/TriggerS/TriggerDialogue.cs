@@ -9,7 +9,7 @@ public class TriggerDialogue : TriggerScript
 
     public override void OnEnterBehaviour()
     {
-        print("trigger dialogue - on enter behaviour");
+        //print("trigger dialogue - on enter behaviour");
         DialogueManager.instance.ShowDialogue(textos);
     }
 }

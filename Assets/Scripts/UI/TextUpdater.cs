@@ -22,7 +22,7 @@ public abstract class TextUpdater : MonoBehaviour
 
     protected virtual void UpdateText(params object[] parameter)
     {
-        print("updateo el text");
+        //print("updateo el text");
         
     }
 }

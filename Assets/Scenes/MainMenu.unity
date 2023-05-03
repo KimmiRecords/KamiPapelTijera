@@ -159,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 365.5, y: -25}
-  m_SizeDelta: {x: 442.6527, y: 50}
+  m_AnchoredPosition: {x: 320, y: -209}
+  m_SizeDelta: {x: 500.1719, y: 376.846}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &16088662
 MonoBehaviour:
@@ -182,16 +182,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bartone
+  m_text: 'Hecho por
 
-    Katabian
 
-    Posadas
+    Antonella Bartone
 
+    Diego Katabian
+
+    Thomas Posadas
+
+    Valentino
     Roman'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6ec7c0b942022c442bb8d10732ada393, type: 2}
+  m_sharedMaterial: {fileID: 2306367738778210952, guid: 6ec7c0b942022c442bb8d10732ada393,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -251,7 +256,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 200.5142, w: 0}
+  m_margin: {x: -153.05322, y: -73.40187, z: -147.51933, w: -74.52603}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5605,7 +5610,7 @@ RectTransform:
   m_GameObject: {fileID: 948214963}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.47864, y: 0.47864, z: 0.47864}
+  m_LocalScale: {x: 0.59710336, y: 0.59710336, z: 0.59710336}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 359910580}
@@ -5613,7 +5618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -293}
+  m_AnchoredPosition: {x: 0, y: -362}
   m_SizeDelta: {x: 1024.9702, y: 853.0503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &948214965
@@ -5682,17 +5687,17 @@ RectTransform:
   m_GameObject: {fileID: 987516518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6519974, y: 1.6519974, z: 1.6519974}
+  m_LocalScale: {x: 2.177663, y: 2.177663, z: 2.177663}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1823648255}
   m_Father: {fileID: 359910580}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 765, y: 460.2}
-  m_SizeDelta: {x: 178.8151, y: 59.605}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -320, y: -187}
+  m_SizeDelta: {x: 178.81506, y: 59.60498}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &987516520
 MonoBehaviour:
@@ -6103,8 +6108,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nuevo juego
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6ec7c0b942022c442bb8d10732ada393, type: 2}
+  m_sharedMaterial: {fileID: 2306367738778210952, guid: 6ec7c0b942022c442bb8d10732ada393,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6258,7 +6264,7 @@ PrefabInstance:
     - target: {fileID: 4104525655400190837, guid: 04118d123dafae24aa868d22c2ad781c,
         type: 3}
       propertyPath: m_Name
-      value: DialogueSystem
+      value: DialogueManager
       objectReference: {fileID: 0}
     - target: {fileID: 7020507771080829317, guid: 04118d123dafae24aa868d22c2ad781c,
         type: 3}

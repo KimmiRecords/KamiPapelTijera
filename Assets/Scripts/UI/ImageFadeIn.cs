@@ -59,7 +59,7 @@ public class ImageFadeIn : MonoBehaviour
 
     public IEnumerator BlackOffCoroutine()
     {
-        print("black off coroutine");
+        //print("black off coroutine");
         while (image.color.a > 0)
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (fadeSpeed * Time.deltaTime));
@@ -70,10 +70,10 @@ public class ImageFadeIn : MonoBehaviour
 
     public IEnumerator BlackOnCoroutine()
     {
-        print("black on coroutine");
+        //print("black on coroutine");
         while (image.color.a < 1)
         {
-            print("oscurezco...");
+            //print("oscurezco...");
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (fadeSpeed * Time.deltaTime));
             yield return new WaitForEndOfFrame();
         }

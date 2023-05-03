@@ -49,7 +49,7 @@ public abstract class TriggerScript : MonoBehaviour
     public virtual void OnExitBehaviour()
     {
         triggerBool = false;
-        print("se salio el player de " + gameObject.name);
+        //print("se salio el player de " + gameObject.name);
         TooltipManager.instance.HideTooltip();
     }
 

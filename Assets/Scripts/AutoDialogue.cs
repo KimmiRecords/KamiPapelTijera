@@ -12,7 +12,7 @@ public class AutoDialogue : MonoBehaviour
 
     public void StartDialogue()
     {
-        print("auto dialogue - start");
+        //print("auto dialogue - start");
         DialogueManager.instance.ShowDialogue(textos);
     }
 }

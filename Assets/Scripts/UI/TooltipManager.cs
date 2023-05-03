@@ -36,7 +36,7 @@ public class TooltipManager : MonoBehaviour
 
     public void HideTooltip()
     {
-        print("hide tooltip");
+        //print("hide tooltip");
         tooltipObject.SetActive(false);
         tooltipTextComponent.text = "";
     }
