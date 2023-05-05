@@ -52,6 +52,7 @@ public class DialogueManager : MonoBehaviour
             LevelManager.instance.inDialogue = true;
             StartCoroutine(WriteText(textos));
             isShowing = true;
+            EventManager.Trigger(Evento.OnDialogueStart, Camara.CloseUp);
         }
     }
     public void HideDialogue()
@@ -61,6 +62,7 @@ public class DialogueManager : MonoBehaviour
         LevelManager.instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
+        EventManager.Trigger(Evento.OnDialogueEnd, Camara.Normal);
     }
     public IEnumerator WriteText(string[] textos)
     {

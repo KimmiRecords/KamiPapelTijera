@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: Main Camera Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: vcam 1
-    m_To: vcam 2
+  - m_From: vcam BookCenter
+    m_To: vcam Normal
     m_Blend:
-      m_Style: 2
-      m_Time: 4
+      m_Style: 1
+      m_Time: 3
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: vcam 2
-    m_To: vcam 1
+  - m_From: vcam BookCenter
+    m_To: vcam CloseUp
     m_Blend:
-      m_Style: 6
-      m_Time: 4
+      m_Style: 1
+      m_Time: 3
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

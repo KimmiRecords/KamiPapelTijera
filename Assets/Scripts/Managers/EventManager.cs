@@ -11,15 +11,19 @@ using UnityEngine;
 //subscribe hace que adhiera a mis metodos para ser disparados cuando alguien mande trigger
 //unsubscribe lo quita. hay que hacerlo siempre que vaya a destruir el objeto.
 
-public enum Evento
+public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARRUINAN LA NUMERACION
 {
     OnPlayerPressedE,
     OnPlayerPressedQ,
     OnPlayerPressedSpace,
     OnPlayerMove, //cuando hor o ver son != 0. los params son 0 hor y 1 ver
     OnPlayerPrimaryClick,
+
     OnPageFinishTurning,
     
+    OnDialogueStart, //param0 es el numero de camara, por ahora
+    OnDialogueEnd,
+
     OnPlayerChangeVida, //param 0 es float hp. param1 es max hp
     OnPlayerChangePage//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
 }
