@@ -110,21 +110,12 @@ public class PageScroller : MonoBehaviour
             esferaNext.gameObject.SetActive(true);
         }
     }
-
     void StartChangePage() //aca EMPIEZA a girar la pagina
     {
-        //LevelManager.instance.inDialogue = true;  //freezeo a kami
-        //CreateHoja(isNext); //instancio la hoja que corresponda
-        //CheckSpheres(activeIndex); //chequeo si hay que poner/sacar zona
-        //PUBManager.instance.ClosePUBs();
         CameraManager.instance.SetCamera(Camara.BookCenter);
-
-        
-
         StartCoroutine(ChangePageCoroutine(1));
         StartCoroutine(AbrirPUBsCoroutine(3));
     }
-
     public IEnumerator ChangePageCoroutine(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
@@ -141,7 +132,6 @@ public class PageScroller : MonoBehaviour
         CheckSpheres(activeIndex); //chequeo si hay que poner/sacar zona
         PUBManager.instance.ClosePUBs();
     }
-
     public IEnumerator AbrirPUBsCoroutine(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
@@ -178,8 +168,6 @@ public class PageScroller : MonoBehaviour
         isTurning = false;
         esferaNext.triggerBool = false;
         CameraManager.instance.SetCamera(Camara.Normal);
-
-
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
 
     private void OnDestroy()
