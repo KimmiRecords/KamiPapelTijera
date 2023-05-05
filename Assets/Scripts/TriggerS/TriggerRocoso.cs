@@ -9,17 +9,9 @@ public class TriggerRocoso : TriggerScript
 
     Player _player;
 
-    protected override void OnTriggerEnter(Collider other)
+    public override void OnEnterBehaviour(Collider other)
     {
-        if (other.gameObject.layer == 3)
-        {
-            _player = other.GetComponent<Player>();
-            OnEnterBehaviour();
-        }
-    }
-
-    public override void OnEnterBehaviour()
-    {
+        _player = other.GetComponent<Player>();
         //print("el player entro a mi trigger, el rocoso debe despertar");
         _thisRocoso.RocosoDespierta(_player);
     }

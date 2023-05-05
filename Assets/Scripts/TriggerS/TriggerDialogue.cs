@@ -7,7 +7,7 @@ public class TriggerDialogue : TriggerScript
     [TextAreaAttribute][SerializeField]
     string[] textos;
 
-    public override void OnEnterBehaviour()
+    public override void OnEnterBehaviour(Collider other)
     {
         //print("trigger dialogue - on enter behaviour");
         DialogueManager.instance.ShowDialogue(textos);

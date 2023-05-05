@@ -7,11 +7,11 @@ public class TriggerSound : TriggerScript
     [SerializeField]
     string soundName;
 
-    public override void OnEnterBehaviour()
+    public override void OnEnterBehaviour(Collider other)
     {
         //print("entro el player");
         triggerBool = true;
-        TooltipManager.instance.ShowTooltip(tooltipTextToShow);
+        TooltipManager.instance.ShowTooltip(tooltipTextToShow, PostItColor.Verde);
         
         if (soundName == "4S_MarimbaLoopConPiano")
         {

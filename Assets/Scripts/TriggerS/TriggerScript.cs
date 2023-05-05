@@ -18,6 +18,9 @@ public abstract class TriggerScript : MonoBehaviour
     [SerializeField]
     protected string tooltipTextToShow;
 
+    [SerializeField]
+    PostItColor postItColor;
+
     private void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
@@ -27,7 +30,7 @@ public abstract class TriggerScript : MonoBehaviour
     {
         if (other.gameObject.layer == 3)
         {
-            OnEnterBehaviour();
+            OnEnterBehaviour(other);
         }
     }
 
@@ -39,11 +42,11 @@ public abstract class TriggerScript : MonoBehaviour
         }
     }
 
-    public virtual void OnEnterBehaviour()
+    public virtual void OnEnterBehaviour(Collider other)
     {
         triggerBool = true;
         //print("entro el player");
-        TooltipManager.instance.ShowTooltip(tooltipTextToShow);
+        TooltipManager.instance.ShowTooltip(tooltipTextToShow, postItColor);
     }
 
     public virtual void OnExitBehaviour()
@@ -60,6 +63,8 @@ public abstract class TriggerScript : MonoBehaviour
 
     protected void OnDestroy()
     {
+        //TooltipManager.instance.HideTooltip(postItColor);
+
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
