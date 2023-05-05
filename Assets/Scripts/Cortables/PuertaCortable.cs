@@ -9,7 +9,7 @@ public class PuertaCortable : MonoBehaviour, ICortable
         print("cortaste la puerta");
         AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
 
-        TooltipManager.instance.HideTooltip();
+        //TooltipManager.instance.HideTooltip();
         Destroy(gameObject);
     }
 }

@@ -17,12 +17,12 @@ public abstract class TextUpdater : MonoBehaviour
     protected virtual void Start()
     {
         myText = GetComponent<TextMeshProUGUI>();
-        EventManager.Subscribe(eventoQueMeInteresa, UpdateText); //ves? me suscribo al evento onplayerchangepage, asi cuando den el aviso, yo disparo el metodo UpdateText
+        EventManager.Subscribe(eventoQueMeInteresa, UpdateText);
     }
 
     protected virtual void UpdateText(params object[] parameter)
     {
-        print("updateo el text");
+        //print("updateo el text");
         
     }
 }

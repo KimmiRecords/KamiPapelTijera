@@ -8,7 +8,6 @@ public class PlayerModel
     //aca en model dice que hace move y jump, y van a estar otras mecanicas seguramente
 
     Player _player;
-
     float _groundedTimer;
     float _verticalVelocity;
     float _speedModifier;
@@ -37,6 +36,7 @@ public class PlayerModel
         if (groundedPlayer)
         {
             _groundedTimer = 0.2f; //mientras este en el suelo
+            _player._view.StartIdleAnimation();
             //pAnims.StopJumping();
             //pAnims.StopFalling();
             //pAnims.PlayLanding();
@@ -77,8 +77,7 @@ public class PlayerModel
                 _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
                 _player.isJump = false;
                 //AudioManager.instance.StopPasos();
-                AudioManager.instance.PlayByName("JumpSFX", 2f);
-                //pAnims.PlayJumping();
+                _player._view.StartJumpAnimation();
                 //pAnims.StopLanding();
             }
         }
@@ -86,13 +85,13 @@ public class PlayerModel
         _move *= _playerSpeed * _speedModifier;
         _move.y = _verticalVelocity; //sigo cargando el vector movieminto
         _player.cc.Move(_move * Time.deltaTime); //aplico el vector movieminto al character controller, con el metodo .Move
-        //RotatePlayer(hor, ver);
 
+        if (hor != 0 || ver != 0)
+        {
+            _player._view.RotateModel(_move);
+        }
 
-        //if (agency) //esto es para cosass de la aanimacion
-        //{
-        //    pAnims.CheckMagnitude(_move.x + _move.z); //en el script de playerAnimations, chequea si me estoy moviendo o no
-        //}
+        //Debug.Log(_move);
     }
 
     public void EnableTijeraHitbox()

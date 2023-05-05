@@ -1,7 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
+
+public enum PostItColor
+{
+    Azul,
+    Naranja,
+    Rosa,
+    Amarillo,
+    Verde
+}
 
 public class TooltipManager : MonoBehaviour
 {
@@ -10,10 +19,7 @@ public class TooltipManager : MonoBehaviour
     public static TooltipManager instance;
 
     [SerializeField]
-    TMPro.TextMeshProUGUI tooltipTextComponent;
-
-    [SerializeField]
-    GameObject tooltipObject;
+    PostIt[] postIts;
 
     private void Awake()
     {
@@ -27,17 +33,20 @@ public class TooltipManager : MonoBehaviour
         }
     }
 
-
-    public void ShowTooltip(string text)
+    public void ShowTooltip(string text, PostItColor postIt)
     {
-        tooltipObject.SetActive(true);
-        tooltipTextComponent.text = text;
+        postIts[(int)postIt].gameObject.SetActive(true);
+        postIts[(int)postIt].tmPro.text = text;
     }
 
     public void HideTooltip()
     {
-        print("hide tooltip");
-        tooltipObject.SetActive(false);
-        tooltipTextComponent.text = "";
+        //print("hide tooltip");
+
+        for (int i = 0; i < postIts.Length; i++)
+        {
+            postIts[i].gameObject.SetActive(false);
+            postIts[i].tmPro.text = "";
+        }
     }
 }

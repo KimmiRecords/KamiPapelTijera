@@ -60,8 +60,7 @@ public class PageScroller : MonoBehaviour
                 {
                     activeIndex++;
                     isNext = true;
-                    SetOnPlayerChangePageTrigger();
-                    AudioManager.instance.PlayByName("PageTurn01");
+                    StartChangePage();
                     isTurning = true;
                 }
             }
@@ -81,8 +80,7 @@ public class PageScroller : MonoBehaviour
                 {
                     activeIndex--;
                     isNext = false;
-                    SetOnPlayerChangePageTrigger();
-                    AudioManager.instance.PlayByName("PageTurn02");
+                    StartChangePage();
                     isTurning = true;
                 }
             }
@@ -112,19 +110,31 @@ public class PageScroller : MonoBehaviour
             esferaNext.gameObject.SetActive(true);
         }
     }
-
-    private void SetOnPlayerChangePageTrigger() //aca EMPIEZA a girar la pagina
+    void StartChangePage() //aca EMPIEZA a girar la pagina
     {
+        CameraManager.instance.SetCamera(Camara.BookCenter);
+        StartCoroutine(ChangePageCoroutine(1));
+        StartCoroutine(AbrirPUBsCoroutine(3));
+    }
+    public IEnumerator ChangePageCoroutine(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        if (isNext)
+        {
+            AudioManager.instance.PlayByName("PageTurn01");
+        }
+        else
+        {
+            AudioManager.instance.PlayByName("PageTurn02");
+        }
         LevelManager.instance.inDialogue = true;  //freezeo a kami
         CreateHoja(isNext); //instancio la hoja que corresponda
         CheckSpheres(activeIndex); //chequeo si hay que poner/sacar zona
         PUBManager.instance.ClosePUBs();
-        StartCoroutine(AbrirPUBsCorrutina());
     }
-
-    public IEnumerator AbrirPUBsCorrutina()
+    public IEnumerator AbrirPUBsCoroutine(float delayTime)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(delayTime);
         EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1, isNext);
 
         for (int i = 0; i < objectsToToggle.Length; i++) //este es el core, el q prende y apaga la carpeta de cada pagina
@@ -157,7 +167,7 @@ public class PageScroller : MonoBehaviour
         LevelManager.instance.inDialogue = false;
         isTurning = false;
         esferaNext.triggerBool = false;
-
+        CameraManager.instance.SetCamera(Camara.Normal);
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
 
     private void OnDestroy()

@@ -9,36 +9,74 @@ public class ImageFadeIn : MonoBehaviour
     [SerializeField]
     float fadeSpeed; // velocidad a la que se hace el fade in
     [SerializeField]
-    float holdTime;
-    
-    Image image; // la imagen que quieres hacer fade in (en este caso, yo mismo)
-    bool isHolding;
+    float holdTime; //hold es un tiempito inicial antes de arrancar
 
+    Image image; // la imagen que hace fade in (en este caso, yo mismo)
+    bool _isHolding; 
+    bool _isOn; //true es TODO NEGRO
     private void Start()
     {
         image = GetComponent<Image>();
 
-        //empieza transparente
+        //empieza vainilla
         image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
-        isHolding = true;
-        StartCoroutine(HoldCoroutine());
+
+        //holdeo un poquito antes de arrancar
+        _isHolding = true;
+        _isOn = true;
+        StartCoroutine(InitialHoldCoroutine());
     }
 
     private void Update()
     {
-        if (!isHolding)
+        //lo primero es desvanecer una vez para que empiece el juego xd
+        if (!_isHolding && _isOn)
         {
-            // si la imagen no es totalmente visible, aumenta su opacity
-            if (image.color.a > 0)
-            {
-                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (fadeSpeed * Time.deltaTime));
-            }
+            PlacaNegraOff();
+            _isHolding = true; 
+            //listo, la placa negra se fue y no disparo mas este metodo
         }
+
     }
 
-    public IEnumerator HoldCoroutine()
+    public IEnumerator InitialHoldCoroutine() //al final del hold permito que me cambien el color
     {
         yield return new WaitForSeconds(holdTime);
-        isHolding = false;
+        _isHolding = false;
+    }
+
+    public void PlacaNegraOff() //tengo q hacerle un metodo dedicado para q el Button lo encuentre. sisi el editor de videojuegos mas caro del mundo
+    {
+        StopAllCoroutines();
+        StartCoroutine(BlackOffCoroutine());
+    }
+
+    public void PlacaNegraOn()
+    {
+        StopAllCoroutines();
+        StartCoroutine(BlackOnCoroutine());
+    }
+
+    public IEnumerator BlackOffCoroutine()
+    {
+        //print("black off coroutine");
+        while (image.color.a > 0)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (fadeSpeed * Time.deltaTime));
+            yield return new WaitForEndOfFrame();
+        }
+        _isOn = false;
+    }
+
+    public IEnumerator BlackOnCoroutine()
+    {
+        //print("black on coroutine");
+        while (image.color.a < 1)
+        {
+            //print("oscurezco...");
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (fadeSpeed * Time.deltaTime));
+            yield return new WaitForEndOfFrame();
+        }
+        _isOn = true;
     }
 }

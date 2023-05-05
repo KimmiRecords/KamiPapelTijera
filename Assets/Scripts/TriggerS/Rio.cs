@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Rio : TriggerScript
 {
-    protected override void OnTriggerEnter(Collider other)
+    //este no muestra el tooltip, solo moja
+
+    public override void OnEnterBehaviour(Collider other)
     {
-        if (other.gameObject.layer == 3)
-        {
-            OnEnterBehaviour();
-            MojarPlayer(other);
-        }
+        triggerBool = true;
+        MojarPlayer(other);
     }
 
     public void MojarPlayer(Collider other)

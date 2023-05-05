@@ -14,6 +14,7 @@ public class Player : Entity, IMojable, IGolpeable
     public float weaponCooldown;
     public CharacterController cc;
     public TijeraHitbox miTijeraHitbox;
+    public Animator anim;
 
     [SerializeField]
     Renderer _renderer;
@@ -22,7 +23,7 @@ public class Player : Entity, IMojable, IGolpeable
     public bool isJump;
 
     PlayerModel _model;
-    PlayerView _view;
+    public PlayerView _view;
     PlayerController _controller;
     float _maxHp;
     bool _readyToAttack = true;
@@ -53,10 +54,10 @@ public class Player : Entity, IMojable, IGolpeable
     }
 
 
-    void Start()
+    void Awake()
     {
         _model = new PlayerModel(this);
-        _view = new PlayerView();
+        _view = new PlayerView(this);
         _controller = new PlayerController(this);
         miTijeraHitbox.tijeraDamage = _attackDamage;
         _maxHp = _hp;
@@ -75,6 +76,7 @@ public class Player : Entity, IMojable, IGolpeable
         }
 
         _model.NewMove(_controller.hor, _controller.ver); //todo el tiempo, aunque no me mueva, pues caidas y bla
+        _view.CheckMagnitude(_controller.hor, _controller.ver);
     }
     public void OnPrimaryClick()
     {
