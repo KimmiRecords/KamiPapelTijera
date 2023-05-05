@@ -18,6 +18,7 @@ public class Player : Entity, IMojable, IGolpeable
 
     [SerializeField]
     Renderer _renderer;
+    Color originalColor;
 
     [HideInInspector]
     public bool isJump;
@@ -62,6 +63,8 @@ public class Player : Entity, IMojable, IGolpeable
         miTijeraHitbox.tijeraDamage = _attackDamage;
         _maxHp = _hp;
         Vida = _maxHp;
+
+        originalColor = _renderer.material.color;
     }
     private void Update()
     {
@@ -123,7 +126,7 @@ public class Player : Entity, IMojable, IGolpeable
         //print("enrojeci el sprite");
         _renderer.material.color = Color.red;
         yield return new WaitForSeconds(0.25f);
-        _renderer.material.color = Color.white;
+        _renderer.material.color = originalColor;
     }
     public override void Die()
     {

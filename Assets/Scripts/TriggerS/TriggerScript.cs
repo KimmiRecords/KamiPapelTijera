@@ -28,7 +28,7 @@ public abstract class TriggerScript : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other) //cuando el player entra, se dispara el behaviour de entrar
     {
-        if (other.gameObject.layer == 3)
+        if (other.gameObject.layer == 3) //layer 3 es el player
         {
             OnEnterBehaviour(other);
         }
