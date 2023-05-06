@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TriggerDialogue : TriggerScript
 {
+
+    [SerializeField]
+    bool burnAfterReading;
     [TextAreaAttribute][SerializeField]
     string[] textos;
 
@@ -11,5 +14,13 @@ public class TriggerDialogue : TriggerScript
     {
         //print("trigger dialogue - on enter behaviour");
         DialogueManager.instance.ShowDialogue(textos);
+
+        if (burnAfterReading)
+        {
+            Destroy(this);
+        }
     }
+
+    //aca deberia agregar el interact.
+    //asi deja de triggerear por enter, pero queda con E
 }

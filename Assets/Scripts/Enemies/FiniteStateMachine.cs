@@ -4,10 +4,18 @@ using UnityEngine;
 
 public enum State
 {
+    //Enemy: rocoso
     RocosoSleep,
     RocosoStart,
     RocosoWalk,
-    RocosoAttack
+    RocosoAttack,
+
+    //NPCs
+    NPC_Idle,
+    NPC_FollowPlayer,
+    Abuela_Idle,
+    Abuela_FollowPlayer,
+    Abuela_Dropoff
 }
 public class FiniteStateMachine
 {

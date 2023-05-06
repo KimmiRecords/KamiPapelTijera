@@ -19,24 +19,18 @@ public class PlayerModel
     public PlayerModel(Player player)
     {
         _player = player;
-
         _playerSpeed = _player.Speed; 
         _speedModifier = 1;
         //initialGravityValue = gravityValue; mismo pero para cambiar la gravedad
     }
-
-    public void NewJump()
-    {
-        Debug.Log("salto");
-    }
-
     public void NewMove(float hor, float ver)
     {
         bool groundedPlayer = _player.cc.isGrounded;
         if (groundedPlayer)
         {
             _groundedTimer = 0.2f; //mientras este en el suelo
-            _player._view.StartIdleAnimation();
+            _player._view.StopJump();
+            //_player._view.StartIdleAnimation();
             //pAnims.StopJumping();
             //pAnims.StopFalling();
             //pAnims.PlayLanding();

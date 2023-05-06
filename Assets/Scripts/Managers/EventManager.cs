@@ -25,7 +25,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnDialogueEnd,
 
     OnPlayerChangeVida, //param 0 es float hp. param1 es max hp
-    OnPlayerChangePage//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
+    OnPlayerChangePage,//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
+    OnAbuelaDropoff //param 0 es el vector3 dropoffpoint
 }
 
 public class EventManager
