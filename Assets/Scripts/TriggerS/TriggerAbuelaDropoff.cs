@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class TriggerAbuelaDropoff : TriggerScript
 {
+    [SerializeField]
+    NPC_Abuela abuela;
     public override void OnEnterBehaviour(Collider other)
     {
         //base.OnEnterBehaviour(other);
-        EventManager.Trigger(Evento.OnAbuelaDropoff, transform.position);
+        if (abuela.isFollowing)
+        {
+            EventManager.Trigger(Evento.OnAbuelaDropoff, transform.position);
+        }
     }
 }

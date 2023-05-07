@@ -16,7 +16,7 @@ public class NPC_Abuela : NPC
         _fsm.AddState(State.Abuela_FollowPlayer, new Abuela_FollowPlayerState(_fsm, this));
         _fsm.AddState(State.Abuela_Dropoff, new Abuela_DropoffState(_fsm, this));
         _fsm.ChangeState(State.Abuela_Idle);
-        EventManager.Subscribe(Evento.OnDialogueEnd, StartFollowingPlayer); //ojo q funca para todos los dialogue end. esto seguro trae problemas
+        EventManager.Subscribe(Evento.OnDialogueEnd, StartFollowingPlayer);
         EventManager.Subscribe(Evento.OnPlayerChangePage, PlaceAbuelaNextToPlayer);
         EventManager.Subscribe(Evento.OnAbuelaDropoff, StartAbuelaDropoff);
 
@@ -24,8 +24,14 @@ public class NPC_Abuela : NPC
 
     public void StartFollowingPlayer(params object[] parameter)
     {
-        isFollowing = true;
-        transform.parent = player.transform.parent;
+        if (parameter[1] is Dialogue d)
+        {
+            if (d.name == "Abuela_01")
+            {
+                isFollowing = true;
+                transform.parent = player.transform.parent;
+            }
+        }
     }
 
     public void StopFollowingPlayer()

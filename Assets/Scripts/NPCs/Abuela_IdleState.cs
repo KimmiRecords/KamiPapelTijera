@@ -18,7 +18,7 @@ public class Abuela_IdleState : IState
 
     public void OnEnter()
     {
-        Debug.Log("[NPC] entro al idle state");
+        //Debug.Log("[NPC] entro al idle state");
     }
     public void OnUpdate()
     {
@@ -31,6 +31,6 @@ public class Abuela_IdleState : IState
 
     public void OnExit()
     {
-        Debug.Log("[NPC] salgo del idle state");
+        //Debug.Log("[NPC] salgo del idle state");
     }
 }

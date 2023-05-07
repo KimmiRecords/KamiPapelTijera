@@ -4,20 +4,33 @@ using UnityEngine;
 
 public class TriggerDialogue : TriggerScript
 {
+    [SerializeField]
+    bool _burnAfterReading;
 
     [SerializeField]
-    bool burnAfterReading;
-    [TextAreaAttribute][SerializeField]
-    string[] textos;
+    Dialogue[] _dialogues;
 
-    public override void OnEnterBehaviour(Collider other)
+    int currentDialogue = 0;
+
+    public override void Interact(params object[] parameter)
     {
-        //print("trigger dialogue - on enter behaviour");
-        DialogueManager.instance.ShowDialogue(textos);
+        if (triggerBool)
+        {
+            //print("trigger dialogue interact: muestro el dialogo " + _dialogues[currentDialogue].name);
+            DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
+        }
 
-        if (burnAfterReading)
+        if (_burnAfterReading)
         {
             Destroy(this);
+        }
+    }
+    protected virtual void PasarAlSiguienteDialogo(params object[] parameter)
+    {
+        if (currentDialogue < _dialogues.Length)
+        {
+            currentDialogue++;
+            print(currentDialogue);
         }
     }
 

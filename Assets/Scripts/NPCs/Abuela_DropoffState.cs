@@ -15,7 +15,7 @@ public class Abuela_DropoffState : IState
 
     public void OnEnter()
     {
-        Debug.Log("[NPC] entro al dropoff state");
+        //Debug.Log("[NPC] entro al dropoff state");
     }
     public void OnUpdate()
     {
@@ -31,6 +31,6 @@ public class Abuela_DropoffState : IState
     }
     public void OnExit()
     {
-        Debug.Log("[NPC] salgo del dropoff state");
+        //Debug.Log("[NPC] salgo del dropoff state");
     }
 }

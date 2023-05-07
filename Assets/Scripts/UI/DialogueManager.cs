@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum Dialogo
+{
+    Granjero_Norberto_01,
+    Granjero_Norberto_02,
+
+    Abuela_01,
+    Abuela_02
+}
+
+
 public class DialogueManager : MonoBehaviour
 {
     //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto
@@ -16,7 +26,11 @@ public class DialogueManager : MonoBehaviour
 
     bool input = false;
     bool waitingForInput = false;
-    bool isShowing = false;
+    [HideInInspector]
+    public bool isShowing = false;
+
+    //[SerializeField]
+    //Dialogue[] dialogos;
 
     private void Awake()
     {
@@ -43,33 +57,36 @@ public class DialogueManager : MonoBehaviour
             input = true;
         }
     }
-    public void ShowDialogue(string[] textos)
+
+    public void ShowDialogue(Dialogue dialogue)
     {
         if (!isShowing)
         {
-            //print("show dialogue");
+            //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
+
             dialogueGlobe.SetActive(true);
             LevelManager.instance.inDialogue = true;
-            StartCoroutine(WriteText(textos));
             isShowing = true;
             EventManager.Trigger(Evento.OnDialogueStart, Camara.CloseUp);
+            StartCoroutine(WriteText(dialogue));
         }
     }
-    public void HideDialogue()
+    public void HideDialogue(Dialogue dialogue)
     {
-        //print("hide dialogue");
+        //print("hide dialogue " + dialogue.name);
         dialogueTextComponent.text = ""; //esto es lo que deberia estar animado despues
         LevelManager.instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
-        EventManager.Trigger(Evento.OnDialogueEnd, Camara.Normal);
+        EventManager.Trigger(Evento.OnDialogueEnd, Camara.Normal, dialogue);
     }
-    public IEnumerator WriteText(string[] textos)
+    public IEnumerator WriteText(Dialogue dialogue)
     {
-        for (int i = 0; i < textos.Length; i++)
+        for (int i = 0; i < dialogue.textos.Length; i++)
         {
-            //print("ARRANCA EL WRITE TEXT - cambio el texto a " + textos[i]);
-            dialogueTextComponent.text = textos[i]; //esto es lo que deberia estar animado despues
+            //print("ARRANCA EL WRITE TEXT - cambio el texto a " + dialogue.textos[i] + " (" + i + ")");
+            dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
+            yield return new WaitForEndOfFrame();
             waitingForInput = true;
 
             while (!input)
@@ -79,8 +96,9 @@ public class DialogueManager : MonoBehaviour
             input = false;
             waitingForInput = false;
         }
-        HideDialogue();
+        HideDialogue(dialogue);
     }
+
 
     private void OnDestroy()
     {

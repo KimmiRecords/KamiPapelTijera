@@ -14,7 +14,7 @@ public class Abuela_FollowPlayerState : IState
 
     public void OnEnter()
     {
-        Debug.Log("[NPC] entro al follow player state");
+        //Debug.Log("[NPC] entro al follow player state");
     }
     public void OnUpdate()
     {
@@ -34,7 +34,7 @@ public class Abuela_FollowPlayerState : IState
     }
     public void OnExit()
     {
-        Debug.Log("[NPC] salgo del followplayer state");
+        //Debug.Log("[NPC] salgo del followplayer state");
         _abuela.isFollowing = false;
     }
 }

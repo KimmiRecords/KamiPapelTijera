@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5357465104666805705}
   - component: {fileID: 5357465104666805707}
-  - component: {fileID: 5357465104666805706}
+  - component: {fileID: 3649359020304989098}
   m_Layer: 0
   m_Name: DialogueHitBox
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12, y: 12, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5357465104666805706
+--- !u!114 &3649359020304989098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,20 +55,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5357465104666805704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c39e061c0fc32364aae84bbc1cb385c5, type: 3}
+  m_Script: {fileID: 11500000, guid: f071bac88ed0e55488bc3f96cab75db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggerBool: 0
-  tooltipTextToShow: 
-  postItColor: 0
-  burnAfterReading: 1
-  textos:
-  - '[Kami encuentra a la abuela entre los arbustos]'
-  - "[ABUELA]: Kami! Qu\xE9 sorpresa! Viniste a buscar le\xF1a?"
-  - '[...]'
-  - "[ABUELA]: Norberto me est\xE1 buscando? Pero qu\xE9 ansioso que es!"
-  - '[ABUELA]: Bueno, dale, vamos para casa que tengo hambre.'
-  - '[LLEVA A LA ABUELA HASTA SU CASA]'
+  tooltipTextToShow: Toca E para charlar
+  postItColor: 1
+  _burnAfterReading: 0
+  _dialogues:
+  - {fileID: 11400000, guid: a727208a659258b4eb483c76b4169f90, type: 2}
+  - {fileID: 11400000, guid: ce0909e931983a74f89eb4e1c854fbf9, type: 2}
 --- !u!1 &5357465105482584964
 GameObject:
   m_ObjectHideFlags: 0

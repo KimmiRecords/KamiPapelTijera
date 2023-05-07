@@ -5492,7 +5492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 920302443}
-  - component: {fileID: 920302442}
+  - component: {fileID: 920302444}
   m_Layer: 0
   m_Name: AutoDialogue01
   m_TagString: Untagged
@@ -5500,28 +5500,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &920302442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920302441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44aaea27c5eae8b4a9a341caec8de447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textos:
-  - '[NARRADOR]: Hola Kami. '
-  - "[NARRADOR]: Si me permit\xEDs, voy a mostrarte mundos con historias incre\xEDbles. "
-  - "[NARRADOR]: Si me hac\xE9s caso, vas a poder leer todos los cuentos que quieras."
-  - '[NARRADOR]: Empezamos?'
-  - '[NARRADOR]: Nuestro primer libro es KAMI, PAPEL Y TIJERA. '
-  - "[NARRADOR]: Este lo conoc\xE9s? "
-  - '[...]'
-  - "[NARRADOR]: Claro que lo conoc\xE9s! Si este es tu libro! Te acord\xE1s como
-    empieza? "
 --- !u!4 &920302443
 Transform:
   m_ObjectHideFlags: 0
@@ -5537,6 +5515,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &920302444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920302441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44aaea27c5eae8b4a9a341caec8de447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: {fileID: 11400000, guid: 1dc47976dc41b9b408a6f3e2e04f4970, type: 2}
 --- !u!1 &932831449
 GameObject:
   m_ObjectHideFlags: 0
@@ -5581,7 +5572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e51cb3dd1629574e9d655fe77c55524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoDialogo: {fileID: 920302442}
+  _autoDialogo: {fileID: 920302444}
   sceneToLoadOnDialogueEnd: SampleScene
 --- !u!1 &948214963
 GameObject:

@@ -6,13 +6,12 @@ public class AutoDialogue : MonoBehaviour
 {
     //cuando se lo pedis, arranca a dialogar
 
-    [TextAreaAttribute]
     [SerializeField]
-    string[] textos;
+    Dialogue dialogue;
 
     public void StartDialogue()
     {
         //print("auto dialogue - start");
-        DialogueManager.instance.ShowDialogue(textos);
+        DialogueManager.instance.ShowDialogue(dialogue);
     }
 }
