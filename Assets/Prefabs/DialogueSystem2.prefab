@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueGlobe: {fileID: 7020507771080829317}
   dialogueTextComponent: {fileID: 7020507771360269970}
+  isShowing: 0
 --- !u!1 &5310992713326206364
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +268,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8923303544631162986, guid: 6aeee19182dbd8b49bd7133d9d51af9c,
         type: 3}
+      propertyPath: m_text
+      value: "En un mar de risas, la vida danza su comp\xE1s,\r\n\xBFSomos marionetas
+        o libres en su vaiv\xE9n fugaz?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923303544631162986, guid: 6aeee19182dbd8b49bd7133d9d51af9c,
+        type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 6ec7c0b942022c442bb8d10732ada393,
@@ -274,7 +281,7 @@ PrefabInstance:
     - target: {fileID: 8923303544631162986, guid: 6aeee19182dbd8b49bd7133d9d51af9c,
         type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8923303544892770173, guid: 6aeee19182dbd8b49bd7133d9d51af9c,
         type: 3}
