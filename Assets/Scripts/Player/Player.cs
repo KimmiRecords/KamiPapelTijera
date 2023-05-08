@@ -33,11 +33,11 @@ public class Player : Entity, IMojable, IGolpeable
     {
         get
         {
-            return _speed;
+            return _maxSpeed;
         }
         set 
         {
-            _speed = value;
+            _maxSpeed = value;
         }
     }
 

@@ -21,11 +21,13 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
 
     OnPageFinishTurning,
     
-    OnDialogueStart, //param0 es el numero de camara, por ahora
-    OnDialogueEnd,
+    OnDialogueStart, //param0 es el numero de camara
+    OnDialogueEnd, //param0 es camara, param1 es dialogue
 
     OnPlayerChangeVida, //param 0 es float hp. param1 es max hp
-    OnPlayerChangePage//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
+    OnPlayerChangePage,//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
+    OnAbuelaDropoff, //param 0 es el vector3 dropoffpoint
+    OnPlayerPlaced //triggereado por PlacePlayer. cuando muere, o cambia de pag, etc
 }
 
 public class EventManager

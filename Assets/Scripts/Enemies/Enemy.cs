@@ -4,7 +4,7 @@ public abstract class Enemy : Entity
 {
     public float Speed
     {
-        get { return _speed; }
-        set { _speed = value; }
+        get { return _maxSpeed; }
+        set { _maxSpeed = value; }
     }
 }

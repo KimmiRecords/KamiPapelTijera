@@ -66,6 +66,11 @@ public class PlayerView
     {
         AudioManager.instance.PlayByName("JumpSFX", 2f);
         _anim.SetBool("isWalk", false);
-        _anim.SetTrigger("Jump");
+        _anim.SetBool("isJump", true);    
+    }
+
+    public void StopJump()
+    {
+        _anim.SetBool("isJump", false);
     }
 }

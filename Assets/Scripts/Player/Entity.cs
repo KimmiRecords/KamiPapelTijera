@@ -7,7 +7,7 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected float _hp;
     [SerializeField]
-    protected float _speed;
+    protected float _maxSpeed;
     [SerializeField]
     protected float _attackDamage;
 
@@ -18,7 +18,7 @@ public abstract class Entity : MonoBehaviour
     }
     public Entity SetSpeed(float desiredSpeed)
     {
-        _speed = desiredSpeed;
+        _maxSpeed = desiredSpeed;
         return this;
     }
     public Entity SetAttackDamage(float desiredAtkDmg)

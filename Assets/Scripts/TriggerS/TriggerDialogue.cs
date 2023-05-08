@@ -4,12 +4,36 @@ using UnityEngine;
 
 public class TriggerDialogue : TriggerScript
 {
-    [TextAreaAttribute][SerializeField]
-    string[] textos;
+    [SerializeField]
+    bool _burnAfterReading;
 
-    public override void OnEnterBehaviour(Collider other)
+    [SerializeField]
+    Dialogue[] _dialogues;
+
+    int currentDialogue = 0;
+
+    public override void Interact(params object[] parameter)
     {
-        //print("trigger dialogue - on enter behaviour");
-        DialogueManager.instance.ShowDialogue(textos);
+        if (triggerBool)
+        {
+            //print("trigger dialogue interact: muestro el dialogo " + _dialogues[currentDialogue].name);
+            DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
+        }
+
+        if (_burnAfterReading)
+        {
+            Destroy(this);
+        }
     }
+    protected virtual void PasarAlSiguienteDialogo(params object[] parameter)
+    {
+        if (currentDialogue < _dialogues.Length)
+        {
+            currentDialogue++;
+            //print(currentDialogue);
+        }
+    }
+
+    //aca deberia agregar el interact.
+    //asi deja de triggerear por enter, pero queda con E
 }
