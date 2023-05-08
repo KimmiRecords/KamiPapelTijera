@@ -30,7 +30,7 @@ public class TriggerDialogue : TriggerScript
         if (currentDialogue < _dialogues.Length)
         {
             currentDialogue++;
-            print(currentDialogue);
+            //print(currentDialogue);
         }
     }
 

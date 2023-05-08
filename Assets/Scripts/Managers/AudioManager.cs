@@ -70,14 +70,6 @@ public class AudioManager : MonoBehaviour
         SceneManager.sceneLoaded += StartLevelBGM;
     }
 
-    //private void Start()
-    //{
-    //    //if (playBGM)
-    //    //{
-    //    //    PlayBGM();
-    //    //}
-    //}
-
     public void StartLevelBGM(Scene scene, LoadSceneMode lsm)
     {
         //print(scene.name);
