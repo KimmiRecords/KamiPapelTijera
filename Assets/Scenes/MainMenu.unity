@@ -194,8 +194,8 @@ MonoBehaviour:
     Valentino
     Roman'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ec7c0b942022c442bb8d10732ada393, type: 2}
-  m_sharedMaterial: {fileID: 2306367738778210952, guid: 6ec7c0b942022c442bb8d10732ada393,
+  m_fontAsset: {fileID: 11400000, guid: 74b2c459710079945b6ae2d51c16c527, type: 2}
+  m_sharedMaterial: {fileID: -6341692012103470525, guid: 74b2c459710079945b6ae2d51c16c527,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6099,8 +6099,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nuevo juego
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ec7c0b942022c442bb8d10732ada393, type: 2}
-  m_sharedMaterial: {fileID: 2306367738778210952, guid: 6ec7c0b942022c442bb8d10732ada393,
+  m_fontAsset: {fileID: 11400000, guid: 74b2c459710079945b6ae2d51c16c527, type: 2}
+  m_sharedMaterial: {fileID: -6341692012103470525, guid: 74b2c459710079945b6ae2d51c16c527,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6274,7 +6274,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7020507771360269970, guid: 04118d123dafae24aa868d22c2ad781c,
         type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 74b2c459710079945b6ae2d51c16c527,
+        type: 2}
+    - target: {fileID: 7020507771360269970, guid: 04118d123dafae24aa868d22c2ad781c,
+        type: 3}
       propertyPath: m_isOrthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020507771360269970, guid: 04118d123dafae24aa868d22c2ad781c,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8332117102437358934, guid: 04118d123dafae24aa868d22c2ad781c,
