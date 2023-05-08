@@ -60,6 +60,7 @@ public class PlayerPageSpawnManager : MonoBehaviour
                 }
 
                 _playerCC.enabled = true;
+                EventManager.Trigger(Evento.OnPlayerPlaced);
                 //_player.transform.parent.position = _pageSpawnPositions[currentPage - 1];
             }
         }

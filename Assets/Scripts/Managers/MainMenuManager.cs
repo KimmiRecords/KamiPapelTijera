@@ -13,6 +13,11 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     string sceneToLoadOnDialogueEnd;
 
+    private void Start()
+    {
+        EventManager.Subscribe(Evento.OnDialogueEnd, ChangeScene);
+    }
+
     public void OnNewGameButtonDown()
     {
         _isNewGameButtonDown = true;
@@ -28,11 +33,12 @@ public class MainMenuManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            EventManager.Trigger(Evento.OnPlayerPressedE);
-            if (_dialogueStarted && !LevelManager.instance.inDialogue)
-            {
-                 ChangeScene();
-            }
+            EventManager.Trigger(Evento.OnPlayerPressedE); //para que avance el texto
+
+            //if (_dialogueStarted && !LevelManager.instance.inDialogue)
+            //{
+            //     ChangeScene();
+            //}
         }
     }
 
@@ -40,6 +46,14 @@ public class MainMenuManager : MonoBehaviour
     {
         //print("change scene");
         LevelManager.instance.GoToScene(sceneToLoadOnDialogueEnd);
+    }
+
+    private void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnDialogueEnd, ChangeScene);
+        }
     }
 
 }
