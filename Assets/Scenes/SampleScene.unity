@@ -738,6 +738,7 @@ Transform:
   - {fileID: 1048875126}
   - {fileID: 441284512}
   - {fileID: 759714948}
+  - {fileID: 1304517195}
   m_Father: {fileID: 165442789}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -7933,6 +7934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 759714948}
   - component: {fileID: 759714950}
+  - component: {fileID: 759714951}
   m_Layer: 0
   m_Name: fueguito_spritesheet_1
   m_TagString: Untagged
@@ -8007,6 +8009,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &759714951
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759714947}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &770891359
 GameObject:
   m_ObjectHideFlags: 3
@@ -13944,13 +13966,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304517193}
-  m_LocalRotation: {x: 0.10857262, y: -0.023870481, z: -0.213398, w: 0.9706202}
-  m_LocalPosition: {x: -40.78, y: -2.6, z: 23.35}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalRotation: {x: 0.22766759, y: -0.70321107, z: -0.074122734, w: 0.66945314}
+  m_LocalPosition: {x: 7.180001, y: 1.81, z: 6.820002}
+  m_LocalScale: {x: 0.49999994, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_Father: {fileID: 52874833}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 11.571, y: -5.428, z: -25.35}
 --- !u!4 &1309526857 stripped
 Transform:
