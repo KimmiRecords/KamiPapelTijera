@@ -154,6 +154,7 @@ public class Player : Entity, IMojable, IGolpeable
                 print("jump force duplicada");
                 jumpForce *= 2;
                 _renderer.material.color = Color.green;
+                //Instantiate el cosito que quieras;
                 break;
 
             case OrigamiStance.Barco:

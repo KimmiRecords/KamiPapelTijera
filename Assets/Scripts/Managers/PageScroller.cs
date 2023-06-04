@@ -24,11 +24,16 @@ public class PageScroller : MonoBehaviour
 
     public GameObject hojaMaster; //el prefab de la hoja que va para adelante
     public GameObject hojaMasterRev; //idem para atras
-
+    [SerializeField]
+    float delayTime;
+    [SerializeField]
+    float popupDelayTime;
     [HideInInspector]
     public bool isNext;
 
     bool isTurning = false;
+
+    
 
     private void Awake()
     {
@@ -113,8 +118,8 @@ public class PageScroller : MonoBehaviour
     void StartChangePage() //aca EMPIEZA a girar la pagina
     {
         CameraManager.instance.SetCamera(Camara.BookCenter);
-        StartCoroutine(ChangePageCoroutine(1));
-        StartCoroutine(AbrirPUBsCoroutine(3));
+        StartCoroutine(ChangePageCoroutine(delayTime));
+        StartCoroutine(AbrirPUBsCoroutine(popupDelayTime));
     }
     public IEnumerator ChangePageCoroutine(float delayTime)
     {
