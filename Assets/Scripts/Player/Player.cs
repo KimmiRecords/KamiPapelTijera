@@ -28,6 +28,9 @@ public class Player : Entity, IMojable, IGolpeable
     PlayerController _controller;
     float _maxHp;
     bool _readyToAttack = true;
+    bool isBarco = false;
+    float originalJumpForce;
+    OrigamiStance currentOrigamiStance;
 
     public float Speed 
     {
@@ -40,7 +43,6 @@ public class Player : Entity, IMojable, IGolpeable
             _maxSpeed = value;
         }
     }
-
     public float Vida
     {
         get
@@ -54,7 +56,6 @@ public class Player : Entity, IMojable, IGolpeable
         }
     }
 
-
     void Awake()
     {
         _model = new PlayerModel(this);
@@ -65,6 +66,9 @@ public class Player : Entity, IMojable, IGolpeable
         Vida = _maxHp;
 
         originalColor = _renderer.material.color;
+        originalJumpForce = jumpForce;
+
+        EventManager.Subscribe(Evento.OnOrigamiApplied, EnterOrigamiStance);
     }
     private void Update()
     {
@@ -102,9 +106,12 @@ public class Player : Entity, IMojable, IGolpeable
     }
     public void GetWet()
     {
-        print("AAAA ME MOJO");
-        _view.StartGetWetAnimation();
-        PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
+        if (!isBarco)
+        {
+            print("AAAA ME MOJO");
+            _view.StartGetWetAnimation();
+            PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
+        }
     }
     public void GetGolpeado(float dmg)
     {
@@ -133,5 +140,54 @@ public class Player : Entity, IMojable, IGolpeable
         print("player: me mori");
         Vida = _maxHp;
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
+    }
+
+    public void EnterOrigamiStance(params object[] parameter)
+    {
+        EndOrigamiStance(currentOrigamiStance); //termina la stance anterior
+
+        currentOrigamiStance = (OrigamiStance)parameter[0]; //nueva
+
+        switch (currentOrigamiStance)
+        {
+            case OrigamiStance.Grulla:
+                print("jump force duplicada");
+                jumpForce *= 2;
+                _renderer.material.color = Color.green;
+                break;
+
+            case OrigamiStance.Barco:
+                print("modo barco on");
+                _renderer.material.color = Color.blue;
+                isBarco = true;
+                break;
+        }
+
+    }
+
+    public void EndOrigamiStance(OrigamiStance origamiStance)
+    {
+        switch (currentOrigamiStance)
+        {
+            case OrigamiStance.Grulla:
+                print("jump force vuelve a original");
+                jumpForce = originalJumpForce;
+                break;
+
+            case OrigamiStance.Barco:
+                print("modo barco off");
+                isBarco = false;
+                break;
+        }
+        _renderer.material.color = originalColor;
+
+    }
+
+    private void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnOrigamiApplied, EnterOrigamiStance);
+        }
     }
 }
