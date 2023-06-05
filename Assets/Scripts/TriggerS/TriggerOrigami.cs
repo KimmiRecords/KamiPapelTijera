@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TriggerOrigami : TriggerScript
 {
+    //cuando entras a este trigger hace nacer al origamicheck
+    //el origami check se va a encargar de chequear que apretes tab y hagas el origami
+
     public Origami origami;
 
     public OrigamiCheck checkPrefab;

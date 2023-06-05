@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class OrigamiCheck : MonoBehaviour
 {
-    //la cosa es que el origami solo funca bien si lo codeo en el update. 
     //este origamicheck solo nace cuando estas dentro del sello de origami
     //asi corre el update pero solo cuando lo necesitamos
+    //aca esta la mecanica de arrastrar el mouse y eso
 
     Origami desiredOrigami;
 
@@ -86,6 +86,8 @@ public class OrigamiCheck : MonoBehaviour
         currentOrigami = origami;
         origami.gameObject.SetActive(true);
         print("arranca la invocacion");
+        TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
+
     }
 
     public void EndOrigami(Origami origami)
@@ -94,11 +96,13 @@ public class OrigamiCheck : MonoBehaviour
         arrastrando = false;
         origami.gameObject.SetActive(false);
         //print("invocacion cancelada");
+        TooltipManager.instance.HideTooltip();
+
     }
 
     public void ApplyOrigami(Origami origami)
     {
-        origami.Apply();
+        origami.Apply(); //aca esta la papa. cada origami se fija que tiene que hacer
         print("origami aplicado");
     }
 }

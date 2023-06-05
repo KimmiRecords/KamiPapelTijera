@@ -10,12 +10,15 @@ public enum OrigamiForm
     Puente
 }
 
-public class Origami : MonoBehaviour
+public abstract class Origami : MonoBehaviour
 {
     public OrigamiForm origamiForm;
     public Image origamiRouteImage;
     public RectTransform puntoInicio;
     public RectTransform puntoFinal;
+
+    public string tooltipMessage;
+    public PostItColor postItColor;
 
     public virtual void Apply()
     {
