@@ -29,8 +29,9 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnAbuelaDropoff, //param 0 es el vector3 dropoffpoint
     OnPlayerPlaced, //triggereado por PlacePlayer. cuando muere, o cambia de pag, etc
 
-    OnOrigamiApplied, //param0 es la origami form
-
+    OnOrigamiApplied, //param0 es papercost (numero negativo), param1 es Origami origami
+    OnPlayerChangePapel, //param0 es int Papel
+    OnCortableDropsPaper //param0 es cuanto papel ganas
 }
 
 public class EventManager

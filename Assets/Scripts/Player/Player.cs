@@ -27,6 +27,7 @@ public class Player : Entity, IMojable, IGolpeable
     public PlayerView _view;
     PlayerController _controller;
     float _maxHp;
+    int _papel;
     bool _readyToAttack = true;
     bool isBarco = false;
     float originalJumpForce;
@@ -55,6 +56,22 @@ public class Player : Entity, IMojable, IGolpeable
             EventManager.Trigger(Evento.OnPlayerChangeVida, _hp, _maxHp);
         }
     }
+    public int Papel
+    {
+        get
+        {
+            return _papel;
+        }
+        set
+        {
+            _papel = value;
+            if (_papel < 0)
+            {
+                _papel = 0;
+            }
+            EventManager.Trigger(Evento.OnPlayerChangePapel, _papel);
+        }
+    }
 
     void Awake()
     {
@@ -68,7 +85,9 @@ public class Player : Entity, IMojable, IGolpeable
         originalColor = _renderer.material.color;
         originalJumpForce = jumpForce;
 
-        EventManager.Subscribe(Evento.OnOrigamiApplied, EnterOrigamiStance);
+        EventManager.Subscribe(Evento.OnOrigamiApplied, AddPaper);
+        EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
+
     }
     private void Update()
     {
@@ -96,7 +115,6 @@ public class Player : Entity, IMojable, IGolpeable
     }
     IEnumerator TijeraCoroutine()
     {
-
         _model.EnableTijeraHitbox();
         yield return new WaitForSeconds(0.1f);
         _model.DisableTijeraHitbox();
@@ -142,53 +160,57 @@ public class Player : Entity, IMojable, IGolpeable
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
 
-    public void EnterOrigamiStance(params object[] parameter)
+    public void AddPaper(params object[] parameter)
     {
-        EndOrigamiStance(currentOrigamiStance); //termina la stance anterior
+        //EndOrigamiStance(currentOrigamiStance); //termina la stance anterior
 
-        currentOrigamiStance = (OrigamiForm)parameter[0]; //nueva
+        //currentOrigamiStance = (OrigamiForm)parameter[0]; //nueva
 
-        switch (currentOrigamiStance)
-        {
-            case OrigamiForm.Grulla:
-                print("jump force duplicada");
-                jumpForce *= 2;
-                _renderer.material.color = Color.green;
-                //Instantiate el cosito que quieras;
-                break;
+        //switch (currentOrigamiStance)
+        //{
+        //    case OrigamiForm.Grulla:
+        //        print("jump force duplicada");
+        //        jumpForce *= 2;
+        //        _renderer.material.color = Color.green;
+        //        //Instantiate el cosito que quieras;
+        //        break;
 
-            case OrigamiForm.Barco:
-                print("modo barco on");
-                _renderer.material.color = Color.blue;
-                isBarco = true;
-                break;
-        }
+        //    case OrigamiForm.Barco:
+        //        print("modo barco on");
+        //        _renderer.material.color = Color.blue;
+        //        isBarco = true;
+        //        break;
+        //}
 
+        //param0 deberia ser el costo de papel. 
+        Papel += (int)parameter[0];
     }
 
-    public void EndOrigamiStance(OrigamiForm origamiStance)
-    {
-        switch (currentOrigamiStance)
-        {
-            case OrigamiForm.Grulla:
-                print("jump force vuelve a original");
-                jumpForce = originalJumpForce;
-                break;
+    //public void EndOrigamiStance(OrigamiForm origamiStance)
+    //{
+    //    //switch (currentOrigamiStance)
+    //    //{
+    //    //    case OrigamiForm.Grulla:
+    //    //        print("jump force vuelve a original");
+    //    //        jumpForce = originalJumpForce;
+    //    //        break;
 
-            case OrigamiForm.Barco:
-                print("modo barco off");
-                isBarco = false;
-                break;
-        }
-        _renderer.material.color = originalColor;
+    //    //    case OrigamiForm.Barco:
+    //    //        print("modo barco off");
+    //    //        isBarco = false;
+    //    //        break;
+    //    //}
+    //    //_renderer.material.color = originalColor;
 
-    }
+    //}
 
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnOrigamiApplied, EnterOrigamiStance);
+            EventManager.Unsubscribe(Evento.OnOrigamiApplied, AddPaper);
+            EventManager.Unsubscribe(Evento.OnCortableDropsPaper, AddPaper);
+
         }
     }
 }

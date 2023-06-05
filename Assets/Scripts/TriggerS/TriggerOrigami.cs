@@ -8,29 +8,74 @@ public class TriggerOrigami : TriggerScript
     //el origami check se va a encargar de chequear que apretes tab y hagas el origami
 
     public Origami origami;
-
+    
     public OrigamiCheck checkPrefab;
     OrigamiCheck currentCheck;
+    public int paperCost;
+
+    bool wasUsed = false;
+
+    protected override void Start()
+    {
+        base.Start();
+        EventManager.Subscribe(Evento.OnOrigamiApplied, UsarSello);
+    }
+
+    public void UsarSello(params object[] parameters)
+    {
+        if (origami == (Origami)parameters[1])
+        {
+            wasUsed = true;
+        }
+    }
 
     public override void OnEnterBehaviour(Collider other)
     {
         //print("on enter beh");
+        if (!wasUsed)
+        {
+            if (other.GetComponent<Player>() != null)
+            {
+                Player player = other.GetComponent<Player>(); //me quedo tranqui xq onenterbehavior solo sucede si el other es player
+            
+                if (player.Papel >= paperCost)
+                {
+                    base.OnEnterBehaviour(other);
+                    currentCheck = Instantiate(checkPrefab).SetOrigami(origami, paperCost, wasUsed);
+                    //particulas y sonidito de entrar en la zona
+                }
+                else
+                {
+                    print("no tenes suficiente papel para hacer este origami");
+                }
+            }
+        }
+        else
+        {
+            print("ya activaste este sello");
+        }
 
-        base.OnEnterBehaviour(other);
-        //particulas y sonidito de entrar en la zona
-
-        currentCheck = Instantiate(checkPrefab).SetOrigami(origami);
-        
     }
 
     public override void OnExitBehaviour()
     {
         //print("on exit beh");
 
-        base.OnExitBehaviour();
-        //apagar particulas y sonidito de entrar en la zona
-        currentCheck.EndOrigami(origami);
-        Destroy(currentCheck);
+        if (currentCheck != null)
+        {
+            base.OnExitBehaviour();
+            currentCheck.EndOrigami(origami);
+            Destroy(currentCheck);
+            //apagar particulas y sonidito de entrar en la zona
+        }
+    }
 
+    protected override void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
+            EventManager.Unsubscribe(Evento.OnOrigamiApplied, UsarSello);
+        }
     }
 }

@@ -22,7 +22,6 @@ public abstract class Origami : MonoBehaviour
 
     public virtual void Apply()
     {
-        EventManager.Trigger(Evento.OnOrigamiApplied, origamiForm);
         print("onorigamiapplied triggereado");
     }
 

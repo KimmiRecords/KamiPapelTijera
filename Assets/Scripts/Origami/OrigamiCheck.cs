@@ -12,11 +12,15 @@ public class OrigamiCheck : MonoBehaviour
 
     bool invocando = false;
     bool arrastrando = false;
+    bool wasUsed;
     Origami currentOrigami;
+    int paperCost; //numero negativo si o si
 
-    public OrigamiCheck SetOrigami(Origami ori)
+    public OrigamiCheck SetOrigami(Origami ori, int cost, bool fueUsado)
     {
         desiredOrigami = ori;
+        paperCost = cost;
+        wasUsed = fueUsado;
         return this;
     }
 
@@ -52,19 +56,19 @@ public class OrigamiCheck : MonoBehaviour
 
                 if (invocacionExitosa)
                 {
-                    Debug.Log("¡Invocación exitosa!");
+                    Debug.Log("invocación exitosa");
                     ApplyOrigami(currentOrigami);
                     EndOrigami(currentOrigami);
                 }
                 else
                 {
-                    Debug.Log("¡Invocación cancelada x soltar en lugar incorrecto!");
+                    Debug.Log("invocación cancelada x soltar en lugar incorrecto");
                     EndOrigami(currentOrigami);
                 }
             }
             else
             {
-                Debug.Log("¡Invocación cancelada x soltar fuera de la ruta!");
+                Debug.Log("invocación cancelada x soltar fuera de la ruta");
                 EndOrigami(currentOrigami);
             }
 
@@ -75,18 +79,21 @@ public class OrigamiCheck : MonoBehaviour
         {
             //me sali de la ruta
             arrastrando = false;
-            Debug.Log("¡Invocación cancelada x salir de la ruta!");
+            Debug.Log("invocación cancelada x salir de la ruta");
             EndOrigami(currentOrigami);
         }
     }
 
     public void StartOrigami(Origami origami)
     {
-        invocando = true;
-        currentOrigami = origami;
-        origami.gameObject.SetActive(true);
-        print("arranca la invocacion");
-        TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
+        if (!wasUsed)
+        {
+            invocando = true;
+            currentOrigami = origami;
+            origami.gameObject.SetActive(true);
+            print("arranca la invocacion");
+            TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
+        }
 
     }
 
@@ -97,12 +104,13 @@ public class OrigamiCheck : MonoBehaviour
         origami.gameObject.SetActive(false);
         //print("invocacion cancelada");
         TooltipManager.instance.HideTooltip();
-
     }
 
     public void ApplyOrigami(Origami origami)
     {
+        EventManager.Trigger(Evento.OnOrigamiApplied, -paperCost, origami);
         origami.Apply(); //aca esta la papa. cada origami se fija que tiene que hacer
+        wasUsed = true;
         print("origami aplicado");
     }
 }
