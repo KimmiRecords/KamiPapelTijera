@@ -29,7 +29,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnAbuelaDropoff, //param 0 es el vector3 dropoffpoint
     OnPlayerPlaced, //triggereado por PlacePlayer. cuando muere, o cambia de pag, etc
 
-    OnOrigamiApplied, //param0 es la origami stance
+    OnOrigamiApplied, //param0 es la origami form
 
 }
 

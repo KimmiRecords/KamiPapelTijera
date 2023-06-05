@@ -57,7 +57,7 @@ public abstract class TriggerScript : MonoBehaviour
         TooltipManager.instance.HideTooltip();
     }
 
-    public virtual void Interact(params object[] parameter)
+    public virtual void Interact(params object[] parameter) //interact se dispara cuando tocas E
     {
         //print("trigger script interact");
     }

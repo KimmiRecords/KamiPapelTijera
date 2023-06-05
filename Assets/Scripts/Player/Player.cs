@@ -30,7 +30,7 @@ public class Player : Entity, IMojable, IGolpeable
     bool _readyToAttack = true;
     bool isBarco = false;
     float originalJumpForce;
-    OrigamiStance currentOrigamiStance;
+    OrigamiForm currentOrigamiStance;
 
     public float Speed 
     {
@@ -146,18 +146,18 @@ public class Player : Entity, IMojable, IGolpeable
     {
         EndOrigamiStance(currentOrigamiStance); //termina la stance anterior
 
-        currentOrigamiStance = (OrigamiStance)parameter[0]; //nueva
+        currentOrigamiStance = (OrigamiForm)parameter[0]; //nueva
 
         switch (currentOrigamiStance)
         {
-            case OrigamiStance.Grulla:
+            case OrigamiForm.Grulla:
                 print("jump force duplicada");
                 jumpForce *= 2;
                 _renderer.material.color = Color.green;
                 //Instantiate el cosito que quieras;
                 break;
 
-            case OrigamiStance.Barco:
+            case OrigamiForm.Barco:
                 print("modo barco on");
                 _renderer.material.color = Color.blue;
                 isBarco = true;
@@ -166,16 +166,16 @@ public class Player : Entity, IMojable, IGolpeable
 
     }
 
-    public void EndOrigamiStance(OrigamiStance origamiStance)
+    public void EndOrigamiStance(OrigamiForm origamiStance)
     {
         switch (currentOrigamiStance)
         {
-            case OrigamiStance.Grulla:
+            case OrigamiForm.Grulla:
                 print("jump force vuelve a original");
                 jumpForce = originalJumpForce;
                 break;
 
-            case OrigamiStance.Barco:
+            case OrigamiForm.Barco:
                 print("modo barco off");
                 isBarco = false;
                 break;

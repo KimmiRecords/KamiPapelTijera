@@ -1,58 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-
-public class Invocacion : MonoBehaviour
+public class OrigamiCheck : MonoBehaviour
 {
-    public Origami grulla;
-    public Origami barco;
+    //la cosa es que el origami solo funca bien si lo codeo en el update. 
+    //este origamicheck solo nace cuando estas dentro del sello de origami
+    //asi corre el update pero solo cuando lo necesitamos
+
+    Origami desiredOrigami;
 
     bool invocando = false;
     bool arrastrando = false;
-
     Origami currentOrigami;
+
+    public OrigamiCheck SetOrigami(Origami ori)
+    {
+        desiredOrigami = ori;
+        return this;
+    }
 
     void Update()
     {
-        // Iniciar la invocación cuando se presiona la tecla Z
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            StartOrigami(grulla);
+            StartOrigami(desiredOrigami);
         }
-        // Cancelar la invocación si se suelta la tecla Z
-        if (Input.GetKeyUp(KeyCode.Z))
+        if (Input.GetKeyUp(KeyCode.Tab))
         {
-            EndOrigami(grulla);
-            print("invocacion cancelada x soltar la Z");
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            StartOrigami(barco);
-        }
-
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            EndOrigami(barco);
-            print("invocacion cancelada x soltar la X");
+            EndOrigami(desiredOrigami);
+            print("invocacion cancelada x soltar tab");
         }
 
         if (invocando && Input.GetMouseButtonDown(1))
         {
-            // Comprobar si el mouse está dentro de la imagen del canvas
+            //chequeo si el mouse esta dentro de la imagen roja
             if (RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.puntoInicio, Input.mousePosition))
             {
                 arrastrando = true;
             }
         }
 
-        // Comprobar si el jugador ha soltado el mouse
+        //chequeo si el jugador solto el mouse mientras arrastraba
         if (arrastrando && Input.GetMouseButtonUp(1))
         {
-            // Comprobar si el mouse está dentro de la imagen del canvas
+            //y si esta dentro de la ruta
             if (RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.origamiRouteImage.rectTransform, Input.mousePosition))
             {
-                // Comprobar si el jugador ha arrastrado desde el punto de inicio al punto final
+                //chequeo si el jugador solto sobre la imagen verde
                 bool invocacionExitosa = RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.puntoFinal, Input.mousePosition);
 
                 if (invocacionExitosa)
@@ -89,7 +84,7 @@ public class Invocacion : MonoBehaviour
     {
         invocando = true;
         currentOrigami = origami;
-        origami.origamiRouteImage.gameObject.SetActive(true);
+        origami.gameObject.SetActive(true);
         print("arranca la invocacion");
     }
 
@@ -97,7 +92,7 @@ public class Invocacion : MonoBehaviour
     {
         invocando = false;
         arrastrando = false;
-        origami.origamiRouteImage.gameObject.SetActive(false);
+        origami.gameObject.SetActive(false);
         //print("invocacion cancelada");
     }
 
@@ -107,5 +102,3 @@ public class Invocacion : MonoBehaviour
         print("origami aplicado");
     }
 }
-
-
