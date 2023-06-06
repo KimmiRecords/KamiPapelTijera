@@ -38,10 +38,15 @@ public class OrigamiCheck : MonoBehaviour
 
         if (invocando && Input.GetMouseButtonDown(1))
         {
-            //chequeo si el mouse esta dentro de la imagen roja
+            //chequeo si el mouse esta dentro de la imagen roja, y habilito el arranque
             if (RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.puntoInicio, Input.mousePosition))
             {
                 arrastrando = true;
+            }
+            else
+            {
+                Debug.Log("invocación cancelada x empezar en un lugar incorrecto");
+                EndOrigami(currentOrigami);
             }
         }
 
@@ -62,7 +67,7 @@ public class OrigamiCheck : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log("invocación cancelada x soltar en lugar incorrecto");
+                    //Debug.Log("invocación cancelada x soltar en la parte blanca");
                     EndOrigami(currentOrigami);
                 }
             }
