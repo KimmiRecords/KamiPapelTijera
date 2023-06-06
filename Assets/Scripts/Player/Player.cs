@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity, IMojable, IGolpeable
+public class Player : Entity, IMojable, IGolpeable, ITransportable
 {
     //player esta partido en 4. aca solo pongo lo que quiero que pase. 
     //model se encarga de pensar, controller de recibir los controles, y view de animaciones, sonidos, particulas etc
@@ -30,8 +30,6 @@ public class Player : Entity, IMojable, IGolpeable
     int _papel;
     bool _readyToAttack = true;
     bool isBarco = false;
-    float originalJumpForce;
-    OrigamiForm currentOrigamiStance;
 
     public float Speed 
     {
@@ -83,7 +81,6 @@ public class Player : Entity, IMojable, IGolpeable
         Vida = _maxHp;
 
         originalColor = _renderer.material.color;
-        originalJumpForce = jumpForce;
 
         EventManager.Subscribe(Evento.OnOrigamiApplied, AddPaper);
         EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
@@ -137,6 +134,11 @@ public class Player : Entity, IMojable, IGolpeable
         _view.StartGetWetAnimation(); //es solo x el sonido
         TakeDamage(dmg);
     }
+    public void Transport(Vector3 movement)
+    {
+        ///Debug.Log("player transport");
+        _model.Transportar(movement);
+    }
     public override void TakeDamage(float dmg)
     {
         Vida -= dmg;
@@ -159,58 +161,18 @@ public class Player : Entity, IMojable, IGolpeable
         Vida = _maxHp;
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
-
     public void AddPaper(params object[] parameter)
     {
-        //EndOrigamiStance(currentOrigamiStance); //termina la stance anterior
-
-        //currentOrigamiStance = (OrigamiForm)parameter[0]; //nueva
-
-        //switch (currentOrigamiStance)
-        //{
-        //    case OrigamiForm.Grulla:
-        //        print("jump force duplicada");
-        //        jumpForce *= 2;
-        //        _renderer.material.color = Color.green;
-        //        //Instantiate el cosito que quieras;
-        //        break;
-
-        //    case OrigamiForm.Barco:
-        //        print("modo barco on");
-        //        _renderer.material.color = Color.blue;
-        //        isBarco = true;
-        //        break;
-        //}
-
         //param0 deberia ser el costo de papel. 
         Papel += (int)parameter[0];
     }
-
-    //public void EndOrigamiStance(OrigamiForm origamiStance)
-    //{
-    //    //switch (currentOrigamiStance)
-    //    //{
-    //    //    case OrigamiForm.Grulla:
-    //    //        print("jump force vuelve a original");
-    //    //        jumpForce = originalJumpForce;
-    //    //        break;
-
-    //    //    case OrigamiForm.Barco:
-    //    //        print("modo barco off");
-    //    //        isBarco = false;
-    //    //        break;
-    //    //}
-    //    //_renderer.material.color = originalColor;
-
-    //}
-
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnOrigamiApplied, AddPaper);
             EventManager.Unsubscribe(Evento.OnCortableDropsPaper, AddPaper);
-
         }
     }
+
 }

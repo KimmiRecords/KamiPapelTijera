@@ -33,7 +33,7 @@ public class OrigamiCheck : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             EndOrigami(desiredOrigami);
-            print("invocacion cancelada x soltar tab");
+            //print("invocacion cancelada x soltar tab");
         }
 
         if (invocando && Input.GetMouseButtonDown(1))
@@ -56,19 +56,19 @@ public class OrigamiCheck : MonoBehaviour
 
                 if (invocacionExitosa)
                 {
-                    Debug.Log("invocación exitosa");
+                    //Debug.Log("invocación exitosa");
                     ApplyOrigami(currentOrigami);
                     EndOrigami(currentOrigami);
                 }
                 else
                 {
-                    Debug.Log("invocación cancelada x soltar en lugar incorrecto");
+                    //Debug.Log("invocación cancelada x soltar en lugar incorrecto");
                     EndOrigami(currentOrigami);
                 }
             }
             else
             {
-                Debug.Log("invocación cancelada x soltar fuera de la ruta");
+                //Debug.Log("invocación cancelada x soltar fuera de la ruta");
                 EndOrigami(currentOrigami);
             }
 
@@ -79,7 +79,7 @@ public class OrigamiCheck : MonoBehaviour
         {
             //me sali de la ruta
             arrastrando = false;
-            Debug.Log("invocación cancelada x salir de la ruta");
+            //Debug.Log("invocación cancelada x salir de la ruta");
             EndOrigami(currentOrigami);
         }
     }
@@ -91,7 +91,7 @@ public class OrigamiCheck : MonoBehaviour
             invocando = true;
             currentOrigami = origami;
             origami.gameObject.SetActive(true);
-            print("arranca la invocacion");
+            //print("arranca la invocacion");
             TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
         }
 
@@ -111,6 +111,6 @@ public class OrigamiCheck : MonoBehaviour
         EventManager.Trigger(Evento.OnOrigamiApplied, -paperCost, origami);
         origami.Apply(); //aca esta la papa. cada origami se fija que tiene que hacer
         wasUsed = true;
-        print("origami aplicado");
+        //print("origami aplicado");
     }
 }

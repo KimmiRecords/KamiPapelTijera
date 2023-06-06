@@ -15,7 +15,11 @@ public enum State
     NPC_FollowPlayer,
     Abuela_Idle,
     Abuela_FollowPlayer,
-    Abuela_Dropoff
+    Abuela_Dropoff,
+
+    //Barquito
+    BarquitoIdle,
+    BarquitoMoving
 }
 public class FiniteStateMachine
 {

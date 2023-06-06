@@ -88,6 +88,13 @@ public class PlayerModel
         //Debug.Log(_move);
     }
 
+    public void Transportar(Vector3 move)
+    {
+        //Debug.Log("player Model: transportar");
+        _player.cc.Move(move * Time.deltaTime);
+    }
+
+
     public void EnableTijeraHitbox()
     {
         //Debug.Log("prendo la tijera");
