@@ -13,9 +13,11 @@ public enum OrigamiForm
 public abstract class Origami : MonoBehaviour
 {
     public OrigamiForm origamiForm;
-    public Image origamiRouteImage;
-    public RectTransform puntoInicio;
-    public RectTransform puntoFinal;
+    //public Image origamiRouteImage;
+
+    public RectTransform[] routeRectangles;
+    public RectTransform inicioRectangle;
+    public RectTransform finalRectangle;
 
     public string tooltipMessage;
     public PostItColor postItColor;

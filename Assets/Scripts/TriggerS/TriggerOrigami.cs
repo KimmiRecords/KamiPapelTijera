@@ -9,8 +9,8 @@ public class TriggerOrigami : TriggerScript
 
     public Origami origami;
     
-    public OrigamiCheck checkPrefab;
-    OrigamiCheck currentCheck;
+    public MultipleRectCheck checkPrefab;
+    MultipleRectCheck currentCheck;
     public int paperCost;
 
     bool wasUsed = false;

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrigamiCheck : MonoBehaviour
+public class MultipleRectCheck : MonoBehaviour
 {
-    //este origamicheck solo nace cuando estas dentro del sello de origami
+    //este multiple rectangle check solo nace cuando estas dentro de un sello (por ahora origami)
     //asi corre el update pero solo cuando lo necesitamos
     //aca esta la mecanica de arrastrar el mouse y eso
 
@@ -16,11 +16,12 @@ public class OrigamiCheck : MonoBehaviour
     Origami currentOrigami;
     int paperCost; //numero negativo si o si
 
-    public OrigamiCheck SetOrigami(Origami ori, int cost, bool fueUsado)
+    public MultipleRectCheck SetOrigami(Origami ori, int cost, bool fueUsado)
     {
         desiredOrigami = ori;
         paperCost = cost;
         wasUsed = fueUsado;
+
         return this;
     }
 
@@ -53,51 +54,51 @@ public class OrigamiCheck : MonoBehaviour
         //chequeo si el jugador solto el mouse mientras arrastraba
         if (arrastrando && Input.GetMouseButtonUp(1))
         {
-            //y si esta dentro de la ruta
-
-            
-            if (RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.routeRectangles[0], Input.mousePosition))
+            //chequeo si el jugador solto sobre la imagen verde
+            if (RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.finalRectangle, Input.mousePosition))
             {
-                //chequeo si el jugador solto sobre la imagen verde
-                bool invocacionExitosa = RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.finalRectangle, Input.mousePosition);
-
-                if (invocacionExitosa)
-                {
-                    //Debug.Log("invocación exitosa");
-                    ApplyOrigami(currentOrigami);
-                    EndOrigami(currentOrigami);
-                }
-                else
-                {
-                    //Debug.Log("invocación cancelada x soltar en la parte blanca");
-                    EndOrigami(currentOrigami);
-                }
+                //Debug.Log("invocación exitosa");
+                ApplyOrigami(currentOrigami);
+                EndOrigami(currentOrigami);
             }
             else
             {
-                //Debug.Log("invocación cancelada x soltar fuera de la ruta");
+                //Debug.Log("invocación cancelada x soltar mal");
                 EndOrigami(currentOrigami);
             }
 
             arrastrando = false;
         }
 
-        if (arrastrando && !RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.routeRectangles[0], Input.mousePosition))
+
+        bool encimaDeAlgunRectangulo = false;
+
+        foreach (RectTransform rectTransform in desiredOrigami.routeRectangles) //chequeo si estoy encima de algun rectangulo
         {
-            //me sali de la ruta
+            if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition))
+            {
+                encimaDeAlgunRectangulo = true; //si sí, todo bien
+                break;
+            }
+        }
+
+        if (arrastrando && !encimaDeAlgunRectangulo) //si no, end origami
+        {
+            // Me salí de la ruta
             arrastrando = false;
-            //Debug.Log("invocación cancelada x salir de la ruta");
+            // Debug.Log("invocación cancelada x salir de la ruta");
             EndOrigami(currentOrigami);
         }
+
     }
 
     public void StartOrigami(Origami origami)
     {
         if (!wasUsed)
         {
-            invocando = true;
             currentOrigami = origami;
             origami.gameObject.SetActive(true);
+            invocando = true;
             //print("arranca la invocacion");
             TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
         }
