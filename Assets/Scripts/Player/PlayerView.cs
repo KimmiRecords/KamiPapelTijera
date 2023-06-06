@@ -40,6 +40,7 @@ public class PlayerView
     {
         AudioManager.instance.PlayByName("TijeraMiss", 1.1f);
         //_anim.SetTrigger("TijeraAttack01");
+        _anim.SetTrigger("isAtack");
     }
 
     public void StartGetWetAnimation()
