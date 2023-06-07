@@ -43,6 +43,9 @@ public class MultipleRectCheck : MonoBehaviour
             if (RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.inicioRectangle, Input.mousePosition))
             {
                 arrastrando = true;
+                AudioManager.instance.PlayRandom("PaperFold01", "PaperFold02");
+                AudioManager.instance.PlayByName("PaperFoldLoop");
+
             }
             else
             {
@@ -58,12 +61,14 @@ public class MultipleRectCheck : MonoBehaviour
             if (RectTransformUtility.RectangleContainsScreenPoint(currentOrigami.finalRectangle, Input.mousePosition))
             {
                 //Debug.Log("invocación exitosa");
+                AudioManager.instance.PlayRandom("PaperFold01", "PaperFold02");
                 ApplyOrigami(currentOrigami);
                 EndOrigami(currentOrigami);
             }
             else
             {
                 //Debug.Log("invocación cancelada x soltar mal");
+                AudioManager.instance.PlayByNameRandomPitch("MagicFail", 1, 0.05f);
                 EndOrigami(currentOrigami);
             }
 
@@ -81,12 +86,12 @@ public class MultipleRectCheck : MonoBehaviour
                 break;
             }
         }
-
         if (arrastrando && !encimaDeAlgunRectangulo) //si no, end origami
         {
             // Me salí de la ruta
             arrastrando = false;
-            // Debug.Log("invocación cancelada x salir de la ruta");
+            AudioManager.instance.PlayByNameRandomPitch("MagicFail", 1, 0.05f);
+            Debug.Log("invocación cancelada x salir de la ruta");
             EndOrigami(currentOrigami);
         }
 
@@ -96,11 +101,12 @@ public class MultipleRectCheck : MonoBehaviour
     {
         if (!wasUsed)
         {
+            //print("arranca la invocacion");
             currentOrigami = origami;
             origami.gameObject.SetActive(true);
             invocando = true;
-            //print("arranca la invocacion");
             TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
+            AudioManager.instance.PlayRandom("MagicChannelingLoop01", "MagicChannelingLoop02");
         }
 
     }
@@ -112,6 +118,8 @@ public class MultipleRectCheck : MonoBehaviour
         origami.gameObject.SetActive(false);
         //print("invocacion cancelada");
         TooltipManager.instance.HideTooltip();
+        AudioManager.instance.StopByName("PaperFoldLoop");
+        AudioManager.instance.StopByName("MagicChannelingLoop01", "MagicChannelingLoop02");
     }
 
     public void ApplyOrigami(Origami origami)

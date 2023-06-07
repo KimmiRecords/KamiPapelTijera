@@ -18,7 +18,7 @@ public class VidaTextUpdater : TextUpdater
         base.UpdateText(parameter);
         if (parameter[0] is float) //este pide la vida actual
         {
-            myText.text = textoInicial + (float)parameter[0]; //tuki, escribe
+            //myText.text = textoInicial + (float)parameter[0]; //tuki, escribe
         }
 
         if (parameter[1] is float)

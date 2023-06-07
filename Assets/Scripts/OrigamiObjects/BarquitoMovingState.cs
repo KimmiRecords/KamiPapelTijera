@@ -21,6 +21,8 @@ public class BarquitoMovingState : IState
     {
         //Debug.Log("entro a moving state");
         SetGoal();
+        AudioManager.instance.PlayByName("ShipSailingLoop");
+
     }
 
     public void OnUpdate()
@@ -43,6 +45,8 @@ public class BarquitoMovingState : IState
     public void OnExit()
     {
         //Debug.Log("salgo del moving state");
+        AudioManager.instance.StopByName("ShipSailingLoop");
+
     }
 
     public void SetGoal()

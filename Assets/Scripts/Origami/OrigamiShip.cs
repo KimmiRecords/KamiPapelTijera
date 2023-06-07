@@ -12,6 +12,8 @@ public class OrigamiShip : Origami
     public override void Apply()
     {
         barquito.SetActive(true);
+        AudioManager.instance.PlayByName("ShipSpawn");
+
         //soniditos y particulas de puente spawneado
     }
 }

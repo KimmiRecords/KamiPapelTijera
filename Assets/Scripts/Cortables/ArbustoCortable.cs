@@ -9,6 +9,8 @@ public class ArbustoCortable : MonoBehaviour, ICortable
     {
         //print("cortaste este arbusto");
         AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
+        AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
+
         EventManager.Trigger(Evento.OnCortableDropsPaper, paperDropAmount);
         Destroy(gameObject);
 

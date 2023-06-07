@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : Entity, IMojable, IGolpeable, ITransportable
 {
+
     //player esta partido en 4. aca solo pongo lo que quiero que pase. 
     //model se encarga de pensar, controller de recibir los controles, y view de animaciones, sonidos, particulas etc
     //aca contruyo a los 3, y les paso mi refe. ellos hablan conmigo, no entre ellos.
@@ -14,6 +15,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     public float weaponCooldown;
     public CharacterController cc;
     public TijeraHitbox miTijeraHitbox;
+    [SerializeField]
+    float tijeraHitBoxDuration = 0.1f;
     public Animator anim;
 
     [SerializeField]
@@ -90,40 +93,40 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     }
     private void Update()
     {
-        if (LevelManager.instance.agency/* && !isAttacking*/)
+        if (LevelManager.instance.agency) //todo el tiempo chequeo los controles. eso seguro.
         {
             _controller.CheckControls();
         }
 
-        if (_controller.hor != 0 || _controller.ver != 0)
+        if (_controller.hor != 0 || _controller.ver != 0) //si estoy tocando cualquier WASD, triggerea evento
         {
             EventManager.Trigger(Evento.OnPlayerMove, _controller.hor, _controller.ver);
         }
 
-        _model.NewMove(_controller.hor, _controller.ver); //todo el tiempo, aunque no me mueva, pues caidas y bla
-        _view.CheckMagnitude(_controller.hor, _controller.ver);
+        _model.NewMove(_controller.hor, _controller.ver); //de todos modos el model hace lo suyo. aunque no me mueva, pues caidas y bla
+        _view.CheckMagnitude(_controller.hor, _controller.ver); //el view tambien necesita enterarse para donde me muevo
     }
     public void OnPrimaryClick()
     {
-        if (_readyToAttack)
+        if (_readyToAttack) //readytoattack se pone false cuando estoy en cooldown
         {
-            //StartTijeraCoroutine();
             _view.StartTijeraAnimation();
             _readyToAttack = false;
         }
     }
 
-    public void StartTijeraCoroutine()
+    public void StartTijeraCoroutine() //este metodo es solo xq el estupido animator no sabe disparar corrutinas. unity "2021"
     {
         StartCoroutine(TijeraCoroutine());
     }
-    public IEnumerator TijeraCoroutine()
+
+    public IEnumerator TijeraCoroutine() //prendo y apago rapidamente la hitbox para simular un ataque
     {
         _model.EnableTijeraHitbox();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(tijeraHitBoxDuration);
         _model.DisableTijeraHitbox();
 
-        yield return new WaitForSeconds(weaponCooldown);
+        yield return new WaitForSeconds(weaponCooldown); //los ataques tienen cooldown, asi que espero
         _readyToAttack = true;
     }
     public void GetWet()

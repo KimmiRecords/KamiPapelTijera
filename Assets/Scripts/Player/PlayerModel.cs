@@ -100,14 +100,6 @@ public class PlayerModel
     {
         //Debug.Log("prendo la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(true);
-        //if (_move.magnitude < 0.5)
-        //{
-        //    _player.miTijeraHitbox.transform.localPosition = lastNormalizedMove;
-        //}
-        //else
-        //{
-        //    _player.miTijeraHitbox.transform.localPosition = _move.normalized;
-        //}
     }
 
     public void DisableTijeraHitbox()

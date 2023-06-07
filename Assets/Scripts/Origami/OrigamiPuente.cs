@@ -11,6 +11,7 @@ public class OrigamiPuente : Origami
     public override void Apply()
     {
         puente.SetActive(true);
+        AudioManager.instance.PlayByName("BridgeCompleted");
         //soniditos y particulas de puente spawneado
     }
 }

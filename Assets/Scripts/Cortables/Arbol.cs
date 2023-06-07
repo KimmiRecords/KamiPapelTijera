@@ -19,6 +19,7 @@ public class Arbol : MonoBehaviour, ICortable
         {
             print("me cortaron");
             AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
+            AudioManager.instance.PlayByName("MagicSuccess");
             transform.Rotate(rotationVector);
             transform.localPosition = newPosition;
             wasCut = true;

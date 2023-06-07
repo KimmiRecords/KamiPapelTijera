@@ -36,11 +36,13 @@ public class AudioManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<string, AudioSource> sound = new Dictionary<string, AudioSource>();
 
-    //public bool playBGM; //si hay que darle play al bgm on start
-    public string thisLevelBgm;
-
+    string thisLevelBgm;
 
     Dictionary<string, string> levelBGMs = new Dictionary<string, string>();
+    [SerializeField]
+    string[] levelNames;
+    [SerializeField]
+    string[] bgmNames;
 
     void Awake()
     {
@@ -64,8 +66,14 @@ public class AudioManager : MonoBehaviour
             //print("agregue el key " + s + " con value " + allSounds[i]+ " al diccionario");
         }
 
-        levelBGMs.Add("MainMenu", "4S_IntroBigChords");
-        levelBGMs.Add("SampleScene", "4S_MarimbaLoop");
+
+        for (int i = 0; i < levelNames.Length; i++) //lleno el dictionary con los bgm
+        {
+            levelBGMs.Add(levelNames[i], bgmNames[i]);
+        }
+
+        //levelBGMs.Add("MainMenu", "4S_IntroBigChords");
+        //levelBGMs.Add("SampleScene", "4S_MarimbaLoop");
 
         SceneManager.sceneLoaded += StartLevelBGM;
     }
@@ -73,7 +81,11 @@ public class AudioManager : MonoBehaviour
     public void StartLevelBGM(Scene scene, LoadSceneMode lsm)
     {
         //print(scene.name);
-        StopBGM();
+        if (thisLevelBgm != null)
+        {
+            StopBGM();
+        }
+
         thisLevelBgm = levelBGMs[scene.name];
         PlayBGM();
         //PlayByName(thisLevelBgm);
@@ -85,16 +97,24 @@ public class AudioManager : MonoBehaviour
         sound = this.sound[clipName];
         sound.Play();
     }
-    public void PlayByName(string clipName, float pitch) //el mas groso. le das el string y te da play a ese audio. muy global y sencillo.
+    public void PlayByName(string clipName, float pitch) //ahora con cambio de pitch.
     {
         AudioSource sound;
         sound = this.sound[clipName]; //establezco que voy a estar laburando con el audio cuyo nombre es clipname
-
         float originalPitch = sound.pitch; //pido el pitch original y lo guardo
-
         sound.pitch = pitch; //cambio al pitch deseado
         sound.Play(); //doy play
         StartCoroutine(SetPitchToOriginal(sound, originalPitch)); //le vuelvo a poner el pitch que tenia antes
+    }
+
+    public void PlayByNameRandomPitch(string clipName, float centralPitch, float pitchVariation) //ahora con variacion random de pitch.
+    {
+        AudioSource sound;
+        sound = this.sound[clipName];
+        float originalPitch = sound.pitch; 
+        sound.pitch = Random.Range(centralPitch - pitchVariation, centralPitch + pitchVariation); //pitch +/- variacion
+        sound.Play();
+        StartCoroutine(SetPitchToOriginal(sound, originalPitch));
     }
 
     public void PlayRandom(params string[] clipNames)
@@ -108,6 +128,16 @@ public class AudioManager : MonoBehaviour
         sound = this.sound[clipName];
         sound.Stop();
     }
+    public void StopByName(params string[] clipNames)
+    {
+        for (int i = 0; i < clipNames.Length; i++)
+        {
+            AudioSource sound;
+            sound = this.sound[clipNames[i]];
+            sound.Stop();
+        }
+    }
+
     public void PlayOnEnd(string soundToEndName, string soundToPlayName)
     {
         AudioSource soundToEnd;
