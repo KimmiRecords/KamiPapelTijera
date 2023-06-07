@@ -21,7 +21,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     Color originalColor;
 
     [HideInInspector]
-    public bool isJump;
+    public bool isJumpButtonDown;
 
     PlayerModel _model;
     public PlayerView _view;
@@ -30,6 +30,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     int _papel;
     bool _readyToAttack = true;
     bool isBarco = false;
+
+    public bool isAttacking = false;
 
     public float Speed 
     {
@@ -88,7 +90,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     }
     private void Update()
     {
-        if (LevelManager.instance.agency)
+        if (LevelManager.instance.agency/* && !isAttacking*/)
         {
             _controller.CheckControls();
         }
@@ -105,12 +107,17 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     {
         if (_readyToAttack)
         {
-            StartCoroutine(TijeraCoroutine());
+            //StartTijeraCoroutine();
             _view.StartTijeraAnimation();
             _readyToAttack = false;
         }
     }
-    IEnumerator TijeraCoroutine()
+
+    public void StartTijeraCoroutine()
+    {
+        StartCoroutine(TijeraCoroutine());
+    }
+    public IEnumerator TijeraCoroutine()
     {
         _model.EnableTijeraHitbox();
         yield return new WaitForSeconds(0.1f);

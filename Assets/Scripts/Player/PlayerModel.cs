@@ -63,18 +63,19 @@ public class PlayerModel
             lastNormalizedMove = _move;
         }
 
-        if (_player.isJump)
+        if (_player.isJumpButtonDown)
         {
             if (_groundedTimer > 0)
             {
                 _groundedTimer = 0;
                 _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
-                _player.isJump = false;
+                _player.isJumpButtonDown = false;
                 //AudioManager.instance.StopPasos();
                 _player._view.StartJumpAnimation();
                 //pAnims.StopLanding();
             }
         }
+
 
         _move *= _playerSpeed * _speedModifier;
         _move.y = _verticalVelocity; //sigo cargando el vector movieminto
@@ -99,14 +100,14 @@ public class PlayerModel
     {
         //Debug.Log("prendo la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(true);
-        if (_move.magnitude < 0.5)
-        {
-            _player.miTijeraHitbox.transform.localPosition = lastNormalizedMove;
-        }
-        else
-        {
-            _player.miTijeraHitbox.transform.localPosition = _move.normalized;
-        }
+        //if (_move.magnitude < 0.5)
+        //{
+        //    _player.miTijeraHitbox.transform.localPosition = lastNormalizedMove;
+        //}
+        //else
+        //{
+        //    _player.miTijeraHitbox.transform.localPosition = _move.normalized;
+        //}
     }
 
     public void DisableTijeraHitbox()

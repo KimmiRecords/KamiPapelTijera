@@ -40,16 +40,16 @@ public class PlayerController
             Application.Quit();
         }
 
-        if (!LevelManager.instance.inDialogue)
+        if (!LevelManager.instance.inDialogue && !_player.isAttacking)
         {
             if (Input.GetButtonDown("Jump"))
             {
-                _player.isJump = true;
+                _player.isJumpButtonDown = true;
             }
 
             if (Input.GetButtonUp("Jump"))
             {
-                _player.isJump = false;
+                _player.isJumpButtonDown = false;
             }
 
             hor = Input.GetAxis("Horizontal");

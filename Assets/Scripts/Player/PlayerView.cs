@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerView
 {
     Animator _anim;
+    Player _player;
     bool canRotate;
     Vector3 lastDirection = Vector3.zero;
 
     public PlayerView(Player player)
     {
         _anim = player.anim;
+        _player = player;
     }
 
     public void CheckMagnitude(float hor, float ver)
