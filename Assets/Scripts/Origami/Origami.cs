@@ -13,18 +13,77 @@ public enum OrigamiForm
 public abstract class Origami : MonoBehaviour
 {
     public OrigamiForm origamiForm;
-    //public Image origamiRouteImage;
 
-    public RectTransform[] routeRectangles;
-    public RectTransform inicioRectangle;
-    public RectTransform finalRectangle;
+    public OrigamiRoute[] origamiRoutes;
+    public int paperCost;
 
     public string tooltipMessage;
     public PostItColor postItColor;
 
+    [HideInInspector]
+    public int currentRouteIndex = 0;
+
+    [HideInInspector]
+    public bool wasUsed;
+
+    public void FailOrigami()
+    {
+        print("fallaste asi que arrancas de cero");
+        currentRouteIndex = 0;
+
+        for (int i = 0; i < origamiRoutes.Length; i++)
+        {
+            origamiRoutes[i].wasCompleted = false;
+            if (currentRouteIndex == i)
+            {
+                origamiRoutes[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                origamiRoutes[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public virtual void NextRoute() //prendo la ruta index, apago las demas
+    {
+        for (int i = 0; i < origamiRoutes.Length; i++)
+        {
+            if (currentRouteIndex == i)
+            {
+                origamiRoutes[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                origamiRoutes[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public virtual void CompleteRoute()
+    {
+        print("ruta actual completada");
+        origamiRoutes[currentRouteIndex].wasCompleted = true;
+        currentRouteIndex++;
+
+        if (currentRouteIndex >= origamiRoutes.Length)
+        {
+            print("completaste el origami");
+            currentRouteIndex = 0;
+            wasUsed = true;
+            Apply();
+        }
+        else
+        {
+            print("siguienteee");
+            NextRoute();
+        }
+    }
+
     public virtual void Apply()
     {
-        print("onorigamiapplied triggereado");
+        print("origami apply");
+        EventManager.Trigger(Evento.OnOrigamiApplied, -paperCost, this);
     }
 
 }

@@ -11,37 +11,34 @@ public class TriggerOrigami : TriggerScript
     
     public MultipleRectCheck checkPrefab;
     MultipleRectCheck currentCheck;
-    public int paperCost;
-
-    bool wasUsed = false;
 
     protected override void Start()
     {
         base.Start();
-        EventManager.Subscribe(Evento.OnOrigamiApplied, UsarSello);
+        //EventManager.Subscribe(Evento.OnOrigamiApplied, ConsumirSello);
     }
 
-    public void UsarSello(params object[] parameters)
-    {
-        if (origami == (Origami)parameters[1])
-        {
-            wasUsed = true;
-        }
-    }
+    //public void ConsumirSello(params object[] parameters) //este se dispara cuando el origami confirma que fue invocado
+    //{
+    //    if (origami == (Origami)parameters[1])
+    //    {
+    //        wasUsed = true;
+    //    }
+    //}
 
     public override void OnEnterBehaviour(Collider other)
     {
         //print("on enter beh");
-        if (!wasUsed)
+        if (!origami.wasUsed)
         {
             if (other.GetComponent<Player>() != null)
             {
                 Player player = other.GetComponent<Player>(); //me quedo tranqui xq onenterbehavior solo sucede si el other es player
             
-                if (player.Papel >= paperCost)
+                if (player.Papel >= origami.paperCost)
                 {
                     base.OnEnterBehaviour(other);
-                    currentCheck = Instantiate(checkPrefab).SetOrigami(origami, paperCost, wasUsed);
+                    currentCheck = Instantiate(checkPrefab).SetOrigami(origami);
                     //particulas y sonidito de entrar en la zona
                 }
                 else
@@ -66,16 +63,16 @@ public class TriggerOrigami : TriggerScript
             base.OnExitBehaviour();
             currentCheck.EndOrigami(origami);
             Destroy(currentCheck);
-            //apagar particulas y sonidito de entrar en la zona
+            //apagar particulas y sonidito de salir en la zona
         }
     }
 
-    protected override void OnDestroy()
-    {
-        if (!gameObject.scene.isLoaded)
-        {
-            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
-            EventManager.Unsubscribe(Evento.OnOrigamiApplied, UsarSello);
-        }
-    }
+    //protected override void OnDestroy()
+    //{
+    //    if (!gameObject.scene.isLoaded)
+    //    {
+    //        EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
+    //        //EventManager.Unsubscribe(Evento.OnOrigamiApplied, ConsumirSello);
+    //    }
+    //}
 }
