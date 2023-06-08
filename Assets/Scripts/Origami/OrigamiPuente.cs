@@ -6,11 +6,12 @@ public class OrigamiPuente : Origami
 {
     //este script va en la RUTA, no en el objeto puente
     [SerializeField]
-    GameObject puente;
+    GameObject objetoParaSpawnear;
 
     public override void Apply()
     {
-        puente.SetActive(true);
+        base.Apply();
+        objetoParaSpawnear.SetActive(true);
         AudioManager.instance.PlayByName("BridgeCompleted");
         //soniditos y particulas de puente spawneado
     }

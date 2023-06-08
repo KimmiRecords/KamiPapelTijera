@@ -11,6 +11,7 @@ public class OrigamiShip : Origami
 
     public override void Apply()
     {
+        base.Apply();
         barquito.SetActive(true);
         AudioManager.instance.PlayByName("ShipSpawn");
 

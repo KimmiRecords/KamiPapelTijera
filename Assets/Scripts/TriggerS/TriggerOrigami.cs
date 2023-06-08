@@ -15,16 +15,7 @@ public class TriggerOrigami : TriggerScript
     protected override void Start()
     {
         base.Start();
-        //EventManager.Subscribe(Evento.OnOrigamiApplied, ConsumirSello);
     }
-
-    //public void ConsumirSello(params object[] parameters) //este se dispara cuando el origami confirma que fue invocado
-    //{
-    //    if (origami == (Origami)parameters[1])
-    //    {
-    //        wasUsed = true;
-    //    }
-    //}
 
     public override void OnEnterBehaviour(Collider other)
     {
@@ -51,7 +42,6 @@ public class TriggerOrigami : TriggerScript
         {
             print("ya activaste este sello");
         }
-
     }
 
     public override void OnExitBehaviour()
@@ -66,13 +56,4 @@ public class TriggerOrigami : TriggerScript
             //apagar particulas y sonidito de salir en la zona
         }
     }
-
-    //protected override void OnDestroy()
-    //{
-    //    if (!gameObject.scene.isLoaded)
-    //    {
-    //        EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
-    //        //EventManager.Unsubscribe(Evento.OnOrigamiApplied, ConsumirSello);
-    //    }
-    //}
 }
