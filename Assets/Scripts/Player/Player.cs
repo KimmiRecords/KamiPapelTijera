@@ -32,8 +32,6 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     float _maxHp;
     int _papel;
     bool _readyToAttack = true;
-    bool isBarco = false;
-
     public bool isAttacking = false;
 
     public float Speed 
@@ -131,12 +129,9 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     }
     public void GetWet()
     {
-        if (!isBarco)
-        {
-            print("AAAA ME MOJO");
-            _view.StartGetWetAnimation();
-            PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
-        }
+        print("AAAA ME MOJO");
+        _view.StartGetWetAnimation();
+        PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
     public void GetGolpeado(float dmg)
     {

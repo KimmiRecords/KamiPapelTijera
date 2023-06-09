@@ -25,13 +25,13 @@ public class PlayerAnimationRelay : MonoBehaviour
     public void SetIsAttackingOn()
     {
         player.isAttacking = true;
-        print("isAttacking es " + player.isAttacking);
+        //print("isAttacking es " + player.isAttacking);
 
     }
     public void SetIsAttackingOff()
     {
         player.isAttacking = false;
-        print("isAttacking es " + player.isAttacking);
+        //print("isAttacking es " + player.isAttacking);
     }
 
     //public void SetIsReadyToJumpOn()

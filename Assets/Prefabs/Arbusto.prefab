@@ -93,7 +93,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2223711168269973713}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c4abe8d5b27955346be595381ea137ea, type: 2}
   m_CullingMode: 0
@@ -114,8 +114,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2223711169329458678}
-  - component: {fileID: 4089154315101621346}
   - component: {fileID: 4460866578473358796}
+  - component: {fileID: 4249590898158523490}
   m_Layer: 0
   m_Name: Arbusto
   m_TagString: Untagged
@@ -139,18 +139,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4089154315101621346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2223711169329458679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e2ad301185f09c4c932504143807c26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &4460866578473358796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -164,3 +152,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.65, y: 3.6, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4249590898158523490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223711169329458679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce131e03b3e708b4b9dd289b5d5ee62b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paperDropAmount: 1
