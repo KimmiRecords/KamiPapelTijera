@@ -3,16 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum Dialogo
-{
-    Granjero_Norberto_01,
-    Granjero_Norberto_02,
-
-    Abuela_01,
-    Abuela_02
-}
-
-
 public class DialogueManager : MonoBehaviour
 {
     //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto

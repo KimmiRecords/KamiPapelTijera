@@ -32,7 +32,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnOrigamiApplied, //param0 es papercost (numero negativo), param1 es Origami origami
     OnPlayerChangePapel, //param0 es int Papel
     OnCortableDropsPaper, //param0 es cuanto papel ganas
-    OnPlayerPickup //cuando toco un pickup
+    OnPlayerAddPickup //cuando agarro un pickup, param0 es el tipo, param1 es el amount total actual
 }
 
 public class EventManager

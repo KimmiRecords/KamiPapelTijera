@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
     public bool agency;
     public bool inDialogue;
 
-    Dictionary<ResourceType, int> recursosRecolectados = new Dictionary<ResourceType, int>();
+    public Dictionary<ResourceType, int> recursosRecolectados = new Dictionary<ResourceType, int>();
 
     private void Awake()
     {
@@ -50,6 +50,6 @@ public class LevelManager : MonoBehaviour
     {
         recursosRecolectados[pickupType] += valueToAdd;
         print(pickupType.ToString() + " // " + recursosRecolectados[pickupType]);
-
+        EventManager.Trigger(Evento.OnPlayerAddPickup, pickupType, recursosRecolectados[pickupType]);
     }
 }
