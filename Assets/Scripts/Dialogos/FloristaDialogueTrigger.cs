@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class FloristaDialogueTrigger : TriggerDialogue
 {
+    [SerializeField]
+    int floresRequeridas = 3;
+
+    [SerializeField]
+    int paperReward = 20;
+
+    bool questCompleted;
+
     protected override void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
@@ -13,9 +21,15 @@ public class FloristaDialogueTrigger : TriggerDialogue
     public override void Interact(params object[] parameter)
     {
 
-        if (LevelManager.instance.recursosRecolectados[ResourceType.flores] >= 3)
+        if (LevelManager.instance.recursosRecolectados[ResourceType.flores] >= floresRequeridas)
         {
-            currentDialogue = 2; //paso al dialogo 2, que es el de Gracias por traer!
+            if (!questCompleted)
+            {
+                currentDialogue = 2; //paso al dialogo 2, que es el de Gracias por traer!
+                LevelManager.instance.AddPickup(ResourceType.flores, -floresRequeridas);
+                EventManager.Trigger(Evento.OnCortableDropsPaper, paperReward);
+                questCompleted = true;
+            }
         }
 
         //el 0 se lee una sola vez
