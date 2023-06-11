@@ -11,7 +11,7 @@ public class VidaTextUpdater : TextUpdater
     [SerializeField]
     Image vidaFillable;
 
-    Color verdeGrinch = new Color(0.298f,0.98f, 0.1274f);
+    Color verdeGrinch = new Color(0.298f, 0.98f, 0.1274f);
     
     protected override void UpdateText(params object[] parameter)
     {
@@ -21,7 +21,7 @@ public class VidaTextUpdater : TextUpdater
             //myText.text = textoInicial + (float)parameter[0]; //tuki, escribe
         }
 
-        if (parameter[1] is float)
+        if (parameter[1] is float) //y este la vida max
         {
             vidaFillable.fillAmount = (float)parameter[0] / (float)parameter[1];
             vidaFillable.color = Color.Lerp(Color.red, verdeGrinch, vidaFillable.fillAmount);

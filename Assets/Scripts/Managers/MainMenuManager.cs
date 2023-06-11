@@ -15,6 +15,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         EventManager.Subscribe(Evento.OnDialogueEnd, ChangeScene);
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity, IMojable, IGolpeable, ITransportable
+public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
 {
 
     //player esta partido en 4. aca solo pongo lo que quiero que pase. 
@@ -56,6 +56,15 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
         set
         {
             _hp = value;
+            if (_hp > _maxHp)
+            {
+                _hp = _maxHp;
+            }
+
+            if (_hp < 0)
+            {
+                _hp = 0;
+            }
             EventManager.Trigger(Evento.OnPlayerChangeVida, _hp, _maxHp);
         }
     }
@@ -152,11 +161,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
         Vida = _maxHp;
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
-    //public void AddPaper(params object[] parameter)
-    //{
-    //    //param0 deberia ser el costo de papel. 
-    //    Papel += (int)parameter[0];
-    //}
+    
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
@@ -166,4 +171,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
         }
     }
 
+    public void GetCured(int curacion)
+    {
+        Vida += curacion;
+    }
 }

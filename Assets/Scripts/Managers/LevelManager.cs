@@ -8,7 +8,6 @@ public enum ResourceType
     hongos,
     flores,
     papel, //las hojas por ahora las cuenta el player. lo tengo que cambiar
-    vida,
     Count 
 }
 

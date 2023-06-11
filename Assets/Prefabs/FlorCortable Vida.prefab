@@ -137,7 +137,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1d71bbff7510038479891cfa3dbdf1c0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4089154315101621346}
   - component: {fileID: 4460866578473358796}
   m_Layer: 6
-  m_Name: FlorCortable
+  m_Name: FlorCortable Vida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   respawnTime: 10
   spriteEntero: {fileID: 70029014811641108}
   spriteBase: {fileID: 2223711168269973726}
-  spritePickup: {fileID: 906815822126549660}
+  spritePickup: {fileID: 3861096447158217618}
   pickupRB: {fileID: 7340189295786692633}
 --- !u!65 &4460866578473358796
 BoxCollider:
@@ -287,7 +287,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 40c2cdb04258a8445aa96d80583b0337, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 6265124299010635538}
   - component: {fileID: 3848987927327013166}
   - component: {fileID: 8715284591513099247}
-  - component: {fileID: 906815822126549660}
+  - component: {fileID: 3861096447158217618}
   m_Layer: 8
   m_Name: SpritePickup
   m_TagString: Untagged
@@ -373,7 +373,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7894c8006a1f51f4fb49a1005581ef75, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -396,7 +396,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 1}
   m_Center: {x: 0.1, y: 0.5, z: 0}
---- !u!114 &906815822126549660
+--- !u!114 &3861096447158217618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -405,14 +405,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 9064206094307642455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a0621a8ed8166d4a877f8a9863870d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 46979eba43fce7e4da8065dc8d638047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggerBool: 0
-  tooltipTextToShow: Levantaste una flor!
+  tooltipTextToShow: Agarraste Vida!
   postItColor: 4
   jumpForce: 20
   haceSaltito: 1
   miCortable: {fileID: 4089154315101621346}
-  pickupType: 1
-  pickupAmount: 1
+  vidaReward: 20
