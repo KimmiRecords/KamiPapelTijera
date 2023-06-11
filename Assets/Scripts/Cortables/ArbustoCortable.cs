@@ -12,7 +12,7 @@ public class ArbustoCortable : MonoBehaviour, ICortable
         print("cortaste este arbusto");
         AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
         AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
-        EventManager.Trigger(Evento.OnCortableDropsPaper, paperDropAmount); //esto no va a ser asi cuando pase el papel al levelmanager
+        LevelManager.instance.AddResource(ResourceType.papel, paperDropAmount);
         Destroy(this.gameObject);
         
     }

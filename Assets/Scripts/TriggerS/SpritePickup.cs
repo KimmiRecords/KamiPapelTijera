@@ -42,7 +42,7 @@ public class SpritePickup : TriggerScript
         {
             print("estaba ready to pickup");
             base.OnEnterBehaviour(other);
-            LevelManager.instance.AddPickup(pickupType, pickupAmount);
+            LevelManager.instance.AddResource(pickupType, pickupAmount);
             AudioManager.instance.PlayByName("Pickup");
             miCortable.StartDelayedRespawn();
             isReadyToPickup = false;

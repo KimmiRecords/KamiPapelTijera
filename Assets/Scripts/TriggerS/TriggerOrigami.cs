@@ -22,21 +22,17 @@ public class TriggerOrigami : TriggerScript
         //print("on enter beh");
         if (!origami.wasUsed)
         {
-            if (other.GetComponent<Player>() != null)
+            if (LevelManager.instance.recursosRecolectados[ResourceType.papel] >= origami.paperCost)
             {
-                Player player = other.GetComponent<Player>(); //me quedo tranqui xq onenterbehavior solo sucede si el other es player
-            
-                if (player.Papel >= origami.paperCost)
-                {
-                    base.OnEnterBehaviour(other);
-                    currentCheck = Instantiate(checkPrefab).SetOrigami(origami);
-                    //particulas y sonidito de entrar en la zona
-                }
-                else
-                {
-                    print("no tenes suficiente papel para hacer este origami");
-                }
+                base.OnEnterBehaviour(other);
+                currentCheck = Instantiate(checkPrefab).SetOrigami(origami);
+                //particulas y sonidito de entrar en la zona
             }
+            else
+            {
+                print("no tenes suficiente papel para hacer este origami");
+            }
+            
         }
         else
         {
@@ -52,7 +48,7 @@ public class TriggerOrigami : TriggerScript
         {
             base.OnExitBehaviour();
             currentCheck.EndOrigami(origami);
-            Destroy(currentCheck);
+            Destroy(currentCheck.gameObject);
             //apagar particulas y sonidito de salir en la zona
         }
     }

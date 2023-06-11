@@ -156,7 +156,7 @@ Shader "HojaTransition"
 }
 /*ASEBEGIN
 Version=18935
-363;761;1844;598;1709.27;518.4173;1.65437;True;False
+774;938;1179;421;1288.233;533.3066;1.65437;False;False
 Node;AmplifyShaderEditor.WorldPosInputsNode;5;-389.0936,47.7464;Inherit;True;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.RangedFloatNode;7;-556.6964,247.1697;Inherit;False;Property;_Rango;Rango;1;0;Create;True;0;0;0;False;0;False;0;0;0;400;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;9;-362.9741,-41.97629;Inherit;False;Property;_posx;pos x;2;0;Create;True;0;0;0;False;0;False;0;-137.89;0;0;0;1;FLOAT;0
@@ -185,4 +185,4 @@ WireConnection;8;0;19;0
 WireConnection;0;0;1;0
 WireConnection;0;9;8;0
 ASEEND*/
-//CHKSM=D7CF98932A33B7370A5C709E900EF81B0D816681
+//CHKSM=74291A4E55E0C5E0A3B6AF1A2F938F8705EF82C8

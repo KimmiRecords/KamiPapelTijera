@@ -12,7 +12,7 @@ public class FloresAzulesTextUpdater : TextUpdater
     protected override void UpdateText(params object[] parameter)
     {
         base.UpdateText(parameter);
-        if (parameter[1] is int) //este pide las flores azules actuales
+        if ((ResourceType)parameter[0] == ResourceType.flores) //este pide las flores azules actuales
         {
             myText.text = textoInicial + (int)parameter[1]; //tuki, escribe "flores = x"
         }

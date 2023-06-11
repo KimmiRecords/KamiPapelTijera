@@ -12,9 +12,9 @@ public class PapelTextUpdater : TextUpdater
     protected override void UpdateText(params object[] parameter)
     {
         base.UpdateText(parameter);
-        if (parameter[0] is int) //este pide el papel actual
+        if ((ResourceType)parameter[0] == ResourceType.papel) //este pide el papel actual
         {
-            myText.text = textoInicial + (int)parameter[0]; //tuki, escribe "papel = x"
+            myText.text = textoInicial + (int)parameter[1]; //tuki, escribe "papel = x"
         }
     }
 }

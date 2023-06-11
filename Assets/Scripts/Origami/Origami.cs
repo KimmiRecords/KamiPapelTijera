@@ -83,7 +83,10 @@ public abstract class Origami : MonoBehaviour
     public virtual void Apply()
     {
         print("origami apply");
-        EventManager.Trigger(Evento.OnOrigamiApplied, -paperCost, this);
+        //EventManager.Trigger(Evento.OnOrigamiApplied, -paperCost, this);
+
+        //consume papel
+        LevelManager.instance.AddResource(ResourceType.papel, -paperCost);
     }
 
 }

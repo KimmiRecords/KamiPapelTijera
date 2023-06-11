@@ -29,7 +29,6 @@ public class FlorCortable : MonoBehaviour, ICortable
             print("cortaste este arbusto");
             AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
             AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
-            EventManager.Trigger(Evento.OnCortableDropsPaper, paperDropAmount); //esto no va a ser asi cuando pase el papel al levelmanager
 
             //apago el entero y prendo las partes
             spriteEntero.gameObject.SetActive(false);

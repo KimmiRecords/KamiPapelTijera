@@ -26,8 +26,8 @@ public class FloristaDialogueTrigger : TriggerDialogue
             if (!questCompleted)
             {
                 currentDialogue = 2; //paso al dialogo 2, que es el de Gracias por traer!
-                LevelManager.instance.AddPickup(ResourceType.flores, -floresRequeridas);
-                EventManager.Trigger(Evento.OnCortableDropsPaper, paperReward);
+                LevelManager.instance.AddResource(ResourceType.flores, -floresRequeridas);
+                LevelManager.instance.AddResource(ResourceType.papel, paperReward);
                 questCompleted = true;
             }
         }

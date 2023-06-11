@@ -11,26 +11,28 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
     //ademas, yo tengo start y update, ellos no.
 
     public float jumpForce = 50f;
-    public float gravityValue;          //gravedad extra para que quede linda la caida del salto
+    public float gravityValue; //gravedad extra para que quede linda la caida del salto
     public float weaponCooldown;
     public CharacterController cc;
+    public Animator anim;
+    [SerializeField]
+    Renderer _renderer;
     public TijeraHitbox miTijeraHitbox;
     [SerializeField]
     float tijeraHitBoxDuration = 0.1f;
-    public Animator anim;
 
-    [SerializeField]
-    Renderer _renderer;
+    
     Color originalColor;
 
     [HideInInspector]
     public bool isJumpButtonDown;
 
     PlayerModel _model;
+    [HideInInspector]
     public PlayerView _view;
     PlayerController _controller;
+
     float _maxHp;
-    int _papel;
     bool _readyToAttack = true;
     public bool isAttacking = false;
 
@@ -57,22 +59,6 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
             EventManager.Trigger(Evento.OnPlayerChangeVida, _hp, _maxHp);
         }
     }
-    public int Papel
-    {
-        get
-        {
-            return _papel;
-        }
-        set
-        {
-            _papel = value;
-            if (_papel < 0)
-            {
-                _papel = 0;
-            }
-            EventManager.Trigger(Evento.OnPlayerChangePapel, _papel);
-        }
-    }
 
     void Awake()
     {
@@ -85,8 +71,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
 
         originalColor = _renderer.material.color;
 
-        EventManager.Subscribe(Evento.OnOrigamiApplied, AddPaper);
-        EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
+        //EventManager.Subscribe(Evento.OnOrigamiApplied, AddPaper);
+        //EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
 
     }
     private void Update()
@@ -166,17 +152,17 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable
         Vida = _maxHp;
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
-    public void AddPaper(params object[] parameter)
-    {
-        //param0 deberia ser el costo de papel. 
-        Papel += (int)parameter[0];
-    }
+    //public void AddPaper(params object[] parameter)
+    //{
+    //    //param0 deberia ser el costo de papel. 
+    //    Papel += (int)parameter[0];
+    //}
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnOrigamiApplied, AddPaper);
-            EventManager.Unsubscribe(Evento.OnCortableDropsPaper, AddPaper);
+            //EventManager.Unsubscribe(Evento.OnOrigamiApplied, AddPaper);
+            //EventManager.Unsubscribe(Evento.OnCortableDropsPaper, AddPaper);
         }
     }
 

@@ -7,7 +7,7 @@ public enum ResourceType
 {
     hongos,
     flores,
-    hojas, //las hojas por ahora las cuenta el player. lo tengo que cambiar
+    papel, //las hojas por ahora las cuenta el player. lo tengo que cambiar
     vida,
     Count 
 }
@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     public bool agency;
     public bool inDialogue;
 
+    //el dictionario capo con cada tipo de recurso y valor
     public Dictionary<ResourceType, int> recursosRecolectados = new Dictionary<ResourceType, int>();
 
     private void Awake()
@@ -46,10 +47,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void AddPickup(ResourceType pickupType, int valueToAdd)
+    public void AddResource(ResourceType pickupType, int valueToAdd)
     {
+        //agrega la cantidad valuetoadd al total. si quiero restar, valuetoadd deberia ser negativo
         recursosRecolectados[pickupType] += valueToAdd;
+        EventManager.Trigger(Evento.OnPlayerResourceUpdated, pickupType, recursosRecolectados[pickupType]);
         print(pickupType.ToString() + " // " + recursosRecolectados[pickupType]);
-        EventManager.Trigger(Evento.OnPlayerAddPickup, pickupType, recursosRecolectados[pickupType]);
     }
 }
