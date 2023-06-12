@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < (int)ResourceType.Count; i++) //creo el dict con uno de cada pickuptype y 0
         {
             recursosRecolectados.Add((ResourceType)i, 0);
-            print( ((ResourceType)i).ToString() + " // " + recursosRecolectados[(ResourceType)i].ToString());
+            //print( ((ResourceType)i).ToString() + " // " + recursosRecolectados[(ResourceType)i].ToString());
         }
 
     }

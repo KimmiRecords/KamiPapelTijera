@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BarquitoMovingState : IState
 {
+    //ojo que falla si el nodo0 no es el mas cercano cuando arranca la cosa
     BarquitoBehaviour _barco;
     FiniteStateMachine _fsm;
 
@@ -54,19 +55,19 @@ public class BarquitoMovingState : IState
         //Debug.Log("arranca set goal");
 
         closestNodeToBarco = _barco.FindClosestNode(_barco.transform.position);
-        Debug.Log("closest node es " + closestNodeToBarco.name);
+        //Debug.Log("closest node es " + closestNodeToBarco.name);
 
 
         if (closestNodeToBarco == _barco.allNodes[0]) //si estoy en el inicio
         {
             FindPathToGoal(_barco.allNodes[_barco.allNodes.Length - 1]); //voy al ultimo
-            Debug.Log("voy hacia " + _barco.allNodes[_barco.allNodes.Length - 1].name);
+            //Debug.Log("voy hacia " + _barco.allNodes[_barco.allNodes.Length - 1].name);
 
         }
         else if (closestNodeToBarco == _barco.allNodes[_barco.allNodes.Length - 1]) //si estoy en el ultimo
         {
             FindPathToGoal(_barco.allNodes[0]); //voy al inicio
-            Debug.Log("voy hacia " + _barco.allNodes[0].name);
+            //Debug.Log("voy hacia " + _barco.allNodes[0].name);
 
         }
 
@@ -83,6 +84,8 @@ public class BarquitoMovingState : IState
 
     void FollowPath()
     {
+        //Debug.Log("arranca follow path");
+
         Vector3 nextPos = _barco._pathToFollow[0].transform.position;
         Vector3 dir = nextPos - _barco.transform.position;
         _barco.transform.forward = dir;
@@ -92,7 +95,7 @@ public class BarquitoMovingState : IState
         if (dir.magnitude < 0.1f)
         {
             _barco._pathToFollow.RemoveAt(0);
-            Debug.Log("llegue al next nodo");
+            //Debug.Log("llegue al next nodo");
 
         }
 

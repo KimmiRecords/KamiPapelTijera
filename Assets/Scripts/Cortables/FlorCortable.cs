@@ -22,7 +22,7 @@ public class FlorCortable : ObjetoCortable, ICortable
     {
         if (isCortable)
         {
-            print("cortaste este arbusto");
+            //print("cortaste este arbusto");
             AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
             AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
 
@@ -41,7 +41,7 @@ public class FlorCortable : ObjetoCortable, ICortable
 
     public void StartDelayedRespawn()
     {
-        print("start delayed respawn");
+        //print("start delayed respawn");
 
         StopAllCoroutines();
         StartCoroutine(DelayedRespawn());
@@ -55,7 +55,7 @@ public class FlorCortable : ObjetoCortable, ICortable
     }
     public void Respawn()
     {
-        print("respawn");
+        //print("respawn");
 
         //dejo preparado el nuevo pickup
         spritePickup.ResetPosition();
