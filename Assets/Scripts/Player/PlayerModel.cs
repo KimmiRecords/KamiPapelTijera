@@ -14,7 +14,6 @@ public class PlayerModel
     float _playerSpeed;
 
     Vector3 _move; //el vector en el que guardo la suma de todo el movimiento para finalmente aplicarsela al character controller
-    Vector3 lastNormalizedMove; //guardo el ultimo vector de movimeinto piola
 
     public PlayerModel(Player player)
     {
@@ -60,7 +59,6 @@ public class PlayerModel
         if (_move.magnitude > 1) //normalizo
         {
             _move = _move.normalized;
-            lastNormalizedMove = _move;
         }
 
         if (_player.isJumpButtonDown)

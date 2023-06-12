@@ -2,20 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjetoCortable : MonoBehaviour, ICortable
+public class CandadoCortable : ObjetoCortable
 {
-    //los objetosCortables se pueden partir en dos
-    //la parte de arriba sale volando
+    [SerializeField]
+    protected float timeUntilDestroy = 5;
 
-    public float jumpForce = 20f;
+    [SerializeField]
+    protected CofreCortable cofreQueAbro;
 
-    public SpriteRenderer spriteEntero, spriteBase, spriteTop;
-    public Rigidbody pickupRB;
-
-    protected bool isCortable = true;
-
-
-    public virtual void GetCut(float dmg)
+    public override void GetCut(float dmg)
     {
         if (isCortable)
         {
@@ -31,21 +26,14 @@ public class ObjetoCortable : MonoBehaviour, ICortable
             //el pickup pega saltito y cae wujuuuu
             pickupRB.AddForce(GetRandomJumpDir() * jumpForce);
             isCortable = false;
+            StartCoroutine(DelayedDestroy());
+            cofreQueAbro.OpenChest();
         }
     }
-
-    public Vector3 GetRandomJumpDir()
+    
+    public IEnumerator DelayedDestroy()
     {
-        float randomX;
-        if (Random.Range(0, 100) < 50)
-        {
-            randomX = -1;
-        }
-        else
-        {
-            randomX = 1;
-        }
-
-        return new(randomX, 1, randomX);
+        yield return new WaitForSeconds(timeUntilDestroy);
+        Destroy(gameObject);
     }
 }

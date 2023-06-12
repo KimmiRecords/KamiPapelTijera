@@ -80,7 +80,9 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
 
         originalColor = _renderer.material.color;
 
-        //EventManager.Subscribe(Evento.OnOrigamiApplied, AddPaper);
+        EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
+        EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
+
         //EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
 
     }
@@ -162,17 +164,29 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
     
-    private void OnDestroy()
-    {
-        if (!gameObject.scene.isLoaded)
-        {
-            //EventManager.Unsubscribe(Evento.OnOrigamiApplied, AddPaper);
-            //EventManager.Unsubscribe(Evento.OnCortableDropsPaper, AddPaper);
-        }
-    }
+   
 
     public void GetCured(int curacion)
     {
         Vida += curacion;
+    }
+
+    public void StartOrigamiCast(params object[] parameters)
+    {
+        _view.StartCast();
+    }
+
+    public void EndOrigamiCast(params object[] parameters)
+    {
+        _view.EndCast();
+    }
+
+    private void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnOrigamiStart, StartOrigamiCast);
+            EventManager.Unsubscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
+        }
     }
 }

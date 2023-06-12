@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArbustoCortable : ObjetoCortable
+public class ArbustoCortable : FlorCortable
 {
     
 }

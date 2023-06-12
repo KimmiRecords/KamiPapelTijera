@@ -20,6 +20,7 @@ public class PlayerController
 
     public void CheckControls() //a este lo disparo en el update
     {
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             EventManager.Trigger(Evento.OnPlayerPressedE);

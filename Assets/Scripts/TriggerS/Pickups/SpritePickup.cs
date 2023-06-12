@@ -6,13 +6,10 @@ public abstract class SpritePickup : TriggerScript
 {
 
     [SerializeField]
-    protected float jumpForce;
-    [SerializeField]
     protected bool haceSaltito; //si pega saltito al nacer como un pickup de flor
 
     [SerializeField]
-    protected ObjetoCortable miCortable;
-
+    protected FlorCortable miCortable;
 
     protected Vector3 originalPosition;
     protected Quaternion originalQuaternion;
@@ -25,8 +22,9 @@ public abstract class SpritePickup : TriggerScript
         base.Start();
         originalPosition = transform.position;
         originalQuaternion = transform.rotation;
-        miCortable.pickupRB.AddForce(GetRandomJumpDir() * jumpForce);
+        miCortable.pickupRB.AddForce(GetRandomJumpDir() * miCortable.jumpForce);
         //transform.position += new Vector3(1, 1, 1);
+        //jumpForce = miCortable.jumpForce;
     }
 
     public void ResetPosition()
@@ -45,7 +43,7 @@ public abstract class SpritePickup : TriggerScript
         {
             if (isReadyToJump)
             {
-                miCortable.pickupRB.AddForce(GetRandomJumpDir() * jumpForce);
+                miCortable.pickupRB.AddForce(GetRandomJumpDir() * miCortable.jumpForce);
                 //transform.position += new Vector3(1, 1, 1);
 
                 isReadyToJump = false;

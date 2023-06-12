@@ -30,7 +30,9 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerPlaced, //triggereado por PlacePlayer. cuando muere, o cambia de pag, etc
 
     OnOrigamiApplied, //param0 es papercost (numero negativo), param1 es Origami origami
-    OnPlayerResourceUpdated //se triggerea cuando uso AddResource, param0 es el tipo, param1 es el amount total actual
+    OnPlayerResourceUpdated, //se triggerea cuando uso AddResource, param0 es el tipo, param1 es el amount total actual
+    OnOrigamiStart,
+    OnOrigamiEnd
 }
 
 public class EventManager

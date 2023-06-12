@@ -8,6 +8,7 @@ public class PlayerView
     Player _player;
     bool canRotate;
     Vector3 lastDirection = Vector3.zero;
+    public bool tabIsPressed;
 
     public PlayerView(Player player)
     {
@@ -76,5 +77,16 @@ public class PlayerView
     public void StopJump()
     {
         _anim.SetBool("isJump", false);
+    }
+
+    public void StartCast()
+    {
+        _anim.SetBool("isCasting", true);
+
+    }
+
+    public void EndCast()
+    {
+        _anim.SetBool("isCasting", false);
     }
 }

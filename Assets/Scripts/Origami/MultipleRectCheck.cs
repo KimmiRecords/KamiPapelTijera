@@ -39,6 +39,7 @@ public class MultipleRectCheck : MonoBehaviour
                 arrastrando = true;
                 AudioManager.instance.PlayRandom("PaperFold01", "PaperFold02");
                 AudioManager.instance.PlayByName("PaperFoldLoop");
+                CursorManager.instance.SetCursor(CursorType.ClosedHand);
             }
             else
             {
@@ -104,6 +105,7 @@ public class MultipleRectCheck : MonoBehaviour
             invocando = true;
             TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
             AudioManager.instance.PlayRandom("MagicChannelingLoop01", "MagicChannelingLoop02");
+            EventManager.Trigger(Evento.OnOrigamiStart);
         }
 
     }
@@ -118,5 +120,7 @@ public class MultipleRectCheck : MonoBehaviour
         TooltipManager.instance.HideTooltip();
         AudioManager.instance.StopByName("PaperFoldLoop");
         AudioManager.instance.StopByName("MagicChannelingLoop01", "MagicChannelingLoop02");
+        CursorManager.instance.SetCursor(CursorType.OpenHand);
+        EventManager.Trigger(Evento.OnOrigamiEnd);
     }
 }

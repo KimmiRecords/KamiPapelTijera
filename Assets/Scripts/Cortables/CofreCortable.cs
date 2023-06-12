@@ -2,22 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CofreCortable : MonoBehaviour, ICortable
+public class CofreCortable : MonoBehaviour/*, ICortable*/
 {
     [SerializeField]
     int paperReward = 5;
-    bool wasCut = false;
+    [SerializeField]
+    float initialDelay = 1;
+    [SerializeField]
+    float delayUntilDeath = 1;
+    [SerializeField]
+    Animator anim; //mi animator
+    bool isOpening;
 
-    public void GetCut(float dmg)
+    //bool wasCut = false;
+
+    //public void GetCut(float dmg)
+    //{
+    //    if (!wasCut)
+    //    {
+    //        //print("cortaste el cofre. ganaste 15 pesos");
+    //        wasCut = true;
+    //    }
+    //}
+
+    public void OpenChest() //este metodo lo dispara mi candado
     {
-        if (!wasCut)
+        StartCoroutine(StartOpenSequence());
+    }
+
+    public IEnumerator StartOpenSequence()
+    {
+        yield return new WaitForSeconds(initialDelay);
+        anim.SetBool("isOpen", true);
+        isOpening = true;
+
+        while (isOpening) //el final de la animacion dispara un metodo que lo hace false
         {
-            //print("cortaste el cofre. ganaste 15 pesos");
-            LevelManager.instance.AddResource(ResourceType.papel, paperReward);
-            AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
-            AudioManager.instance.PlayByName("MagicSuccess", 1.5f);
-            Destroy(gameObject);
-            wasCut = true;
+            yield return new WaitForEndOfFrame();
         }
+
+        //particles.gameObject.SetActive(true);
+        LevelManager.instance.AddResource(ResourceType.papel, paperReward);
+        AudioManager.instance.PlayByName("MagicSuccess", 1.5f);
+        yield return new WaitForSeconds(delayUntilDeath);
+        Destroy(gameObject);
+
+    }
+
+    public void EndOpeningAnimation()
+    {
+        isOpening = false;
     }
 }
