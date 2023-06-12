@@ -51,6 +51,8 @@ public class MultipleRectCheck : MonoBehaviour
         //chequeo si el jugador solto el mouse mientras arrastraba
         if (arrastrando && Input.GetMouseButtonUp(1))
         {
+            CursorManager.instance.SetCursor(CursorType.OpenHand);
+
             //chequeo si el jugador solto sobre la imagen verde
             if (RectTransformUtility.RectangleContainsScreenPoint(desiredOrigami.origamiRoutes[desiredOrigami.currentRouteIndex].finalRectangle, Input.mousePosition))
             {
