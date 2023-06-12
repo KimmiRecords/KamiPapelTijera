@@ -25,7 +25,7 @@ public abstract class SpritePickup : TriggerScript
         base.Start();
         originalPosition = transform.position;
         originalQuaternion = transform.rotation;
-        miCortable.pickupRB.AddForce(new Vector3(1, 1, 1) * jumpForce);
+        miCortable.pickupRB.AddForce(GetRandomJumpDir() * jumpForce);
         //transform.position += new Vector3(1, 1, 1);
     }
 
@@ -45,13 +45,29 @@ public abstract class SpritePickup : TriggerScript
         {
             if (isReadyToJump)
             {
-                miCortable.pickupRB.AddForce(new Vector3(1, 1, 1) * jumpForce);
+                miCortable.pickupRB.AddForce(GetRandomJumpDir() * jumpForce);
                 //transform.position += new Vector3(1, 1, 1);
+
                 isReadyToJump = false;
             }
         }
 
         isReadyToPickup = true;
+    }
+
+    public Vector3 GetRandomJumpDir()
+    {
+        float randomX;
+        if (Random.Range(0, 100) < 50)
+        {
+            randomX = -1;
+        }
+        else
+        {
+            randomX = 1;
+        }
+
+        return new(randomX, 1, randomX);
     }
 
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjetoCortable : MonoBehaviour
+public class ObjetoCortable : MonoBehaviour, ICortable
 {
     //los objetosCortables se pueden partir en dos
     //la parte de arriba sale volando y se convierte en pickup
@@ -15,7 +15,7 @@ public class ObjetoCortable : MonoBehaviour
 
     bool isCortable = true;
 
-    public void GetCut(float dmg)
+    public virtual void GetCut(float dmg)
     {
         if (isCortable)
         {
