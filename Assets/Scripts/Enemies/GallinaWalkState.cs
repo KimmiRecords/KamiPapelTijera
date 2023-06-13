@@ -20,7 +20,7 @@ public class GallinaWalkState : IState
 
     public void OnEnter()
     {
-        Debug.Log("gallina - entre a walk");
+        //Debug.Log("gallina - entre a walk");
         //_gallina.anim.SetBool("isWalk", true);
         SetGoal(_gallina);
     }
@@ -29,7 +29,7 @@ public class GallinaWalkState : IState
     {
         if (goalReached) //si llego, nuevo camino
         {
-            Debug.Log("cambie de goal");
+            //Debug.Log("cambie de goal");
             SetGoal(_gallina);
         }
 
@@ -46,12 +46,12 @@ public class GallinaWalkState : IState
     public void OnExit()
     {
         //Debug.Log("salgo de walk");
-        Debug.Log("gallina - entre a walk");
+        //Debug.Log("gallina - entre a walk");
     }
 
     public void SetGoal(Gallina yo)
     {
-        Debug.Log("gallina - arranca set goal");
+        //Debug.Log("gallina - arranca set goal");
         currentGoalNode = yo.allNodes[Random.Range(0, yo.allNodes.Length)];
         goalReached = false;
     }

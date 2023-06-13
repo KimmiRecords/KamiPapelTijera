@@ -13,7 +13,7 @@ public class HongoPickup : ResourcePickup
         if (isReadyToPickup)
         {
             print("estaba ready to pickup");
-            base.OnEnterBehaviour(other);
+            //base.OnEnterBehaviour(other);
 
             LevelManager.instance.AddResource(pickupType, pickupAmount);
             AudioManager.instance.PlayByName("Pickup");
