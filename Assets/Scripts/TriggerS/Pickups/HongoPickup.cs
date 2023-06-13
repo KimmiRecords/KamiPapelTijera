@@ -6,6 +6,24 @@ public class HongoPickup : ResourcePickup
 {
     //el hongo pickup es un resource pickup que re-spawnea en la cabeza de su gallina
 
+    public override void OnEnterBehaviour(Collider other)
+    {
+        print("on enter behaviour por " + other.gameObject.name);
+
+        if (isReadyToPickup)
+        {
+            print("estaba ready to pickup");
+            base.OnEnterBehaviour(other);
+
+            LevelManager.instance.AddResource(pickupType, pickupAmount);
+            AudioManager.instance.PlayByName("Pickup");
+            //miCortable.StartDelayedRespawn();
+            isReadyToPickup = false;
+            ResetPosition();
+            miCortable.pickupRB.gameObject.SetActive(false);
+        }
+    }
+
 
     public override void ResetPosition()
     {
