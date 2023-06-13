@@ -9,7 +9,7 @@ public class RocosoCortable : MonoBehaviour, ICortable
 
     public virtual void GetCut(float dmg)
     {
-        print("enemy: me cortaron");
+        print("rocoso: me cortaron");
         AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
         _thisRocoso.TakeDamage(dmg);
     }

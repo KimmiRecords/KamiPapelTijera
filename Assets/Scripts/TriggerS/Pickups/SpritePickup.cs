@@ -27,7 +27,7 @@ public abstract class SpritePickup : TriggerScript
         //jumpForce = miCortable.jumpForce;
     }
 
-    public void ResetPosition()
+    public virtual void ResetPosition()
     {
         //print("reset position");
         //vuelvo a donde empece
@@ -37,7 +37,7 @@ public abstract class SpritePickup : TriggerScript
 
     public void Jump()
     {
-        print("la flor salta");
+        print("el pickup salta");
         //nace tirando animacion de salir volando y caer al piso. 
         if (haceSaltito)
         {

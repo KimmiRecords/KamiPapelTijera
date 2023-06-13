@@ -7,9 +7,9 @@ public class ResourcePickup : SpritePickup
     //los sprite pickup son por ejemplo los hongos, las flores o las hojas
 
     [SerializeField]
-    ResourceType pickupType;
+    protected ResourceType pickupType;
     [SerializeField]
-    int pickupAmount;
+    protected int pickupAmount;
 
     public override void OnEnterBehaviour(Collider other)
     {

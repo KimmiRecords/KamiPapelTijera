@@ -19,7 +19,11 @@ public enum State
 
     //Barquito
     BarquitoIdle,
-    BarquitoMoving
+    BarquitoMoving,
+
+    //Enemy: gallina
+    GallinaWalk,
+    GallinaEvade
 }
 public class FiniteStateMachine
 {

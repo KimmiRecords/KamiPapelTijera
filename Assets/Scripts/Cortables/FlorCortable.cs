@@ -53,7 +53,7 @@ public class FlorCortable : ObjetoCortable, ICortable
         yield return new WaitForSeconds(respawnTime);
         Respawn();
     }
-    public void Respawn()
+    public virtual void Respawn()
     {
         //print("respawn");
 

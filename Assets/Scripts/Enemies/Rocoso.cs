@@ -8,12 +8,8 @@ public class Rocoso : Enemy
     //asi las animaciones pueden llamar a metodos de este script.
     //unity, no lo entenderias.
     
-    //todavia esta en proceso. la idea es que el enemigo sea un statemachine
-    //y hacer por separado los scripts de EnemySleepState, EnemyStartState, EnemyWalkState, EnemyPursuitState, etc
-    //por ahora es que se acerca durante 2 seg y luego ataca.
 
     public Animator anim; //mi animator
-    public SpriteRenderer _sr; //y mi sprite renderer. esto y el metodo EnrojecerSprite deberia estar separado, tipo creado como EnemyView o algo asi
     public RocosoHeadbuttHitBox _hitBox;
 
     [HideInInspector]
@@ -64,19 +60,6 @@ public class Rocoso : Enemy
     public void RocosoCamina() //disparada por el final de la animacion de start
     {
         startAnimationHasFinished = true;
-    }
-
-    public override void TakeDamage(float dmg)
-    {
-        base.TakeDamage(dmg);
-        StartCoroutine(EnrojecerSprite());
-    }
-    public IEnumerator EnrojecerSprite()
-    {
-        //print("enrojeci el sprite");
-        _sr.material.color = Color.red;
-        yield return new WaitForSeconds(0.25f);
-        _sr.material.color = Color.white;
     }
 
     IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo

@@ -5,11 +5,11 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
-    protected float _hp;
+    protected float _hp = 100;
     [SerializeField]
-    protected float _maxSpeed;
+    protected float _maxSpeed = 1.5f;
     [SerializeField]
-    protected float _attackDamage;
+    protected float _attackDamage = 10;
 
     public Entity SetHP(float desiredHp)
     {
@@ -36,8 +36,6 @@ public abstract class Entity : MonoBehaviour
             Die();
         }
     }
-
-    
     public virtual void Die()
     {
         //print("entity: me mori");
