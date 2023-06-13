@@ -14,7 +14,7 @@ public class PageScroller : MonoBehaviour
     public static PageScroller instance;
 
     [SerializeField]
-    private GameObject[] objectsToToggle; //las 4 carpetas (buildingspagina1, 2, 3 y 4)
+    private GameObject[] objectsToToggle; //las 5 carpetas (buildingspagina1, 2, 3, 4 y 5)
 
     [HideInInspector]
     public int activeIndex = 0; //currentpage = activeindex - 1
