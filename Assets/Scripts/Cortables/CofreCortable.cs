@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class CofreCortable : MonoBehaviour/*, ICortable*/
 {
+    //los cofres son un tipo de cortable que dispara animacion de abrirse cuando le cortas el candado
+    //lo usamos para puertas tambien
+
+    //el trucazo: no es un cortable per se. pero bueno, quedó
+
     [SerializeField]
     int paperReward = 5;
     [SerializeField]
     float initialDelay = 1;
-    [SerializeField]
-    float delayUntilDeath = 1;
+    //[SerializeField]
+    //float delayUntilDeath = 1;
     [SerializeField]
     Animator anim; //mi animator
     bool isOpening;
@@ -44,8 +49,8 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
         //particles.gameObject.SetActive(true);
         LevelManager.instance.AddResource(ResourceType.papel, paperReward);
         AudioManager.instance.PlayByName("MagicSuccess", 1.5f);
-        yield return new WaitForSeconds(delayUntilDeath);
-        Destroy(gameObject);
+        //yield return new WaitForSeconds(delayUntilDeath);
+        //Destroy(gameObject);
 
     }
 

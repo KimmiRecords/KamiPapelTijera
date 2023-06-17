@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour
     //el dictionario capo con cada tipo de recurso y valor
     public Dictionary<ResourceType, int> recursosRecolectados = new Dictionary<ResourceType, int>();
 
+    public int initialPaper;
+
     private void Awake()
     {
         if (instance != this && instance != null)
@@ -39,6 +41,7 @@ public class LevelManager : MonoBehaviour
             //print( ((ResourceType)i).ToString() + " // " + recursosRecolectados[(ResourceType)i].ToString());
         }
 
+        recursosRecolectados[ResourceType.papel] = initialPaper;
     }
 
     public void GoToScene(string sceneName)

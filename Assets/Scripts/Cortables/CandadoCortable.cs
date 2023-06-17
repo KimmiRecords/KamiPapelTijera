@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CandadoCortable : ObjetoCortable
 {
+    //el candado dispara la animacion de abrir de un cofreCortable cuando lo corto.
     [SerializeField]
     protected float timeUntilDestroy = 5;
 
