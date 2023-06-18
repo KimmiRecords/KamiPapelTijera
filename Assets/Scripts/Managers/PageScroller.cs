@@ -18,7 +18,7 @@ public class PageScroller : MonoBehaviour
 
     [HideInInspector]
     public int activeIndex = 0; //currentpage = activeindex - 1
-
+    public int startingPage = 0;
     public TriggerScript esferaPrev; //la zona para volver a pag anterior
     public TriggerScript esferaNext; //la zona para ir a pag siguiente
 
@@ -33,7 +33,6 @@ public class PageScroller : MonoBehaviour
 
     bool isTurning = false;
 
-    
 
     private void Awake()
     {
@@ -49,6 +48,8 @@ public class PageScroller : MonoBehaviour
         EventManager.Subscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
         EventManager.Subscribe(Evento.OnPlayerPressedE, TurnNextPage);
         EventManager.Subscribe(Evento.OnPageFinishTurning, FinishTurning);
+        activeIndex = startingPage - 1;
+        CheckSpheres(activeIndex);
     }
 
     void TurnNextPage(params object[] parameters)

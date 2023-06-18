@@ -9,6 +9,9 @@ public class NPC_Abuela : NPC
     [HideInInspector]
     public Vector3 dropoffPoint;
 
+
+
+
     protected override void Start()
     {
         _fsm = new FiniteStateMachine();
@@ -43,9 +46,11 @@ public class NPC_Abuela : NPC
     public void StartAbuelaDropoff(params object[] parameter)
     {
         isDropoff = true;
-        if (parameter[0] is Vector3)
+        if (parameter[0] is Transform)
         {
-            dropoffPoint = (Vector3)parameter[0];
+            var dropOffTransform = (Transform)parameter[0];
+            dropoffPoint = dropOffTransform.position;
+            transform.parent = dropOffTransform;
         }
     }
 
