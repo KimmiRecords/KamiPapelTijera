@@ -15,7 +15,7 @@ public class TriggerAbuelaDropoff : TriggerScript
         {
             EventManager.Trigger(Evento.OnAbuelaDropoff, dropOffPoint);
             //AudioManager.instance.StopByName("4S_MarimbaLoopConPiano");
-            AudioManager.instance.PlayByName("MagicSuccess", 0.5f);
+            AudioManager.instance.PlayByName("MagicSuccess", 0.6f);
             //AudioManager.instance.PlayOnEnd("QuestCompleted", "4S_MarimbaLoop");
             base.OnEnterBehaviour(other);
         }

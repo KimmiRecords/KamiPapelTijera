@@ -40,6 +40,7 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
         yield return new WaitForSeconds(initialDelay);
         anim.SetBool("isOpen", true);
         isOpening = true;
+        AudioManager.instance.PlayByName("MagicSuccess", 1.4f);
 
         while (isOpening) //el final de la animacion dispara un metodo que lo hace false
         {
@@ -48,7 +49,6 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
 
         //particles.gameObject.SetActive(true);
         LevelManager.instance.AddResource(ResourceType.papel, paperReward);
-        AudioManager.instance.PlayByName("MagicSuccess", 1.5f);
         //yield return new WaitForSeconds(delayUntilDeath);
         //Destroy(gameObject);
 

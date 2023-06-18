@@ -35,6 +35,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     float _maxHp;
     bool _readyToAttack = true;
     public bool isAttacking = false;
+    public bool hasTijera = false;
 
     public float Speed 
     {
@@ -82,6 +83,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
 
         EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
         EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
+        EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
+
 
         //EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
 
@@ -103,7 +106,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     }
     public void OnPrimaryClick()
     {
-        if (_readyToAttack) //readytoattack se pone false cuando estoy en cooldown
+        if (_readyToAttack && hasTijera) //readytoattack se pone false cuando estoy en cooldown
         {
             _view.StartTijeraAnimation();
             _readyToAttack = false;
@@ -165,6 +168,11 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     {
         Vida += curacion;
     }
+    public void GetTijera(params object[] parameters)
+    {
+        hasTijera = true;
+        miTijeraHitbox.transform.parent.gameObject.SetActive(true);
+    }
     public void StartOrigamiCast(params object[] parameters)
     {
         _view.StartCast();
@@ -179,6 +187,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
         {
             EventManager.Unsubscribe(Evento.OnOrigamiStart, StartOrigamiCast);
             EventManager.Unsubscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
+            EventManager.Unsubscribe(Evento.OnPlayerGetTijera, GetTijera);
         }
     }
 }

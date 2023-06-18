@@ -33,7 +33,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerResourceUpdated, //se triggerea cuando uso AddResource, param0 es el tipo, param1 es el amount total actual
     OnOrigamiStart, //le interesa al player para arrancar animaciones
     OnOrigamiEnd, //le interesa al player para arrancar animaciones
-    OnOrigamiFoldChange //param0 el fold actual, param1 los fold totales
+    OnOrigamiFoldChange, //param0 el fold actual, param1 los fold totales
+    OnPlayerGetTijera
 
 }
 
