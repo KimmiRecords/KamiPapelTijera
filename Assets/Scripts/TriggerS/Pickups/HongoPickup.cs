@@ -27,7 +27,7 @@ public class HongoPickup : ResourcePickup
 
     public override void ResetPosition()
     {
-        //print("reset position");
+        print("reset position");
         //vuelvo a donde empece
         miCortable.pickupRB.transform.parent = miCortable.transform;
         transform.SetPositionAndRotation(originalPosition, originalQuaternion);

@@ -21,7 +21,7 @@ public class HongoCortable : FlorCortable
             spriteEntero.gameObject.SetActive(false);
             spriteBase.gameObject.SetActive(true);
             pickupRB.gameObject.SetActive(true);
-            pickupRB.gameObject.transform.parent = null;
+            pickupRB.gameObject.transform.parent = transform.parent.parent; //el parent de la gallina
 
             //el pickup pega saltito y cae wujuuuu
             spritePickup.Jump();
