@@ -156,8 +156,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2223711169329458678}
-  - component: {fileID: 4089154315101621346}
   - component: {fileID: 4460866578473358796}
+  - component: {fileID: 8743692848181703346}
   m_Layer: 6
   m_Name: FlorCortable Vida
   m_TagString: Untagged
@@ -183,25 +183,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4089154315101621346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2223711169329458679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e2ad301185f09c4c932504143807c26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnTime: 10
-  jumpForce: 20
-  spriteEntero: {fileID: 70029014811641108}
-  spriteBase: {fileID: 2223711168269973726}
-  spriteTop: {fileID: 3848987927327013166}
-  pickupRB: {fileID: 7340189295786692633}
-  spritePickup: {fileID: 3861096447158217618}
 --- !u!65 &4460866578473358796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -215,6 +196,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 1.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8743692848181703346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223711169329458679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01dd19fb08803f249b8ba67e1500aee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 20
+  spriteEntero: {fileID: 70029014811641108}
+  spriteBase: {fileID: 2223711168269973726}
+  spriteTop: {fileID: 3848987927327013166}
+  pickupRB: {fileID: 7340189295786692633}
+  respawnTime: 5
+  spritePickup: {fileID: 3861096447158217618}
+  pickupType: 0
+  pickupAmount: 0
+  curacionAmount: 20
 --- !u!1 &3987536364650957055
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,5 +417,6 @@ MonoBehaviour:
   tooltipTextToShow: Agarraste Vida!
   postItColor: 4
   haceSaltito: 1
-  miCortable: {fileID: 4089154315101621346}
-  vidaReward: 20
+  miCortable: {fileID: 8743692848181703346}
+  isSelfDestruct: 1
+  timeUntilSelfdestruct: 2

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PapelTextUpdater : TextUpdater
 {
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         myText.text = textoInicial + 0.ToString();
     }
     protected override void UpdateText(params object[] parameter)

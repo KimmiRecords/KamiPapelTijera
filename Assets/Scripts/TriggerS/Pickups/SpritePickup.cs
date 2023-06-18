@@ -4,6 +4,11 @@ using UnityEngine;
 
 public abstract class SpritePickup : TriggerScript
 {
+    //los sprite pickups se llaman pickups xq en un principio la idea
+    //era que estos caian cortados y luego habia que tocarlos para agarrarlos.
+    //ahora, simplemente caen y desaparecen
+    //(se añade al inventario al momento de cortar,
+    //no hace falta tocarlo de nuevo)
 
     [SerializeField]
     protected bool haceSaltito; //si pega saltito al nacer como un pickup de flor
@@ -15,6 +20,10 @@ public abstract class SpritePickup : TriggerScript
     protected Quaternion originalQuaternion;
     protected bool isReadyToJump;
     protected bool isReadyToPickup;
+
+
+    public bool isSelfDestruct;
+    public float timeUntilSelfdestruct = 2;
 
 
     protected override void Start()
@@ -50,7 +59,14 @@ public abstract class SpritePickup : TriggerScript
             }
         }
 
-        isReadyToPickup = true;
+        if (isSelfDestruct)
+        {
+            StartCoroutine(SelfDestructCoroutine(timeUntilSelfdestruct));
+        }
+
+        //esta linea esta comentada porque al final los pickups son autopickupeables
+        //cuestion que nunca voy a tener que pickupear estas cosas del piso
+        //isReadyToPickup = true;
     }
 
     public Vector3 GetRandomJumpDir()
@@ -67,5 +83,13 @@ public abstract class SpritePickup : TriggerScript
 
         return new(randomX, 1, randomX);
     }
+
+    public IEnumerator SelfDestructCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+        transform.parent.gameObject.SetActive(false);
+        //Destroy(gameObject);
+    }
+
 
 }

@@ -23,6 +23,11 @@ public class LevelManager : MonoBehaviour
     public Dictionary<ResourceType, int> recursosRecolectados = new Dictionary<ResourceType, int>();
 
     public int initialPaper;
+    public int initialHongos;
+    public int initialFloresAzules;
+
+    public Player player;
+        
 
     private void Awake()
     {
@@ -42,11 +47,25 @@ public class LevelManager : MonoBehaviour
         }
 
         recursosRecolectados[ResourceType.papel] = initialPaper;
+        recursosRecolectados[ResourceType.hongos] = initialHongos;
+        recursosRecolectados[ResourceType.flores] = initialFloresAzules;
+
     }
 
     public void GoToScene(string sceneName)
     {   
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void Update()
+    {
+        //CHEAT CODES
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            AddResource(ResourceType.hongos, 100);
+            AddResource(ResourceType.papel, 100);
+            AddResource(ResourceType.flores, 100);
+        }
     }
 
     public void AddResource(ResourceType pickupType, int valueToAdd)
@@ -55,5 +74,10 @@ public class LevelManager : MonoBehaviour
         recursosRecolectados[pickupType] += valueToAdd;
         EventManager.Trigger(Evento.OnPlayerResourceUpdated, pickupType, recursosRecolectados[pickupType]);
         print(pickupType.ToString() + " // " + recursosRecolectados[pickupType]);
+    }
+
+    public void CurePlayer(int curacion)
+    {
+        player.GetCured(curacion);
     }
 }

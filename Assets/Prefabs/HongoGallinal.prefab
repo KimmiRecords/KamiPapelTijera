@@ -66,8 +66,10 @@ MonoBehaviour:
   spriteBase: {fileID: 6432310864005939249}
   spriteTop: {fileID: 6603477753804779656}
   pickupRB: {fileID: 2767657344255649519}
-  respawnTime: 5
+  respawnTime: 9999
   spritePickup: {fileID: 3962814971974374131}
+  pickupType: 0
+  pickupAmount: 1
 --- !u!1 &3407858799241410177
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,8 +333,8 @@ MonoBehaviour:
   postItColor: 1
   haceSaltito: 1
   miCortable: {fileID: 6869142402802870411}
-  pickupType: 0
-  pickupAmount: 1
+  isSelfDestruct: 1
+  timeUntilSelfdestruct: 1
 --- !u!1 &8746060627207873154
 GameObject:
   m_ObjectHideFlags: 0

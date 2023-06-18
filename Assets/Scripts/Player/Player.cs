@@ -109,12 +109,10 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
             _readyToAttack = false;
         }
     }
-
     public void StartTijeraCoroutine() //este metodo es solo xq el estupido animator no sabe disparar corrutinas. unity "2021"
     {
         StartCoroutine(TijeraCoroutine());
     }
-
     public IEnumerator TijeraCoroutine() //prendo y apago rapidamente la hitbox para simular un ataque
     {
         _model.EnableTijeraHitbox();
@@ -163,24 +161,18 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
         Vida = _maxHp;
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
-    
-   
-
     public void GetCured(int curacion)
     {
         Vida += curacion;
     }
-
     public void StartOrigamiCast(params object[] parameters)
     {
         _view.StartCast();
     }
-
     public void EndOrigamiCast(params object[] parameters)
     {
         _view.EndCast();
     }
-
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)

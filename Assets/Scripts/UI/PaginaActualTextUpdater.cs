@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PaginaActualTextUpdater : TextUpdater
 {
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         myText.text = textoInicial + 1.ToString(); //tuki, escribe "numero de pagina = x"
     }
     protected override void UpdateText(params object[] parameter)

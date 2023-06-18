@@ -108,6 +108,8 @@ public class MultipleRectCheck : MonoBehaviour
             TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
             AudioManager.instance.PlayRandom("MagicChannelingLoop01", "MagicChannelingLoop02");
             EventManager.Trigger(Evento.OnOrigamiStart);
+            print("rect check: mando a actualizar");
+            origami.TriggerPliegueTextUpdater();
         }
 
     }

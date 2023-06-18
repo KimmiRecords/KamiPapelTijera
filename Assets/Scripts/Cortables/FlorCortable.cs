@@ -10,6 +10,11 @@ public class FlorCortable : ObjetoCortable, ICortable
     public float respawnTime = 5;
     public SpritePickup spritePickup;
 
+    [SerializeField]
+    protected ResourceType pickupType;
+    [SerializeField]
+    protected int pickupAmount = 1;
+
     private void Start()
     {
         if (spriteTop.GetComponent<SpritePickup>() != null)
@@ -33,9 +38,14 @@ public class FlorCortable : ObjetoCortable, ICortable
 
             //el pickup pega saltito y cae wujuuuu
             spritePickup.Jump();
-            StartDelayedRespawn();
+
+            //en vez de delayedspawn, tendria que ser instapickup
+            //StartDelayedRespawn();
+            LevelManager.instance.AddResource(pickupType, pickupAmount);
+            AudioManager.instance.PlayByName("Pickup");
 
             isCortable = false;
+
         }
     }
 
@@ -53,11 +63,16 @@ public class FlorCortable : ObjetoCortable, ICortable
         yield return new WaitForSeconds(respawnTime);
         Respawn();
     }
+
+    //SOY EL ALFA Y EL OMEGA 
+    //SOY EL PRINCIPIO Y EL FIN
+    //NADA ME DETENDRA
+    //FIRMA -DONKEY KONG
+
     public virtual void Respawn()
     {
         //print("respawn");
 
-        //dejo preparado el nuevo pickup
         spritePickup.ResetPosition();
 
         //apago las partes y prendo el entero

@@ -20,25 +20,19 @@ public class FloristaDialogueTrigger : TriggerDialogue
 
     public override void Interact(params object[] parameter)
     {
-
-        if (LevelManager.instance.recursosRecolectados[ResourceType.flores] >= floresRequeridas)
-        {
-            if (!questCompleted)
-            {
-                currentDialogue = 2; //paso al dialogo 2, que es el de Gracias por traer!
-                LevelManager.instance.AddResource(ResourceType.flores, -floresRequeridas);
-                LevelManager.instance.AddResource(ResourceType.papel, paperReward);
-                questCompleted = true;
-            }
-        }
-
-        //el 0 se lee una sola vez
-        //una vez leido, pasa al 1
-        //una vez juntadas lasflores, pasa al 2
         if (triggerBool)
         {
-            
             //print("trigger dialogue interact: muestro el dialogo " + _dialogues[currentDialogue].name);
+            if (LevelManager.instance.recursosRecolectados[ResourceType.flores] >= floresRequeridas)
+            {
+                if (!questCompleted)
+                {
+                    currentDialogue = 2; //paso al dialogo 2, que es el de Gracias por traer!
+                    LevelManager.instance.AddResource(ResourceType.flores, -floresRequeridas);
+                    LevelManager.instance.AddResource(ResourceType.papel, paperReward);
+                    questCompleted = true;
+                }
+            }
             DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
         }
 

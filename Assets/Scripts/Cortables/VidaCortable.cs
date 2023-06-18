@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArbustoCortable : FlorCortable
+public class VidaCortable : FlorCortable
 {
-    //el arbusto si respawnea
+    [SerializeField]
+    int curacionAmount = 20;
+
     public override void GetCut(float dmg)
     {
         if (isCortable)
@@ -22,9 +24,9 @@ public class ArbustoCortable : FlorCortable
             spritePickup.Jump();
 
             //en vez de delayedspawn, tendria que ser instapickup
-            StartDelayedRespawn();
-            LevelManager.instance.AddResource(pickupType, pickupAmount);
-            AudioManager.instance.PlayByName("Pickup");
+            //StartDelayedRespawn();
+            LevelManager.instance.CurePlayer(curacionAmount);
+            AudioManager.instance.PlayByName("Pickup", 0.8f);
 
             isCortable = false;
 

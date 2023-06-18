@@ -28,7 +28,7 @@ public abstract class Origami : MonoBehaviour
 
     public void FailOrigami()
     {
-        print("fallaste asi que arrancas de cero");
+        //print("fallaste asi que arrancas de cero");
         currentRouteIndex = 0;
 
         for (int i = 0; i < origamiRoutes.Length; i++)
@@ -58,6 +58,7 @@ public abstract class Origami : MonoBehaviour
                 origamiRoutes[i].gameObject.SetActive(false);
             }
         }
+        TriggerPliegueTextUpdater();
     }
 
     public virtual void CompleteRoute()
@@ -87,6 +88,12 @@ public abstract class Origami : MonoBehaviour
 
         //consume papel
         LevelManager.instance.AddResource(ResourceType.papel, -paperCost);
+    }
+
+    public void TriggerPliegueTextUpdater()
+    {
+        print("triggereo con " + (currentRouteIndex + 1).ToString() + "/" + origamiRoutes.Length);
+        EventManager.Trigger(Evento.OnOrigamiFoldChange, currentRouteIndex + 1, origamiRoutes.Length);
     }
 
 }

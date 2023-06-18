@@ -61,12 +61,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce131e03b3e708b4b9dd289b5d5ee62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 5
+  jumpForce: 20
   spriteEntero: {fileID: 1403119957648234421}
   spriteBase: {fileID: 6432310864005939249}
   spriteTop: {fileID: 6603477753804779656}
   pickupRB: {fileID: 2767657344255649519}
+  respawnTime: 10
   spritePickup: {fileID: 269802804298028791}
+  pickupType: 2
+  pickupAmount: 1
 --- !u!1 &3407858799241410177
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +96,7 @@ Transform:
   m_GameObject: {fileID: 3407858799241410177}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2223711169329458678}
@@ -178,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 7181559646363321908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1064269292514549441}
@@ -213,7 +216,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.05, y: 1.79, z: 0.2}
-  m_Center: {x: -0.3, y: 0.9, z: 0}
+  m_Center: {x: 0.3, y: 0.9, z: 0}
 --- !u!1 &8442388447858696004
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +315,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.6, y: 2.5, z: 1}
-  m_Center: {x: -0.3, y: 0.9, z: 0}
+  m_Center: {x: 0.3, y: 0.9, z: 0}
 --- !u!114 &269802804298028791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,11 +331,10 @@ MonoBehaviour:
   triggerBool: 0
   tooltipTextToShow: Conseguiste papel!
   postItColor: 4
-  jumpForce: 20
   haceSaltito: 1
   miCortable: {fileID: 4249590898158523490}
-  pickupType: 2
-  pickupAmount: 1
+  isSelfDestruct: 1
+  timeUntilSelfdestruct: 1
 --- !u!1 &8746060627207873154
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 8746060627207873154}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2223711169329458678}

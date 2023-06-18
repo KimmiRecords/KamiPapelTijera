@@ -195,12 +195,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2ad301185f09c4c932504143807c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 10
+  jumpForce: 20
   spriteEntero: {fileID: 70029014811641108}
   spriteBase: {fileID: 2223711168269973726}
   spriteTop: {fileID: 3848987927327013166}
   pickupRB: {fileID: 7340189295786692633}
+  respawnTime: 9999
   spritePickup: {fileID: 906815822126549660}
+  pickupType: 1
+  pickupAmount: 1
 --- !u!65 &4460866578473358796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -412,8 +415,7 @@ MonoBehaviour:
   triggerBool: 0
   tooltipTextToShow: Levantaste una flor!
   postItColor: 4
-  jumpForce: 20
   haceSaltito: 1
   miCortable: {fileID: 4089154315101621346}
-  pickupType: 1
-  pickupAmount: 1
+  isSelfDestruct: 1
+  timeUntilSelfdestruct: 1
