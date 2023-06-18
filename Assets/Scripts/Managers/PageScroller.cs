@@ -45,7 +45,7 @@ public class PageScroller : MonoBehaviour
             instance = this;
         }
 
-        EventManager.Subscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
+        //EventManager.Subscribe(Evento.OnPlayerPressedQ, TurnNextPage);
         EventManager.Subscribe(Evento.OnPlayerPressedE, TurnNextPage);
         EventManager.Subscribe(Evento.OnPageFinishTurning, FinishTurning);
         activeIndex = startingPage - 1;
@@ -71,9 +71,7 @@ public class PageScroller : MonoBehaviour
                 }
             }
         }
-    }
-    void TurnPrevPage(params object[] parameters)
-    {
+
         if (esferaPrev.triggerBool)
         {
             if (!isTurning)
@@ -92,6 +90,26 @@ public class PageScroller : MonoBehaviour
             }
         }
     }
+    //void TurnPrevPage(params object[] parameters)
+    //{
+    //    if (esferaPrev.triggerBool)
+    //    {
+    //        if (!isTurning)
+    //        {
+    //            if (activeIndex <= 0)
+    //            {
+    //                print("no hay mas paginas");
+    //            }
+    //            else
+    //            {
+    //                activeIndex--;
+    //                isNext = false;
+    //                StartChangePage();
+    //                isTurning = true;
+    //            }
+    //        }
+    //    }
+    //}
     public void CheckSpheres(int currentPage)
     {
         //este metodo chequea, segun la currentPage, que esferas deberian estar activas
@@ -156,7 +174,6 @@ public class PageScroller : MonoBehaviour
         }
         PUBManager.instance.OpenPUBs();
     }
-
     void CreateHoja(bool isNext)
     {
         if (isNext)
@@ -173,6 +190,7 @@ public class PageScroller : MonoBehaviour
         LevelManager.instance.inDialogue = false;
         isTurning = false;
         esferaNext.triggerBool = false;
+        esferaPrev.triggerBool = false;
         CameraManager.instance.SetCamera(Camara.Normal);
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
 
@@ -180,7 +198,7 @@ public class PageScroller : MonoBehaviour
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
+            //EventManager.Unsubscribe(Evento.OnPlayerPressedQ, TurnPrevPage);
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, TurnNextPage);
             EventManager.Unsubscribe(Evento.OnPageFinishTurning, FinishTurning);
         }
