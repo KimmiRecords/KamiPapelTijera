@@ -11,6 +11,6 @@ public class EntityCortable : MonoBehaviour, ICortable
     {
         print("entity: me cortaron");
         AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
-        _thisEntity.TakeDamage(dmg);
+        //_thisEntity.TakeDamage(dmg);
     }
 }

@@ -10,8 +10,6 @@ public class NPC_Abuela : NPC
     public Vector3 dropoffPoint;
 
 
-
-
     protected override void Start()
     {
         _fsm = new FiniteStateMachine();
@@ -21,9 +19,7 @@ public class NPC_Abuela : NPC
         _fsm.ChangeState(State.Abuela_Idle);
         EventManager.Subscribe(Evento.OnDialogueEnd, StartFollowingPlayer);
         EventManager.Subscribe(Evento.OnPlayerPlaced, PlaceAbuelaNextToPlayer);
-
         EventManager.Subscribe(Evento.OnAbuelaDropoff, StartAbuelaDropoff);
-
     }
 
     public void StartFollowingPlayer(params object[] parameter)
