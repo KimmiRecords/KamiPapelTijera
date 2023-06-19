@@ -91,10 +91,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     }
     private void Update()
     {
-        if (LevelManager.instance.agency) //todo el tiempo chequeo los controles. eso seguro.
-        {
-            _controller.CheckControls();
-        }
+        //todo el tiempo chequeo los controles. eso seguro.
+        _controller.CheckControls();
 
         if (_controller.hor != 0 || _controller.ver != 0) //si estoy tocando cualquier WASD, triggerea evento
         {
@@ -129,7 +127,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     {
         print("AAAA ME MOJO");
         _view.StartGetWetAnimation();
-        PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
+        Die();
+        //PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
     public void GetGolpeado(float dmg)
     {
@@ -162,13 +161,15 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     {
         print("player: me mori");
         Vida = _maxHp;
+        EventManager.Trigger(Evento.OnPlayerDie);
         PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
     public void GetCured(int curacion)
     {
         Vida += curacion;
     }
-    public void GetTijera(params object[] parameters)
+    public void GetTijera(params object[] parameters
+        )
     {
         hasTijera = true;
         miTijeraHitbox.transform.parent.gameObject.SetActive(true);

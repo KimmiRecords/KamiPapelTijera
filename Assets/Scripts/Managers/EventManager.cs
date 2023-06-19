@@ -34,7 +34,9 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnOrigamiStart, //le interesa al player para arrancar animaciones
     OnOrigamiEnd, //le interesa al player para arrancar animaciones
     OnOrigamiFoldChange, //param0 el fold actual, param1 los fold totales
-    OnPlayerGetTijera
+    OnPlayerGetTijera,
+    OnPlayerDie,
+    OnPlayerPressedR
 
 }
 

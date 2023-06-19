@@ -7,7 +7,7 @@ public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
     bool firstTime = true;
 
     [SerializeField]
-    GameObject tijeraPickup;
+    GameObject tijeraPickup, triggerText;
 
     protected override void Start()
     {
@@ -23,6 +23,8 @@ public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
             if (firstTime)
             {
                 tijeraPickup.SetActive(true);
+                triggerText.SetActive(true);
+
                 firstTime = false;
                 AudioManager.instance.PlayByName("MagicSuccess", 4.0f);
             }

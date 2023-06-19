@@ -20,46 +20,52 @@ public class PlayerController
 
     public void CheckControls() //a este lo disparo en el update
     {
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.F5))
         {
-            EventManager.Trigger(Evento.OnPlayerPressedE);
+            EventManager.Trigger(Evento.OnPlayerPressedR);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (LevelManager.instance.agency) 
         {
-            EventManager.Trigger(Evento.OnPlayerPressedQ);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            _player.OnPrimaryClick();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-
-        if (!LevelManager.instance.inDialogue && !_player.isAttacking)
-        {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                _player.isJumpButtonDown = true;
+                EventManager.Trigger(Evento.OnPlayerPressedE);
             }
 
-            if (Input.GetButtonUp("Jump"))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                _player.isJumpButtonDown = false;
+                _player.OnPrimaryClick();
             }
 
-            hor = Input.GetAxis("Horizontal");
-            ver = Input.GetAxis("Vertical");
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+
+            if (!LevelManager.instance.inDialogue && !_player.isAttacking)
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    _player.isJumpButtonDown = true;
+                }
+
+                if (Input.GetButtonUp("Jump"))
+                {
+                    _player.isJumpButtonDown = false;
+                }
+
+                hor = Input.GetAxis("Horizontal");
+                ver = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                hor = 0;
+                ver = 0;
+            }
+
         }
-        else
-        {
-            hor = 0;
-            ver = 0;
-        }
+
+
+        
     }
 }

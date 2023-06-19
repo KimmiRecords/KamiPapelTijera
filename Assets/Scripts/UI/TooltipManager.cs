@@ -16,6 +16,12 @@ public class TooltipManager : MonoBehaviour
 {
     [SerializeField]
     int killTime = 10;
+    [SerializeField]
+    int azulKillTime, naranjaKillTime, rosaKillTime, amarilloKillTime, verdeKillTime;
+
+
+
+
 
     //cambia los postits 
 
