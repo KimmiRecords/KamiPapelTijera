@@ -9,31 +9,6 @@ public class HongoCortable : FlorCortable
 
     ////los hongos no respawnean
 
-    //public override void GetCut(float dmg)
-    //{
-    //    if (isCortable)
-    //    {
-    //        //print("cortaste este arbusto");
-    //        AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
-    //        AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
-
-    //        //apago el entero y prendo las partes
-    //        spriteEntero.gameObject.SetActive(false);
-    //        spriteBase.gameObject.SetActive(true);
-    //        pickupRB.gameObject.SetActive(true);
-    //        pickupRB.gameObject.transform.parent = transform.parent.parent; //el parent de la gallina
-
-    //        //el pickup pega saltito y cae wujuuuu
-    //        spritePickup.Jump();
-
-    //        isCortable = false;
-    //    }
-    //}
-
-    //public override void Respawn()
-    //{
-    //    print("jkajajajjaj");
-    //}
 }
 
 

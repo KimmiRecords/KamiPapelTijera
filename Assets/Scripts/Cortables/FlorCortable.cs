@@ -9,6 +9,7 @@ public class FlorCortable : ObjetoCortable, ICortable
 
     public float respawnTime = 5;
     public SpritePickup spritePickup;
+    public bool _isCortado = false;
 
     [SerializeField]
     protected ResourceType pickupType;
@@ -43,7 +44,7 @@ public class FlorCortable : ObjetoCortable, ICortable
             //StartDelayedRespawn();
             LevelManager.instance.AddResource(pickupType, pickupAmount);
             AudioManager.instance.PlayByName("Pickup");
-
+            _isCortado = true;
             isCortable = false;
 
         }
@@ -80,5 +81,6 @@ public class FlorCortable : ObjetoCortable, ICortable
         pickupRB.gameObject.SetActive(false);
         spriteEntero.gameObject.SetActive(true);
         isCortable = true;
+        _isCortado = false;
     }
 }

@@ -107,7 +107,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7897264121734106301}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -141,8 +141,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 469d8150b8dbd1d4fac3ba1da35b89bf, type: 3}
-  m_Color: {r: 1, g: 0.8650887, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f48c668e5ef7d0c4ab439faaa69771bb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -162,7 +162,7 @@ Animator:
   m_GameObject: {fileID: 7897264121734106301}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 990bd4c3f05cf1a47bebbce46458cbe9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 59df307aac00fcd47817937921d91f4a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -224,8 +224,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9, y: 6, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 8.999996, y: 6.862627, z: 0.3}
+  m_Center: {x: 0, y: -0.4313134, z: 0}
 --- !u!1001 &4618872518290727426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,6 +233,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7897264121734106300}
     m_Modifications:
+    - target: {fileID: 1403119957648234421, guid: e8751e52e97fda448be0044dc402949a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
       propertyPath: m_RootOrder
@@ -241,32 +246,32 @@ PrefabInstance:
     - target: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.27457342
+      value: 0.9662513
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3687128
+      value: 1.0204871
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.27457342
+      value: 0.9662513
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.54
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.61
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.22
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
@@ -307,6 +312,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HongoGallinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539083702588494424, guid: e8751e52e97fda448be0044dc402949a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539083702588494424, guid: e8751e52e97fda448be0044dc402949a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6869142402802870411, guid: e8751e52e97fda448be0044dc402949a,
+        type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 7897264121734106303}
+    - target: {fileID: 6869142402802870411, guid: e8751e52e97fda448be0044dc402949a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1902992293085615690, guid: e8751e52e97fda448be0044dc402949a, type: 3}
