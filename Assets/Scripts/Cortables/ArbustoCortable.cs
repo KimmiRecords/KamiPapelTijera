@@ -27,7 +27,7 @@ public class ArbustoCortable : FlorCortable
             AudioManager.instance.PlayByName("Pickup");
 
             isCortable = false;
-            _isCortado = true;
+            //_isCortado = true;
 
         }
     }

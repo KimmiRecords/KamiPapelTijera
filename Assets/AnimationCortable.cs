@@ -6,21 +6,23 @@ public class AnimationCortable : MonoBehaviour
 {
     public HongoCortable miHongo;
     public Animator anim; //mi animator
-    public bool aux = true;
+    //public bool aux = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (miHongo._isCortado && aux)
+        if (miHongo.ListoParaCortar)
+        {
+            anim.SetBool("_isCortado", false);
+        }
+        else
         {
             anim.SetBool("_isCortado", true);
-            aux = false;
         }
+
+        //if (!miHongo.ListoParaCortar && aux)
+        //{
+        //    anim.SetBool("_isCortado", true);
+        //    aux = false;
+        //}
     }
 }

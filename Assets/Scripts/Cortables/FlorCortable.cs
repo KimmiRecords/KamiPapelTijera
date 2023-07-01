@@ -5,16 +5,26 @@ using UnityEngine;
 public class FlorCortable : ObjetoCortable, ICortable
 {
     //cuando cortas una flor con la tijera, se parte en 2 y la mitad de arriba se cae
-    //una vez en el piso, la mitad de arriba es pickupeable
-
     public float respawnTime = 5;
     public SpritePickup spritePickup;
-    public bool _isCortado = false;
 
     [SerializeField]
     protected ResourceType pickupType;
     [SerializeField]
     protected int pickupAmount = 1;
+
+    public bool ListoParaCortar
+    {
+        get
+        {
+            return isCortable;
+        }
+        set
+        {
+            isCortable = value;
+        }
+    }
+        
 
     private void Start()
     {
@@ -40,16 +50,16 @@ public class FlorCortable : ObjetoCortable, ICortable
             //el pickup pega saltito y cae wujuuuu
             spritePickup.Jump();
 
-            //en vez de delayedspawn, tendria que ser instapickup
+            //en vez de delayedspawn, es instapickup
             //StartDelayedRespawn();
             LevelManager.instance.AddResource(pickupType, pickupAmount);
             AudioManager.instance.PlayByName("Pickup");
-            _isCortado = true;
             isCortable = false;
-
         }
     }
 
+
+    //estos 3 por ahora nmo se usan pues las flores/hongos no respawnean
     public void StartDelayedRespawn()
     {
         //print("start delayed respawn");
@@ -64,12 +74,6 @@ public class FlorCortable : ObjetoCortable, ICortable
         yield return new WaitForSeconds(respawnTime);
         Respawn();
     }
-
-    //SOY EL ALFA Y EL OMEGA 
-    //SOY EL PRINCIPIO Y EL FIN
-    //NADA ME DETENDRA
-    //FIRMA -DONKEY KONG
-
     public virtual void Respawn()
     {
         //print("respawn");
@@ -81,6 +85,6 @@ public class FlorCortable : ObjetoCortable, ICortable
         pickupRB.gameObject.SetActive(false);
         spriteEntero.gameObject.SetActive(true);
         isCortable = true;
-        _isCortado = false;
+        //_isCortado = false;
     }
 }
