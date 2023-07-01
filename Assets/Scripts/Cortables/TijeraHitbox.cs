@@ -18,11 +18,9 @@ public class TijeraHitbox : MonoBehaviour
         if (other.GetComponent<ICortable>() != null)
         {
             //print("...cortable");
-
             ICortable objetoCortable = other.GetComponent<ICortable>();
             objetoCortable.GetCut(tijeraDamage);
             missed = false;
-
         }
         else
         {
@@ -37,9 +35,5 @@ public class TijeraHitbox : MonoBehaviour
             AudioManager.instance.PlayByName("TijeraMiss", 1.1f);
             missed = false;
         }
-
-
     }
-
-
 }

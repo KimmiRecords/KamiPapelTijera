@@ -79,8 +79,4 @@ public class Rocoso : Enemy
         _hitBox.gameObject.SetActive(false);
         isHitting = false;
     }
-
-
-
-
 }

@@ -6,7 +6,6 @@ public class TriggerRocoso : TriggerScript
 {
     [SerializeField]
     Rocoso _thisRocoso;
-
     Player _player;
 
     public override void OnEnterBehaviour(Collider other)
