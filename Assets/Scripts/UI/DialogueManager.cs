@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     GameObject dialogueGlobe;
     [SerializeField]
     TMPro.TextMeshProUGUI dialogueTextComponent;
+    [SerializeField] Image npcQueTeHablaImage;
 
     bool input = false;
     bool waitingForInput = false;
@@ -76,6 +77,7 @@ public class DialogueManager : MonoBehaviour
         {
             //print("ARRANCA EL WRITE TEXT - cambio el texto a " + dialogue.textos[i] + " (" + i + ")");
             dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
+            npcQueTeHablaImage.sprite = dialogue.sprite;
             yield return new WaitForEndOfFrame();
             waitingForInput = true;
 
