@@ -17,7 +17,7 @@ public abstract class Origami : MonoBehaviour
     public OrigamiRoute[] origamiRoutes;
     public int paperCost;
 
-    public string tooltipMessage;
+    public string tooltipMessage = "Arratrá con clic derecho desde la flecha verde hasta el circulo rojo. No te salgas del camino indicado!";
     public PostItColor postItColor;
 
     [HideInInspector]

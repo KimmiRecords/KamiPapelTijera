@@ -2,14 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
+public class ChinoDialogueTrigger : TriggerDialogue
 {
-    bool firstTime = true;
-
-    [SerializeField]
-    GameObject tijeraPickup, triggerText;
-
-
     protected override void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
@@ -21,14 +15,6 @@ public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
         if (triggerBool)
         {
             DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
-            if (firstTime)
-            {
-                tijeraPickup.SetActive(true);
-                triggerText.SetActive(true);
-
-                firstTime = false;
-                AudioManager.instance.PlayByName("MagicSuccess", 4.0f);
-            }
         }
 
         if (_burnAfterReading)
@@ -45,5 +31,4 @@ public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
             EventManager.Unsubscribe(Evento.OnAbuelaDropoff, PasarAlSiguienteDialogo);
         }
     }
-
 }

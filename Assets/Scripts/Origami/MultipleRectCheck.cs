@@ -89,7 +89,7 @@ public class MultipleRectCheck : MonoBehaviour
         }
         if (arrastrando && !encimaDeAlgunRectangulo) //si no, end origami
         {
-            // Me salí de la ruta
+            //me salí de la ruta
             arrastrando = false;
             AudioManager.instance.PlayByNameRandomPitch("MagicFail", 1, 0.05f);
             Debug.Log("invocación cancelada x salir de la ruta");
