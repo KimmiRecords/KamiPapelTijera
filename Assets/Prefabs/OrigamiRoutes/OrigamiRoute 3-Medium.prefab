@@ -68,6 +68,7 @@ MonoBehaviour:
   - {fileID: 5056327851396434250}
   - {fileID: 618016612906879590}
   paperCost: 3
+  isReusable: 0
   tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
     rojo. No te salgas del camino indicado!"
   postItColor: 1
@@ -154,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 3004084558606913180, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3004084558606913180, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
@@ -460,6 +461,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3004084558606913180, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2786874
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004084558606913180, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
       propertyPath: m_LocalScale.y
       value: 12.25
       objectReference: {fileID: 0}
@@ -693,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 3004084558606913180, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3004084558606913180, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
