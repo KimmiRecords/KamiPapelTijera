@@ -36,7 +36,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnOrigamiFoldChange, //param0 el fold actual, param1 los fold totales
     OnPlayerGetTijera,
     OnPlayerDie,
-    OnPlayerPressedR
+    OnPlayerPressedR,
+    OnOrigamiGivePaperPlaneHat
 
 }
 

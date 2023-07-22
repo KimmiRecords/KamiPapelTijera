@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TriggerBarquito : TriggerScript
 {
+    //el trigger del barquito que viaja solo.
+    //cuando tocas E, arranca.
+    //por ahora no se usa.
+
+
     [SerializeField]
     BarquitoBehaviour esteBarco;
 
@@ -33,13 +38,5 @@ public class TriggerBarquito : TriggerScript
     {
         base.OnExitBehaviour();
         esteBarco.playerIsInside = triggerBool;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (esteBarco.playerIsInside)
-        {
-            playerRef.Transport(esteBarco.velocity);
-        }
     }
 }

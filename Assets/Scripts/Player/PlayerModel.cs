@@ -50,6 +50,10 @@ public class PlayerModel
         {
             _verticalVelocity = 0f;
             //AudioManager.instance.PlayJumpDown();
+            if (_player.pphJumpsLeft == 0)
+            {
+                _player.DestroyPaperPlaneHat();
+            }
         }
 
         _verticalVelocity -= _player.gravityValue * Time.deltaTime; //aplica gravedad extra
@@ -71,6 +75,10 @@ public class PlayerModel
                 //AudioManager.instance.StopPasos();
                 _player._view.StartJumpAnimation();
                 //pAnims.StopLanding();
+                if (_player.isPaperPlaneHat)
+                {
+                    _player.pphJumpsLeft--;
+                }
             }
         }
 

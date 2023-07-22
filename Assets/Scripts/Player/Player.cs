@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
+public class Player : Entity, IMojable, IGolpeable, ICurable
 {
 
     //player esta partido en 4. aca solo pongo lo que quiero que pase. 
@@ -11,6 +11,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     //ademas, yo tengo start y update, ellos no.
 
     public float jumpForce = 50f;
+    public float augmentedJumpForce = 500f;
+    public int paperPlaneHatMaxJumps = 3;
     public float gravityValue; //gravedad extra para que quede linda la caida del salto
     public float weaponCooldown;
     public CharacterController cc;
@@ -20,8 +22,10 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     public TijeraHitbox miTijeraHitbox;
     [SerializeField]
     float tijeraHitBoxDuration = 0.1f;
+    [SerializeField]
+    GameObject myPaperPlaneHat;
 
-    
+
     Color originalColor;
 
     [HideInInspector]
@@ -37,13 +41,13 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     public bool isAttacking = false;
     public bool hasTijera = false;
 
-    public float Speed 
+    public float Speed
     {
         get
         {
             return _maxSpeed;
         }
-        set 
+        set
         {
             _maxSpeed = value;
         }
@@ -70,7 +74,9 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
         }
     }
 
-    Transform originalParent;
+    float originalJumpForce;
+    [HideInInspector] public bool isPaperPlaneHat = false; //pph es paper plane hat
+    [HideInInspector] public int pphJumpsLeft;
 
     void Awake()
     {
@@ -86,8 +92,10 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
         EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
         EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
         EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
+        EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
 
-        originalParent = transform.parent;
+        pphJumpsLeft = paperPlaneHatMaxJumps;
+        originalJumpForce = jumpForce;
 
         //EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
 
@@ -139,11 +147,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
         _view.StartGetWetAnimation(); //es solo x el sonido
         TakeDamage(dmg);
     }
-    public void Transport(Vector3 movement)
-    {
-        //Debug.Log("player transport");
-        _model.Transportar(movement);
-    }
+    
     public override void TakeDamage(float dmg)
     {
         Vida -= dmg;
@@ -171,8 +175,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     {
         Vida += curacion;
     }
-    public void GetTijera(params object[] parameters
-        )
+    public void GetTijera(params object[] parameters)
     {
         hasTijera = true;
         miTijeraHitbox.transform.parent.gameObject.SetActive(true);
@@ -185,6 +188,22 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     {
         _view.EndCast();
     }
+    public void GetPaperPlaneHat(params object[] parameters)
+    {
+        isPaperPlaneHat = true;
+        jumpForce = augmentedJumpForce;
+        myPaperPlaneHat.SetActive(true);
+        AudioManager.instance.PlayByName("ShipSpawn", 2f);
+
+    }
+    public void DestroyPaperPlaneHat(params object[] parameters)
+    {
+        isPaperPlaneHat = false;
+        jumpForce = originalJumpForce;
+        //sfx de hacer bollo y destruir
+        myPaperPlaneHat.SetActive(false);
+
+    }
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
@@ -192,6 +211,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
             EventManager.Unsubscribe(Evento.OnOrigamiStart, StartOrigamiCast);
             EventManager.Unsubscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
             EventManager.Unsubscribe(Evento.OnPlayerGetTijera, GetTijera);
+            EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
         }
     }
 }
