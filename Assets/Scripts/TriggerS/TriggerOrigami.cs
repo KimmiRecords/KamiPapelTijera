@@ -8,12 +8,11 @@ public class TriggerOrigami : TriggerScript
     //el origami check se va a encargar de chequear que apretes tab y hagas el origami
 
     public Origami origami;
-    
+
     public MultipleRectCheck checkPrefab;
     MultipleRectCheck currentCheck;
 
-    [SerializeField] 
-    GameObject particleSystemGO;
+    [SerializeField] GameObject particleSystemGO;
     
     ParticleSystem ps;
     ParticleSystem.MainModule mainModule;
@@ -24,6 +23,8 @@ public class TriggerOrigami : TriggerScript
     private float originalStartSpeed;
     private float originalStartSize;
     //private float originalEmissionRate;
+
+    
 
     protected override void Start()
     {
@@ -40,7 +41,35 @@ public class TriggerOrigami : TriggerScript
     public override void OnEnterBehaviour(Collider other)
     {
         //print("on enter beh");
-        if (!origami.wasUsed)
+
+        //if (!origami.isReusable)
+        //{
+        //    if (!origami.wasUsed)
+        //    {
+        //        if (LevelManager.instance.recursosRecolectados[ResourceType.papel] >= origami.paperCost)
+        //        {
+        //            base.OnEnterBehaviour(other);
+        //            currentCheck = Instantiate(checkPrefab).SetOrigami(origami);
+        //            //particulas y sonidito de entrar en la zona
+        //            SetParameters();
+        //        }
+        //        else
+        //        {
+        //            print("no tenes suficiente papel para hacer este origami");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        print("ya activaste este sello");
+        //    }
+        //}
+
+
+        if (origami.wasUsed)
+        {
+            print("ya activaste este sello");
+        }
+        else
         {
             if (LevelManager.instance.recursosRecolectados[ResourceType.papel] >= origami.paperCost)
             {
@@ -52,12 +81,8 @@ public class TriggerOrigami : TriggerScript
             else
             {
                 print("no tenes suficiente papel para hacer este origami");
+                TooltipManager.instance.ShowTooltip("No tenes suficiente papel para hacer este origami", postItColor);
             }
-            
-        }
-        else
-        {
-            print("ya activaste este sello");
         }
     }
 

@@ -10,37 +10,52 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     //aca contruyo a los 3, y les paso mi refe. ellos hablan conmigo, no entre ellos.
     //ademas, yo tengo start y update, ellos no.
 
-    public float jumpForce = 50f;
-    public float augmentedJumpForce = 500f;
-    public int paperPlaneHatMaxJumps = 3;
-    public float gravityValue; //gravedad extra para que quede linda la caida del salto
+    [Header("Stats")]
+    public bool hasTijera = false;
     public float weaponCooldown;
+    [SerializeField] float tijeraHitBoxDuration = 0.1f;
+    public float jumpForce = 50f;
+    public float gravityValue; //gravedad extra para que quede linda la caida del salto
+
+
+    [Header("Componentes")]
     public CharacterController cc;
     public Animator anim;
-    [SerializeField]
-    Renderer _renderer;
     public TijeraHitbox miTijeraHitbox;
-    [SerializeField]
-    float tijeraHitBoxDuration = 0.1f;
-    [SerializeField]
-    GameObject myPaperPlaneHat;
+    [SerializeField] Renderer _renderer;
+    [SerializeField] GameObject myPaperPlaneHat;
 
 
+    [Header("Planeo")]
+    public float augmentedJumpForce = 500f;
+    public int augmentedJumpsMax = 3;
+    public float planeoImpulse = 5;
+    public float planeoDuration = 2;
+    public float planeoDelayTime = 2;
+
+    //originals
     Color originalColor;
+    float originalJumpForce;
+    float _maxHp;
 
-    [HideInInspector]
-    public bool isJumpButtonDown;
 
+    //auxiliars
+    bool _readyToAttack = true;
+    [HideInInspector] public bool isJumpButtonDown;
+    [HideInInspector] public bool isAttacking = false;
+    [HideInInspector] public bool isPaperPlaneHat = false; //pph es paper plane hat
+    [HideInInspector] public int augmentedJumpsLeft;
+    [HideInInspector] public Vector3 lastDirection;
+
+
+
+    //MVC
     PlayerModel _model;
-    [HideInInspector]
-    public PlayerView _view;
+    [HideInInspector] public PlayerView _view;
     PlayerController _controller;
 
-    float _maxHp;
-    bool _readyToAttack = true;
-    public bool isAttacking = false;
-    public bool hasTijera = false;
 
+    //Properties
     public float Speed
     {
         get
@@ -74,31 +89,24 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         }
     }
 
-    float originalJumpForce;
-    [HideInInspector] public bool isPaperPlaneHat = false; //pph es paper plane hat
-    [HideInInspector] public int pphJumpsLeft;
 
     void Awake()
     {
         _model = new PlayerModel(this);
         _view = new PlayerView(this);
         _controller = new PlayerController(this);
+
         miTijeraHitbox.tijeraDamage = _attackDamage;
         _maxHp = _hp;
         Vida = _maxHp;
-
         originalColor = _renderer.material.color;
+        augmentedJumpsLeft = augmentedJumpsMax;
+        originalJumpForce = jumpForce;
 
         EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
         EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
         EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
         EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
-
-        pphJumpsLeft = paperPlaneHatMaxJumps;
-        originalJumpForce = jumpForce;
-
-        //EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
-
     }
     private void Update()
     {
@@ -192,6 +200,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     {
         isPaperPlaneHat = true;
         jumpForce = augmentedJumpForce;
+        augmentedJumpsLeft = augmentedJumpsMax;
         myPaperPlaneHat.SetActive(true);
         AudioManager.instance.PlayByName("ShipSpawn", 2f);
 
@@ -204,6 +213,13 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         myPaperPlaneHat.SetActive(false);
 
     }
+
+    public void AddPlaning()
+    {
+        print("AddPlaning: dalee");
+        StartCoroutine(_model.AddExtraForwardForce(planeoDelayTime, planeoDuration));
+    }
+
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)

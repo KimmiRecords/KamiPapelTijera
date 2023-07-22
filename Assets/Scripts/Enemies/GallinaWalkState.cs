@@ -64,7 +64,7 @@ public class GallinaWalkState : IState
 
         if (dir.magnitude < yo.arriveRadius*2)
         {
-            Debug.Log("llegue al node");
+            //Debug.Log("llegue al node");
             goalReached = true;
         }
     }

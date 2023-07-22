@@ -4104,7 +4104,7 @@ PrefabInstance:
     - target: {fileID: 2223711169329458678, guid: 46a350abcbe6d6548b95c4eb662b9dbc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.4
+      value: -47.9
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: 46a350abcbe6d6548b95c4eb662b9dbc,
         type: 3}
@@ -4114,7 +4114,7 @@ PrefabInstance:
     - target: {fileID: 2223711169329458678, guid: 46a350abcbe6d6548b95c4eb662b9dbc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 157.4
+      value: 166.7
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: 46a350abcbe6d6548b95c4eb662b9dbc,
         type: 3}
@@ -17985,7 +17985,7 @@ PrefabInstance:
     - target: {fileID: 2223711169329458678, guid: a67f73dd624214c4c97dcc12b65b55dd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -67.5
+      value: -51
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: a67f73dd624214c4c97dcc12b65b55dd,
         type: 3}
@@ -17995,7 +17995,7 @@ PrefabInstance:
     - target: {fileID: 2223711169329458678, guid: a67f73dd624214c4c97dcc12b65b55dd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 163.1
+      value: 172.4
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: a67f73dd624214c4c97dcc12b65b55dd,
         type: 3}
@@ -21714,7 +21714,7 @@ PrefabInstance:
     - target: {fileID: 2223711169329458678, guid: a67f73dd624214c4c97dcc12b65b55dd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.5
+      value: -48
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: a67f73dd624214c4c97dcc12b65b55dd,
         type: 3}
@@ -21724,7 +21724,7 @@ PrefabInstance:
     - target: {fileID: 2223711169329458678, guid: a67f73dd624214c4c97dcc12b65b55dd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 151.1
+      value: 160.4
       objectReference: {fileID: 0}
     - target: {fileID: 2223711169329458678, guid: a67f73dd624214c4c97dcc12b65b55dd,
         type: 3}
@@ -27718,22 +27718,26 @@ MonoBehaviour:
   _hp: 60
   _maxSpeed: 20
   _attackDamage: 50
-  jumpForce: 5
-  augmentedJumpForce: 25
-  paperPlaneHatMaxJumps: 3
-  gravityValue: 35
+  hasTijera: 1
   weaponCooldown: 0.05
+  tijeraHitBoxDuration: 0.1
+  jumpForce: 5
+  gravityValue: 35
   cc: {fileID: 1461658731}
   anim: {fileID: 2096099810}
-  _renderer: {fileID: 8133901225745835399}
   miTijeraHitbox: {fileID: 1994257947}
-  tijeraHitBoxDuration: 0.1
+  _renderer: {fileID: 8133901225745835399}
   myPaperPlaneHat: {fileID: 2060973622}
+  augmentedJumpForce: 15
+  augmentedJumpsMax: 3
+  planeoImpulse: 0.5
+  planeoDuration: 6
+  planeoDelayTime: 0.5
   isJumpButtonDown: 0
   isAttacking: 0
-  hasTijera: 1
   isPaperPlaneHat: 0
-  pphJumpsLeft: 0
+  augmentedJumpsLeft: 0
+  lastDirection: {x: 0, y: 0, z: 0}
 --- !u!1001 &1467880484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37532,7 +37536,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4b6f2e4fa7eb93b4e84f311ec3baba4f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -62.3
+      value: -45.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b6f2e4fa7eb93b4e84f311ec3baba4f,
         type: 3}
@@ -37542,7 +37546,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4b6f2e4fa7eb93b4e84f311ec3baba4f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 161.3
+      value: 170.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b6f2e4fa7eb93b4e84f311ec3baba4f,
         type: 3}
@@ -40446,11 +40450,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3886032758321488323, guid: d8da750c757b40245b3e4595a5869b8f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4865759187645821301, guid: d8da750c757b40245b3e4595a5869b8f,
         type: 3}
       propertyPath: m_Convex
@@ -41586,7 +41585,7 @@ PrefabInstance:
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 260.281
+      value: 308
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -41612,6 +41611,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615648074418424197, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.78635013
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033f5b5aa64aaab49a6eadbeccc2549f, type: 3}
@@ -42164,9 +42168,10 @@ MonoBehaviour:
   - {fileID: 1799597625}
   - {fileID: 1245884481}
   paperCost: 2
+  isReusable: 1
   tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
     rojo. No te salgas del camino indicado!"
-  postItColor: 4
+  postItColor: 1
   currentRouteIndex: 0
   wasUsed: 0
 --- !u!1 &5423976339733537609

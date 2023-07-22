@@ -16,6 +16,8 @@ public abstract class Origami : MonoBehaviour
 
     public OrigamiRoute[] origamiRoutes;
     public int paperCost;
+    public bool isReusable;
+
 
     public string tooltipMessage = "Arratrá con clic derecho desde la flecha verde hasta el circulo rojo. No te salgas del camino indicado!";
     public PostItColor postItColor;
@@ -25,6 +27,7 @@ public abstract class Origami : MonoBehaviour
 
     [HideInInspector]
     public bool wasUsed;
+
 
     public void FailOrigami()
     {
@@ -61,7 +64,7 @@ public abstract class Origami : MonoBehaviour
         TriggerPliegueTextUpdater();
     }
 
-    public virtual void CompleteRoute()
+    public virtual bool CompleteRoute()
     {
         print("ruta actual completada");
         origamiRoutes[currentRouteIndex].wasCompleted = true;
@@ -71,13 +74,18 @@ public abstract class Origami : MonoBehaviour
         {
             print("completaste el origami");
             currentRouteIndex = 0;
-            wasUsed = true;
+            if (!isReusable)
+            {
+                wasUsed = true;
+            }
             Apply();
+            return true;
         }
         else
         {
             print("siguienteee");
             NextRoute();
+            return false;
         }
     }
 

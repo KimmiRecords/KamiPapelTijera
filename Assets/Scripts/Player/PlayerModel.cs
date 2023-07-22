@@ -14,12 +14,16 @@ public class PlayerModel
     float _playerSpeed;
 
     Vector3 _move; //el vector en el que guardo la suma de todo el movimiento para finalmente aplicarsela al character controller
+    Vector3 auxForwardVector;
+    float auxOriginalImpulse;
+
 
     public PlayerModel(Player player)
     {
         _player = player;
         _playerSpeed = _player.Speed; 
         _speedModifier = 1;
+        auxOriginalImpulse = _player.planeoImpulse;
         //initialGravityValue = gravityValue; mismo pero para cambiar la gravedad
     }
     public void NewMove(float hor, float ver)
@@ -50,7 +54,7 @@ public class PlayerModel
         {
             _verticalVelocity = 0f;
             //AudioManager.instance.PlayJumpDown();
-            if (_player.pphJumpsLeft == 0)
+            if (_player.augmentedJumpsLeft == 0)
             {
                 _player.DestroyPaperPlaneHat();
             }
@@ -77,7 +81,9 @@ public class PlayerModel
                 //pAnims.StopLanding();
                 if (_player.isPaperPlaneHat)
                 {
-                    _player.pphJumpsLeft--;
+                    Debug.Log("Move: salte con hat. add planing porfaa");
+                    _player.AddPlaning();
+                    _player.augmentedJumpsLeft--;
                 }
             }
         }
@@ -99,6 +105,7 @@ public class PlayerModel
     {
         //Debug.Log("player Model: transportar");
         _player.cc.Move(move * Time.deltaTime);
+        //_player.cc.Move(auxForwardVector, auxForwardVector);
     }
 
 
@@ -112,5 +119,48 @@ public class PlayerModel
     {
         //Debug.Log("apago la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(false);
+    }
+
+    //public IEnumerator AddExtraForwardForce(float delayTime, float duration, float decayRate)
+    //{
+    //    yield return new WaitForSeconds(delayTime);
+
+    //    auxTimer = 0;
+    //    _player.planeoImpulse = auxOriginalImpulse;
+
+    //    while (auxTimer < duration)
+    //    {
+    //        auxForwardVector = _player.lastDirection * _player.planeoImpulse;
+    //        _player.cc.Move(auxForwardVector * Time.deltaTime);
+    //        _player.planeoImpulse *= (1 - decayRate);
+    //        auxTimer += Time.deltaTime;
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //}
+
+    
+
+    public IEnumerator AddExtraForwardForce(float delayTime, float duration)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        _player.planeoImpulse = auxOriginalImpulse;
+        float elapsedTime = 0f;
+        float startImpulse = _player.planeoImpulse;
+
+        while (elapsedTime < duration)
+        {
+            auxForwardVector = _player.lastDirection * _player.planeoImpulse;
+            _player.cc.Move(auxForwardVector * Time.deltaTime);
+
+            // Reducción lineal del planeoImpulse en función del tiempo transcurrido
+            _player.planeoImpulse = Mathf.Lerp(startImpulse, 0f, elapsedTime / duration);
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        // Asegurarse de que el planeoImpulse sea exactamente 0 al final de la corrutina
+        _player.planeoImpulse = 0f;
     }
 }

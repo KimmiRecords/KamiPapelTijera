@@ -58,10 +58,10 @@ public class MultipleRectCheck : MonoBehaviour
             {
                 //Debug.Log("invocación exitosa");
                 AudioManager.instance.PlayRandom("PaperFold01", "PaperFold02");
-                desiredOrigami.CompleteRoute();
                 AudioManager.instance.StopByName("PaperFoldLoop");
+                //desiredOrigami.CompleteRoute();
 
-                if (desiredOrigami.wasUsed)
+                if (desiredOrigami.CompleteRoute())
                 {
                     EndOrigami(desiredOrigami);
                 }
@@ -100,7 +100,7 @@ public class MultipleRectCheck : MonoBehaviour
 
     public void StartOrigami(Origami origami)
     {
-        if (!origami.wasUsed)
+        if (!origami.wasUsed) //me parece que esto no deberia preguntarse aca
         {
             //print("arranca la invocacion");
             origami.gameObject.SetActive(true);

@@ -7,7 +7,7 @@ public class PlayerView
     Animator _anim;
     Player _player;
     bool canRotate;
-    Vector3 lastDirection = Vector3.zero;
+    Vector3 _lastDirection = Vector3.zero;
     public bool tabIsPressed;
 
     public PlayerView(Player player)
@@ -34,8 +34,9 @@ public class PlayerView
     {
         if (canRotate)
         {
-            lastDirection = new Vector3(move.x, _anim.transform.forward.y, move.z);
-            _anim.transform.forward = lastDirection;
+            _lastDirection = new Vector3(move.x, _anim.transform.forward.y, move.z);
+            _anim.transform.forward = _lastDirection;
+            _player.lastDirection = _lastDirection;
         }
     }
 

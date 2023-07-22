@@ -19,7 +19,7 @@ public abstract class TriggerScript : MonoBehaviour
     protected string tooltipTextToShow;
 
     [SerializeField]
-    PostItColor postItColor;
+    protected PostItColor postItColor;
 
     protected virtual void Start()
     {
