@@ -12,12 +12,20 @@ public class TriggerBarquito : TriggerScript
     public override void OnEnterBehaviour(Collider other)
     {
         base.OnEnterBehaviour(other);
-        esteBarco.playerIsInside = triggerBool;
 
-        if (other.GetComponent<ITransportable>() != null)
+        if (playerRef == null && other.GetComponent<ITransportable>() != null)
         {
             Debug.Log("obtengo refe del player transportable");
             playerRef = other.GetComponent<ITransportable>();
+            //playerRef.AttachToTransporter(esteBarco.transform);
+        }
+    }
+
+    public override void Interact(params object[] parameter)
+    {
+        if (triggerBool)
+        {
+            esteBarco.playerIsInside = triggerBool;
         }
     }
 
@@ -27,12 +35,11 @@ public class TriggerBarquito : TriggerScript
         esteBarco.playerIsInside = triggerBool;
     }
 
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (esteBarco.playerIsInside)
         {
             playerRef.Transport(esteBarco.velocity);
-            //Debug.Log("barquito velocity = " + esteBarco.velocity);
         }
     }
 }

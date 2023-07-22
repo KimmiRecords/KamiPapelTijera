@@ -70,6 +70,8 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
         }
     }
 
+    Transform originalParent;
+
     void Awake()
     {
         _model = new PlayerModel(this);
@@ -85,6 +87,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
         EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
         EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
 
+        originalParent = transform.parent;
 
         //EventManager.Subscribe(Evento.OnCortableDropsPaper, AddPaper);
 
@@ -138,7 +141,7 @@ public class Player : Entity, IMojable, IGolpeable, ITransportable, ICurable
     }
     public void Transport(Vector3 movement)
     {
-        ///Debug.Log("player transport");
+        //Debug.Log("player transport");
         _model.Transportar(movement);
     }
     public override void TakeDamage(float dmg)

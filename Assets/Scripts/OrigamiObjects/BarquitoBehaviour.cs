@@ -21,6 +21,9 @@ public class BarquitoBehaviour : MonoBehaviour
 
     float arriveRadius = 0.1f;
 
+    [HideInInspector]
+    public ITransportable playerITransportable;
+
 
 
     void Start()
@@ -36,7 +39,6 @@ public class BarquitoBehaviour : MonoBehaviour
         //transform.position += velocity * Time.deltaTime;
         _fsm.Update();
     }
-
     public void AddForce(Vector3 force)
     {
         velocity = Vector3.ClampMagnitude(velocity + force, speed);

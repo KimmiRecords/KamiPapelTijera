@@ -40,7 +40,6 @@ public class BarquitoMovingState : IState
         }
 
         _barco.transform.position += _barco.velocity * Time.deltaTime;
-
     }
 
     public void OnExit()
@@ -96,7 +95,6 @@ public class BarquitoMovingState : IState
         {
             _barco._pathToFollow.RemoveAt(0);
             //Debug.Log("llegue al next nodo");
-
         }
 
         if (_barco._pathToFollow.Count == 0)
