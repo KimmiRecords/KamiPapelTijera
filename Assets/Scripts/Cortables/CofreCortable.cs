@@ -9,26 +9,11 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
 
     //el trucazo: no es un cortable per se. pero bueno, quedó
 
-    [SerializeField]
-    int paperReward = 5;
-    [SerializeField]
-    float initialDelay = 1;
-    //[SerializeField]
-    //float delayUntilDeath = 1;
-    [SerializeField]
-    Animator anim; //mi animator
+    [SerializeField] int paperReward = 5;
+    [SerializeField] float initialDelay = 1;
+    [SerializeField] Animator anim; //mi animator
+    [SerializeField] GameObject particulitasDePapel;
     bool isOpening;
-
-    //bool wasCut = false;
-
-    //public void GetCut(float dmg)
-    //{
-    //    if (!wasCut)
-    //    {
-    //        //print("cortaste el cofre. ganaste 15 pesos");
-    //        wasCut = true;
-    //    }
-    //}
 
     public void OpenChest() //este metodo lo dispara mi candado
     {
@@ -41,6 +26,8 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
         anim.SetBool("isOpen", true);
         isOpening = true;
         AudioManager.instance.PlayByName("MagicSuccess", 1.4f);
+        //lanzar particulas
+        particulitasDePapel.gameObject.SetActive(true);
 
         while (isOpening) //el final de la animacion dispara un metodo que lo hace false
         {
