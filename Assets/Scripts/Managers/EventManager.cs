@@ -38,8 +38,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerDie,
     OnPlayerPressedR,
     OnOrigamiGivePaperPlaneHat,
-    OnEncounterEnd //cuando mato al ultimo enemigo, por ej
-
+    OnEncounterEnd, //cuando mato al ultimo enemigo, por ej
+    OnEncounterStart
 }
 
 public class EventManager

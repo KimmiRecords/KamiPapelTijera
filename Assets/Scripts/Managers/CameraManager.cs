@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum Camara
@@ -20,8 +21,12 @@ public class CameraManager : MonoBehaviour
 
     int currentCamera = 0;
 
-    [SerializeField]
-    int startingCamera;
+    [SerializeField] int startingCamera;
+    [SerializeField] float levelStartDelayTime = 1;
+
+    [Header("Casos Especiales")]
+    [SerializeField] Dialogue[] dialoguesEspeciales;
+    [SerializeField] Camara[] camarasEspeciales;
 
     private void Awake()
     {
@@ -38,9 +43,19 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         EventManager.Subscribe(Evento.OnDialogueStart, SetCamera);
-        EventManager.Subscribe(Evento.OnDialogueEnd, SetCamera);
+        EventManager.Subscribe(Evento.OnDialogueEnd, PrepareCamera);
+        EventManager.Subscribe(Evento.OnEncounterStart, SetCamera);
+        EventManager.Subscribe(Evento.OnEncounterEnd, SetCamera);
+
 
         currentCamera = startingCamera;
+        StartCoroutine(LevelStartCameraMovement());
+    }
+
+    IEnumerator LevelStartCameraMovement()
+    {
+        yield return new WaitForSeconds(levelStartDelayTime);
+        SetCamera(Camara.Normal);
     }
 
     void Update()
@@ -49,19 +64,21 @@ public class CameraManager : MonoBehaviour
         {
             ToggleNextCamera();
         }
+    }
 
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    SetCamera(Camara.CloseUp);
-        //}
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    SetCamera(Camara.Normal);
-        //}
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    SetCamera(Camara.General);
-        //}
+    public void PrepareCamera(params object[] parameter)
+    {
+        for (int i = 0; i < dialoguesEspeciales.Count(); i++)
+        {
+            if ((Dialogue)parameter[1] == dialoguesEspeciales[i]) //el dialogue
+            {
+                Debug.Log("prepare camera. era caso especial: no hago nada");
+                //SetCamera(camarasEspeciales[i]);
+                return;
+            }
+        }
+        Debug.Log("prepare camera: no era caso especial. set camera");
+        SetCamera((Dialogue)parameter[2]);
     }
 
     public void ToggleNextCamera()
@@ -94,6 +111,7 @@ public class CameraManager : MonoBehaviour
 
     public void SetCamera(Camara cam)
     {
+        Debug.Log("cambio la camara a " + cam);
         _virtualCameras[(int)cam].gameObject.SetActive(false);
         currentCamera = (int)cam;
         _virtualCameras[currentCamera].gameObject.SetActive(true);
@@ -103,10 +121,12 @@ public class CameraManager : MonoBehaviour
     {
         if (parameter[0] is int || parameter[0] is Camara)
         {
+            Debug.Log("cambio la camara a " + (int)parameter[0]);
             SetCamera((int)parameter[0]);
         }
         else if (parameter[0] is Camara)
         {
+            Debug.Log("cambio la camara a " + (Camara)parameter[0]);
             SetCamera((Camara)parameter[0]);
         }
     }
@@ -116,6 +136,8 @@ public class CameraManager : MonoBehaviour
         {
             EventManager.Unsubscribe(Evento.OnDialogueStart, SetCamera);
             EventManager.Unsubscribe(Evento.OnDialogueEnd, SetCamera);
+            EventManager.Unsubscribe(Evento.OnEncounterEnd, SetCamera);
+            EventManager.Unsubscribe(Evento.OnEncounterStart, SetCamera);
         }
     }
 }

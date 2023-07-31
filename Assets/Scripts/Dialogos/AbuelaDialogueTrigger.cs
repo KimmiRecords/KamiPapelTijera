@@ -17,21 +17,7 @@ public class AbuelaDialogueTrigger : TriggerDialogue
 
     public override void Interact(params object[] parameter)
     {
-        //if (firstTime)
-        //{
-        //    if (triggerBool)
-        //    {
-        //        //print("trigger dialogue interact: muestro el dialogo " + _dialogues[currentDialogue].name);
-        //        DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
-        //    }
-
-        //    if (_burnAfterReading)
-        //    {
-        //        Destroy(this);
-        //    }
-
-        //    firstTime = false;
-        //}
+        
 
         if (triggerBool)
         {

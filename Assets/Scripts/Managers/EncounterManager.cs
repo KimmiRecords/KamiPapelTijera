@@ -20,13 +20,6 @@ public class EncounterManager : MonoBehaviour
         EventManager.Subscribe(Evento.OnEncounterEnd, EndEncounter);
     }
 
-    private void EndEncounter(params object[] parameters)
-    {
-        AudioManager.instance.StopByName("MemoFloraBattleLoop01");
-        AudioManager.instance.PlayByName("MemoFloraPostBattle01");
-        AudioManager.instance.PlayOnEnd("MemoFloraPostBattle01", "MemoFloraMainLoop01");
-    }
-
     public void SpawnEncounter(params object[] parameters)
     {
         if (_isDialogueTriggered && (Dialogue)parameters[1] == _triggeringDialogue && firstTime)
@@ -36,7 +29,16 @@ public class EncounterManager : MonoBehaviour
             AudioManager.instance.PlayByName("MagicFail", 0.7f);
             AudioManager.instance.StopByName("MemoFloraMainLoop01");
             AudioManager.instance.PlayByName("MemoFloraBattleLoop01");
+            EventManager.Trigger(Evento.OnEncounterStart, Camara.General);
         }
+    }
+
+    private void EndEncounter(params object[] parameters)
+    {
+        AudioManager.instance.StopByName("MemoFloraBattleLoop01");
+        AudioManager.instance.PlayByName("MemoFloraPostBattle01");
+        AudioManager.instance.PlayOnEnd("MemoFloraPostBattle01", "MemoFloraMainLoop01");
+        //EventManager.Trigger(Evento.OnEncounterEnd, Camara.Normal);
     }
 
     private void OnDestroy()
