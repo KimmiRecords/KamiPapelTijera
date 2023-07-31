@@ -7,24 +7,17 @@ public class Rocoso : Enemy
     //este script tiene que estar en donde esta el animator
     //asi las animaciones pueden llamar a metodos de este script.
     //unity, no lo entenderias.
-    
 
     public Animator anim; //mi animator
     public RocosoHeadbuttHitBox _hitBox;
 
-    [HideInInspector]
-    public bool wasAwoken; //si el player ya se acerco y me despertó
-    [HideInInspector]
-    public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
-    [HideInInspector]
-    public Vector3 target;
-    [HideInInspector]
-    public bool isHitting;
+    [HideInInspector] public bool wasAwoken; //si el player ya se acerco y me despertó
+    [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
+    [HideInInspector] public Vector3 target;
+    [HideInInspector] public bool isHitting;
 
     Player _player;
     protected FiniteStateMachine fsm;
-
-
 
     private void Start()
     {

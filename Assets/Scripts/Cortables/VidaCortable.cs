@@ -26,7 +26,7 @@ public class VidaCortable : FlorCortable
             //en vez de delayedspawn, tendria que ser instapickup
             //StartDelayedRespawn();
             LevelManager.instance.CurePlayer(curacionAmount);
-            AudioManager.instance.PlayByName("Pickup", 0.8f);
+            AudioManager.instance.PlayByName("PickupSFX", 0.8f);
 
             isCortable = false;
 

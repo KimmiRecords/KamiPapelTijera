@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Enemy : Entity
 {
     public SpriteRenderer _sr; //y mi sprite renderer. esto y el metodo EnrojecerSprite deberia estar separado, tipo creado como EnemyView o algo asi
+    public bool endsEncounter = false; //si este enemigo hace terminar el encuentro o no
 
     public float Speed
     {
@@ -23,5 +24,17 @@ public abstract class Enemy : Entity
         _sr.material.color = Color.red;
         yield return new WaitForSeconds(0.25f);
         _sr.material.color = Color.white;
+    }
+
+    public override void Die()
+    {
+        float pitch = 1;
+        if (endsEncounter)
+        {
+            EventManager.Trigger(Evento.OnEncounterEnd);
+            pitch = 0.6f;
+        }
+        AudioManager.instance.PlayByName("Death", pitch, 0.1f);
+        base.Die();
     }
 }

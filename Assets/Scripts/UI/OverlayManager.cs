@@ -60,6 +60,7 @@ public class OverlayManager : MonoBehaviour
         _defeatOverlay.gameObject.SetActive(false);
         _victoryOverlay.gameObject.SetActive(false);
         _mainQuestOverlay.gameObject.SetActive(false);
+        AudioManager.instance.PlayByName("PickupSFX", 2.5f);
     }
 
     void OnDestroy()

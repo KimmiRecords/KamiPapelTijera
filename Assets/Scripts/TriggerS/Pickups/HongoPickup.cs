@@ -16,7 +16,7 @@ public class HongoPickup : ResourcePickup
             //base.OnEnterBehaviour(other);
 
             LevelManager.instance.AddResource(pickupType, pickupAmount);
-            AudioManager.instance.PlayByName("Pickup");
+            AudioManager.instance.PlayByName("PickupSFX");
             //miCortable.StartDelayedRespawn();
             isReadyToPickup = false;
             ResetPosition();

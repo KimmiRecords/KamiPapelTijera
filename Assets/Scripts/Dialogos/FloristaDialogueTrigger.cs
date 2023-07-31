@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class FloristaDialogueTrigger : TriggerDialogue
 {
-    [SerializeField]
-    int floresRequeridas = 3;
+    [SerializeField] int floresRequeridas = 3;
 
-    [SerializeField]
-    int paperReward = 20;
+    [SerializeField] int paperReward = 20;
 
     bool questCompleted;
 
@@ -30,7 +28,12 @@ public class FloristaDialogueTrigger : TriggerDialogue
                     currentDialogue = 2; //paso al dialogo 2, que es el de Gracias por traer!
                     LevelManager.instance.AddResource(ResourceType.flores, -floresRequeridas);
                     LevelManager.instance.AddResource(ResourceType.papel, paperReward);
+                    AudioManager.instance.PlayByName("QuestCompleted02");
                     questCompleted = true;
+                }
+                else
+                {
+                    currentDialogue = 3; //paso al dialogo 3, que es el de Gracias por haberme traido!
                 }
             }
             DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
@@ -46,7 +49,7 @@ public class FloristaDialogueTrigger : TriggerDialogue
     {
         if ((Dialogue)parameter[1] == _dialogues[0])
         {
-            //si el dialogo q termino fue mi dialogo0, paso al 1
+            //solo me interesa si el dialogo que terminó fue el 0
             base.PasarAlSiguienteDialogo(parameter);
         }
     }

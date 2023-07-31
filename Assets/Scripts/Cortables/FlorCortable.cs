@@ -53,7 +53,7 @@ public class FlorCortable : ObjetoCortable, ICortable
             //en vez de delayedspawn, es instapickup
             //StartDelayedRespawn();
             LevelManager.instance.AddResource(pickupType, pickupAmount);
-            AudioManager.instance.PlayByName("Pickup");
+            AudioManager.instance.PlayByName("PickupSFX");
             isCortable = false;
         }
     }

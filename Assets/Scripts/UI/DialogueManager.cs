@@ -9,19 +9,13 @@ public class DialogueManager : MonoBehaviour
 
     public static DialogueManager instance;
 
-    [SerializeField]
-    GameObject dialogueGlobe;
-    [SerializeField]
-    TMPro.TextMeshProUGUI dialogueTextComponent;
+    [SerializeField] GameObject dialogueGlobe;
+    [SerializeField] TMPro.TextMeshProUGUI dialogueTextComponent;
     [SerializeField] Image npcQueTeHablaImage;
 
     bool input = false;
     bool waitingForInput = false;
-    [HideInInspector]
-    public bool isShowing = false;
-
-    //[SerializeField]
-    //Dialogue[] dialogos;
+    [HideInInspector] public bool isShowing = false;
 
     private void Awake()
     {
@@ -46,6 +40,7 @@ public class DialogueManager : MonoBehaviour
         {
             //print("recibi input true");
             input = true;
+            AudioManager.instance.PlayByName("PickupSFX", 2.5f);
         }
     }
 
@@ -54,7 +49,6 @@ public class DialogueManager : MonoBehaviour
         if (!isShowing)
         {
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
-
             dialogueGlobe.SetActive(true);
             LevelManager.instance.inDialogue = true;
             isShowing = true;
@@ -82,7 +76,7 @@ public class DialogueManager : MonoBehaviour
             waitingForInput = true;
 
             while (!input)
-                yield return null;
+                yield return null; //va a salir del while cuando toques E
 
             //print("termine de esperar, waitforinput false");
             input = false;

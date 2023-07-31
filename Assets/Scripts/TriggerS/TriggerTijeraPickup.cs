@@ -9,8 +9,8 @@ public class TriggerTijeraPickup : TriggerScript
         if (triggerBool)
         {
             EventManager.Trigger(Evento.OnPlayerGetTijera);
-            AudioManager.instance.PlayByName("Pickup", 0.7f);
-            AudioManager.instance.PlayByName("Pickup", 1.4f);
+            AudioManager.instance.PlayByName("PickupSFX", 0.7f);
+            AudioManager.instance.PlayByName("PickupSFX", 1.4f);
             AudioManager.instance.PlayByName("MagicSuccess", 0.7f);
 
             OnExitBehaviour();

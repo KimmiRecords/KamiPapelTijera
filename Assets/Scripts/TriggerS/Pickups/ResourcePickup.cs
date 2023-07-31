@@ -9,24 +9,4 @@ public class ResourcePickup : SpritePickup
     protected ResourceType pickupType;
     protected int pickupAmount;
 
-    public override void OnEnterBehaviour(Collider other)
-    {
-
-
-        //print("on enter behaviour por " + other.gameObject.name);
-
-        //if (isReadyToPickup) //esto no deberia suceder nunca igual 
-        //{
-        //    print("estaba ready to pickup");
-        //    base.OnEnterBehaviour(other);
-
-        //    LevelManager.instance.AddResource(pickupType, pickupAmount);
-        //    AudioManager.instance.PlayByName("Pickup");
-
-        //    miCortable.StartDelayedRespawn();
-        //    isReadyToPickup = false;
-        //    ResetPosition();
-        //    miCortable.pickupRB.gameObject.SetActive(false);
-        //}
-    }
 }
