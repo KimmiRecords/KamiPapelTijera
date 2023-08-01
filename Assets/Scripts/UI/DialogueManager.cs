@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
         {
             instance = this;
         }
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
     private void Start()
     {
@@ -72,6 +72,8 @@ public class DialogueManager : MonoBehaviour
             //print("ARRANCA EL WRITE TEXT - cambio el texto a " + dialogue.textos[i] + " (" + i + ")");
             dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
             npcQueTeHablaImage.sprite = dialogue.sprite;
+            SetNativeSize(npcQueTeHablaImage.sprite);
+
             yield return new WaitForEndOfFrame();
             waitingForInput = true;
 
@@ -85,6 +87,11 @@ public class DialogueManager : MonoBehaviour
         HideDialogue(dialogue);
     }
 
+    public void SetNativeSize(Sprite sprite)
+    {
+          float spriteRatio = sprite.rect.width / sprite.rect.height;
+          npcQueTeHablaImage.rectTransform.sizeDelta = new Vector2(npcQueTeHablaImage.rectTransform.sizeDelta.y * spriteRatio, npcQueTeHablaImage.rectTransform.sizeDelta.y);
+    }
 
     private void OnDestroy()
     {

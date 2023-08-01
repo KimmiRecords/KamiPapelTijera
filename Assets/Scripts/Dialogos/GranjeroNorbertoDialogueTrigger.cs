@@ -6,8 +6,7 @@ public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
 {
     bool firstTime = true;
 
-    [SerializeField]
-    GameObject tijeraPickup, triggerText;
+    [SerializeField] GameObject tijeraPickup, triggerText;
 
 
     protected override void Start()

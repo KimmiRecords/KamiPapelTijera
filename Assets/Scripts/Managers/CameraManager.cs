@@ -105,21 +105,35 @@ public class CameraManager : MonoBehaviour
 
     public void SetCamera(int index)
     {
-        _virtualCameras[currentCamera].gameObject.SetActive(false);
+        //_virtualCameras[currentCamera].gameObject.SetActive(false);
+        TurnOffAllVirtualCameras();
+
         currentCamera = index;
         _virtualCameras[currentCamera].gameObject.SetActive(true);
+    }
+    
+    public void TurnOffAllVirtualCameras()
+    {
+        foreach (Cinemachine.CinemachineVirtualCamera cam in _virtualCameras)
+        {
+            cam.gameObject.SetActive(false);
+        }
     }
 
     public void SetCamera(CameraMode cam)
     {
         Debug.Log("cambio la camara a " + cam);
-        _virtualCameras[(int)cam].gameObject.SetActive(false);
+        //_virtualCameras[(int)cam].gameObject.SetActive(false);
+        TurnOffAllVirtualCameras();
+
         currentCamera = (int)cam;
         _virtualCameras[currentCamera].gameObject.SetActive(true);
     }
 
     public void SetCamera(params object[] parameter)
     {
+        TurnOffAllVirtualCameras();
+
         if (parameter[0] is int || parameter[0] is CameraMode)
         {
             Debug.Log("cambio la camara a " + (int)parameter[0]);
