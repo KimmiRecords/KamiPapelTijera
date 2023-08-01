@@ -136,7 +136,7 @@ public class PageScroller : MonoBehaviour
     }
     void StartChangePage() //aca EMPIEZA a girar la pagina
     {
-        CameraManager.instance.SetCamera(Camara.BookCenter);
+        CameraManager.instance.SetCamera(CameraMode.BookCenter);
         StartCoroutine(ChangePageCoroutine(delayTime));
         StartCoroutine(AbrirPUBsCoroutine(popupDelayTime));
     }
@@ -191,7 +191,7 @@ public class PageScroller : MonoBehaviour
         isTurning = false;
         esferaNext.triggerBool = false;
         esferaPrev.triggerBool = false;
-        CameraManager.instance.SetCamera(Camara.Normal);
+        CameraManager.instance.SetCamera(CameraMode.Normal);
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
 
     private void OnDestroy()

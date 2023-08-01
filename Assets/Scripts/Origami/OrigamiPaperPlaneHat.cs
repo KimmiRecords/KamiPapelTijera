@@ -9,7 +9,7 @@ public class OrigamiPaperPlaneHat : Origami
     public override void Apply()
     {
         base.Apply();
-        EventManager.Trigger(Evento.OnOrigamiGivePaperPlaneHat);
+        EventManager.Trigger(Evento.OnOrigamiGivePaperPlaneHat, CameraMode.General);
         //particulas
     }
 }

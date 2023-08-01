@@ -52,7 +52,7 @@ public class DialogueManager : MonoBehaviour
             dialogueGlobe.SetActive(true);
             LevelManager.instance.inDialogue = true;
             isShowing = true;
-            EventManager.Trigger(Evento.OnDialogueStart, Camara.CloseUp);
+            EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
             StartCoroutine(WriteText(dialogue));
         }
     }
@@ -63,7 +63,7 @@ public class DialogueManager : MonoBehaviour
         LevelManager.instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
-        EventManager.Trigger(Evento.OnDialogueEnd, Camara.Normal, dialogue);
+        EventManager.Trigger(Evento.OnDialogueEnd, CameraMode.Normal, dialogue);
     }
     public IEnumerator WriteText(Dialogue dialogue)
     {

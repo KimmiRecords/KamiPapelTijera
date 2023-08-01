@@ -31,7 +31,7 @@ public abstract class Enemy : Entity
         float pitch = 1;
         if (endsEncounter)
         {
-            EventManager.Trigger(Evento.OnEncounterEnd, Camara.Normal);
+            EventManager.Trigger(Evento.OnEncounterEnd, CameraMode.Normal);
             pitch = 0.6f;
         }
         AudioManager.instance.PlayByName("Death", pitch, 0.1f);

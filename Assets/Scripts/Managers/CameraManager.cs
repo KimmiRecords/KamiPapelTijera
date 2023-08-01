@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum Camara
+public enum CameraMode
 {
     CloseUp,
     Normal,
@@ -26,7 +26,7 @@ public class CameraManager : MonoBehaviour
 
     [Header("Casos Especiales")]
     [SerializeField] Dialogue[] dialoguesEspeciales;
-    [SerializeField] Camara[] camarasEspeciales;
+    [SerializeField] CameraMode[] camarasEspeciales;
 
     private void Awake()
     {
@@ -46,6 +46,7 @@ public class CameraManager : MonoBehaviour
         EventManager.Subscribe(Evento.OnDialogueEnd, PrepareCamera);
         EventManager.Subscribe(Evento.OnEncounterStart, SetCamera);
         EventManager.Subscribe(Evento.OnEncounterEnd, SetCamera);
+        EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
 
 
         currentCamera = startingCamera;
@@ -55,7 +56,7 @@ public class CameraManager : MonoBehaviour
     IEnumerator LevelStartCameraMovement()
     {
         yield return new WaitForSeconds(levelStartDelayTime);
-        SetCamera(Camara.Normal);
+        SetCamera(CameraMode.Normal);
     }
 
     void Update()
@@ -78,7 +79,7 @@ public class CameraManager : MonoBehaviour
             }
         }
         Debug.Log("prepare camera: no era caso especial. set camera");
-        SetCamera((Dialogue)parameter[2]);
+        SetCamera((CameraMode)parameter[0]);
     }
 
     public void ToggleNextCamera()
@@ -109,7 +110,7 @@ public class CameraManager : MonoBehaviour
         _virtualCameras[currentCamera].gameObject.SetActive(true);
     }
 
-    public void SetCamera(Camara cam)
+    public void SetCamera(CameraMode cam)
     {
         Debug.Log("cambio la camara a " + cam);
         _virtualCameras[(int)cam].gameObject.SetActive(false);
@@ -119,15 +120,15 @@ public class CameraManager : MonoBehaviour
 
     public void SetCamera(params object[] parameter)
     {
-        if (parameter[0] is int || parameter[0] is Camara)
+        if (parameter[0] is int || parameter[0] is CameraMode)
         {
             Debug.Log("cambio la camara a " + (int)parameter[0]);
             SetCamera((int)parameter[0]);
         }
-        else if (parameter[0] is Camara)
+        else if (parameter[0] is CameraMode)
         {
-            Debug.Log("cambio la camara a " + (Camara)parameter[0]);
-            SetCamera((Camara)parameter[0]);
+            Debug.Log("cambio la camara a " + (CameraMode)parameter[0]);
+            SetCamera((CameraMode)parameter[0]);
         }
     }
     private void OnDestroy()

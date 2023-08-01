@@ -1,0 +1,181 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &367375347215666131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7511665663355293157}
+  m_Layer: 0
+  m_Name: PuenteRoto
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7511665663355293157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367375347215666131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 834801527338955412}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &873547615432643967
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7511665663355293157}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 42.862385
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 579.5423
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 42.862385
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.018355
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.16995
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 738cd4bec203ca641981251305b88d21,
+        type: 3}
+      propertyPath: m_Name
+      value: Puente-roto
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 738cd4bec203ca641981251305b88d21, type: 3}
+--- !u!4 &834801527338955412 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 738cd4bec203ca641981251305b88d21,
+    type: 3}
+  m_PrefabInstance: {fileID: 873547615432643967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1049069402650468305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: 738cd4bec203ca641981251305b88d21,
+    type: 3}
+  m_PrefabInstance: {fileID: 873547615432643967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1573913046906373465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049069402650468305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03462589, y: 0.0034893646, z: 0.02733113}
+  m_Center: {x: -2.0099279e-16, y: 0.0011867179, z: -0.014143615}
+--- !u!1 &2211653570985755535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7877312682337757456, guid: 738cd4bec203ca641981251305b88d21,
+    type: 3}
+  m_PrefabInstance: {fileID: 873547615432643967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5709599407290970379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2211653570985755535}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.00816921, y: 0.017460272, z: 0.028838182}
+  m_Center: {x: -0.0006889203, y: -0.0011113216, z: -0.014286587}
+--- !u!1 &7537738581175303088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7242944475213164239, guid: 738cd4bec203ca641981251305b88d21,
+    type: 3}
+  m_PrefabInstance: {fileID: 873547615432643967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7133525264651324720
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537738581175303088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.008169209, y: 0.017460272, z: 0.028838182}
+  m_Center: {x: -0.0009153889, y: -0.0011113216, z: -0.014286587}

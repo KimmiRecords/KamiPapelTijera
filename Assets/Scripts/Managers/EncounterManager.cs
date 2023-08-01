@@ -29,7 +29,7 @@ public class EncounterManager : MonoBehaviour
             AudioManager.instance.PlayByName("MagicFail", 0.7f);
             AudioManager.instance.StopByName("MemoFloraMainLoop01");
             AudioManager.instance.PlayByName("MemoFloraBattleLoop01");
-            EventManager.Trigger(Evento.OnEncounterStart, Camara.General);
+            EventManager.Trigger(Evento.OnEncounterStart, CameraMode.General);
         }
     }
 
