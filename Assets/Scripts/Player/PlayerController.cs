@@ -20,9 +20,14 @@ public class PlayerController
 
     public void CheckControls() //a este lo disparo en el update
     {
-        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.F5))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             EventManager.Trigger(Evento.OnPlayerPressedR);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            EventManager.Trigger(Evento.OnPlayerPressedM);
         }
 
         if (LevelManager.instance.agency) 
@@ -39,7 +44,8 @@ public class PlayerController
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Application.Quit();
+                //Application.Quit();
+                EventManager.Trigger(Evento.OnPlayerPressedEsc);
             }
 
             if (!LevelManager.instance.inDialogue && !_player.isAttacking)

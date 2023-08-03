@@ -145,11 +145,11 @@ public class PageScroller : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         if (isNext)
         {
-            AudioManager.instance.PlayByName("PageTurn01");
+            AudioManager.instance.PlayByName("PageTurn01", 0.9f);
         }
         else
         {
-            AudioManager.instance.PlayByName("PageTurn02");
+            AudioManager.instance.PlayByName("PageTurn02", 0.9f);
         }
         LevelManager.instance.inDialogue = true;  //freezeo a kami
         CreateHoja(isNext); //instancio la hoja que corresponda

@@ -39,7 +39,11 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerPressedR,
     OnOrigamiGivePaperPlaneHat, //param0 es camara
     OnEncounterEnd, //cuando mato al ultimo enemigo, por ej
-    OnEncounterStart
+    OnEncounterStart,
+    OnMouseEnterFlap,
+    OnMouseExitFlap,
+    OnPlayerPressedEsc,
+    OnPlayerPressedM
 }
 
 public class EventManager
