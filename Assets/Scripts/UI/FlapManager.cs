@@ -10,7 +10,6 @@ public class FlapManager : Singleton<FlapManager>
     float posYClosed = 0;
     bool isOpen = false;
 
-
     [SerializeField] GameObject seguroOverlay;
     [SerializeField] Slider sliderBrillo, sliderContraste, sliderVolumen;
     float valueBeforeMute = 1;
@@ -100,6 +99,16 @@ public class FlapManager : Singleton<FlapManager>
     public void SLIDER_Volumen()
     {
         AudioManager.instance.SetGlobalVolume(sliderVolumen.value);
+    }
+
+    public void SLIDER_Brillo()
+    {
+        PostProcessManager.Instance.SetBrightnessValue(sliderBrillo.value);
+    }
+
+    public void SLIDER_Contraste()
+    {
+        PostProcessManager.Instance.SetContrastValue(sliderContraste.value);
     }
 
     public void ToggleMute(params object[] parameters)
