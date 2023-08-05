@@ -11,6 +11,6 @@ public class AutoDialogue : MonoBehaviour
     public void StartDialogue()
     {
         //print("auto dialogue - start");
-        DialogueManager.instance.ShowDialogue(dialogue);
+        DialogueManager.Instance.ShowDialogue(dialogue);
     }
 }

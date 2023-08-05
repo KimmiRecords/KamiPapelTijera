@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : Singleton<DialogueManager>
 {
     //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto
 
-    public static DialogueManager instance;
+    //public static DialogueManager instance;
 
     [SerializeField] GameObject dialogueGlobe;
     [SerializeField] TMPro.TextMeshProUGUI dialogueTextComponent;
@@ -17,18 +17,18 @@ public class DialogueManager : MonoBehaviour
     bool waitingForInput = false;
     [HideInInspector] public bool isShowing = false;
 
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-        //DontDestroyOnLoad(this);
-    }
+    //private void Awake()
+    //{
+    //    if (instance != null && instance != this)
+    //    {
+    //        Destroy(this);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //    }
+    //    //DontDestroyOnLoad(this);
+    //}
     private void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, CheckPlayerInput);
@@ -49,7 +49,7 @@ public class DialogueManager : MonoBehaviour
         if (!isShowing)
         {
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
-            //dialogue.currentText = 0;
+            dialogue.currentText = 0;
 
 
             dialogueGlobe.SetActive(true);
@@ -70,11 +70,18 @@ public class DialogueManager : MonoBehaviour
     }
     public IEnumerator WriteText(Dialogue dialogue)
     {
-        for (int i = 0; i < dialogue.textos.Length; i++)
+        for (int i = 0; i < dialogue.events.Length; i++)
         {
-            //print("ARRANCA EL WRITE TEXT - cambio el texto a " + dialogue.textos[i] + " (" + i + ")");
-            dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
-            npcQueTeHablaImage.sprite = dialogue.sprite;    //sprite[i]
+            //print("ARRANCA EL WRITE TEXT ");
+            dialogue.currentText++;
+
+            //dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
+            //npcQueTeHablaImage.sprite = dialogue.sprite;    //sprite[i]
+            
+            
+            dialogueTextComponent.text = dialogue.events[i].text;
+            npcQueTeHablaImage.sprite = dialogue.events[i].sprite; 
+
             SetNativeSize(npcQueTeHablaImage.sprite); //??? esto es necesario si todos los sprites son del mismo tamaño?
 
             yield return new WaitForEndOfFrame();

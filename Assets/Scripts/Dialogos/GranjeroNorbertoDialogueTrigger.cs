@@ -19,7 +19,7 @@ public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
     {
         if (triggerBool)
         {
-            DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
+            DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
             if (firstTime)
             {
                 tijeraPickup.SetActive(true);

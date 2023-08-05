@@ -7,8 +7,8 @@ using UnityEngine;
 public struct DialogueEvent
 {
     [TextAreaAttribute]
-    public string[] texts;
-    public Sprite[] sprites;
+    public string text;
+    public Sprite sprite;
 }
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Dialogue", order = 1)]
@@ -19,9 +19,6 @@ public class Dialogue : ScriptableObject
     public bool wasRead = false;
     public Sprite sprite;
 
-    //public DialogueEvent[] events;
-    //public Sprite[] sprites;
-    //public int currentText = 0;
-    //Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
-
+    public DialogueEvent[] events;
+    public int currentText = 0;
 }

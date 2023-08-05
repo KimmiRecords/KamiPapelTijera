@@ -21,7 +21,7 @@ public class AbuelaDialogueTrigger : TriggerDialogue
 
         if (triggerBool)
         {
-            DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
+            DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
             if (firstTime)
             {
                 firstTime = false;

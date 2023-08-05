@@ -40,7 +40,7 @@ public class HongueroTiburcioDialogueTrigger : TriggerDialogue
                     currentDialogue = 3; //paso al dialogo 3, que es el de Gracias por haberme traido!
                 }
             }
-            DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
+            DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
 
         }
 

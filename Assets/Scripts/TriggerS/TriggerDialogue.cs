@@ -17,7 +17,7 @@ public class TriggerDialogue : TriggerScript
         if (triggerBool)
         {
             //print("trigger dialogue interact: muestro el dialogo " + _dialogues[currentDialogue].name);
-            DialogueManager.instance.ShowDialogue(_dialogues[currentDialogue]);
+            DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
         }
 
         if (_burnAfterReading)
