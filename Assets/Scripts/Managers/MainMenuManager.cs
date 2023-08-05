@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField]
-    AutoDialogue _autoDialogo;
+    [SerializeField] AutoDialogue _autoDialogo;
 
     bool _isNewGameButtonDown = false;
     bool _dialogueStarted = false;
 
-    [SerializeField]
-    string sceneToLoadOnDialogueEnd;
+    [SerializeField] string sceneToLoadOnDialogueEnd;
 
     private void Start()
     {
@@ -22,24 +20,18 @@ public class MainMenuManager : MonoBehaviour
     public void OnNewGameButtonDown()
     {
         _isNewGameButtonDown = true;
-    }
-
-    void Update()
-    {
-        if (_isNewGameButtonDown && !_dialogueStarted && Input.anyKeyDown)
+        if (_isNewGameButtonDown && !_dialogueStarted)
         {
             _autoDialogo.StartDialogue();
             _dialogueStarted = true;
         }
+    }
 
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            EventManager.Trigger(Evento.OnPlayerPressedE); //para que avance el texto
-
-            //if (_dialogueStarted && !LevelManager.instance.inDialogue)
-            //{
-            //     ChangeScene();
-            //}
+            EventManager.Trigger(Evento.OnPlayerPressedE); //como no tengo PlayerController, lo hago aca.
         }
     }
 

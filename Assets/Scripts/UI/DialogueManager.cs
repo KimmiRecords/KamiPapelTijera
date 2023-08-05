@@ -49,6 +49,9 @@ public class DialogueManager : MonoBehaviour
         if (!isShowing)
         {
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
+            //dialogue.currentText = 0;
+
+
             dialogueGlobe.SetActive(true);
             LevelManager.instance.inDialogue = true;
             isShowing = true;
@@ -71,8 +74,8 @@ public class DialogueManager : MonoBehaviour
         {
             //print("ARRANCA EL WRITE TEXT - cambio el texto a " + dialogue.textos[i] + " (" + i + ")");
             dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
-            npcQueTeHablaImage.sprite = dialogue.sprite;
-            SetNativeSize(npcQueTeHablaImage.sprite);
+            npcQueTeHablaImage.sprite = dialogue.sprite;    //sprite[i]
+            SetNativeSize(npcQueTeHablaImage.sprite); //??? esto es necesario si todos los sprites son del mismo tamaño?
 
             yield return new WaitForEndOfFrame();
             waitingForInput = true;

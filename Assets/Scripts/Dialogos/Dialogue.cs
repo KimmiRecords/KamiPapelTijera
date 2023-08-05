@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-//public enum Speaker
-//{
-//    norberto,
-//    tiburcio,
-//    dalia,
-//    abuela,
-//    narrador,
-//    chino,
-//    farolio,
-//}
 
+[System.Serializable]
+public struct DialogueEvent
+{
+    [TextAreaAttribute]
+    public string[] texts;
+    public Sprite[] sprites;
+}
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Dialogue", order = 1)]
 public class Dialogue : ScriptableObject
@@ -20,4 +18,10 @@ public class Dialogue : ScriptableObject
     public string[] textos;
     public bool wasRead = false;
     public Sprite sprite;
+
+    //public DialogueEvent[] events;
+    //public Sprite[] sprites;
+    //public int currentText = 0;
+    //Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
+
 }
