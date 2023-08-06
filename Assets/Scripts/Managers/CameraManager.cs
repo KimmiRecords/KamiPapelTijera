@@ -11,13 +11,11 @@ public enum CameraMode
     BookCenter
 }
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : Singleton<CameraManager>
 {
     //este script hace que con mouse3 (centro) cambies de camara, a la proxima en la lista.
-    public static CameraManager instance;
 
-    [SerializeField]
-    Cinemachine.CinemachineVirtualCamera[] _virtualCameras;
+    [SerializeField] Cinemachine.CinemachineVirtualCamera[] _virtualCameras;
 
     int currentCamera = 0;
 
@@ -28,18 +26,6 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Dialogue[] dialoguesEspeciales;
     [SerializeField] CameraMode[] camarasEspeciales;
 
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-        //DontDestroyOnLoad(this);
-    }
     private void Start()
     {
         EventManager.Subscribe(Evento.OnDialogueStart, SetCamera);

@@ -177,7 +177,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         print("player: me mori");
         Vida = _maxHp;
         EventManager.Trigger(Evento.OnPlayerDie);
-        PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
+        PlayerPageSpawnManager.Instance.PlacePlayer(PageScroller.Instance.activeIndex + 1, PageScroller.Instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
     public void GetCured(int curacion)
     {
