@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.9843063, y: 8.629505, z: 1}
-  m_Center: {x: 0.737692, y: -0.30966675, z: 0}
+  m_Size: {x: 6.883386, y: 9.228793, z: 1}
+  m_Center: {x: -0.21184778, y: -0.6093036, z: -1.1564476e-10}
 --- !u!1 &5357465104666805704
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 5357465105482584966}
   - component: {fileID: 8621498527565570154}
   - component: {fileID: 6460524119705627060}
+  - component: {fileID: 3175414029089527560}
   m_Layer: 0
   m_Name: Abuela
   m_TagString: Untagged
@@ -240,6 +241,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &3175414029089527560
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357465105482584964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2edc3b66bf8bd9f4c9550de204d54835, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5357465105803906919
 GameObject:
   m_ObjectHideFlags: 0
