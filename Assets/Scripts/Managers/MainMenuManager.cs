@@ -23,6 +23,9 @@ public class MainMenuManager : MonoBehaviour
         if (_isNewGameButtonDown && !_dialogueStarted)
         {
             _autoDialogo.StartDialogue();
+            AudioManager.instance.StopByName("4S_IntroBigChords");
+            AudioManager.instance.PlayByName("IntroStoryboardLoop");
+
             _dialogueStarted = true;
         }
     }

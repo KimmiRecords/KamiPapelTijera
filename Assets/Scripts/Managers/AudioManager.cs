@@ -8,6 +8,9 @@ public class AudioManager : MonoBehaviour
     //todo lo pertinente a sonidos y sus metodos
     //por diego katabian
 
+
+    //todo el chistecito del bgm no va. pero otro dia lo saco. hoy no.
+
     public static AudioManager instance;
     bool _soundOn = true;
 
@@ -189,6 +192,11 @@ public class AudioManager : MonoBehaviour
         if (thisLevelBgm != null)
         {
             StopBGM();
+
+            if (soundDict["IntroStoryboardLoop"].isPlaying)
+            {
+                StopByName("IntroStoryboardLoop");
+            }
         }
 
         thisLevelBgm = levelBGMs[scene.name];
