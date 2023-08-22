@@ -41,7 +41,7 @@ public class MainMenuManager : MonoBehaviour
     public void ChangeScene(params object[] parameter)
     {
         //print("change scene");
-        LevelManager.instance.GoToScene(sceneToLoadOnDialogueEnd);
+        LevelManager.Instance.GoToScene(sceneToLoadOnDialogueEnd);
     }
 
     private void OnDestroy()

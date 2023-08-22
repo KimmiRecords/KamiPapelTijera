@@ -23,7 +23,7 @@ public class ArbustoCortable : FlorCortable
 
             //en vez de delayedspawn, tendria que ser instapickup
             StartDelayedRespawn();
-            LevelManager.instance.AddResource(pickupType, pickupAmount);
+            LevelManager.Instance.AddResource(pickupType, pickupAmount);
             AudioManager.instance.PlayByName("PickupSFX");
 
             isCortable = false;

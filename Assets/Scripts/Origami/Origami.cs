@@ -95,7 +95,7 @@ public abstract class Origami : MonoBehaviour
         //EventManager.Trigger(Evento.OnOrigamiApplied, -paperCost, this);
 
         //consume papel
-        LevelManager.instance.AddResource(ResourceType.papel, -paperCost);
+        LevelManager.Instance.AddResource(ResourceType.papel, -paperCost);
     }
 
     public void TriggerPliegueTextUpdater()

@@ -12,10 +12,8 @@ public enum ResourceType
 }
 
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
-    public static LevelManager instance;
-
     public bool agency;
     public bool inDialogue;
 
@@ -29,15 +27,15 @@ public class LevelManager : MonoBehaviour
     public Player player;
         
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (instance != this && instance != null)
+        if (Instance != this && Instance != null)
         {
             Destroy(this);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
 
         for (int i = 0; i < (int)ResourceType.Count; i++) //creo el dict con uno de cada pickuptype y 0

@@ -114,7 +114,7 @@ public class PageScroller : Singleton<PageScroller>
 
         //despues de esperar un toque
         PlayPageSound();
-        LevelManager.instance.inDialogue = true;  //freezeo a kami
+        LevelManager.Instance.inDialogue = true;  //freezeo a kami
         CreateHoja(isNext); //instancio la hoja que corresponda
         CheckSpheres(activeIndex); //chequeo si hay que poner/sacar zona
         PUBManager.Instance.ClosePUBs();
@@ -150,7 +150,7 @@ public class PageScroller : Singleton<PageScroller>
     }
     void FinishTurning(params object[] parameter) //esto recien se triggerea cuando TERMINA de cambiar la pagina
     {
-        LevelManager.instance.inDialogue = false;
+        LevelManager.Instance.inDialogue = false;
         isTurning = false;
         esferaNext.triggerBool = false;
         esferaPrev.triggerBool = false;

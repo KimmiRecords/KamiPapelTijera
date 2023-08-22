@@ -25,13 +25,13 @@ public class HongueroTiburcioDialogueTrigger : TriggerDialogue
         if (triggerBool)
         {
             print("trigger dialogue interact: muestro el dialogo " + _dialogues[currentDialogue].name);
-            if (LevelManager.instance.recursosRecolectados[ResourceType.hongos] >= hongosRequeridos)
+            if (LevelManager.Instance.recursosRecolectados[ResourceType.hongos] >= hongosRequeridos)
             {
                 if (!questCompleted)
                 {
                     currentDialogue = 2; //paso al dialogo 2, que es el de Gracias por traer!
-                    LevelManager.instance.AddResource(ResourceType.hongos, -hongosRequeridos);
-                    LevelManager.instance.AddResource(ResourceType.papel, paperReward);
+                    LevelManager.Instance.AddResource(ResourceType.hongos, -hongosRequeridos);
+                    LevelManager.Instance.AddResource(ResourceType.papel, paperReward);
                     AudioManager.instance.PlayByName("QuestCompleted02");
                     questCompleted = true;
                 }

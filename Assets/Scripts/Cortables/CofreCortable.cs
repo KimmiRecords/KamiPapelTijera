@@ -35,7 +35,7 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
         }
 
         //particles.gameObject.SetActive(true);
-        LevelManager.instance.AddResource(ResourceType.papel, paperReward);
+        LevelManager.Instance.AddResource(ResourceType.papel, paperReward);
         //yield return new WaitForSeconds(delayUntilDeath);
         //Destroy(gameObject);
 

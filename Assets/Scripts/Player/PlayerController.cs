@@ -30,7 +30,7 @@ public class PlayerController
             EventManager.Trigger(Evento.OnPlayerPressedM);
         }
 
-        if (LevelManager.instance.agency) 
+        if (LevelManager.Instance.agency) 
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -48,7 +48,7 @@ public class PlayerController
                 EventManager.Trigger(Evento.OnPlayerPressedEsc);
             }
 
-            if (!LevelManager.instance.inDialogue && !_player.isAttacking)
+            if (!LevelManager.Instance.inDialogue && !_player.isAttacking)
             {
                 if (Input.GetButtonDown("Jump"))
                 {

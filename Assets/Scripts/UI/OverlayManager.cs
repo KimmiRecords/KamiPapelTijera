@@ -45,7 +45,7 @@ public class OverlayManager : MonoBehaviour
 
     public void Lock(params object[] parameter)
     {
-        LevelManager.instance.inDialogue = true;
+        LevelManager.Instance.inDialogue = true;
         _isLocked = true;
     }
 
@@ -53,7 +53,7 @@ public class OverlayManager : MonoBehaviour
     {
         if (_isLocked)
         {
-            LevelManager.instance.inDialogue = false;
+            LevelManager.Instance.inDialogue = false;
             _isLocked = false;
         }
 

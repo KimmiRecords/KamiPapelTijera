@@ -46,7 +46,7 @@ public class TriggerOrigami : TriggerScript
         //{
         //    if (!origami.wasUsed)
         //    {
-        //        if (LevelManager.instance.recursosRecolectados[ResourceType.papel] >= origami.paperCost)
+        //        if (LevelManager.Instance.recursosRecolectados[ResourceType.papel] >= origami.paperCost)
         //        {
         //            base.OnEnterBehaviour(other);
         //            currentCheck = Instantiate(checkPrefab).SetOrigami(origami);
@@ -71,7 +71,7 @@ public class TriggerOrigami : TriggerScript
         }
         else
         {
-            if (LevelManager.instance.recursosRecolectados[ResourceType.papel] >= origami.paperCost)
+            if (LevelManager.Instance.recursosRecolectados[ResourceType.papel] >= origami.paperCost)
             {
                 base.OnEnterBehaviour(other);
                 currentCheck = Instantiate(checkPrefab).SetOrigami(origami);

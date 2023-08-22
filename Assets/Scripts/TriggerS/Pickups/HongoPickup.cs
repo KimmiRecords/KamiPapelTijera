@@ -15,7 +15,7 @@ public class HongoPickup : ResourcePickup
             print("estaba ready to pickup");
             //base.OnEnterBehaviour(other);
 
-            LevelManager.instance.AddResource(pickupType, pickupAmount);
+            LevelManager.Instance.AddResource(pickupType, pickupAmount);
             AudioManager.instance.PlayByName("PickupSFX");
             //miCortable.StartDelayedRespawn();
             isReadyToPickup = false;

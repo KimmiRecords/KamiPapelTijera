@@ -53,7 +53,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
 
             dialogueGlobe.SetActive(true);
-            LevelManager.instance.inDialogue = true;
+            LevelManager.Instance.inDialogue = true;
             isShowing = true;
             EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
             StartCoroutine(WriteText(dialogue));
@@ -63,7 +63,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         //print("hide dialogue " + dialogue.name);
         dialogueTextComponent.text = ""; //esto es lo que deberia estar animado despues
-        LevelManager.instance.inDialogue = false;
+        LevelManager.Instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
         EventManager.Trigger(Evento.OnDialogueEnd, CameraMode.Normal, dialogue);
