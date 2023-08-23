@@ -22,8 +22,8 @@ public class RocosoWalkState : IState
 
     public void OnUpdate()
     {
-        Walk();
-        if (_rocoso.target.x > _rocoso.transform.position.x)
+        WalkTowardsPlayer();
+        if (_rocoso.target.x > _rocoso.transform.position.x) //roto al rocoso
         {
             _rocoso.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
@@ -46,7 +46,7 @@ public class RocosoWalkState : IState
 
     }
 
-    public void Walk()
+    public void WalkTowardsPlayer()
     {
         Vector3 dir = _rocoso.target - _rocoso.transform.position;
         dir.y = 0;

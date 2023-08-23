@@ -10,6 +10,7 @@ public class TijeraHitbox : MonoBehaviour
 
     [HideInInspector]
     public float tijeraDamage;
+    bool missed;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,11 +18,22 @@ public class TijeraHitbox : MonoBehaviour
         if (other.GetComponent<ICortable>() != null)
         {
             //print("...cortable");
-
             ICortable objetoCortable = other.GetComponent<ICortable>();
             objetoCortable.GetCut(tijeraDamage);
+            missed = false;
+        }
+        else
+        {
+            missed = true;
         }
     }
 
-    
+    private void OnDisable()
+    {
+        if (missed)
+        {
+            AudioManager.instance.PlayByName("TijeraMiss", 1.1f);
+            missed = false;
+        }
+    }
 }

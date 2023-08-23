@@ -7,28 +7,17 @@ public class Rocoso : Enemy
     //este script tiene que estar en donde esta el animator
     //asi las animaciones pueden llamar a metodos de este script.
     //unity, no lo entenderias.
-    
-    //todavia esta en proceso. la idea es que el enemigo sea un statemachine
-    //y hacer por separado los scripts de EnemySleepState, EnemyStartState, EnemyWalkState, EnemyPursuitState, etc
-    //por ahora es que se acerca durante 2 seg y luego ataca.
 
     public Animator anim; //mi animator
-    public SpriteRenderer _sr; //y mi sprite renderer. esto y el metodo EnrojecerSprite deberia estar separado, tipo creado como EnemyView o algo asi
     public RocosoHeadbuttHitBox _hitBox;
 
-    [HideInInspector]
-    public bool wasAwoken; //si el player ya se acerco y me despertó
-    [HideInInspector]
-    public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
-    [HideInInspector]
-    public Vector3 target;
-    [HideInInspector]
-    public bool isHitting;
+    [HideInInspector] public bool wasAwoken; //si el player ya se acerco y me despertó
+    [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
+    [HideInInspector] public Vector3 target;
+    [HideInInspector] public bool isHitting;
 
     Player _player;
     protected FiniteStateMachine fsm;
-
-
 
     private void Start()
     {
@@ -66,19 +55,6 @@ public class Rocoso : Enemy
         startAnimationHasFinished = true;
     }
 
-    public override void TakeDamage(float dmg)
-    {
-        base.TakeDamage(dmg);
-        StartCoroutine(EnrojecerSprite());
-    }
-    public IEnumerator EnrojecerSprite()
-    {
-        //print("enrojeci el sprite");
-        _sr.material.color = Color.red;
-        yield return new WaitForSeconds(0.25f);
-        _sr.material.color = Color.white;
-    }
-
     IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo
     {
         EnableHeadbuttHitbox();
@@ -96,8 +72,4 @@ public class Rocoso : Enemy
         _hitBox.gameObject.SetActive(false);
         isHitting = false;
     }
-
-
-
-
 }

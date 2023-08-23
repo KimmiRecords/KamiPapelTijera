@@ -15,6 +15,8 @@ public class Abuela_FollowPlayerState : IState
     public void OnEnter()
     {
         //Debug.Log("[NPC] entro al follow player state");
+        _abuela.anim.SetBool("IsWalking", true);
+
     }
     public void OnUpdate()
     {
@@ -36,5 +38,6 @@ public class Abuela_FollowPlayerState : IState
     {
         //Debug.Log("[NPC] salgo del followplayer state");
         _abuela.isFollowing = false;
+        _abuela.anim.SetBool("IsWalking", false);
     }
 }

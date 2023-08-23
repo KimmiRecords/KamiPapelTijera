@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public enum Camara
+public enum CameraMode
 {
     CloseUp,
     Normal,
@@ -10,37 +11,38 @@ public enum Camara
     BookCenter
 }
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : Singleton<CameraManager>
 {
     //este script hace que con mouse3 (centro) cambies de camara, a la proxima en la lista.
-    public static CameraManager instance;
 
-    [SerializeField]
-    Cinemachine.CinemachineVirtualCamera[] _virtualCameras;
+    [SerializeField] Cinemachine.CinemachineVirtualCamera[] _virtualCameras;
 
     int currentCamera = 0;
 
-    [SerializeField]
-    int startingCamera;
+    [SerializeField] int startingCamera;
+    [SerializeField] float levelStartDelayTime = 1;
 
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-        //DontDestroyOnLoad(this);
-    }
+    [Header("Casos Especiales")]
+    [SerializeField] Dialogue[] dialoguesEspeciales;
+    [SerializeField] CameraMode[] camarasEspeciales;
+
     private void Start()
     {
         EventManager.Subscribe(Evento.OnDialogueStart, SetCamera);
-        EventManager.Subscribe(Evento.OnDialogueEnd, SetCamera);
+        EventManager.Subscribe(Evento.OnDialogueEnd, PrepareCamera);
+        EventManager.Subscribe(Evento.OnEncounterStart, SetCamera);
+        EventManager.Subscribe(Evento.OnEncounterEnd, SetCamera);
+        EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
+
 
         currentCamera = startingCamera;
+        StartCoroutine(LevelStartCameraMovement());
+    }
+
+    IEnumerator LevelStartCameraMovement()
+    {
+        yield return new WaitForSeconds(levelStartDelayTime);
+        SetCamera(CameraMode.Normal);
     }
 
     void Update()
@@ -49,19 +51,21 @@ public class CameraManager : MonoBehaviour
         {
             ToggleNextCamera();
         }
+    }
 
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    SetCamera(Camara.CloseUp);
-        //}
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    SetCamera(Camara.Normal);
-        //}
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    SetCamera(Camara.General);
-        //}
+    public void PrepareCamera(params object[] parameter)
+    {
+        for (int i = 0; i < dialoguesEspeciales.Count(); i++)
+        {
+            if ((Dialogue)parameter[1] == dialoguesEspeciales[i]) //el dialogue
+            {
+                Debug.Log("prepare camera. era caso especial: no hago nada");
+                //SetCamera(camarasEspeciales[i]);
+                return;
+            }
+        }
+        Debug.Log("prepare camera: no era caso especial. set camera");
+        SetCamera((CameraMode)parameter[0]);
     }
 
     public void ToggleNextCamera()
@@ -87,27 +91,44 @@ public class CameraManager : MonoBehaviour
 
     public void SetCamera(int index)
     {
-        _virtualCameras[currentCamera].gameObject.SetActive(false);
+        //_virtualCameras[currentCamera].gameObject.SetActive(false);
+        TurnOffAllVirtualCameras();
+
         currentCamera = index;
         _virtualCameras[currentCamera].gameObject.SetActive(true);
     }
-
-    public void SetCamera(Camara cam)
+    
+    public void TurnOffAllVirtualCameras()
     {
-        _virtualCameras[(int)cam].gameObject.SetActive(false);
+        foreach (Cinemachine.CinemachineVirtualCamera cam in _virtualCameras)
+        {
+            cam.gameObject.SetActive(false);
+        }
+    }
+
+    public void SetCamera(CameraMode cam)
+    {
+        Debug.Log("cambio la camara a " + cam);
+        //_virtualCameras[(int)cam].gameObject.SetActive(false);
+        TurnOffAllVirtualCameras();
+
         currentCamera = (int)cam;
         _virtualCameras[currentCamera].gameObject.SetActive(true);
     }
 
     public void SetCamera(params object[] parameter)
     {
-        if (parameter[0] is int || parameter[0] is Camara)
+        TurnOffAllVirtualCameras();
+
+        if (parameter[0] is int || parameter[0] is CameraMode)
         {
+            Debug.Log("cambio la camara a " + (int)parameter[0]);
             SetCamera((int)parameter[0]);
         }
-        else if (parameter[0] is Camara)
+        else if (parameter[0] is CameraMode)
         {
-            SetCamera((Camara)parameter[0]);
+            Debug.Log("cambio la camara a " + (CameraMode)parameter[0]);
+            SetCamera((CameraMode)parameter[0]);
         }
     }
     private void OnDestroy()
@@ -116,6 +137,8 @@ public class CameraManager : MonoBehaviour
         {
             EventManager.Unsubscribe(Evento.OnDialogueStart, SetCamera);
             EventManager.Unsubscribe(Evento.OnDialogueEnd, SetCamera);
+            EventManager.Unsubscribe(Evento.OnEncounterEnd, SetCamera);
+            EventManager.Unsubscribe(Evento.OnEncounterStart, SetCamera);
         }
     }
 }

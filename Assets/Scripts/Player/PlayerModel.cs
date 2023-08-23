@@ -14,13 +14,16 @@ public class PlayerModel
     float _playerSpeed;
 
     Vector3 _move; //el vector en el que guardo la suma de todo el movimiento para finalmente aplicarsela al character controller
-    Vector3 lastNormalizedMove; //guardo el ultimo vector de movimeinto piola
+    Vector3 auxForwardVector;
+    float auxOriginalImpulse;
+
 
     public PlayerModel(Player player)
     {
         _player = player;
         _playerSpeed = _player.Speed; 
         _speedModifier = 1;
+        auxOriginalImpulse = _player.planeoImpulse;
         //initialGravityValue = gravityValue; mismo pero para cambiar la gravedad
     }
     public void NewMove(float hor, float ver)
@@ -51,6 +54,10 @@ public class PlayerModel
         {
             _verticalVelocity = 0f;
             //AudioManager.instance.PlayJumpDown();
+            if (_player.augmentedJumpsLeft == 0)
+            {
+                _player.DestroyPaperPlaneHat();
+            }
         }
 
         _verticalVelocity -= _player.gravityValue * Time.deltaTime; //aplica gravedad extra
@@ -60,21 +67,27 @@ public class PlayerModel
         if (_move.magnitude > 1) //normalizo
         {
             _move = _move.normalized;
-            lastNormalizedMove = _move;
         }
 
-        if (_player.isJump)
+        if (_player.isJumpButtonDown)
         {
             if (_groundedTimer > 0)
             {
                 _groundedTimer = 0;
                 _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
-                _player.isJump = false;
+                _player.isJumpButtonDown = false;
                 //AudioManager.instance.StopPasos();
                 _player._view.StartJumpAnimation();
                 //pAnims.StopLanding();
+                if (_player.isPaperPlaneHat)
+                {
+                    Debug.Log("Move: salte con hat. add planing porfaa");
+                    _player.AddPlaning();
+                    _player.augmentedJumpsLeft--;
+                }
             }
         }
+
 
         _move *= _playerSpeed * _speedModifier;
         _move.y = _verticalVelocity; //sigo cargando el vector movieminto
@@ -88,23 +101,66 @@ public class PlayerModel
         //Debug.Log(_move);
     }
 
+    public void Transportar(Vector3 move)
+    {
+        //Debug.Log("player Model: transportar");
+        _player.cc.Move(move * Time.deltaTime);
+        //_player.cc.Move(auxForwardVector, auxForwardVector);
+    }
+
+
     public void EnableTijeraHitbox()
     {
         //Debug.Log("prendo la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(true);
-        if (_move.magnitude < 0.5)
-        {
-            _player.miTijeraHitbox.transform.localPosition = lastNormalizedMove;
-        }
-        else
-        {
-            _player.miTijeraHitbox.transform.localPosition = _move.normalized;
-        }
     }
 
     public void DisableTijeraHitbox()
     {
         //Debug.Log("apago la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(false);
+    }
+
+    //public IEnumerator AddExtraForwardForce(float delayTime, float duration, float decayRate)
+    //{
+    //    yield return new WaitForSeconds(delayTime);
+
+    //    auxTimer = 0;
+    //    _player.planeoImpulse = auxOriginalImpulse;
+
+    //    while (auxTimer < duration)
+    //    {
+    //        auxForwardVector = _player.lastDirection * _player.planeoImpulse;
+    //        _player.cc.Move(auxForwardVector * Time.deltaTime);
+    //        _player.planeoImpulse *= (1 - decayRate);
+    //        auxTimer += Time.deltaTime;
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //}
+
+    
+
+    public IEnumerator AddExtraForwardForce(float delayTime, float duration)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        _player.planeoImpulse = auxOriginalImpulse;
+        float elapsedTime = 0f;
+        float startImpulse = _player.planeoImpulse;
+
+        while (elapsedTime < duration)
+        {
+            auxForwardVector = _player.lastDirection * _player.planeoImpulse;
+            _player.cc.Move(auxForwardVector * Time.deltaTime);
+
+            // Reducción lineal del planeoImpulse en función del tiempo transcurrido
+            _player.planeoImpulse = Mathf.Lerp(startImpulse, 0f, elapsedTime / duration);
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        // Asegurarse de que el planeoImpulse sea exactamente 0 al final de la corrutina
+        _player.planeoImpulse = 0f;
     }
 }

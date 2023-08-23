@@ -5,12 +5,15 @@ using UnityEngine;
 public class PlayerView
 {
     Animator _anim;
+    Player _player;
     bool canRotate;
-    Vector3 lastDirection = Vector3.zero;
+    Vector3 _lastDirection = Vector3.zero;
+    public bool tabIsPressed;
 
     public PlayerView(Player player)
     {
         _anim = player.anim;
+        _player = player;
     }
 
     public void CheckMagnitude(float hor, float ver)
@@ -31,15 +34,17 @@ public class PlayerView
     {
         if (canRotate)
         {
-            lastDirection = new Vector3(move.x, _anim.transform.forward.y, move.z);
-            _anim.transform.forward = lastDirection;
+            _lastDirection = new Vector3(move.x, _anim.transform.forward.y, move.z);
+            _anim.transform.forward = _lastDirection;
+            _player.lastDirection = _lastDirection;
         }
     }
 
     public void StartTijeraAnimation()
     {
-        AudioManager.instance.PlayByName("TijeraMiss", 1.1f);
+        //AudioManager.instance.PlayByName("TijeraMiss", 1.1f);
         //_anim.SetTrigger("TijeraAttack01");
+        _anim.SetTrigger("isAtack");
     }
 
     public void StartGetWetAnimation()
@@ -73,5 +78,16 @@ public class PlayerView
     public void StopJump()
     {
         _anim.SetBool("isJump", false);
+    }
+
+    public void StartCast()
+    {
+        _anim.SetBool("isCasting", true);
+
+    }
+
+    public void EndCast()
+    {
+        _anim.SetBool("isCasting", false);
     }
 }

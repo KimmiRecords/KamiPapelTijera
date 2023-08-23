@@ -14,7 +14,7 @@ public abstract class TextUpdater : MonoBehaviour
     [SerializeField]
     protected string textoInicial;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         myText = GetComponent<TextMeshProUGUI>();
         EventManager.Subscribe(eventoQueMeInteresa, UpdateText);

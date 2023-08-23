@@ -3,47 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum Dialogo
-{
-    Granjero_Norberto_01,
-    Granjero_Norberto_02,
-
-    Abuela_01,
-    Abuela_02
-}
-
-
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : Singleton<DialogueManager>
 {
     //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto
 
-    public static DialogueManager instance;
+    //public static DialogueManager instance;
 
-    [SerializeField]
-    GameObject dialogueGlobe;
-    [SerializeField]
-    TMPro.TextMeshProUGUI dialogueTextComponent;
+    [SerializeField] GameObject dialogueGlobe;
+    [SerializeField] TMPro.TextMeshProUGUI dialogueTextComponent;
+    [SerializeField] Image npcQueTeHablaImage;
 
     bool input = false;
     bool waitingForInput = false;
-    [HideInInspector]
-    public bool isShowing = false;
+    [HideInInspector] public bool isShowing = false;
 
-    //[SerializeField]
-    //Dialogue[] dialogos;
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this);
-    }
+    //private void Awake()
+    //{
+    //    if (instance != null && instance != this)
+    //    {
+    //        Destroy(this);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //    }
+    //    //DontDestroyOnLoad(this);
+    //}
     private void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, CheckPlayerInput);
@@ -55,6 +40,7 @@ public class DialogueManager : MonoBehaviour
         {
             //print("recibi input true");
             input = true;
+            AudioManager.instance.PlayByName("PickupSFX", 2.5f);
         }
     }
 
@@ -63,11 +49,13 @@ public class DialogueManager : MonoBehaviour
         if (!isShowing)
         {
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
+            dialogue.currentText = 0;
+
 
             dialogueGlobe.SetActive(true);
-            LevelManager.instance.inDialogue = true;
+            LevelManager.Instance.inDialogue = true;
             isShowing = true;
-            EventManager.Trigger(Evento.OnDialogueStart, Camara.CloseUp);
+            EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
             StartCoroutine(WriteText(dialogue));
         }
     }
@@ -75,22 +63,32 @@ public class DialogueManager : MonoBehaviour
     {
         //print("hide dialogue " + dialogue.name);
         dialogueTextComponent.text = ""; //esto es lo que deberia estar animado despues
-        LevelManager.instance.inDialogue = false;
+        LevelManager.Instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
-        EventManager.Trigger(Evento.OnDialogueEnd, Camara.Normal, dialogue);
+        EventManager.Trigger(Evento.OnDialogueEnd, CameraMode.Normal, dialogue);
     }
     public IEnumerator WriteText(Dialogue dialogue)
     {
-        for (int i = 0; i < dialogue.textos.Length; i++)
+        for (int i = 0; i < dialogue.events.Length; i++)
         {
-            //print("ARRANCA EL WRITE TEXT - cambio el texto a " + dialogue.textos[i] + " (" + i + ")");
-            dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
+            //print("ARRANCA EL WRITE TEXT ");
+            dialogue.currentText++;
+
+            //dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
+            //npcQueTeHablaImage.sprite = dialogue.sprite;    //sprite[i]
+            
+            
+            dialogueTextComponent.text = dialogue.events[i].text;
+            npcQueTeHablaImage.sprite = dialogue.events[i].sprite; 
+
+            SetNativeSize(npcQueTeHablaImage.sprite); //??? esto es necesario si todos los sprites son del mismo tamaño?
+
             yield return new WaitForEndOfFrame();
             waitingForInput = true;
 
             while (!input)
-                yield return null;
+                yield return null; //va a salir del while cuando toques E
 
             //print("termine de esperar, waitforinput false");
             input = false;
@@ -99,6 +97,11 @@ public class DialogueManager : MonoBehaviour
         HideDialogue(dialogue);
     }
 
+    public void SetNativeSize(Sprite sprite)
+    {
+          float spriteRatio = sprite.rect.width / sprite.rect.height;
+          npcQueTeHablaImage.rectTransform.sizeDelta = new Vector2(npcQueTeHablaImage.rectTransform.sizeDelta.y * spriteRatio, npcQueTeHablaImage.rectTransform.sizeDelta.y);
+    }
 
     private void OnDestroy()
     {

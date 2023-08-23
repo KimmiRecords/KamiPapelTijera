@@ -16,7 +16,7 @@ public class PUB : MonoBehaviour
     void Start()
     {
         _anim = GetComponent<Animator>();
-        PUBManager.instance.AddPUB(this);
+        PUBManager.Instance.AddPUB(this);
         init = true;
     }
 
@@ -36,12 +36,12 @@ public class PUB : MonoBehaviour
     {
         if (init)
         {
-            PUBManager.instance.AddPUB(this);
+            PUBManager.Instance.AddPUB(this);
         }
     }
 
     private void OnDisable()
     {
-        PUBManager.instance.RemovePUB(this);
+        PUBManager.Instance.RemovePUB(this);
     }
 }

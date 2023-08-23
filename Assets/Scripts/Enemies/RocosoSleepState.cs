@@ -15,7 +15,7 @@ public class RocosoSleepState : IState
 
     public void OnEnter()
     {
-        Debug.Log("entre a sleep");
+        //Debug.Log("rocoso entre a sleep");
         //_rocoso.RocosoCamina();
 
     }
@@ -30,6 +30,6 @@ public class RocosoSleepState : IState
 
     public void OnExit()
     {
-        Debug.Log("salgo de sleep");
+        //Debug.Log("rocoso salgo de sleep");
     }
 }

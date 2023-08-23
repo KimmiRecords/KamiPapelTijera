@@ -14,6 +14,15 @@ public enum PostItColor
 
 public class TooltipManager : MonoBehaviour
 {
+    [SerializeField]
+    int killTime = 10;
+    [SerializeField]
+    int azulKillTime, naranjaKillTime, rosaKillTime, amarilloKillTime, verdeKillTime;
+
+
+
+
+
     //cambia los postits 
 
     public static TooltipManager instance;
@@ -60,7 +69,7 @@ public class TooltipManager : MonoBehaviour
     {
         //print("[TooltipManager] arranca la corrutina killallpostits");
 
-        while (killAllPostitsTimer < 10) //cuando el timer llegue a 10, saldre del while 
+        while (killAllPostitsTimer < killTime) //cuando el timer llegue a 10, saldre del while 
         {
             //print("aumento el timer");
             killAllPostitsTimer += Time.deltaTime;

@@ -4,48 +4,44 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField]
-    AutoDialogue _autoDialogo;
+    [SerializeField] AutoDialogue _autoDialogo;
 
     bool _isNewGameButtonDown = false;
     bool _dialogueStarted = false;
 
-    [SerializeField]
-    string sceneToLoadOnDialogueEnd;
+    [SerializeField] string sceneToLoadOnDialogueEnd;
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         EventManager.Subscribe(Evento.OnDialogueEnd, ChangeScene);
     }
 
     public void OnNewGameButtonDown()
     {
         _isNewGameButtonDown = true;
+        if (_isNewGameButtonDown && !_dialogueStarted)
+        {
+            _autoDialogo.StartDialogue();
+            AudioManager.instance.StopByName("4S_IntroBigChords");
+            AudioManager.instance.PlayByName("IntroStoryboardLoop");
+
+            _dialogueStarted = true;
+        }
     }
 
     void Update()
     {
-        if (_isNewGameButtonDown && !_dialogueStarted && Input.anyKeyDown)
-        {
-            _autoDialogo.StartDialogue();
-            _dialogueStarted = true;
-        }
-
         if (Input.GetKeyDown(KeyCode.E))
         {
-            EventManager.Trigger(Evento.OnPlayerPressedE); //para que avance el texto
-
-            //if (_dialogueStarted && !LevelManager.instance.inDialogue)
-            //{
-            //     ChangeScene();
-            //}
+            EventManager.Trigger(Evento.OnPlayerPressedE); //como no tengo PlayerController, lo hago aca.
         }
     }
 
     public void ChangeScene(params object[] parameter)
     {
         //print("change scene");
-        LevelManager.instance.GoToScene(sceneToLoadOnDialogueEnd);
+        LevelManager.Instance.GoToScene(sceneToLoadOnDialogueEnd);
     }
 
     private void OnDestroy()

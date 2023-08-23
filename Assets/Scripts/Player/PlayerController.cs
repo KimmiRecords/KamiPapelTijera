@@ -20,45 +20,58 @@ public class PlayerController
 
     public void CheckControls() //a este lo disparo en el update
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            EventManager.Trigger(Evento.OnPlayerPressedE);
+            EventManager.Trigger(Evento.OnPlayerPressedR);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            EventManager.Trigger(Evento.OnPlayerPressedQ);
+            EventManager.Trigger(Evento.OnPlayerPressedM);
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (LevelManager.Instance.agency) 
         {
-            _player.OnPrimaryClick();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-
-        if (!LevelManager.instance.inDialogue)
-        {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                _player.isJump = true;
+                EventManager.Trigger(Evento.OnPlayerPressedE);
             }
 
-            if (Input.GetButtonUp("Jump"))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                _player.isJump = false;
+                _player.OnPrimaryClick();
             }
 
-            hor = Input.GetAxis("Horizontal");
-            ver = Input.GetAxis("Vertical");
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                //Application.Quit();
+                EventManager.Trigger(Evento.OnPlayerPressedEsc);
+            }
+
+            if (!LevelManager.Instance.inDialogue && !_player.isAttacking)
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    _player.isJumpButtonDown = true;
+                }
+
+                if (Input.GetButtonUp("Jump"))
+                {
+                    _player.isJumpButtonDown = false;
+                }
+
+                hor = Input.GetAxis("Horizontal");
+                ver = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                hor = 0;
+                ver = 0;
+            }
+
         }
-        else
-        {
-            hor = 0;
-            ver = 0;
-        }
+
+
+        
     }
 }

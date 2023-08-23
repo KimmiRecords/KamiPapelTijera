@@ -8,6 +8,8 @@ public class PuertaCortable : MonoBehaviour, ICortable
     {
         print("cortaste la puerta");
         AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
+        //AudioManager.instance.PlayByName("MagicSuccess");
+
 
         //TooltipManager.instance.HideTooltip();
         Destroy(gameObject);

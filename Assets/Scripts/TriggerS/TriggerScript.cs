@@ -19,7 +19,7 @@ public abstract class TriggerScript : MonoBehaviour
     protected string tooltipTextToShow;
 
     [SerializeField]
-    PostItColor postItColor;
+    protected PostItColor postItColor;
 
     protected virtual void Start()
     {
@@ -57,7 +57,7 @@ public abstract class TriggerScript : MonoBehaviour
         TooltipManager.instance.HideTooltip();
     }
 
-    public virtual void Interact(params object[] parameter)
+    public virtual void Interact(params object[] parameter) //interact se dispara cuando tocas E
     {
         //print("trigger script interact");
     }

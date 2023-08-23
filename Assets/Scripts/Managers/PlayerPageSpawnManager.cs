@@ -9,30 +9,12 @@ public struct PageSpawnPositions
     public Vector3 exitSpawn;
 }
 
-public class PlayerPageSpawnManager : MonoBehaviour
+public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 {
     //decime a que pagina pasaste, y yo te dire donde deberia spawnear el player.
-
-    public static PlayerPageSpawnManager instance;
-
-    [SerializeField]
-    PageSpawnPositions[] _pageSpawnCollection;
-
-    [SerializeField]
-    Player _player;
+    [SerializeField] PageSpawnPositions[] _pageSpawnCollection;
+    [SerializeField] Player _player;
     CharacterController _playerCC;
-
-    private void Awake()
-    {
-        if (instance != this && instance != null)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
 
     void Start()
     {
@@ -61,7 +43,6 @@ public class PlayerPageSpawnManager : MonoBehaviour
 
                 _playerCC.enabled = true;
                 EventManager.Trigger(Evento.OnPlayerPlaced);
-                //_player.transform.parent.position = _pageSpawnPositions[currentPage - 1];
             }
         }
     }

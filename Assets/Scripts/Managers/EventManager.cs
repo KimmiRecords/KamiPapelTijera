@@ -26,11 +26,24 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
 
     OnPlayerChangeVida, //param 0 es float hp. param1 es max hp
     OnPlayerChangePage,//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
-    OnAbuelaDropoff, //param 0 es el vector3 dropoffpoint
+    OnAbuelaDropoff, //param 0 es el transform dropoffpoint
     OnPlayerPlaced, //triggereado por PlacePlayer. cuando muere, o cambia de pag, etc
 
-    OnOrigamiApplied, //param0 es la origami stance
-
+    OnOrigamiApplied, //param0 es papercost (numero negativo), param1 es Origami origami
+    OnPlayerResourceUpdated, //se triggerea cuando uso AddResource, param0 es el tipo, param1 es el amount total actual
+    OnOrigamiStart, //le interesa al player para arrancar animaciones
+    OnOrigamiEnd, //le interesa al player para arrancar animaciones
+    OnOrigamiFoldChange, //param0 el fold actual, param1 los fold totales
+    OnPlayerGetTijera,
+    OnPlayerDie,
+    OnPlayerPressedR,
+    OnOrigamiGivePaperPlaneHat, //param0 es camara
+    OnEncounterEnd, //cuando mato al ultimo enemigo, por ej
+    OnEncounterStart,
+    OnMouseEnterFlap,
+    OnMouseExitFlap,
+    OnPlayerPressedEsc,
+    OnPlayerPressedM
 }
 
 public class EventManager
