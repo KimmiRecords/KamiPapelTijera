@@ -7,9 +7,13 @@ public enum ResourceType
 {
     hongos,
     flores,
-    papel, //las hojas por ahora las cuenta el player. lo tengo que cambiar
+    papel,
     Count 
 }
+
+
+//por ahi los resourcetype deberian estar en el resourcemanager
+//que deberia estar conectado con el inventorymanager
 
 
 public class LevelManager : Singleton<LevelManager>
