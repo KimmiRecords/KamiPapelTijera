@@ -1310,8 +1310,8 @@ Transform:
   - {fileID: 805312524}
   - {fileID: 327122569}
   - {fileID: 522099811}
-  - {fileID: 1782156529}
   - {fileID: 1861682707}
+  - {fileID: 1782156529}
   - {fileID: 1886668160}
   - {fileID: 2033309816}
   m_Father: {fileID: 165442789}
@@ -3662,7 +3662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &165442789
 Transform:
   m_ObjectHideFlags: 0
@@ -22906,7 +22906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1034421067
 Transform:
   m_ObjectHideFlags: 0
@@ -24465,7 +24465,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-187690
+  m_Name: pb_Mesh-18824
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27961,7 +27961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303519955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -108.6, y: -0.27, z: -23.3}
+  m_LocalPosition: {x: 93.3, y: -0.27, z: -23.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -31855,12 +31855,12 @@ MonoBehaviour:
   anim: {fileID: 2096099810}
   miTijeraHitbox: {fileID: 1994257947}
   _renderer: {fileID: 8133901225745835399}
-  myPaperPlaneHat: {fileID: 0}
-  augmentedJumpForce: 500
+  myPaperPlaneHat: {fileID: 2060973622}
+  augmentedJumpForce: 20
   augmentedJumpsMax: 3
-  planeoImpulse: 5
-  planeoDuration: 2
-  planeoDelayTime: 2
+  planeoImpulse: 2
+  planeoDuration: 1
+  planeoDelayTime: 1
   isJumpButtonDown: 0
   isAttacking: 0
   isPaperPlaneHat: 0

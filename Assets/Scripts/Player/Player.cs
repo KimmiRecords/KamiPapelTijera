@@ -27,11 +27,11 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
 
 
     [Header("Planeo")]
-    public float augmentedJumpForce = 500f;
+    public float augmentedJumpForce = 20f;
     public int augmentedJumpsMax = 3;
-    public float planeoImpulse = 5;
-    public float planeoDuration = 2;
-    public float planeoDelayTime = 2;
+    public float planeoImpulse = 2;
+    public float planeoDuration = 1;
+    public float planeoDelayTime = 1;
 
     //originals
     Color originalColor;
