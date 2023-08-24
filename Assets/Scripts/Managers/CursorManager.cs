@@ -10,10 +10,7 @@ public enum CursorType
 }
 public class CursorManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     public static CursorManager instance;
-
-
     public Texture2D openHand, closedHand;
 
     private void Awake()

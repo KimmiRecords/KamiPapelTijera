@@ -35,14 +35,14 @@ public class PostProcessManager : Singleton<PostProcessManager>
         float t = 0;
         while (t < bloomLerpTime)
         {
-            bloom.intensity.value = Mathf.Lerp(3, 60, t);
+            bloom.intensity.value = Mathf.Lerp(3, maximumBloomIntensity, t);
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         t = 0;
         while (t < bloomLerpTime)
         {
-            bloom.intensity.value = Mathf.Lerp(60, 3, t);
+            bloom.intensity.value = Mathf.Lerp(maximumBloomIntensity, 3, t);
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
