@@ -76,6 +76,11 @@ public class LevelManager : Singleton<LevelManager>
         recursosRecolectados[pickupType] += valueToAdd;
         EventManager.Trigger(Evento.OnPlayerResourceUpdated, pickupType, recursosRecolectados[pickupType]);
         print(pickupType.ToString() + " // " + recursosRecolectados[pickupType]);
+
+        //if (pickupType == ResourceType.papel)
+        //{
+        //    //add particulas
+        //}
     }
 
     public void CurePlayer(int curacion)

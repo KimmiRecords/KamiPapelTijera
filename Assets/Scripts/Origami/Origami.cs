@@ -3,31 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum OrigamiForm
-{
-    Grulla,
-    Barco,
-    Puente
-}
 
 public abstract class Origami : MonoBehaviour
 {
-    public OrigamiForm origamiForm;
-
     public OrigamiRoute[] origamiRoutes;
     public int paperCost;
     public bool isReusable;
-
-
     public string tooltipMessage = "Arratrá con clic derecho desde la flecha verde hasta el circulo rojo. No te salgas del camino indicado!";
     public PostItColor postItColor;
 
-    [HideInInspector]
-    public int currentRouteIndex = 0;
-
-    [HideInInspector]
-    public bool wasUsed;
-
+    [HideInInspector] public int currentRouteIndex = 0;
+    [HideInInspector] public bool wasUsed;
 
     public void FailOrigami()
     {
@@ -91,10 +77,8 @@ public abstract class Origami : MonoBehaviour
 
     public virtual void Apply()
     {
+        //todos los origamis, al terminarlos, aplican algo
         print("origami apply");
-        //EventManager.Trigger(Evento.OnOrigamiApplied, -paperCost, this);
-
-        //consume papel
         LevelManager.Instance.AddResource(ResourceType.papel, -paperCost);
     }
 
