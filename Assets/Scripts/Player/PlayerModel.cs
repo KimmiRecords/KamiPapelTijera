@@ -81,7 +81,7 @@ public class PlayerModel
                 //pAnims.StopLanding();
                 if (_player.isPaperPlaneHat)
                 {
-                    Debug.Log("Move: salte con hat. add planing porfaa");
+                    //Debug.Log("Move: salte con hat. add planing porfaa");
                     _player.AddPlaning();
                     _player.augmentedJumpsLeft--;
                 }

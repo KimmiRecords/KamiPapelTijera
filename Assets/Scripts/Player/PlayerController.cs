@@ -68,10 +68,6 @@ public class PlayerController
                 hor = 0;
                 ver = 0;
             }
-
         }
-
-
-        
     }
 }

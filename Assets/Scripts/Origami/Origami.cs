@@ -18,7 +18,10 @@ public abstract class Origami : MonoBehaviour
     public void FailOrigami()
     {
         //print("fallaste asi que arrancas de cero");
+        origamiRoutes[currentRouteIndex].ResetImagePosition();
         currentRouteIndex = 0;
+        //ResetAllRoutes();
+
 
         for (int i = 0; i < origamiRoutes.Length; i++)
         {
@@ -52,24 +55,26 @@ public abstract class Origami : MonoBehaviour
 
     public virtual bool CompleteRoute()
     {
-        print("ruta actual completada");
+        //print("ruta actual completada");
         origamiRoutes[currentRouteIndex].wasCompleted = true;
+        origamiRoutes[currentRouteIndex].ResetImagePosition();
         currentRouteIndex++;
 
         if (currentRouteIndex >= origamiRoutes.Length)
         {
-            print("completaste el origami");
+            //print("completaste el origami");
             currentRouteIndex = 0;
             if (!isReusable)
             {
                 wasUsed = true;
             }
             Apply();
+            //ResetAllRoutes();
             return true;
         }
         else
         {
-            print("siguienteee");
+            //print("siguienteee");
             NextRoute();
             return false;
         }
@@ -78,14 +83,23 @@ public abstract class Origami : MonoBehaviour
     public virtual void Apply()
     {
         //todos los origamis, al terminarlos, aplican algo
-        print("origami apply");
+        //print("origami apply");
         LevelManager.Instance.AddResource(ResourceType.papel, -paperCost);
     }
 
     public void TriggerPliegueTextUpdater()
     {
-        print("triggereo con " + (currentRouteIndex + 1).ToString() + "/" + origamiRoutes.Length);
+        //print("triggereo con " + (currentRouteIndex + 1).ToString() + "/" + origamiRoutes.Length);
         EventManager.Trigger(Evento.OnOrigamiFoldChange, currentRouteIndex + 1, origamiRoutes.Length);
     }
+
+    public void ResetAllRoutes()
+    {
+        foreach (OrigamiRoute route in origamiRoutes)
+        {
+            route.ResetImagePosition();
+        }
+    }
+
 
 }

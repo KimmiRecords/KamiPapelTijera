@@ -127,13 +127,14 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         {
             _view.StartTijeraAnimation();
             _readyToAttack = false;
+            isAttacking = true;
         }
     }
     public void StartTijeraCoroutine() //este metodo es solo xq el estupido animator no sabe disparar corrutinas. unity "2021"
     {
         StartCoroutine(TijeraCoroutine());
     }
-    public IEnumerator TijeraCoroutine() //prendo y apago rapidamente la hitbox para simular un ataque
+    public IEnumerator TijeraCoroutine() //prendo y apago rapidamente la hitbox en el momento justo para simular un ataque
     {
         _model.EnableTijeraHitbox();
         yield return new WaitForSeconds(tijeraHitBoxDuration);
@@ -141,18 +142,18 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
 
         yield return new WaitForSeconds(weaponCooldown); //los ataques tienen cooldown, asi que espero
         _readyToAttack = true;
+        isAttacking = false;
     }
     public void GetWet()
     {
-        print("AAAA ME MOJO");
+        //print("AAAA ME MOJO");
         _view.StartGetWetAnimation();
         Die();
-        //PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
     }
     public void GetGolpeado(float dmg)
     {
         //print("me han golpeao");
-        _view.StartGetWetAnimation(); //es solo x el sonido
+        _view.StartGetWetAnimation(); //es solo x el sonido por ahora
         TakeDamage(dmg);
     }
     
@@ -211,12 +212,11 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         jumpForce = originalJumpForce;
         //sfx de hacer bollo y destruir
         myPaperPlaneHat.SetActive(false);
-
     }
 
     public void AddPlaning()
     {
-        print("AddPlaning: dalee");
+        //print("AddPlaning: dalee");
         StartCoroutine(_model.AddExtraForwardForce(planeoDelayTime, planeoDuration));
     }
 

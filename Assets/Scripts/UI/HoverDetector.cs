@@ -10,14 +10,14 @@ public class HoverDetector : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         EventManager.Trigger(Evento.OnMouseEnterFlap);
         isHover = true;
-        Debug.Log("enter flap");
+        //Debug.Log("enter flap");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         EventManager.Trigger(Evento.OnMouseExitFlap);
         isHover = false;    
-        Debug.Log("exit flap");
+        //Debug.Log("exit flap");
     }
     public void OnPointerClick(PointerEventData eventData)
     {

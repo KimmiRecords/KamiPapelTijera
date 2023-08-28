@@ -61,11 +61,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38a5d9b04795e34699ffe95244ebfbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origamiForm: 1
   origamiRoutes:
   - {fileID: 811311523485784188}
   - {fileID: 5598585001905656120}
   paperCost: 2
+  isReusable: 0
   tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
     rojo. No te salgas del camino indicado!"
   postItColor: 4
@@ -143,6 +143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OrigamiRoute
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061278643690110774, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69219c6d096d19f48b780a5f0a02c485, type: 3}

@@ -42,9 +42,8 @@ public class PlayerView
 
     public void StartTijeraAnimation()
     {
-        //AudioManager.instance.PlayByName("TijeraMiss", 1.1f);
-        //_anim.SetTrigger("TijeraAttack01");
-        _anim.SetTrigger("isAtack");
+        _anim.SetTrigger("isAttack");
+        //_anim.SetBool("isWalk", true); //xq son parte del mismo blend
     }
 
     public void StartGetWetAnimation()
@@ -83,7 +82,6 @@ public class PlayerView
     public void StartCast()
     {
         _anim.SetBool("isCasting", true);
-
     }
 
     public void EndCast()

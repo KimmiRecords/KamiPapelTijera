@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public enum CursorType
@@ -8,23 +10,9 @@ public enum CursorType
     ClosedHand,
     OpenHand
 }
-public class CursorManager : MonoBehaviour
+public class CursorManager : Singleton<CursorManager>
 {
-    public static CursorManager instance;
     public Texture2D openHand, closedHand;
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this);
-    }
 
     public void SetCursor(CursorType type)
     {
@@ -37,4 +25,4 @@ public class CursorManager : MonoBehaviour
             Cursor.SetCursor(openHand, Vector2.zero, CursorMode.Auto);
         }
     }
-}
+    }
