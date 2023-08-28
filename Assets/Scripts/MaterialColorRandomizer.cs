@@ -23,16 +23,16 @@ public class MaterialColorRandomizer : MonoBehaviour
     [Tooltip("The maximum value (brightness) to use for randomization.")]
     public float maxValue = 1.0f;
  
-    [HideInInspector] public Renderer renderer;
+    [HideInInspector] public Renderer _renderer;
     [HideInInspector] public Color resultColor;
 
  
     void Awake()
     {
-        renderer = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
 
         // Generate and apply the randomized color.
         resultColor = Random.ColorHSV(minHue, maxHue, minSaturation, maxSaturation, minValue, maxValue);
-        renderer.material.color = resultColor;
+        _renderer.material.color = resultColor;
     }
 }

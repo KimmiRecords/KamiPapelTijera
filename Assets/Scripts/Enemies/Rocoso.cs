@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Rocoso : Enemy
+public class Rocoso : Enemy, IMojable
 {
     //este script tiene que estar en donde esta el animator
     //asi las animaciones pueden llamar a metodos de este script.
@@ -71,5 +71,21 @@ public class Rocoso : Enemy
         //Debug.Log("apago el headbutt");
         _hitBox.gameObject.SetActive(false);
         isHitting = false;
+    }
+
+    public void GetWet()
+    {
+        Debug.Log("rocoso se moja");
+        _sr.flipY = true;
+        StartCoroutine(MojarseYMorirCoroutine());
+    }
+
+    public IEnumerator MojarseYMorirCoroutine()
+    {
+        Debug.Log("arranco corrutina de morir");
+        float loQueDuraLaAnimDeMuerte = 2f;
+        yield return new WaitForSeconds(loQueDuraLaAnimDeMuerte);
+        _sr.flipY = false;
+        Die();
     }
 }
