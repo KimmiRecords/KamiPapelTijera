@@ -10,30 +10,32 @@ public class Rocoso : Enemy, IMojable
 
     public Animator anim; //mi animator
     public RocosoHeadbuttHitBox _hitBox;
-
+    [SerializeField] GameObject _particulasSplash;
     [HideInInspector] public bool wasAwoken; //si el player ya se acerco y me despertó
     [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
     [HideInInspector] public Vector3 target;
     [HideInInspector] public bool isHitting;
 
     Player _player;
-    protected FiniteStateMachine fsm;
+    protected FiniteStateMachine _fsm;
+
+
 
     private void Start()
     {
-        fsm = new FiniteStateMachine();
-        fsm.AddState(State.RocosoSleep, new RocosoSleepState(fsm, this));
-        fsm.AddState(State.RocosoStart, new RocosoStartState(fsm, this));
-        fsm.AddState(State.RocosoWalk, new RocosoWalkState(fsm, this));
-        fsm.AddState(State.RocosoAttack, new RocosoAttackState(fsm, this));
-        fsm.ChangeState(State.RocosoSleep);
+        _fsm = new FiniteStateMachine();
+        _fsm.AddState(State.RocosoSleep, new RocosoSleepState(_fsm, this));
+        _fsm.AddState(State.RocosoStart, new RocosoStartState(_fsm, this));
+        _fsm.AddState(State.RocosoWalk, new RocosoWalkState(_fsm, this));
+        _fsm.AddState(State.RocosoAttack, new RocosoAttackState(_fsm, this));
+        _fsm.ChangeState(State.RocosoSleep);
 
         _hitBox.headbuttDamage = _attackDamage;
     }
 
     private void Update()
     {
-        fsm.Update();
+        _fsm.Update();
 
         if (_player != null)
         {
@@ -77,14 +79,18 @@ public class Rocoso : Enemy, IMojable
     {
         Debug.Log("rocoso se moja");
         _sr.flipY = true;
+        transform.position += Vector3.down * 2;
         StartCoroutine(MojarseYMorirCoroutine());
     }
 
     public IEnumerator MojarseYMorirCoroutine()
     {
         Debug.Log("arranco corrutina de morir");
+        AudioManager.instance.PlayByName("BigWaterSplash");
+        _particulasSplash.SetActive(true);
         float loQueDuraLaAnimDeMuerte = 2f;
         yield return new WaitForSeconds(loQueDuraLaAnimDeMuerte);
+
         _sr.flipY = false;
         Die();
     }

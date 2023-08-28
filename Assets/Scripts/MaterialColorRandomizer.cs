@@ -30,8 +30,6 @@ public class MaterialColorRandomizer : MonoBehaviour
     void Awake()
     {
         _renderer = GetComponent<Renderer>();
-
-        // Generate and apply the randomized color.
         resultColor = Random.ColorHSV(minHue, maxHue, minSaturation, maxSaturation, minValue, maxValue);
         _renderer.material.color = resultColor;
     }
