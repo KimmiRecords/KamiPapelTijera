@@ -9,6 +9,7 @@ public enum State
     RocosoStart,
     RocosoWalk,
     RocosoAttack,
+    RocosoDeath,
 
     //NPCs
     NPC_Idle,

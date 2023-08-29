@@ -357,17 +357,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 150
-  _maxSpeed: 1.5
+  _maxSpeed: 2.5
   _attackDamage: 10
   _sr: {fileID: 7897264121734106302}
   endsEncounter: 0
   anim: {fileID: 7897264121734106303}
   _hitBox: {fileID: 2412841192040739279}
+  attackRange: 6
+  disengageRange: 30
   _particulasSplash: {fileID: 7250192349626849009}
   wasAwoken: 0
   startAnimationHasFinished: 0
   target: {x: 0, y: 0, z: 0}
   isHitting: 0
+  isDead: 0
 --- !u!54 &2698636374348165167
 Rigidbody:
   m_ObjectHideFlags: 0

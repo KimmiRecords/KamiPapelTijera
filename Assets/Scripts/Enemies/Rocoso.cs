@@ -10,16 +10,18 @@ public class Rocoso : Enemy, IMojable
 
     public Animator anim; //mi animator
     public RocosoHeadbuttHitBox _hitBox;
+    public float attackRange = 11;
+    public float disengageRange = 30;
     [SerializeField] GameObject _particulasSplash;
+
     [HideInInspector] public bool wasAwoken; //si el player ya se acerco y me despertó
     [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
     [HideInInspector] public Vector3 target;
     [HideInInspector] public bool isHitting;
+    [HideInInspector] public bool isDead = false;
 
     Player _player;
     protected FiniteStateMachine _fsm;
-
-
 
     private void Start()
     {
@@ -28,6 +30,7 @@ public class Rocoso : Enemy, IMojable
         _fsm.AddState(State.RocosoStart, new RocosoStartState(_fsm, this));
         _fsm.AddState(State.RocosoWalk, new RocosoWalkState(_fsm, this));
         _fsm.AddState(State.RocosoAttack, new RocosoAttackState(_fsm, this));
+        _fsm.AddState(State.RocosoDeath, new RocosoDeathState(_fsm, this));
         _fsm.ChangeState(State.RocosoSleep);
 
         _hitBox.headbuttDamage = _attackDamage;
@@ -41,6 +44,16 @@ public class Rocoso : Enemy, IMojable
         {
             target = _player.transform.position;
         }
+    }
+
+    public override void TakeDamage(float dmg)
+    {
+        _hp -= dmg;
+        if (_hp <= 0)
+        {
+            StartCoroutine(MorirCoroutine());
+        }
+        StartCoroutine(EnrojecerSprite());
     }
 
     public void RocosoDespierta(Player player) //este metodo es disparado por el trigger, solo la primera vez
@@ -75,23 +88,23 @@ public class Rocoso : Enemy, IMojable
         isHitting = false;
     }
 
-    public void GetWet()
+    public void GetWet() //esto se dispara cuando collisiona con el rio
     {
         Debug.Log("rocoso se moja");
+
+        _particulasSplash.SetActive(true);
+        AudioManager.instance.PlayByName("BigWaterSplash");
         _sr.flipY = true;
-        transform.position += Vector3.down * 2;
-        StartCoroutine(MojarseYMorirCoroutine());
+
+        StartCoroutine(MorirCoroutine());
     }
 
-    public IEnumerator MojarseYMorirCoroutine()
+    public IEnumerator MorirCoroutine() //la corrutina esta es solo para esperar a la anim antes de disparar Die()
     {
+        isDead = true; //necesito un bool para que se haga el cambio de state. pero todavia no quiero morir posta
         Debug.Log("arranco corrutina de morir");
-        AudioManager.instance.PlayByName("BigWaterSplash");
-        _particulasSplash.SetActive(true);
-        float loQueDuraLaAnimDeMuerte = 2f;
+        float loQueDuraLaAnimDeMuerte = 3f;
         yield return new WaitForSeconds(loQueDuraLaAnimDeMuerte);
-
-        _sr.flipY = false;
         Die();
     }
 }

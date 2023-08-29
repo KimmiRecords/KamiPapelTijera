@@ -23,6 +23,7 @@ public class RocosoWalkState : IState
     public void OnUpdate()
     {
         WalkTowardsPlayer();
+
         if (_rocoso.target.x > _rocoso.transform.position.x) //roto al rocoso
         {
             _rocoso.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
@@ -32,11 +33,16 @@ public class RocosoWalkState : IState
             _rocoso.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
-
-        if (Vector3.Distance(_rocoso.target, _rocoso.transform.position) < 10)
+        if (Vector3.Distance(_rocoso.target, _rocoso.transform.position) < _rocoso.attackRange)
         {
             //Debug.Log("ONUPDATE - me cambio a attack");
             _fsm.ChangeState(State.RocosoAttack);
+        }
+
+        if (_rocoso.isDead)
+        {
+            Debug.Log("Walk - ONUPDATE - me cambio a death porque me mori");
+            _fsm.ChangeState(State.RocosoDeath);
         }
     }
 

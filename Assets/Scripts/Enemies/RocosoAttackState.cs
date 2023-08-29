@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class RocosoAttackState : IState
 
     public void OnUpdate()
     {
-        if (Vector3.Distance(_rocoso.target, _rocoso.transform.position) > 30)
+        if (Vector3.Distance(_rocoso.target, _rocoso.transform.position) > _rocoso.disengageRange)
         {
             //Debug.Log("ONUPDATE - me cambio a walk xq ta re lejos");
             _fsm.ChangeState(State.RocosoWalk);
@@ -35,6 +36,12 @@ public class RocosoAttackState : IState
             //Debug.Log("ONUPDATE - me cambio a walk xq no pegue");
             _fsm.ChangeState(State.RocosoWalk);
         }
+
+        if (_rocoso.isDead)
+        {
+            Debug.Log("Walk - ONUPDATE - me cambio a death porque me mori");
+            _fsm.ChangeState(State.RocosoDeath);
+        }
     }
 
     public void OnExit()
@@ -42,6 +49,5 @@ public class RocosoAttackState : IState
         //Debug.Log("salgo de attack");
         //_rocoso.isHitting = false;
         _rocoso.anim.SetBool("isAttack", false);
-
     }
 }
