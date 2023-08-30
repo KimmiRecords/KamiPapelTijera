@@ -371,6 +371,7 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   isHitting: 0
   isDead: 0
+  deathAnimationEnded: 0
 --- !u!54 &2698636374348165167
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -482,7 +483,7 @@ PrefabInstance:
     - target: {fileID: 9163110612162866128, guid: 4a70c2358f2f27f4cae5d4eecb2bea53,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a70c2358f2f27f4cae5d4eecb2bea53, type: 3}

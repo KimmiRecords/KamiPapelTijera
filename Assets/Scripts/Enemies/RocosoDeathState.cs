@@ -17,6 +17,13 @@ public class RocosoDeathState : IState
     {
         Debug.Log("entre a death");
         _rocoso.anim.SetBool("isDead", true);
+
+        float cryPitch = 1f;
+        if (_rocoso.endsEncounter)
+        {
+            cryPitch = 0.5f;
+        }
+        AudioManager.instance.PlayByName("RocosoCry", cryPitch, 0.1f);
     }
 
     public void OnUpdate()

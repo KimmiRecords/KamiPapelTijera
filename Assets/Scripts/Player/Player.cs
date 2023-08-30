@@ -125,9 +125,9 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     {
         if (_readyToAttack && hasTijera) //readytoattack se pone false cuando estoy en cooldown
         {
-            _view.StartTijeraAnimation();
             _readyToAttack = false;
             isAttacking = true;
+            _view.StartAttack();
         }
     }
     public void StartTijeraCoroutine() //este metodo es solo xq el estupido animator no sabe disparar corrutinas. unity "2021"
@@ -143,6 +143,8 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         yield return new WaitForSeconds(weaponCooldown); //los ataques tienen cooldown, asi que espero
         _readyToAttack = true;
         isAttacking = false;
+        _view.EndAttack();
+
     }
     public void GetWet()
     {

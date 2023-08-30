@@ -24,7 +24,6 @@ public class PlayerModel
         _playerSpeed = _player.Speed; 
         _speedModifier = 1;
         auxOriginalImpulse = _player.planeoImpulse;
-        //initialGravityValue = gravityValue; mismo pero para cambiar la gravedad
     }
     public void NewMove(float hor, float ver)
     {
@@ -101,14 +100,6 @@ public class PlayerModel
         //Debug.Log(_move);
     }
 
-    public void Transportar(Vector3 move)
-    {
-        //Debug.Log("player Model: transportar");
-        _player.cc.Move(move * Time.deltaTime);
-        //_player.cc.Move(auxForwardVector, auxForwardVector);
-    }
-
-
     public void EnableTijeraHitbox()
     {
         //Debug.Log("prendo la tijera");
@@ -120,25 +111,6 @@ public class PlayerModel
         //Debug.Log("apago la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(false);
     }
-
-    //public IEnumerator AddExtraForwardForce(float delayTime, float duration, float decayRate)
-    //{
-    //    yield return new WaitForSeconds(delayTime);
-
-    //    auxTimer = 0;
-    //    _player.planeoImpulse = auxOriginalImpulse;
-
-    //    while (auxTimer < duration)
-    //    {
-    //        auxForwardVector = _player.lastDirection * _player.planeoImpulse;
-    //        _player.cc.Move(auxForwardVector * Time.deltaTime);
-    //        _player.planeoImpulse *= (1 - decayRate);
-    //        auxTimer += Time.deltaTime;
-    //        yield return new WaitForEndOfFrame();
-    //    }
-    //}
-
-    
 
     public IEnumerator AddExtraForwardForce(float delayTime, float duration)
     {

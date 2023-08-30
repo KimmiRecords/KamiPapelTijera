@@ -48,7 +48,7 @@ public class PlayerController
                 EventManager.Trigger(Evento.OnPlayerPressedEsc);
             }
 
-            if (!LevelManager.Instance.inDialogue && !_player.isAttacking)
+            if (!LevelManager.Instance.inDialogue && !_player.isAttacking) //este if mepa que va en model
             {
                 if (Input.GetButtonDown("Jump"))
                 {

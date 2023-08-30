@@ -18,15 +18,18 @@ public class PlayerView
 
     public void CheckMagnitude(float hor, float ver)
     {
-        if (hor == 0 && ver == 0)
+        if (!_player.isAttacking)
         {
-            StartIdleAnimation();
-            canRotate = false;
-        }
-        else
-        {
-            StartMoveAnimation();
-            canRotate = true;
+            if (hor == 0 && ver == 0)
+            {
+                StartIdleAnimation();
+                canRotate = false;
+            }
+            else
+            {
+                StartMoveAnimation();
+                canRotate = true;
+            }
         }
     }
 
@@ -43,7 +46,16 @@ public class PlayerView
     public void StartTijeraAnimation()
     {
         _anim.SetTrigger("isAttack");
-        //_anim.SetBool("isWalk", true); //xq son parte del mismo blend
+    }
+
+    public void StartAttack()
+    {
+        _anim.SetBool("isAttacking", true);
+    }
+
+    public void EndAttack()
+    {
+        _anim.SetBool("isAttacking", false);
     }
 
     public void StartGetWetAnimation()
