@@ -75,10 +75,6 @@ public class DialogueManager : Singleton<DialogueManager>
             //print("ARRANCA EL WRITE TEXT ");
             dialogue.currentText++;
 
-            //dialogueTextComponent.text = dialogue.textos[i]; //esto es lo que deberia estar animado despues
-            //npcQueTeHablaImage.sprite = dialogue.sprite;    //sprite[i]
-            
-            
             dialogueTextComponent.text = dialogue.events[i].text;
             npcQueTeHablaImage.sprite = dialogue.events[i].sprite; 
 

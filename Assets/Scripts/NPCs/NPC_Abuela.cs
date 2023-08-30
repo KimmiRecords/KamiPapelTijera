@@ -9,7 +9,6 @@ public class NPC_Abuela : NPC
 
     public Animator anim;
 
-
     protected override void Start()
     {
         _fsm = new FiniteStateMachine();
