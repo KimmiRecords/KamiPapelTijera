@@ -24,12 +24,12 @@ public class PedestalColorCheck : MonoBehaviour
         {
             if (LevelManager.Instance.recursosRecolectados[ResourceType.papel] >= myTriggerOrigami.origami.paperCost)
             {
-                print("tengo suficiente papel para hacer este origami");
+                //print("tengo suficiente papel para hacer este origami");
                 _renderer.material.color = activeColor;
             }
             else
             {
-                print("no tengo suficiente papel para hacer este origami");
+                //print("no tengo suficiente papel para hacer este origami");
                 _renderer.material.color = inactiveColor;
             }
         }

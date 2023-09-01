@@ -108,8 +108,7 @@ public class CameraManager : Singleton<CameraManager>
 
     public void SetCamera(CameraMode cam)
     {
-        Debug.Log("cambio la camara a " + cam);
-        //_virtualCameras[(int)cam].gameObject.SetActive(false);
+        //Debug.Log("cambio la camara a " + cam);
         TurnOffAllVirtualCameras();
 
         currentCamera = (int)cam;

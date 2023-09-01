@@ -2,33 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArbustoCortable : FlorCortable
+public class Arbol2DCortable : FlorCortable
 {
-    //el arbusto, a diferencia de la flor, respawnea
     public override void GetCut(float dmg)
     {
         if (isCortable)
         {
-            //print("cortaste este arbusto");
+            Debug.Log("arbol2d get cut");
             AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
             AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
 
-            //apago el entero y prendo las partes
             spriteEntero.gameObject.SetActive(false);
             spriteBase.gameObject.SetActive(true);
             pickupRB.gameObject.SetActive(true);
 
-            //el pickup pega saltito y cae wujuuuu
             spritePickup.Jump();
 
-            //en vez de delayedspawn, tendria que ser instapickup
-            StartDelayedRespawn();
             LevelManager.Instance.AddResource(pickupType, pickupAmount);
-            AudioManager.instance.PlayByName("PickupSFX");
-
+            AudioManager.instance.PlayByName("QuestCompleted", 0.85f);
             isCortable = false;
-            //_isCortado = true;
-
         }
     }
 }

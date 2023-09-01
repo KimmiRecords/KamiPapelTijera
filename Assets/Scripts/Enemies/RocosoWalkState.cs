@@ -41,7 +41,7 @@ public class RocosoWalkState : IState
 
         if (_rocoso.isDead)
         {
-            Debug.Log("Walk - ONUPDATE - me cambio a death porque me mori");
+            //Debug.Log("Walk - ONUPDATE - me cambio a death porque me mori");
             _fsm.ChangeState(State.RocosoDeath);
         }
     }

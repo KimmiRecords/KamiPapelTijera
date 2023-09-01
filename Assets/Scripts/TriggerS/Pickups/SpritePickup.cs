@@ -18,7 +18,7 @@ public abstract class SpritePickup : TriggerScript
 
     protected Vector3 originalPosition;
     protected Quaternion originalQuaternion;
-    protected bool isReadyToJump;
+    protected bool isReadyToJump = true;
     protected bool isReadyToPickup;
 
 
@@ -32,8 +32,6 @@ public abstract class SpritePickup : TriggerScript
         originalPosition = transform.position;
         originalQuaternion = transform.rotation;
         miCortable.pickupRB.AddForce(GetRandomJumpDir() * miCortable.jumpForce);
-        //transform.position += new Vector3(1, 1, 1);
-        //jumpForce = miCortable.jumpForce;
     }
 
     public virtual void ResetPosition()
@@ -44,14 +42,15 @@ public abstract class SpritePickup : TriggerScript
         isReadyToJump = true;
     }
 
-    public void Jump()
+    public virtual void Jump()
     {
-        print("el pickup salta");
+        //print("el pickup salta");
         //nace tirando animacion de salir volando y caer al piso. 
         if (haceSaltito)
         {
             if (isReadyToJump)
             {
+                //Debug.Log("aaaaaa");
                 miCortable.pickupRB.AddForce(GetRandomJumpDir() * miCortable.jumpForce);
                 //transform.position += new Vector3(1, 1, 1);
 

@@ -15,7 +15,7 @@ public class RocosoStartState : IState
 
     public void OnEnter()
     {
-        Debug.Log("entre a start");
+        //Debug.Log("entre a start");
         _rocoso.anim.SetBool("isStart", true);
     }
 
@@ -25,10 +25,16 @@ public class RocosoStartState : IState
         {
             _fsm.ChangeState(State.RocosoWalk);
         }
+
+        if (_rocoso.isDead)
+        {
+            //Debug.Log("start - ONUPDATE - me cambio a death porque me mori");
+            _fsm.ChangeState(State.RocosoDeath);
+        }
     }
 
     public void OnExit()
     {
-        Debug.Log("salgo de start");
+        //Debug.Log("salgo de start");
     }
 }

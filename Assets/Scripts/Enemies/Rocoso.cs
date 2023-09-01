@@ -92,7 +92,7 @@ public class Rocoso : Enemy, IMojable
 
     public void GetWet() //esto se dispara cuando collisiona con el rio
     {
-        Debug.Log("rocoso se moja");
+        //Debug.Log("rocoso se moja");
 
         _particulasSplash.SetActive(true);
         AudioManager.instance.PlayByName("BigWaterSplash");
@@ -102,14 +102,14 @@ public class Rocoso : Enemy, IMojable
 
     public void DeathAnimationEnd() //esto lo dispara el animator (especificamente, el final de clip de death)
     {
-        Debug.Log("termina el clip de muerte");
+        //Debug.Log("termina el clip de muerte");
         deathAnimationEnded = true;
     }
 
     public IEnumerator MorirCoroutine() //la corrutina esta es solo para esperar a la anim antes de disparar Die()
     {
         isDead = true; //necesito un bool para que se haga el cambio de state. pero todavia no quiero morir posta
-        Debug.Log("arranco corrutina de morir");
+        //Debug.Log("arranco corrutina de morir");
         
         //espero a que termine la animacion de muerte
         while (!deathAnimationEnded)
@@ -119,4 +119,6 @@ public class Rocoso : Enemy, IMojable
         
         Die();
     }
+
+    
 }

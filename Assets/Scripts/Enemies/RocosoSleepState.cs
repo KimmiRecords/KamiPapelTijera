@@ -26,6 +26,12 @@ public class RocosoSleepState : IState
         {
             _fsm.ChangeState(State.RocosoStart);
         }
+
+        if (_rocoso.isDead)
+        {
+            Debug.Log("sleep - ONUPDATE - me cambio a death porque me mori");
+            _fsm.ChangeState(State.RocosoDeath);
+        }
     }
 
     public void OnExit()

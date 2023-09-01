@@ -5,13 +5,12 @@ using UnityEngine;
 public class FlorCortable : ObjetoCortable, ICortable
 {
     //cuando cortas una flor con la tijera, se parte en 2 y la mitad de arriba se cae
+
     public float respawnTime = 5;
     public SpritePickup spritePickup;
 
-    [SerializeField]
-    protected ResourceType pickupType;
-    [SerializeField]
-    protected int pickupAmount = 1;
+    [SerializeField] protected ResourceType pickupType;
+    [SerializeField] protected int pickupAmount = 1;
 
     public bool ListoParaCortar
     {

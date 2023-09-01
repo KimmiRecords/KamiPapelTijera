@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arbol : MonoBehaviour, ICortable
+public class Arbol3DCortable : MonoBehaviour, ICortable
 {
-    
     [SerializeField]
     Vector3 rotationVector;
 
