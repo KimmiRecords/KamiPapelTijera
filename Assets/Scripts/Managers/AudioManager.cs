@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
     //todo lo pertinente a sonidos y sus metodos
     //por diego katabian
 
-
     //todo el chistecito del bgm no va. pero otro dia lo saco. hoy no.
 
     public static AudioManager instance;
@@ -38,8 +37,6 @@ public class AudioManager : MonoBehaviour
     Dictionary<KeyValuePair<string, AudioSource>, float> originalVolumes = new Dictionary<KeyValuePair<string, AudioSource>, float>();
 
     [HideInInspector] public Dictionary<string, AudioSource> soundDict = new Dictionary<string, AudioSource>();
-
-
 
     string thisLevelBgm;
     Dictionary<string, string> levelBGMs = new Dictionary<string, string>();

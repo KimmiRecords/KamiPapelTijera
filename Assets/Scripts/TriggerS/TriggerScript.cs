@@ -12,14 +12,11 @@ public abstract class TriggerScript : MonoBehaviour
 
     //el player es la layer 3
 
-    [HideInInspector]
-    public bool triggerBool = false;
+    [HideInInspector] public bool triggerBool = false;
 
-    [SerializeField]
-    protected string tooltipTextToShow;
+    [SerializeField] protected string tooltipTextToShow;
 
-    [SerializeField]
-    protected PostItColor postItColor;
+    [SerializeField] protected PostItColor postItColor;
 
     protected virtual void Start()
     {

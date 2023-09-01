@@ -7,13 +7,9 @@ public class ObjetoCortable : MonoBehaviour, ICortable
     //los objetosCortables se pueden partir en dos
     //la parte de arriba sale volando
 
-    public float jumpForce = 20f;
-
-    public SpriteRenderer spriteEntero, spriteBase, spriteTop;
-    public Rigidbody pickupRB;
-
+    //[SerializeField] protected float jumpForce = 5;
+    [SerializeField] protected SpriteRenderer spriteEntero, spriteBase, spriteTop;
     protected bool isCortable = true;
-
 
     public virtual void GetCut(float dmg)
     {
@@ -26,10 +22,10 @@ public class ObjetoCortable : MonoBehaviour, ICortable
             //apago el entero y prendo las partes
             spriteEntero.gameObject.SetActive(false);
             spriteBase.gameObject.SetActive(true);
-            pickupRB.gameObject.SetActive(true);
+            spriteTop.gameObject.SetActive(true);
 
             //el pickup pega saltito y cae wujuuuu
-            pickupRB.AddForce(GetRandomJumpDir() * jumpForce);
+            //spriteTop.gameObject.transform.position += GetRandomJumpDir() * jumpForce;
             isCortable = false;
         }
     }
@@ -46,6 +42,6 @@ public class ObjetoCortable : MonoBehaviour, ICortable
             randomX = 1;
         }
 
-        return new(randomX, 1, randomX);
+        return new(randomX, 1, -1);
     }
 }
