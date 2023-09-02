@@ -1,68 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1803443988500347719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1839200025747255805}
-  - component: {fileID: 7340189295786692633}
-  - component: {fileID: 4834876928453784454}
-  m_Layer: 8
-  m_Name: PickupRB
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1839200025747255805
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803443988500347719}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6265124299010635538}
-  m_Father: {fileID: 2223711169329458678}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &7340189295786692633
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803443988500347719}
-  serializedVersion: 2
-  m_Mass: 0.1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!65 &4834876928453784454
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803443988500347719}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.8, y: 1.2, z: 0.2}
-  m_Center: {x: 0.1, y: 0.5, z: 0}
 --- !u!1 &2223711168269973713
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +116,7 @@ Transform:
   m_Children:
   - {fileID: 9079287164867712835}
   - {fileID: 2223711168269973712}
-  - {fileID: 1839200025747255805}
+  - {fileID: 6265124299010635538}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,15 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2ad301185f09c4c932504143807c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 20
   spriteEntero: {fileID: 70029014811641108}
   spriteBase: {fileID: 2223711168269973726}
   spriteTop: {fileID: 3848987927327013166}
-  pickupRB: {fileID: 7340189295786692633}
-  respawnTime: 9999
-  spritePickup: {fileID: 906815822126549660}
+  velocidadInicial: 3
+  anguloLanzamiento: 60
   pickupType: 1
   pickupAmount: 1
+  doesRespawn: 0
+  respawnTime: 9999
 --- !u!65 &4460866578473358796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -311,15 +248,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6265124299010635538}
   - component: {fileID: 3848987927327013166}
-  - component: {fileID: 8715284591513099247}
-  - component: {fileID: 906815822126549660}
   m_Layer: 8
-  m_Name: SpritePickup
+  m_Name: SpriteTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6265124299010635538
 Transform:
   m_ObjectHideFlags: 0
@@ -328,12 +263,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9064206094307642455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.000015271282, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1839200025747255805}
-  m_RootOrder: 0
+  m_Father: {fileID: 2223711169329458678}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3848987927327013166
 SpriteRenderer:
@@ -387,35 +322,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &8715284591513099247
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9064206094307642455}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0.1, y: 0.5, z: 0}
---- !u!114 &906815822126549660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9064206094307642455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a0621a8ed8166d4a877f8a9863870d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerBool: 0
-  tooltipTextToShow: Levantaste una flor!
-  postItColor: 4
-  haceSaltito: 1
-  miCortable: {fileID: 4089154315101621346}
-  isSelfDestruct: 1
-  timeUntilSelfdestruct: 1

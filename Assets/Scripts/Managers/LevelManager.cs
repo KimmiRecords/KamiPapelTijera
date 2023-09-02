@@ -83,7 +83,7 @@ public class LevelManager : Singleton<LevelManager>
         //}
     }
 
-    public void CurePlayer(int curacion)
+    public void AddHealth(int curacion)
     {
         player.GetCured(curacion);
     }

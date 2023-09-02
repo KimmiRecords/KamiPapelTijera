@@ -58,37 +58,15 @@ public abstract class SpritePickup : TriggerScript
     //        }
     //    }
 
-    //    if (isSelfDestruct)
-    //    {
-    //        StartCoroutine(SelfDestructCoroutine(timeUntilSelfdestruct));
-    //    }
+    //    
 
     //    //esta linea esta comentada porque al final los pickups son autopickupeables
     //    //cuestion que nunca voy a tener que pickupear estas cosas del piso
     //    //isReadyToPickup = true;
     //}
 
-    //public Vector3 GetRandomJumpDir()
-    //{
-    //    float randomX;
-    //    if (Random.Range(0, 100) < 50)
-    //    {
-    //        randomX = -1;
-    //    }
-    //    else
-    //    {
-    //        randomX = 1;
-    //    }
-
-    //    return new(randomX, 1, randomX);
-    //}
-
-    //public IEnumerator SelfDestructCoroutine(float time)
-    //{
-    //    yield return new WaitForSeconds(time);
-    //    transform.parent.gameObject.SetActive(false);
-    //    //Destroy(gameObject);
-    //}
+  
+   
 
 
 }

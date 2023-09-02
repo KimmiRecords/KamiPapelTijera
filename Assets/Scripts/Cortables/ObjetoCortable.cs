@@ -67,7 +67,7 @@ public class ObjetoCortable : MonoBehaviour, ICortable
             float z = posicionInicial.z + (velocidadInicial * Mathf.Cos(anguloLanzamiento * Mathf.Deg2Rad)) * tiempoPasado;
 
             spriteTop.gameObject.transform.localPosition = new Vector3(x, y, -z);
-            Debug.Log(spriteTop.gameObject.transform.localPosition);
+            //Debug.Log(spriteTop.gameObject.transform.localPosition);
 
             tiempoPasado += Time.deltaTime;
             yield return null;

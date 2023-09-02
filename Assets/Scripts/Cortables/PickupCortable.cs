@@ -5,10 +5,6 @@ using UnityEngine.VFX;
 
 public class PickupCortable : ObjetoCortable
 {
-    //faltaria que desaparezca
-    //(en el caso de los arbustos, que respawnee)
-    //y poder ajustar el movimiento en z (para hacer el caso del arbol despues)
-
     //los pickups cortables dan algun recurso, 
     //desaparecen despues de cortarlos,
     //y pueden respawnear

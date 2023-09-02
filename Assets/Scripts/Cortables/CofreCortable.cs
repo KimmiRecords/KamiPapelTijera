@@ -9,7 +9,6 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
 
     //el trucazo: no es un cortable per se. pero bueno, quedó
 
-    [SerializeField] int paperReward = 5;
     [SerializeField] float initialDelay = 1;
     [SerializeField] Animator anim; //mi animator
     [SerializeField] GameObject particulitasDePapel;
@@ -27,18 +26,12 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
         isOpening = true;
         AudioManager.instance.PlayByName("MagicSuccess", 1.4f);
         //lanzar particulas
-        particulitasDePapel.gameObject.SetActive(true);
+        particulitasDePapel.SetActive(true);
 
         while (isOpening) //el final de la animacion dispara un metodo que lo hace false
         {
             yield return new WaitForEndOfFrame();
         }
-
-        //particles.gameObject.SetActive(true);
-        LevelManager.Instance.AddResource(ResourceType.papel, paperReward);
-        //yield return new WaitForSeconds(delayUntilDeath);
-        //Destroy(gameObject);
-
     }
 
     public void EndOpeningAnimation()
