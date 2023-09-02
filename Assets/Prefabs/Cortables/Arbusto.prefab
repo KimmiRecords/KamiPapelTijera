@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7026260969120478915}
   - {fileID: 7009003680000460756}
-  - {fileID: 2178901445804473580}
+  - {fileID: 1064269292514549441}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61,15 +61,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce131e03b3e708b4b9dd289b5d5ee62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 20
   spriteEntero: {fileID: 1403119957648234421}
   spriteBase: {fileID: 6432310864005939249}
   spriteTop: {fileID: 6603477753804779656}
-  pickupRB: {fileID: 2767657344255649519}
-  respawnTime: 10
-  spritePickup: {fileID: 269802804298028791}
+  velocidadInicial: 5
+  anguloLanzamiento: 45
   pickupType: 2
   pickupAmount: 1
+  doesRespawn: 1
+  respawnTime: 30
 --- !u!1 &3407858799241410177
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,69 +154,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &7181559646363321908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2178901445804473580}
-  - component: {fileID: 2767657344255649519}
-  - component: {fileID: 1624196536821855684}
-  m_Layer: 8
-  m_Name: PickupRB
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2178901445804473580
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7181559646363321908}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1064269292514549441}
-  m_Father: {fileID: 2223711169329458678}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2767657344255649519
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7181559646363321908}
-  serializedVersion: 2
-  m_Mass: 0.1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!65 &1624196536821855684
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7181559646363321908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.05, y: 1.79, z: 0.2}
-  m_Center: {x: 0.3, y: 0.9, z: 0}
 --- !u!1 &8442388447858696004
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,15 +164,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1064269292514549441}
   - component: {fileID: 6603477753804779656}
-  - component: {fileID: 7134753204767780619}
-  - component: {fileID: 269802804298028791}
   m_Layer: 8
-  m_Name: SpritePickup
+  m_Name: SpriteTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1064269292514549441
 Transform:
   m_ObjectHideFlags: 0
@@ -245,11 +180,11 @@ Transform:
   m_GameObject: {fileID: 8442388447858696004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.4999998, y: 2.4999998, z: 2.4999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2178901445804473580}
-  m_RootOrder: 0
+  m_Father: {fileID: 2223711169329458678}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6603477753804779656
 SpriteRenderer:
@@ -303,38 +238,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7134753204767780619
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8442388447858696004}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.6, y: 2.5, z: 1}
-  m_Center: {x: 0.3, y: 0.9, z: 0}
---- !u!114 &269802804298028791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8442388447858696004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a0621a8ed8166d4a877f8a9863870d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerBool: 0
-  tooltipTextToShow: Conseguiste papel!
-  postItColor: 4
-  haceSaltito: 1
-  miCortable: {fileID: 4249590898158523490}
-  isSelfDestruct: 1
-  timeUntilSelfdestruct: 1
 --- !u!1 &8746060627207873154
 GameObject:
   m_ObjectHideFlags: 0
