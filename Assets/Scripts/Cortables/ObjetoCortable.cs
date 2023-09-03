@@ -9,11 +9,12 @@ public class ObjetoCortable : MonoBehaviour, ICortable
     //este script apaga uno y prende los otros cuando es cortado
 
     [SerializeField] protected SpriteRenderer spriteEntero, spriteBase, spriteTop;
+
+    [SerializeField] protected float velocidadInicial = 5.0f;
+    [SerializeField] protected float anguloLanzamiento = 45.0f; // Ángulo en grados
+    [SerializeField] protected float alturaInicial = 0;
+
     protected bool isCortable = true;
-
-    public float velocidadInicial = 5.0f;
-    public float anguloLanzamiento = 45.0f; // Ángulo en grados
-
     protected Vector3 posicionInicial;
     protected float tiempoDeVuelo;
     protected readonly float gravedad = 9.81f;
@@ -35,7 +36,7 @@ public class ObjetoCortable : MonoBehaviour, ICortable
 
     protected virtual void ApplyCut()
     {
-        print("cortaste este objeto");
+        //print("cortaste este objeto");
         AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
         AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
 
@@ -55,7 +56,7 @@ public class ObjetoCortable : MonoBehaviour, ICortable
     }
 
 
-    protected IEnumerator MoverEnTiroOblicuo()
+    protected virtual IEnumerator MoverEnTiroOblicuo()
     {
         float tiempoPasado = 0.0f;
         tiempoDeVuelo = (2 * velocidadInicial * Mathf.Sin(anguloLanzamiento * Mathf.Deg2Rad)) / gravedad;
@@ -63,7 +64,7 @@ public class ObjetoCortable : MonoBehaviour, ICortable
         while (tiempoPasado < tiempoDeVuelo)
         {
             float x = posicionInicial.x + (velocidadInicial * Mathf.Cos(anguloLanzamiento * Mathf.Deg2Rad)) * tiempoPasado;
-            float y = posicionInicial.y + (velocidadInicial * Mathf.Sin(anguloLanzamiento * Mathf.Deg2Rad)) * tiempoPasado - (0.5f * gravedad * tiempoPasado * tiempoPasado);
+            float y = alturaInicial + posicionInicial.y + (velocidadInicial * Mathf.Sin(anguloLanzamiento * Mathf.Deg2Rad)) * tiempoPasado - (0.5f * gravedad * tiempoPasado * tiempoPasado);
             float z = posicionInicial.z + (velocidadInicial * Mathf.Cos(anguloLanzamiento * Mathf.Deg2Rad)) * tiempoPasado;
 
             spriteTop.gameObject.transform.localPosition = new Vector3(x, y, -z);

@@ -21,7 +21,6 @@ public class Rocoso : Enemy, IMojable
     [HideInInspector] public bool isDead = false;
     [HideInInspector] public bool deathAnimationEnded = false;
 
-
     Player _player;
     protected FiniteStateMachine _fsm;
 
@@ -108,8 +107,8 @@ public class Rocoso : Enemy, IMojable
 
     public IEnumerator MorirCoroutine() //la corrutina esta es solo para esperar a la anim antes de disparar Die()
     {
+        Debug.Log("arranco corrutina de morir");
         isDead = true; //necesito un bool para que se haga el cambio de state. pero todavia no quiero morir posta
-        //Debug.Log("arranco corrutina de morir");
         
         //espero a que termine la animacion de muerte
         while (!deathAnimationEnded)

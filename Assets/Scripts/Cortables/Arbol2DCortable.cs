@@ -2,25 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arbol2DCortable : FlorCortable
+public class Arbol2DCortable : ObjetoCortable
 {
-    //public override void GetCut(float dmg)
-    //{
-    //    if (isCortable)
-    //    {
-    //        Debug.Log("arbol2d get cut");
-    //        AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
-    //        AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
+    //cuando cortas a este arbol, dispara su animacion
+    //y un cambio de camara. seguro tambien sonidos y particulas
 
-    //        spriteEntero.gameObject.SetActive(false);
-    //        spriteBase.gameObject.SetActive(true);
-    //        pickupRB.gameObject.SetActive(true);
+    [SerializeField] Animator _anim;
+    [SerializeField] GameObject _hitbox;
 
-    //        spritePickup.Jump();
+    bool _falldownEnded;
 
-    //        LevelManager.Instance.AddResource(pickupType, pickupAmount);
-    //        AudioManager.instance.PlayByName("QuestCompleted", 0.85f);
-    //        isCortable = false;
-    //    }
-    //}
+    protected override void ApplyCut()
+    {
+        base.ApplyCut();
+        CameraManager.Instance.SetCamera(CameraMode.General);
+        _anim.SetTrigger("FallDown");
+        StartCoroutine(AplastadorHitboxCoroutine());
+    }
+
+    public void FinalizarAplastadorHitbox()
+    {
+        Debug.Log("finalizar aplastador hitbox");
+        _falldownEnded = true;
+    }
+
+    IEnumerator AplastadorHitboxCoroutine()
+    {
+        //la idea es que la hitbox solo este prendida mientras cae
+        //la animacion de caida me va a avisar cuando termine
+
+        while (!_falldownEnded)
+        {
+            yield return null;
+        }
+
+        Debug.Log("apago la hitbox");
+        _hitbox.SetActive(false);
+    }
+
 }

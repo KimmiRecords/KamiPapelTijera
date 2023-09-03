@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 699239927733961118}
   - component: {fileID: 902718098205751472}
   m_Layer: 0
-  m_Name: RocosoBoxCollider
+  m_Name: CortableCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 6824791627489949588}
   - component: {fileID: 3469385055474898540}
   m_Layer: 0
-  m_Name: RocosoTrigger
+  m_Name: WakeUpTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 9202922456042850852}
   - component: {fileID: 8254748610383554322}
   m_Layer: 0
-  m_Name: RocosoAplastable
+  m_Name: AplastableCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7897264121734106300}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &9202922456042850852
 BoxCollider:
@@ -214,7 +214,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7897264121734106300}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1593964433056289674
 MeshFilter:
@@ -325,11 +325,11 @@ Transform:
   m_LocalScale: {x: 2.69472, y: 2.69472, z: 2.69472}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4692066203251883459}
+  - {fileID: 4024922672323088892}
   - {fileID: 6690140290626366434}
   - {fileID: 6426847484859966042}
+  - {fileID: 4692066203251883459}
   - {fileID: 579492377203971641}
-  - {fileID: 4024922672323088892}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -459,7 +459,7 @@ PrefabInstance:
     - target: {fileID: 1422845244052679448, guid: 4a70c2358f2f27f4cae5d4eecb2bea53,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1422845244052679448, guid: 4a70c2358f2f27f4cae5d4eecb2bea53,
         type: 3}

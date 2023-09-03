@@ -59,12 +59,12 @@ public class CameraManager : Singleton<CameraManager>
         {
             if ((Dialogue)parameter[1] == dialoguesEspeciales[i]) //el dialogue
             {
-                Debug.Log("prepare camera. era caso especial: no hago nada");
+                //Debug.Log("prepare camera. era caso especial: no hago nada");
                 //SetCamera(camarasEspeciales[i]);
                 return;
             }
         }
-        Debug.Log("prepare camera: no era caso especial. set camera");
+        //Debug.Log("prepare camera: no era caso especial. set camera");
         SetCamera((CameraMode)parameter[0]);
     }
 
@@ -121,12 +121,12 @@ public class CameraManager : Singleton<CameraManager>
 
         if (parameter[0] is int || parameter[0] is CameraMode)
         {
-            Debug.Log("cambio la camara a " + (int)parameter[0]);
+            //Debug.Log("cambio la camara a " + (int)parameter[0]);
             SetCamera((int)parameter[0]);
         }
         else if (parameter[0] is CameraMode)
         {
-            Debug.Log("cambio la camara a " + (CameraMode)parameter[0]);
+            //Debug.Log("cambio la camara a " + (CameraMode)parameter[0]);
             SetCamera((CameraMode)parameter[0]);
         }
     }
