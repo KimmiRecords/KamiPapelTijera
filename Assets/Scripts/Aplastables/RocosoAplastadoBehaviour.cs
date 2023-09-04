@@ -11,5 +11,6 @@ public class RocosoAplastadoBehaviour : AplastadoBehaviour
         Debug.Log("Aplastado: Aplastar");
         StartCoroutine(LerpScaleY(transform, lerpTime));
         _miRocoso.StartCoroutine(_miRocoso.MorirCoroutine());
+        AudioManager.instance.PlayByName("RockSmash");
     }
 }

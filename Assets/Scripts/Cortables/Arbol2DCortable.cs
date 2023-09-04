@@ -18,6 +18,10 @@ public class Arbol2DCortable : ObjetoCortable
         CameraManager.Instance.SetCamera(CameraMode.General);
         _anim.SetTrigger("FallDown");
         StartCoroutine(AplastadorHitboxCoroutine());
+
+        AudioManager.instance.PlayByName("AxeHit", 1f, 0.05f);
+        AudioManager.instance.PlayByName("TreeFall");
+
     }
 
     public void FinalizarAplastadorHitbox()
