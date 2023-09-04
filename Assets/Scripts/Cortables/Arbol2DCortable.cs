@@ -10,6 +10,10 @@ public class Arbol2DCortable : ObjetoCortable
     [SerializeField] Animator _anim;
     [SerializeField] GameObject _hitbox;
 
+    [SerializeField] GameObject _particulasHojas;
+    [SerializeField] GameObject _particulasPolvo;
+
+
     bool _falldownEnded;
 
     protected override void ApplyCut()
@@ -21,13 +25,14 @@ public class Arbol2DCortable : ObjetoCortable
 
         AudioManager.instance.PlayByName("AxeHit", 1f, 0.05f);
         AudioManager.instance.PlayByName("TreeFall");
-
+        _particulasHojas.SetActive(true);
     }
 
     public void FinalizarAplastadorHitbox()
     {
         Debug.Log("finalizar aplastador hitbox");
         _falldownEnded = true;
+        _particulasPolvo.SetActive(true);
     }
 
     IEnumerator AplastadorHitboxCoroutine()
@@ -42,6 +47,7 @@ public class Arbol2DCortable : ObjetoCortable
 
         Debug.Log("apago la hitbox");
         _hitbox.SetActive(false);
+
     }
 
 }
