@@ -21,7 +21,7 @@ public class PageScroller : Singleton<PageScroller>
     public GameObject hojaMasterRev; //idem para atras
     [SerializeField] float delayTime;
     [SerializeField] float popupDelayTime;
-    [HideInInspector] public bool isNext;
+    public bool isNext = true;
 
     bool isTurning = false;
 
