@@ -38,7 +38,7 @@ public class NPC_Abuela : NPC
         isDropoff = true;
         if (parameter[0] is Transform)
         {
-            var dropOffTransform = (Transform)parameter[0];
+            Transform dropOffTransform = (Transform)parameter[0];
             dropoffPoint = dropOffTransform.position;
             transform.parent = dropOffTransform;
         }

@@ -15,6 +15,8 @@ MonoBehaviour:
   questName: Dalia I
   questDescription: "Cort\xE1 3 flores violetas y tra\xE9selas a Dalia para que pueda
     preparar sus pociones energizantes."
-  conditions:
-  - resourceType: 1
+  condition:
+    conditionType: 0
+    resourceType: 1
     requiredAmount: 3
+    evento: 0

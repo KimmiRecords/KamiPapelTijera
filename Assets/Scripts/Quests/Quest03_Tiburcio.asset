@@ -15,6 +15,8 @@ MonoBehaviour:
   questName: Tiburcio I
   questDescription: "Las gallinas de Tiburcio tienen hongos en la cabeza! Us\xE1
     tu tijera para cortar 3 de ellos y tra\xE9selos a Tiburcio."
-  conditions:
-  - resourceType: 1
+  condition:
+    conditionType: 0
+    resourceType: 0
     requiredAmount: 3
+    evento: 0

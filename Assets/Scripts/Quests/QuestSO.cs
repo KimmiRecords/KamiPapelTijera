@@ -6,7 +6,7 @@ public class QuestSO : ScriptableObject
 {
     public string questName;
     [TextArea] public string questDescription;
-    public Condition[] conditions;
+    public Condition condition;
 
     //eventualmente podrian tener un reward,
     //tambien podrian tener un string descripcion de cada condicion
@@ -15,6 +15,14 @@ public class QuestSO : ScriptableObject
 [System.Serializable]
 public struct Condition
 {
+    public ConditionType conditionType;
     public ResourceType resourceType;
     public int requiredAmount;
+    public Evento evento;
+}
+
+public enum ConditionType
+{
+    Resource,
+    Event
 }

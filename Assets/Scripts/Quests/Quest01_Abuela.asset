@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: "Tra\xE9 de vuelta a la abuela."
   questDescription: "La abuela se perdi\xF3 en el bosque."
-  conditions:
-  - resourceType: 3
-    requiredAmount: 9999
+  condition:
+    conditionType: 1
+    resourceType: 0
+    requiredAmount: 0
+    evento: 10

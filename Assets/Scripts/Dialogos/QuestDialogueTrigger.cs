@@ -12,6 +12,7 @@ public class QuestDialogueTrigger : TriggerDialogue
     [SerializeField] QuestSO _quest; //la quest que da este pj
     bool _questCompleted;
     bool _questDelivered;
+    
 
     protected override void Start()
     {
@@ -31,17 +32,19 @@ public class QuestDialogueTrigger : TriggerDialogue
         if (triggerBool) //este temita del interact se podria hacer mejor, ya lo demostre en otro lado
         {
             //Debug.Log("dalia: me interactuan");
+            //known bug: si agrego la quest por primera vez con las condiciones
+            //           de la misma ya cumplidas, va directo al currentDialogue3
+
 
             if (_questCompleted && !_questDelivered)
             {
                 //Debug.Log("dalia: quest entregada!");
                 QuestManager.Instance.RemoveQuest(_quest);
-                LevelManager.Instance.AddResource(_quest.conditions[0].resourceType, -_quest.conditions[0].requiredAmount); //esto deberia funcar foreach condition
+                LevelManager.Instance.AddResource(_quest.condition.resourceType, -_quest.condition.requiredAmount); //esto deberia funcar para condition evento. tal vez con una interfaz IQuestCondition con metodo complete/deliver
                 LevelManager.Instance.AddResource(ResourceType.papel, _paperReward);
                 AudioManager.instance.PlayByName("QuestCompleted02");
                 currentDialogue = 2;
                 _questDelivered = true;
-
             }
 
             //Debug.Log("dalia: muestro currentdialogue");
