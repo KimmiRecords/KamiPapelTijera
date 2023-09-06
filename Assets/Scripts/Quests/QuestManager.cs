@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class QuestManager : Singleton<QuestManager>
 {
-    public List<QuestSO> quests = new List<QuestSO>();
+    List<QuestSO> quests = new List<QuestSO>();
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void AddQuest(QuestSO quest) //esto lo disparan los npcs cuando les hablo
     {
-        Debug.Log("agrego la quest");
+        //Debug.Log("agrego la quest");
         quests.Add(quest);
     }
 

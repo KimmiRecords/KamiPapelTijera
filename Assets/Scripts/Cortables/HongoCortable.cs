@@ -2,13 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HongoCortable : FlorCortable
+public class HongoCortable : PickupCortable
 {
-    ////los hongos estan en las cabezas de las gallinas
-    ////asi que nacen, saltan, se deshacen hijos de la gallina
+    //el hongo cortable debe cambiar la animacion de la gallina
+    [SerializeField] Animator _anim;
 
-    ////los hongos no respawnean
+    protected override void ApplyCut()
+    {
+        print("cortaste el hongo!");
+        AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
+        AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
+        AudioManager.instance.PlayByName("MagicSuccess", 2f);
 
+
+        //cambio las animaciones
+        _anim.SetBool("_isCortado", true);
+
+        isCortable = false;
+        LevelManager.Instance.AddResource(pickupType, pickupAmount);
+        StartCoroutine(WaitForSelfDestructCoroutine(selfDestructTime));
+
+        if (doesRespawn)
+        {
+            StartCoroutine(WaitForRespawnCoroutine(respawnTime));
+        }
+    }
 }
 
 

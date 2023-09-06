@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloristaDialogueTrigger : TriggerDialogue
+public class QuestDialogueTrigger : TriggerDialogue
 {
+    //si tu npc tiene exactamente 4 dialogos y una quest de recursos:
+    //este script es para vos
+    
+
     [SerializeField] int _paperReward = 20;
     [SerializeField] QuestSO _quest; //la quest que da este pj
-
     bool _questCompleted;
     bool _questDelivered;
 
@@ -31,7 +34,7 @@ public class FloristaDialogueTrigger : TriggerDialogue
 
             if (_questCompleted && !_questDelivered)
             {
-                Debug.Log("dalia: quest entregada!");
+                //Debug.Log("dalia: quest entregada!");
                 QuestManager.Instance.RemoveQuest(_quest);
                 LevelManager.Instance.AddResource(_quest.conditions[0].resourceType, -_quest.conditions[0].requiredAmount); //esto deberia funcar foreach condition
                 LevelManager.Instance.AddResource(ResourceType.papel, _paperReward);
@@ -41,7 +44,7 @@ public class FloristaDialogueTrigger : TriggerDialogue
 
             }
 
-            Debug.Log("dalia: muestro currentdialogue");
+            //Debug.Log("dalia: muestro currentdialogue");
             DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
 
             switch (currentDialogue)

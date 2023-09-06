@@ -15,7 +15,7 @@ public class PickupCortable : ObjetoCortable
     [SerializeField] protected bool doesRespawn;
     [SerializeField] protected float respawnTime = 30;
 
-    float selfDestructTime = 1;
+    protected float selfDestructTime = 1;
 
 
     protected override void ApplyCut()
