@@ -74,7 +74,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         //agrega la cantidad valuetoadd al total. si quiero restar, valuetoadd deberia ser negativo
         recursosRecolectados[pickupType] += valueToAdd;
-        EventManager.Trigger(Evento.OnPlayerResourceUpdated, pickupType, recursosRecolectados[pickupType]);
+        EventManager.Trigger(Evento.OnResourceUpdated, pickupType, recursosRecolectados[pickupType]);
         print(pickupType.ToString() + " // " + recursosRecolectados[pickupType]);
 
         //if (pickupType == ResourceType.papel)

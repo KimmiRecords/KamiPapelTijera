@@ -23,7 +23,7 @@ public class CameraManager : Singleton<CameraManager>
     [SerializeField] float levelStartDelayTime = 1;
 
     [Header("Casos Especiales")]
-    [SerializeField] Dialogue[] dialoguesEspeciales;
+    [SerializeField] DialogueSO[] dialoguesEspeciales;
     [SerializeField] CameraMode[] camarasEspeciales;
 
     private void Start()
@@ -57,7 +57,7 @@ public class CameraManager : Singleton<CameraManager>
     {
         for (int i = 0; i < dialoguesEspeciales.Count(); i++)
         {
-            if ((Dialogue)parameter[1] == dialoguesEspeciales[i]) //el dialogue
+            if ((DialogueSO)parameter[1] == dialoguesEspeciales[i]) //el dialogue
             {
                 //Debug.Log("prepare camera. era caso especial: no hago nada");
                 //SetCamera(camarasEspeciales[i]);

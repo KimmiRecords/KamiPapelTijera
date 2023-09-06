@@ -52,7 +52,7 @@ public class HongueroTiburcioDialogueTrigger : TriggerDialogue
 
     protected override void PasarAlSiguienteDialogo(params object[] parameter)
     {
-        if ((Dialogue)parameter[1] == _dialogues[0])
+        if ((DialogueSO)parameter[1] == _dialogues[0])
         {
             //si el dialogo q termino fue mi dialogo0, paso al 1
             base.PasarAlSiguienteDialogo(parameter);

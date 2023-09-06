@@ -12,7 +12,7 @@ public class PedestalColorCheck : MonoBehaviour
 
     private void Start()
     {
-        EventManager.Subscribe(Evento.OnPlayerResourceUpdated, SetPedestalColor);
+        EventManager.Subscribe(Evento.OnResourceUpdated, SetPedestalColor);
         _renderer = GetComponent<Renderer>();
 
         _renderer.material.color = inactiveColor;
@@ -44,7 +44,7 @@ public class PedestalColorCheck : MonoBehaviour
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPlayerResourceUpdated, SetPedestalColor);
+            EventManager.Unsubscribe(Evento.OnResourceUpdated, SetPedestalColor);
         }
     }
 }

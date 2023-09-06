@@ -11,7 +11,7 @@ public struct DialogueEvent
 }
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Dialogue", order = 1)]
-public class Dialogue : ScriptableObject
+public class DialogueSO : ScriptableObject
 {
     public bool wasRead = false;
     public DialogueEvent[] events;

@@ -10,7 +10,7 @@ public class OverlayManager : MonoBehaviour
     bool _isLocked;
 
     [SerializeField]
-    Dialogue victoryTriggeringDialogue, mainQuestTriggeringDialogue;
+    DialogueSO victoryTriggeringDialogue, mainQuestTriggeringDialogue;
 
     void Start()
     {
@@ -29,13 +29,13 @@ public class OverlayManager : MonoBehaviour
     {
         //por ahora muestra el victory o el mainquest
 
-        if ((Dialogue)parameter[1] == victoryTriggeringDialogue)
+        if ((DialogueSO)parameter[1] == victoryTriggeringDialogue)
         {
             _victoryOverlay.gameObject.SetActive(true);
             Lock();
         }
 
-        if ((Dialogue)parameter[1] == mainQuestTriggeringDialogue)
+        if ((DialogueSO)parameter[1] == mainQuestTriggeringDialogue)
         {
             _mainQuestOverlay.gameObject.SetActive(true);
             Lock();

@@ -34,7 +34,7 @@ public class OrigamiRoute : MonoBehaviour
 
     public void ResetImagePosition()
     {
-        Debug.Log("RESET IAMGE POSITION");
+        //Debug.Log("RESET IAMGE POSITION");
 
         inicioRectangle.position = posicionInicioOriginal;
     }

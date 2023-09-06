@@ -6,7 +6,7 @@ public class AutoDialogue : MonoBehaviour
 {
     //cuando se lo pedis, arranca a dialogar
 
-    [SerializeField] Dialogue dialogue;
+    [SerializeField] DialogueSO dialogue;
 
     public void StartDialogue()
     {

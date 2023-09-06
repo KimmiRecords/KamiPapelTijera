@@ -44,7 +44,7 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
-    public void ShowDialogue(Dialogue dialogue)
+    public void ShowDialogue(DialogueSO dialogue)
     {
         if (!isShowing)
         {
@@ -59,7 +59,7 @@ public class DialogueManager : Singleton<DialogueManager>
             StartCoroutine(WriteText(dialogue));
         }
     }
-    public void HideDialogue(Dialogue dialogue)
+    public void HideDialogue(DialogueSO dialogue)
     {
         //print("hide dialogue " + dialogue.name);
         dialogueTextComponent.text = ""; //esto es lo que deberia estar animado despues
@@ -68,7 +68,7 @@ public class DialogueManager : Singleton<DialogueManager>
         isShowing = false;
         EventManager.Trigger(Evento.OnDialogueEnd, CameraMode.Normal, dialogue);
     }
-    public IEnumerator WriteText(Dialogue dialogue)
+    public IEnumerator WriteText(DialogueSO dialogue)
     {
         for (int i = 0; i < dialogue.events.Length; i++)
         {
