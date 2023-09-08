@@ -41,6 +41,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
 
     //auxiliars
     bool _readyToAttack = true;
+    bool isDrowning = false;
     [HideInInspector] public bool isJumpButtonDown;
     [HideInInspector] public bool isAttacking = false;
     [HideInInspector] public bool isPaperPlaneHat = false; //pph es paper plane hat
@@ -146,12 +147,30 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         _view.EndAttack();
 
     }
-    public void GetWet()
+    public void GetWet(float wetDamage)
     {
         //print("AAAA ME MOJO");
         _view.StartGetWetAnimation();
-        Die();
+        //Die();
+        isDrowning = true;
+        StartCoroutine(DrowningCoroutine(wetDamage));
     }
+
+
+    public void StopGettingWet()
+    {
+        isDrowning = false;
+    }
+
+    public IEnumerator DrowningCoroutine(float wetDamage)
+    {
+        while (isDrowning)
+        {
+            TakeDamage(wetDamage);
+            yield return new WaitForSeconds(0.8f);
+        }
+    }
+
     public void GetGolpeado(float dmg)
     {
         //print("me han golpeao");
@@ -165,6 +184,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         if (Vida <= 0)
         {
             Die();
+            isDrowning = false;
         }
         StartCoroutine(EnrojecerSprite());
     }
@@ -232,4 +252,5 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
             EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
         }
     }
+
 }
