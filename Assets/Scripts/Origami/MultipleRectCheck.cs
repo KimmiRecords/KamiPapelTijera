@@ -39,7 +39,7 @@ public class MultipleRectCheck : MonoBehaviour
                 arrastrando = true;
                 AudioManager.instance.PlayRandom("PaperFold01", "PaperFold02");
                 AudioManager.instance.PlayByName("PaperFoldLoop");
-                CursorManager.instance.SetCursor(CursorType.ClosedHand);
+                CursorManager.Instance.SetCursor(CursorType.ClosedHand);
             }
             else
             {
@@ -49,11 +49,11 @@ public class MultipleRectCheck : MonoBehaviour
         }
 
         //chequeo si el jugador solto el mouse mientras arrastraba
-        if (arrastrando && Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1))
         {
-            CursorManager.instance.SetCursor(CursorType.OpenHand);
+            CursorManager.Instance.SetCursor(CursorType.OpenHand);
 
-            //chequeo si el jugador solto sobre la imagen verde
+            //chequeo si el jugador solto sobre la meta
             if (RectTransformUtility.RectangleContainsScreenPoint(desiredOrigami.origamiRoutes[desiredOrigami.currentRouteIndex].finalRectangle, Input.mousePosition))
             {
                 //Debug.Log("invocación exitosa");
@@ -76,13 +76,16 @@ public class MultipleRectCheck : MonoBehaviour
             arrastrando = false;
         }
 
-
         bool encimaDeAlgunRectangulo = false;
 
         foreach (RectTransform rectTransform in desiredOrigami.origamiRoutes[desiredOrigami.currentRouteIndex].routeRectangles) //chequeo si estoy encima de algun rectangulo
         {
             if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition))
             {
+                if (arrastrando)
+                {
+                    desiredOrigami.origamiRoutes[desiredOrigami.currentRouteIndex].SetImagePosition(Input.mousePosition);
+                }
                 encimaDeAlgunRectangulo = true; //si sí, todo bien
                 break;
             }
@@ -108,7 +111,7 @@ public class MultipleRectCheck : MonoBehaviour
             TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
             AudioManager.instance.PlayRandom("MagicChannelingLoop01", "MagicChannelingLoop02");
             EventManager.Trigger(Evento.OnOrigamiStart);
-            print("rect check: mando a actualizar");
+            //print("rect check: mando a actualizar");
             origami.TriggerPliegueTextUpdater();
         }
 
@@ -124,7 +127,7 @@ public class MultipleRectCheck : MonoBehaviour
         TooltipManager.instance.HideTooltip();
         AudioManager.instance.StopByName("PaperFoldLoop");
         AudioManager.instance.StopByName("MagicChannelingLoop01", "MagicChannelingLoop02");
-        CursorManager.instance.SetCursor(CursorType.OpenHand);
+        CursorManager.Instance.SetCursor(CursorType.OpenHand);
         EventManager.Trigger(Evento.OnOrigamiEnd);
     }
 }

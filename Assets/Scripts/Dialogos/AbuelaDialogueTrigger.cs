@@ -9,7 +9,7 @@ public class AbuelaDialogueTrigger : TriggerDialogue
 
     protected override void Start()
     {
-        print("me suscribo a onplayerpressed E y abueladropoff - awela");
+        //print("me suscribo a onplayerpressed E y abueladropoff - awela");
 
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
         EventManager.Subscribe(Evento.OnAbuelaDropoff, PasarAlSiguienteDialogo);

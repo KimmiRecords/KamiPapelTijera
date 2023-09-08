@@ -23,7 +23,7 @@ public class CameraManager : Singleton<CameraManager>
     [SerializeField] float levelStartDelayTime = 1;
 
     [Header("Casos Especiales")]
-    [SerializeField] Dialogue[] dialoguesEspeciales;
+    [SerializeField] DialogueSO[] dialoguesEspeciales;
     [SerializeField] CameraMode[] camarasEspeciales;
 
     private void Start()
@@ -57,14 +57,14 @@ public class CameraManager : Singleton<CameraManager>
     {
         for (int i = 0; i < dialoguesEspeciales.Count(); i++)
         {
-            if ((Dialogue)parameter[1] == dialoguesEspeciales[i]) //el dialogue
+            if ((DialogueSO)parameter[1] == dialoguesEspeciales[i]) //el dialogue
             {
-                Debug.Log("prepare camera. era caso especial: no hago nada");
+                //Debug.Log("prepare camera. era caso especial: no hago nada");
                 //SetCamera(camarasEspeciales[i]);
                 return;
             }
         }
-        Debug.Log("prepare camera: no era caso especial. set camera");
+        //Debug.Log("prepare camera: no era caso especial. set camera");
         SetCamera((CameraMode)parameter[0]);
     }
 
@@ -108,8 +108,7 @@ public class CameraManager : Singleton<CameraManager>
 
     public void SetCamera(CameraMode cam)
     {
-        Debug.Log("cambio la camara a " + cam);
-        //_virtualCameras[(int)cam].gameObject.SetActive(false);
+        //Debug.Log("cambio la camara a " + cam);
         TurnOffAllVirtualCameras();
 
         currentCamera = (int)cam;
@@ -122,12 +121,12 @@ public class CameraManager : Singleton<CameraManager>
 
         if (parameter[0] is int || parameter[0] is CameraMode)
         {
-            Debug.Log("cambio la camara a " + (int)parameter[0]);
+            //Debug.Log("cambio la camara a " + (int)parameter[0]);
             SetCamera((int)parameter[0]);
         }
         else if (parameter[0] is CameraMode)
         {
-            Debug.Log("cambio la camara a " + (CameraMode)parameter[0]);
+            //Debug.Log("cambio la camara a " + (CameraMode)parameter[0]);
             SetCamera((CameraMode)parameter[0]);
         }
     }

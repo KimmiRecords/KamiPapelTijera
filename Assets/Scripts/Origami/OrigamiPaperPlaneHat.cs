@@ -11,5 +11,6 @@ public class OrigamiPaperPlaneHat : Origami
         base.Apply();
         EventManager.Trigger(Evento.OnOrigamiGivePaperPlaneHat, CameraMode.General);
         //particulas
+        //estaria genial un GlitterManager, que le decis donde y tuki, pone un glitter ahi
     }
 }

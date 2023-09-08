@@ -10,7 +10,7 @@ public class EncounterManager : MonoBehaviour
     // o por ahi un manager x encuentro? no se jaja
 
     [SerializeField] bool _isDialogueTriggered = true;
-    [SerializeField] Dialogue _triggeringDialogue;
+    [SerializeField] DialogueSO _triggeringDialogue;
     [SerializeField] GameObject _encounter;
     bool firstTime = true;
 
@@ -22,7 +22,7 @@ public class EncounterManager : MonoBehaviour
 
     public void SpawnEncounter(params object[] parameters)
     {
-        if (_isDialogueTriggered && (Dialogue)parameters[1] == _triggeringDialogue && firstTime)
+        if (_isDialogueTriggered && (DialogueSO)parameters[1] == _triggeringDialogue && firstTime)
         {
             _encounter.SetActive(true);
             firstTime = false;

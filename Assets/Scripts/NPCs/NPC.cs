@@ -17,8 +17,7 @@ public class NPC : Entity
     public float playerOffsetDistance = 10;
     public float arriveRadius = 5;
 
-    [HideInInspector]
-    public Vector3 velocity;
+    [HideInInspector] public Vector3 velocity;
     public float maxForce = 50;
 
     protected virtual void Start()
@@ -29,7 +28,7 @@ public class NPC : Entity
         _fsm.ChangeState(State.NPC_Idle);
     }
 
-    private void Update()
+    protected void Update()
     {
         transform.position += velocity * Time.deltaTime;
         _fsm.Update();

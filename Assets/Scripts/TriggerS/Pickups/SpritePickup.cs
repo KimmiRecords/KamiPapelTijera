@@ -10,86 +10,63 @@ public abstract class SpritePickup : TriggerScript
     //(se añade al inventario al momento de cortar,
     //no hace falta tocarlo de nuevo)
 
-    [SerializeField]
-    protected bool haceSaltito; //si pega saltito al nacer como un pickup de flor
+    //[SerializeField]
+    //protected bool haceSaltito; //si pega saltito al nacer como un pickup de flor
 
-    [SerializeField]
-    protected FlorCortable miCortable;
+    //[SerializeField]
+    //protected FlorCortable miCortable;
 
-    protected Vector3 originalPosition;
-    protected Quaternion originalQuaternion;
-    protected bool isReadyToJump;
-    protected bool isReadyToPickup;
-
-
-    public bool isSelfDestruct;
-    public float timeUntilSelfdestruct = 2;
+    //protected Vector3 originalPosition;
+    //protected Quaternion originalQuaternion;
+    //protected bool isReadyToJump = true;
+    //protected bool isReadyToPickup;
 
 
-    protected override void Start()
-    {
-        base.Start();
-        originalPosition = transform.position;
-        originalQuaternion = transform.rotation;
-        miCortable.pickupRB.AddForce(GetRandomJumpDir() * miCortable.jumpForce);
-        //transform.position += new Vector3(1, 1, 1);
-        //jumpForce = miCortable.jumpForce;
-    }
+    //public bool isSelfDestruct;
+    //public float timeUntilSelfdestruct = 2;
 
-    public virtual void ResetPosition()
-    {
-        //print("reset position");
-        //vuelvo a donde empece
-        transform.SetPositionAndRotation(originalPosition, originalQuaternion);
-        isReadyToJump = true;
-    }
 
-    public void Jump()
-    {
-        print("el pickup salta");
-        //nace tirando animacion de salir volando y caer al piso. 
-        if (haceSaltito)
-        {
-            if (isReadyToJump)
-            {
-                miCortable.pickupRB.AddForce(GetRandomJumpDir() * miCortable.jumpForce);
-                //transform.position += new Vector3(1, 1, 1);
+    //protected override void Start()
+    //{
+    //    base.Start();
+    //    originalPosition = transform.position;
+    //    originalQuaternion = transform.rotation;
+    //    miCortable.pickupRB.AddForce(GetRandomJumpDir() * miCortable.jumpForce);
+    //}
 
-                isReadyToJump = false;
-            }
-        }
+    //public virtual void ResetPosition()
+    //{
+    //    //print("reset position");
+    //    //vuelvo a donde empece
+    //    transform.SetPositionAndRotation(originalPosition, originalQuaternion);
+    //    isReadyToJump = true;
+    //}
 
-        if (isSelfDestruct)
-        {
-            StartCoroutine(SelfDestructCoroutine(timeUntilSelfdestruct));
-        }
+    //public virtual void Jump()
+    //{
+    //    //print("el pickup salta");
+    //    //nace tirando animacion de salir volando y caer al piso. 
+    //    if (haceSaltito)
+    //    {
+    //        if (isReadyToJump)
+    //        {
+    //            //Debug.Log("aaaaaa");
+    //            miCortable.pickupRB.AddForce(GetRandomJumpDir() * miCortable.jumpForce);
+    //            //transform.position += new Vector3(1, 1, 1);
 
-        //esta linea esta comentada porque al final los pickups son autopickupeables
-        //cuestion que nunca voy a tener que pickupear estas cosas del piso
-        //isReadyToPickup = true;
-    }
+    //            isReadyToJump = false;
+    //        }
+    //    }
 
-    public Vector3 GetRandomJumpDir()
-    {
-        float randomX;
-        if (Random.Range(0, 100) < 50)
-        {
-            randomX = -1;
-        }
-        else
-        {
-            randomX = 1;
-        }
+    //    
 
-        return new(randomX, 1, randomX);
-    }
+    //    //esta linea esta comentada porque al final los pickups son autopickupeables
+    //    //cuestion que nunca voy a tener que pickupear estas cosas del piso
+    //    //isReadyToPickup = true;
+    //}
 
-    public IEnumerator SelfDestructCoroutine(float time)
-    {
-        yield return new WaitForSeconds(time);
-        transform.parent.gameObject.SetActive(false);
-        //Destroy(gameObject);
-    }
+  
+   
 
 
 }

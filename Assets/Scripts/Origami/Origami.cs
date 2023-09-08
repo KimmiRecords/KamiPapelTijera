@@ -3,36 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum OrigamiForm
-{
-    Grulla,
-    Barco,
-    Puente
-}
 
 public abstract class Origami : MonoBehaviour
 {
-    public OrigamiForm origamiForm;
-
     public OrigamiRoute[] origamiRoutes;
     public int paperCost;
     public bool isReusable;
-
-
     public string tooltipMessage = "Arratrá con clic derecho desde la flecha verde hasta el circulo rojo. No te salgas del camino indicado!";
     public PostItColor postItColor;
 
-    [HideInInspector]
-    public int currentRouteIndex = 0;
-
-    [HideInInspector]
-    public bool wasUsed;
-
+    [HideInInspector] public int currentRouteIndex = 0;
+    [HideInInspector] public bool wasUsed;
 
     public void FailOrigami()
     {
         //print("fallaste asi que arrancas de cero");
+        origamiRoutes[currentRouteIndex].ResetImagePosition();
         currentRouteIndex = 0;
+        //ResetAllRoutes();
+
 
         for (int i = 0; i < origamiRoutes.Length; i++)
         {
@@ -66,24 +55,26 @@ public abstract class Origami : MonoBehaviour
 
     public virtual bool CompleteRoute()
     {
-        print("ruta actual completada");
+        //print("ruta actual completada");
         origamiRoutes[currentRouteIndex].wasCompleted = true;
+        origamiRoutes[currentRouteIndex].ResetImagePosition();
         currentRouteIndex++;
 
         if (currentRouteIndex >= origamiRoutes.Length)
         {
-            print("completaste el origami");
+            //print("completaste el origami");
             currentRouteIndex = 0;
             if (!isReusable)
             {
                 wasUsed = true;
             }
             Apply();
+            //ResetAllRoutes();
             return true;
         }
         else
         {
-            print("siguienteee");
+            //print("siguienteee");
             NextRoute();
             return false;
         }
@@ -91,17 +82,24 @@ public abstract class Origami : MonoBehaviour
 
     public virtual void Apply()
     {
-        print("origami apply");
-        //EventManager.Trigger(Evento.OnOrigamiApplied, -paperCost, this);
-
-        //consume papel
+        //todos los origamis, al terminarlos, aplican algo
+        //print("origami apply");
         LevelManager.Instance.AddResource(ResourceType.papel, -paperCost);
     }
 
     public void TriggerPliegueTextUpdater()
     {
-        print("triggereo con " + (currentRouteIndex + 1).ToString() + "/" + origamiRoutes.Length);
+        //print("triggereo con " + (currentRouteIndex + 1).ToString() + "/" + origamiRoutes.Length);
         EventManager.Trigger(Evento.OnOrigamiFoldChange, currentRouteIndex + 1, origamiRoutes.Length);
     }
+
+    public void ResetAllRoutes()
+    {
+        foreach (OrigamiRoute route in origamiRoutes)
+        {
+            route.ResetImagePosition();
+        }
+    }
+
 
 }

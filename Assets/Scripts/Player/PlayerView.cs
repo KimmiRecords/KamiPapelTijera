@@ -18,15 +18,18 @@ public class PlayerView
 
     public void CheckMagnitude(float hor, float ver)
     {
-        if (hor == 0 && ver == 0)
+        if (!_player.isAttacking)
         {
-            StartIdleAnimation();
-            canRotate = false;
-        }
-        else
-        {
-            StartMoveAnimation();
-            canRotate = true;
+            if (hor == 0 && ver == 0)
+            {
+                StartIdleAnimation();
+                canRotate = false;
+            }
+            else
+            {
+                StartMoveAnimation();
+                canRotate = true;
+            }
         }
     }
 
@@ -42,14 +45,24 @@ public class PlayerView
 
     public void StartTijeraAnimation()
     {
-        //AudioManager.instance.PlayByName("TijeraMiss", 1.1f);
-        //_anim.SetTrigger("TijeraAttack01");
-        _anim.SetTrigger("isAtack");
+        _anim.SetTrigger("isAttack");
+    }
+
+    public void StartAttack()
+    {
+        _anim.SetBool("isAttacking", true);
+    }
+
+    public void EndAttack()
+    {
+        _anim.SetBool("isAttacking", false);
     }
 
     public void StartGetWetAnimation()
     {
-        AudioManager.instance.PlayByName("ShipCrash", 0.4f);
+        AudioManager.instance.PlayByName("BigWaterSplash", 1.4f);
+        //triggerear loop de particulas
+        //triggerear loop de sonido de nadar splashsplash
     }
 
     public void StartGetGolpeadoAnimation()
@@ -72,7 +85,7 @@ public class PlayerView
     {
         AudioManager.instance.PlayByName("JumpSFX", 2f);
         _anim.SetBool("isWalk", false);
-        _anim.SetBool("isJump", true);    
+        _anim.SetBool("isJump", true);
     }
 
     public void StopJump()
@@ -83,7 +96,6 @@ public class PlayerView
     public void StartCast()
     {
         _anim.SetBool("isCasting", true);
-
     }
 
     public void EndCast()

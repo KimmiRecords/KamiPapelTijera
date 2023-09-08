@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 7026260969120478915}
   - {fileID: 7009003680000460756}
-  - {fileID: 2178901445804473580}
+  - {fileID: 1064269292514549441}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -64,16 +64,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c88fa963bb68545b7653d8f428f824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 2
   spriteEntero: {fileID: 1403119957648234421}
   spriteBase: {fileID: 6432310864005939249}
   spriteTop: {fileID: 6603477753804779656}
-  pickupRB: {fileID: 2767657344255649519}
-  respawnTime: 9999
-  spritePickup: {fileID: 3962814971974374131}
-  _isCortado: 0
+  velocidadInicial: 5
+  anguloLanzamiento: 45
+  alturaInicial: 0
   pickupType: 0
   pickupAmount: 1
+  doesRespawn: 0
+  respawnTime: 9999
+  _anim: {fileID: 0}
 --- !u!95 &2467245976564216227
 Animator:
   serializedVersion: 4
@@ -106,9 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e573e8753fb33004388694a14abcc34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miHongo: {fileID: 6869142402802870411}
-  anim: {fileID: 2467245976564216227}
-  aux: 1
 --- !u!212 &2539083702588494424
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -245,69 +243,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &7181559646363321908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2178901445804473580}
-  - component: {fileID: 2767657344255649519}
-  - component: {fileID: 1624196536821855684}
-  m_Layer: 8
-  m_Name: PickupRB
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2178901445804473580
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7181559646363321908}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1064269292514549441}
-  m_Father: {fileID: 2223711169329458678}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2767657344255649519
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7181559646363321908}
-  serializedVersion: 2
-  m_Mass: 0.1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!65 &1624196536821855684
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7181559646363321908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.4081428, y: 0.7314911, z: 0.5330667}
-  m_Center: {x: -0.22938459, y: 0.37074566, z: 0.049763136}
 --- !u!1 &8442388447858696004
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,12 +256,12 @@ GameObject:
   - component: {fileID: 7134753204767780619}
   - component: {fileID: 3962814971974374131}
   m_Layer: 8
-  m_Name: SpritePickup
+  m_Name: SpriteTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1064269292514549441
 Transform:
   m_ObjectHideFlags: 0
@@ -335,12 +270,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8442388447858696004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2178901445804473580}
-  m_RootOrder: 0
+  m_Father: {fileID: 2223711169329458678}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6603477753804779656
 SpriteRenderer:
@@ -414,7 +349,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8442388447858696004}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2650474a43ed9a54b910649e6bb92fe0, type: 3}
   m_Name: 
@@ -422,10 +357,6 @@ MonoBehaviour:
   triggerBool: 0
   tooltipTextToShow: Agarraste un honguito!
   postItColor: 1
-  haceSaltito: 1
-  miCortable: {fileID: 6869142402802870411}
-  isSelfDestruct: 1
-  timeUntilSelfdestruct: 1
 --- !u!1 &8746060627207873154
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,11 +27,11 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
 
 
     [Header("Planeo")]
-    public float augmentedJumpForce = 500f;
+    public float augmentedJumpForce = 20f;
     public int augmentedJumpsMax = 3;
-    public float planeoImpulse = 5;
-    public float planeoDuration = 2;
-    public float planeoDelayTime = 2;
+    public float planeoImpulse = 2;
+    public float planeoDuration = 1;
+    public float planeoDelayTime = 1;
 
     //originals
     Color originalColor;
@@ -41,6 +41,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
 
     //auxiliars
     bool _readyToAttack = true;
+    bool isDrowning = false;
     [HideInInspector] public bool isJumpButtonDown;
     [HideInInspector] public bool isAttacking = false;
     [HideInInspector] public bool isPaperPlaneHat = false; //pph es paper plane hat
@@ -125,15 +126,16 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     {
         if (_readyToAttack && hasTijera) //readytoattack se pone false cuando estoy en cooldown
         {
-            _view.StartTijeraAnimation();
             _readyToAttack = false;
+            isAttacking = true;
+            _view.StartAttack();
         }
     }
     public void StartTijeraCoroutine() //este metodo es solo xq el estupido animator no sabe disparar corrutinas. unity "2021"
     {
         StartCoroutine(TijeraCoroutine());
     }
-    public IEnumerator TijeraCoroutine() //prendo y apago rapidamente la hitbox para simular un ataque
+    public IEnumerator TijeraCoroutine() //prendo y apago rapidamente la hitbox en el momento justo para simular un ataque
     {
         _model.EnableTijeraHitbox();
         yield return new WaitForSeconds(tijeraHitBoxDuration);
@@ -141,27 +143,48 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
 
         yield return new WaitForSeconds(weaponCooldown); //los ataques tienen cooldown, asi que espero
         _readyToAttack = true;
+        isAttacking = false;
+        _view.EndAttack();
+
     }
-    public void GetWet()
+    public void GetWet(float wetDamage)
     {
-        print("AAAA ME MOJO");
+        //print("AAAA ME MOJO");
         _view.StartGetWetAnimation();
-        Die();
-        //PlayerPageSpawnManager.instance.PlacePlayer(PageScroller.instance.activeIndex + 1, PageScroller.instance.isNext); //spawnea al player en el inicio de la pagina actual
+        //Die();
+        isDrowning = true;
+        StartCoroutine(DrowningCoroutine(wetDamage));
     }
+
+
+    public void StopGettingWet()
+    {
+        isDrowning = false;
+    }
+
+    public IEnumerator DrowningCoroutine(float wetDamage)
+    {
+        while (isDrowning)
+        {
+            TakeDamage(wetDamage);
+            yield return new WaitForSeconds(0.8f);
+        }
+    }
+
     public void GetGolpeado(float dmg)
     {
         //print("me han golpeao");
-        _view.StartGetWetAnimation(); //es solo x el sonido
+        _view.StartGetWetAnimation(); //es solo x el sonido por ahora
         TakeDamage(dmg);
     }
-    
+
     public override void TakeDamage(float dmg)
     {
         Vida -= dmg;
         if (Vida <= 0)
         {
             Die();
+            isDrowning = false;
         }
         StartCoroutine(EnrojecerSprite());
     }
@@ -211,12 +234,11 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         jumpForce = originalJumpForce;
         //sfx de hacer bollo y destruir
         myPaperPlaneHat.SetActive(false);
-
     }
 
     public void AddPlaning()
     {
-        print("AddPlaning: dalee");
+        //print("AddPlaning: dalee");
         StartCoroutine(_model.AddExtraForwardForce(planeoDelayTime, planeoDuration));
     }
 
@@ -230,4 +252,5 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
             EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
         }
     }
+
 }

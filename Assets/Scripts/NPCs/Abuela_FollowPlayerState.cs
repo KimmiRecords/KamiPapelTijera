@@ -6,6 +6,8 @@ public class Abuela_FollowPlayerState : IState
 {
     FiniteStateMachine _fsm;
     NPC_Abuela _abuela;
+    bool movingRight = false;
+
     public Abuela_FollowPlayerState(FiniteStateMachine fsm, NPC_Abuela npc)
     {
         _fsm = fsm;
@@ -21,8 +23,10 @@ public class Abuela_FollowPlayerState : IState
     public void OnUpdate()
     {
         //Debug.Log("[NPC]  state");
-
         _abuela.AddForce(_abuela.FollowPlayer());
+
+        movingRight = _abuela.velocity.x > 0; //si la velocidad es positiva, esta yendo a la derecha
+        _abuela._sr.flipX = movingRight;//flipeo (o no)
 
         if (!_abuela.isFollowing)
         {

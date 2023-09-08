@@ -6,11 +6,9 @@ public class HongueroTiburcioDialogueTrigger : TriggerDialogue
 {
     //tiburcio es el de la quest de los hongos. si le llevas 3 hongos te da 20 de papel.
 
-    [SerializeField]
-    int hongosRequeridos = 3;
+    [SerializeField] int hongosRequeridos = 3;
 
-    [SerializeField]
-    int paperReward = 20;
+    [SerializeField] int paperReward = 20;
 
     bool questCompleted;
 
@@ -24,7 +22,7 @@ public class HongueroTiburcioDialogueTrigger : TriggerDialogue
     {
         if (triggerBool)
         {
-            print("trigger dialogue interact: muestro el dialogo " + _dialogues[currentDialogue].name);
+            //print("trigger dialogue interact: muestro el dialogo " + _dialogues[currentDialogue].name);
             if (LevelManager.Instance.recursosRecolectados[ResourceType.hongos] >= hongosRequeridos)
             {
                 if (!questCompleted)
@@ -52,7 +50,7 @@ public class HongueroTiburcioDialogueTrigger : TriggerDialogue
 
     protected override void PasarAlSiguienteDialogo(params object[] parameter)
     {
-        if ((Dialogue)parameter[1] == _dialogues[0])
+        if ((DialogueSO)parameter[1] == _dialogues[0])
         {
             //si el dialogo q termino fue mi dialogo0, paso al 1
             base.PasarAlSiguienteDialogo(parameter);

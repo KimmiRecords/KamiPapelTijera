@@ -17,14 +17,11 @@ public class TriggerOrigami : TriggerScript
     ParticleSystem ps;
     ParticleSystem.MainModule mainModule;
 
-    public Color blueActiveColor;
-
-    private Color originalStartColor;
-    private float originalStartSpeed;
-    private float originalStartSize;
+    public Color blueParticleActiveColor;
+    Color originalStartColor;
+    float originalStartSpeed;
+    float originalStartSize;
     //private float originalEmissionRate;
-
-    
 
     protected override void Start()
     {
@@ -40,31 +37,6 @@ public class TriggerOrigami : TriggerScript
 
     public override void OnEnterBehaviour(Collider other)
     {
-        //print("on enter beh");
-
-        //if (!origami.isReusable)
-        //{
-        //    if (!origami.wasUsed)
-        //    {
-        //        if (LevelManager.Instance.recursosRecolectados[ResourceType.papel] >= origami.paperCost)
-        //        {
-        //            base.OnEnterBehaviour(other);
-        //            currentCheck = Instantiate(checkPrefab).SetOrigami(origami);
-        //            //particulas y sonidito de entrar en la zona
-        //            SetParameters();
-        //        }
-        //        else
-        //        {
-        //            print("no tenes suficiente papel para hacer este origami");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        print("ya activaste este sello");
-        //    }
-        //}
-
-
         if (origami.wasUsed)
         {
             print("ya activaste este sello");
@@ -76,7 +48,7 @@ public class TriggerOrigami : TriggerScript
                 base.OnEnterBehaviour(other);
                 currentCheck = Instantiate(checkPrefab).SetOrigami(origami);
                 //particulas y sonidito de entrar en la zona
-                SetParameters();
+                SetParticleParameters();
             }
             else
             {
@@ -96,21 +68,19 @@ public class TriggerOrigami : TriggerScript
             currentCheck.EndOrigami(origami);
             Destroy(currentCheck.gameObject);
             //apagar particulas y sonidito de salir en la zona
-            ChangeBackToOriginalParameters();
-
+            ChangeBackToOriginalParticleParameters();
         }
     }
 
-
-    public void SetParameters()
+    public void SetParticleParameters()
     {
-        mainModule.startColor = blueActiveColor;
-        mainModule.startSpeed = originalStartSpeed * 2f;
-        mainModule.startSize = 1.66f;
+        mainModule.startColor = blueParticleActiveColor;
+        mainModule.startSpeed = originalStartSpeed * 1.5f;
+        mainModule.startSize = 2f;
         //mainModule.emission.rateOverTime = originalEmissionRate * 2f;
     }
 
-    public void ChangeBackToOriginalParameters()
+    public void ChangeBackToOriginalParticleParameters()
     {
         mainModule.startColor = originalStartColor;
         mainModule.startSpeed = originalStartSpeed;

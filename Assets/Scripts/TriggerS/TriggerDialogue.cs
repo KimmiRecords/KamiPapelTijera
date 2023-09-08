@@ -8,7 +8,7 @@ public class TriggerDialogue : TriggerScript
     protected bool _burnAfterReading;
 
     [SerializeField]
-    protected Dialogue[] _dialogues;
+    protected DialogueSO[] _dialogues;
 
     protected int currentDialogue = 0;
 

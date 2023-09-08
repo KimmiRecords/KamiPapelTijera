@@ -160,7 +160,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7897264121734106301}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 59df307aac00fcd47817937921d91f4a, type: 2}
   m_CullingMode: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   _maxSpeed: 3
   _attackDamage: 10
   _sr: {fileID: 7897264121734106302}
+  endsEncounter: 0
   anim: {fileID: 7897264121734106303}
   startAnimationHasFinished: 0
   _player: {fileID: 0}
@@ -330,6 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 7897264121734106303}
     - target: {fileID: 6869142402802870411, guid: e8751e52e97fda448be0044dc402949a,
         type: 3}
+      propertyPath: _anim
+      value: 
+      objectReference: {fileID: 7072027117241193377}
+    - target: {fileID: 6869142402802870411, guid: e8751e52e97fda448be0044dc402949a,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -339,6 +345,12 @@ PrefabInstance:
 --- !u!4 &6829072852146917364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2223711169329458678, guid: e8751e52e97fda448be0044dc402949a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4618872518290727426}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7072027117241193377 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2467245976564216227, guid: e8751e52e97fda448be0044dc402949a,
     type: 3}
   m_PrefabInstance: {fileID: 4618872518290727426}
   m_PrefabAsset: {fileID: 0}
