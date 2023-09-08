@@ -174,7 +174,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     public void GetGolpeado(float dmg)
     {
         //print("me han golpeao");
-        _view.StartGetWetAnimation(); //es solo x el sonido por ahora
+        _view.StartGetGolpeadoAnimation(); //es solo x el sonido por ahora
         TakeDamage(dmg);
     }
 
