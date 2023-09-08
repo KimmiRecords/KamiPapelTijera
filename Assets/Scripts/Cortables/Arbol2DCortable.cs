@@ -13,7 +13,6 @@ public class Arbol2DCortable : ObjetoCortable
     [SerializeField] GameObject _particulasHojas;
     [SerializeField] GameObject _particulasPolvo;
 
-
     bool _falldownEnded;
 
     protected override void ApplyCut()
@@ -30,7 +29,7 @@ public class Arbol2DCortable : ObjetoCortable
 
     public void FinalizarAplastadorHitbox()
     {
-        Debug.Log("finalizar aplastador hitbox");
+        //Debug.Log("finalizar aplastador hitbox");
         _falldownEnded = true;
         _particulasPolvo.SetActive(true);
     }
@@ -45,7 +44,7 @@ public class Arbol2DCortable : ObjetoCortable
             yield return null;
         }
 
-        Debug.Log("apago la hitbox");
+        //Debug.Log("apago la hitbox");
         _hitbox.SetActive(false);
 
     }

@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 7897264121734106303}
   - component: {fileID: 2429854604947804655}
   - component: {fileID: 2698636374348165167}
+  - component: {fileID: 3959302516047835602}
   m_Layer: 0
   m_Name: Rocoso
   m_TagString: Untagged
@@ -417,8 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6771e40e38c8d28459a41ddbc0395e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 150
-  _maxSpeed: 2.5
+  _hp: 1500
+  _maxSpeed: 3
   _attackDamage: 10
   _sr: {fileID: 7897264121734106302}
   endsEncounter: 0
@@ -449,6 +450,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3959302516047835602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897264121734106301}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.74, y: 7.78, z: 0.2}
+  m_Center: {x: 0, y: -0.000000014901161, z: 0.0000018849969}
 --- !u!1001 &1996276656420371745
 PrefabInstance:
   m_ObjectHideFlags: 0

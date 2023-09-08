@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VFX;
 
-public class PickupCortable : ObjetoCortable
+public class PickupCortable : ObjetoCortable, IAplastable
 {
     //los pickups cortables dan algun recurso, 
     //desaparecen despues de cortarlos,
@@ -57,6 +56,12 @@ public class PickupCortable : ObjetoCortable
         //print("delayed respawn");
         yield return new WaitForSeconds(time);
         Respawn();
+    }
+
+    public void Aplastar()
+    {
+        Debug.Log("este cortable fue aplastado");
+        ApplyCut();
     }
 
 

@@ -1,4 +1,5 @@
 ﻿internal interface IMojable
 {
-    public void GetWet();
+    public void GetWet(float wetDamage);
+    public void StopGettingWet();
 }
