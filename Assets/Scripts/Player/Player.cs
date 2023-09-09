@@ -124,7 +124,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     }
     public void OnPrimaryClick()
     {
-        if (_readyToAttack && hasTijera) //readytoattack se pone false cuando estoy en cooldown
+        if (_readyToAttack && hasTijera && !anim.GetBool("isCasting")) //readytoattack se pone false cuando estoy en cooldown
         {
             _readyToAttack = false;
             isAttacking = true;

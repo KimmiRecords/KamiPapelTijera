@@ -17,18 +17,6 @@ public class DialogueManager : Singleton<DialogueManager>
     bool waitingForInput = false;
     [HideInInspector] public bool isShowing = false;
 
-    //private void Awake()
-    //{
-    //    if (instance != null && instance != this)
-    //    {
-    //        Destroy(this);
-    //    }
-    //    else
-    //    {
-    //        instance = this;
-    //    }
-    //    //DontDestroyOnLoad(this);
-    //}
     private void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, CheckPlayerInput);
@@ -46,11 +34,10 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void ShowDialogue(DialogueSO dialogue)
     {
-        if (!isShowing)
+        if (!isShowing && !LevelManager.Instance.inDialogue)
         {
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
             dialogue.currentText = 0;
-
 
             dialogueGlobe.SetActive(true);
             LevelManager.Instance.inDialogue = true;
@@ -59,6 +46,7 @@ public class DialogueManager : Singleton<DialogueManager>
             StartCoroutine(WriteText(dialogue));
         }
     }
+
     public void HideDialogue(DialogueSO dialogue)
     {
         //print("hide dialogue " + dialogue.name);

@@ -24,13 +24,13 @@ public class QuestManager : Singleton<QuestManager>
 
     public void CheckQuests(params object[] parameters)
     {
-        Debug.Log("me pongo a chequear todas las quests");
+        //Debug.Log("me pongo a chequear todas las quests");
         foreach (QuestSO quest in quests)
         {
             if (quest.condition.conditionType == ConditionType.Resource &&
                 LevelManager.Instance.recursosRecolectados[quest.condition.resourceType] >= quest.condition.requiredAmount)
             {
-                Debug.Log("quest manager: se completo la " + quest.name);
+                //Debug.Log("quest manager: se completo la " + quest.name);
                 CompleteQuest(quest);
             }
 

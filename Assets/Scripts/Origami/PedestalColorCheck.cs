@@ -16,10 +16,12 @@ public class PedestalColorCheck : MonoBehaviour
         _renderer = GetComponent<Renderer>();
 
         _renderer.material.color = inactiveColor;
+        SetPedestalColor(ResourceType.papel);
     }
 
     public void SetPedestalColor(params object[] parameter)
     {
+        //cuando el player gana algun recurso, chequea si era papel, y si tengo sufi, lo activo
         if ((ResourceType)parameter[0] == ResourceType.papel)
         {
             if (LevelManager.Instance.recursosRecolectados[ResourceType.papel] >= myTriggerOrigami.origami.paperCost)

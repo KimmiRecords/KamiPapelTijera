@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SolapaTirar : Solapa
 {
-    //esta solapa se mueve en x para entrar y salir
+    //en un momento flashee pero por ahora no se usa
 
-    public override void CambiarEstado()
-    {
-        base.CambiarEstado(); //esto cambio el isOn entre tru o false
-        anim.SetBool("isOpen", isOn);
-    }
+
+    //public override void CambiarEstado()
+    //{
+    //    base.CambiarEstado(); //esto cambio el isOn entre tru o false
+    //}
 
 }

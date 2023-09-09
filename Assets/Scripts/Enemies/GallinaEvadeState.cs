@@ -15,7 +15,7 @@ public class GallinaEvadeState : IState
 
     public void OnEnter()
     {
-        Debug.Log("gallina - entre a evade");
+        //Debug.Log("gallina - entre a evade");
     }
 
     public void OnUpdate()
@@ -31,7 +31,7 @@ public class GallinaEvadeState : IState
     public void OnExit()
     {
         //Debug.Log("salgo de walk");
-        Debug.Log("gallina - entre a walk");
+        //Debug.Log("gallina - entre a walk");
     }
 
     public void WalkAwayFromPlayer()

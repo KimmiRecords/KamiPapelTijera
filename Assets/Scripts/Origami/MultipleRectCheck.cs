@@ -31,7 +31,7 @@ public class MultipleRectCheck : MonoBehaviour
             //print("invocacion cancelada x soltar tab");
         }
 
-        if (invocando && Input.GetMouseButtonDown(1))
+        if (invocando && Input.GetMouseButtonDown(0))
         {
             //chequeo si el mouse esta dentro de la imagen roja, y habilito el arranque
             if (RectTransformUtility.RectangleContainsScreenPoint(desiredOrigami.origamiRoutes[desiredOrigami.currentRouteIndex].inicioRectangle, Input.mousePosition))
@@ -49,7 +49,7 @@ public class MultipleRectCheck : MonoBehaviour
         }
 
         //chequeo si el jugador solto el mouse mientras arrastraba
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(0))
         {
             CursorManager.Instance.SetCursor(CursorType.OpenHand);
 

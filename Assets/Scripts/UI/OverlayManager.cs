@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class OverlayManager : MonoBehaviour
 {
-    [SerializeField]
-    Overlay _defeatOverlay, _victoryOverlay, _mainQuestOverlay;
+    [SerializeField] Overlay _defeatOverlay, _victoryOverlay, _mainQuestOverlay;
 
     bool _isLocked;
 
-    [SerializeField]
-    DialogueSO victoryTriggeringDialogue, mainQuestTriggeringDialogue;
+    [SerializeField] DialogueSO victoryTriggeringDialogue, mainQuestTriggeringDialogue;
 
     void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerDie, ShowDefeatOverlay);
         EventManager.Subscribe(Evento.OnDialogueEnd, ShowOverlay);
-        EventManager.Subscribe(Evento.OnPlayerPressedR, Unlock);
+        EventManager.Subscribe(Evento.OnPlayerPressedE, Unlock);
     }
 
     public void ShowDefeatOverlay(params object[] parameter)
@@ -55,12 +53,12 @@ public class OverlayManager : MonoBehaviour
         {
             LevelManager.Instance.inDialogue = false;
             _isLocked = false;
+            AudioManager.instance.PlayByName("PickupSFX", 2.5f);
         }
 
         _defeatOverlay.gameObject.SetActive(false);
         _victoryOverlay.gameObject.SetActive(false);
         _mainQuestOverlay.gameObject.SetActive(false);
-        AudioManager.instance.PlayByName("PickupSFX", 2.5f);
     }
 
     void OnDestroy()
@@ -69,7 +67,7 @@ public class OverlayManager : MonoBehaviour
         {
             EventManager.Unsubscribe(Evento.OnPlayerDie, ShowDefeatOverlay);
             EventManager.Unsubscribe(Evento.OnDialogueEnd, ShowOverlay);
-            EventManager.Unsubscribe(Evento.OnPlayerPressedR, Unlock);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Unlock);
         }
     }
 }

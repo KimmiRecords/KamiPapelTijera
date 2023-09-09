@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1423326809522704706}
   - component: {fileID: 1423326809522704704}
   - component: {fileID: 1423326809522704705}
-  - component: {fileID: 1423326809522704711}
   - component: {fileID: 1269738132478514147}
   m_Layer: 0
   m_Name: Chest
@@ -63,25 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a977d3d1e3f1834db8b208759b0c0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paperReward: 10
   initialDelay: 1
   anim: {fileID: 1269738132478514147}
   particulitasDePapel: {fileID: 6381214325114916530}
---- !u!114 &1423326809522704711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423326809522704707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c3335d810ed744f8545fe6ec765666, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerBool: 0
-  tooltipTextToShow: CLICK para cortar el cofre
-  postItColor: 2
 --- !u!95 &1269738132478514147
 Animator:
   serializedVersion: 4

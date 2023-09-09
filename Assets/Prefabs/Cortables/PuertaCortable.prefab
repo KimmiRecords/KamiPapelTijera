@@ -60,7 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerBool: 0
   tooltipTextToShow: CLICK para cortar
-  postItColor: 0
+  postItColor: 2
+  isOneTimeOnly: 1
 --- !u!1 &5620619544468592072
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a977d3d1e3f1834db8b208759b0c0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paperReward: 0
   initialDelay: 1
   anim: {fileID: 7267041858233729117}
   particulitasDePapel: {fileID: 821101885267733546}

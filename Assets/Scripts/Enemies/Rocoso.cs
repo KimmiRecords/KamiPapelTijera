@@ -23,10 +23,11 @@ public class Rocoso : Enemy, IMojable
 
     Player _player;
     protected FiniteStateMachine _fsm;
-    private bool isDrowning;
+    bool isDrowning;
 
     private void Start()
     {
+        Debug.Log("Rocoso Start");
         _fsm = new FiniteStateMachine();
         _fsm.AddState(State.RocosoSleep, new RocosoSleepState(_fsm, this));
         _fsm.AddState(State.RocosoStart, new RocosoStartState(_fsm, this));
@@ -134,5 +135,16 @@ public class Rocoso : Enemy, IMojable
         }
 
         Die();
+    }
+
+    private void OnDisable()
+    {
+
+        //cuando cambias de pagina el rocoso se apaga
+        //cuando volves a la pagina en la que estaba, el animator se reinicia y vuelve a estar dormido
+        //esta linea es para que despues de reiniciarse, vuelva al estado en el que estaba antes
+
+        //Debug.Log("me deshabilitaron");
+        _fsm.ChangeState(State.RocosoSleep);
     }
 }

@@ -24,7 +24,7 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 
     public void PlacePlayer(params object[] parameter)
     {
-        Debug.Log("place player");
+        //Debug.Log("place player");
 
         if (parameter[0] is int)
         {
@@ -36,12 +36,12 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 
                 if ((bool)parameter[1]) //si isNext
                 {
-                    Debug.Log("lo pongo en el entry");
+                    //Debug.Log("lo pongo en el entry");
                     _player.transform.position = _pageSpawnCollection[currentPage - 1].entrySpawn;
                 }
                 else
                 {
-                    Debug.Log("lo pongo en el exit");
+                    //Debug.Log("lo pongo en el exit");
                     _player.transform.position = _pageSpawnCollection[currentPage - 1].exitSpawn;
                 }
 
