@@ -20,6 +20,9 @@ public class PickupCortable : ObjetoCortable, IAplastable
     protected override void ApplyCut()
     {
         base.ApplyCut();
+
+        EventManager.Trigger(Evento.OnObjectWasCut, transform.position);
+        
         LevelManager.Instance.AddResource(pickupType, pickupAmount);
         StartCoroutine(WaitForSelfDestructCoroutine(selfDestructTime));
 
