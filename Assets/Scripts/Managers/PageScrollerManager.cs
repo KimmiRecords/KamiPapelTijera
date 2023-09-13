@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PageScroller : Singleton<PageScroller>
+public class PageScrollerManager : Singleton<PageScrollerManager>
 {
     //este script se encarga de cambiar las paginas y algunas cosas mas
 
@@ -42,35 +42,38 @@ public class PageScroller : Singleton<PageScroller>
     {
         glitterSystems = glitterParent.GetComponentsInChildren<ParticleSystem>();
     }
-    void TriggerPageScroll(params object[] parameters)
+    public void TriggerPageScroll(params object[] parameters)
     {
-        if (esferaNext.triggerBool && !isTurning) //pregunta si el player esta encima del trigger
+        if (!OverlayManager.Instance.isLocked)
         {
-            if (activeIndex >= objectsToToggle.Length - 1)
+            if (esferaNext.triggerBool && !isTurning) //pregunta si el player esta encima del trigger
             {
-                print("no hay mas paginas");
+                if (activeIndex >= objectsToToggle.Length - 1)
+                {
+                    print("no hay mas paginas");
+                }
+                else
+                {
+                    activeIndex++;
+                    isNext = true;
+                    StartChangePage();
+                    isTurning = true;
+                }
             }
-            else
-            {
-                activeIndex++;
-                isNext = true;
-                StartChangePage();
-                isTurning = true;
-            }
-        }
 
-        if (esferaPrev.triggerBool && !isTurning)
-        {
-            if (activeIndex <= 0)
+            if (esferaPrev.triggerBool && !isTurning)
             {
-                print("no hay mas paginas");
-            }
-            else
-            {
-                activeIndex--;
-                isNext = false;
-                StartChangePage();
-                isTurning = true;
+                if (activeIndex <= 0)
+                {
+                    print("no hay mas paginas");
+                }
+                else
+                {
+                    activeIndex--;
+                    isNext = false;
+                    StartChangePage();
+                    isTurning = true;
+                }
             }
         }
     }
@@ -181,7 +184,7 @@ public class PageScroller : Singleton<PageScroller>
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPlayerPressedE, TriggerPageScroll);
+            //EventManager.Unsubscribe(Evento.OnPlayerPressedE, TriggerPageScroll);
             EventManager.Unsubscribe(Evento.OnPageFinishTurning, FinishTurning);
         }
     }

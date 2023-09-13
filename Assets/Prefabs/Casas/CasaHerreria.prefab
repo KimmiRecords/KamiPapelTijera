@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7048702103123340137}
   - component: {fileID: 2226296467800262406}
   m_Layer: 0
-  m_Name: pCylinder6
+  m_Name: Puntita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,9 +313,9 @@ GameObject:
   - component: {fileID: 8143308981839530628}
   - component: {fileID: 7202172360797074644}
   - component: {fileID: 5207590939364198376}
-  - component: {fileID: 330737835412490222}
+  - component: {fileID: 8488276911555646118}
   m_Layer: 0
-  m_Name: pCylinder1
+  m_Name: MainCasa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,8 +386,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &330737835412490222
-BoxCollider:
+--- !u!64 &8488276911555646118
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -396,9 +396,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.019330129, y: 0.01979937, z: 0.023854032}
-  m_Center: {x: 0.0000000018626451, y: 0.00010031741, z: -0.002261952}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5076798556035486163, guid: 2ab84cc325137564f80ee0caced876ab, type: 3}
 --- !u!1 &5752177391428456689
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,8 +411,9 @@ GameObject:
   - component: {fileID: 7308763606811827814}
   - component: {fileID: 287437867580283199}
   - component: {fileID: 3522411836069547665}
+  - component: {fileID: 1834979453923109507}
   m_Layer: 0
-  m_Name: pPlane1
+  m_Name: TechitoPuerta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,7 +427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5752177391428456689}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02026593, y: 0.03769567, z: -0.021174759}
+  m_LocalPosition: {x: 0.0093, y: 0.03769567, z: -0.021174759}
   m_LocalScale: {x: 7.3267555, y: 1, z: 10.914086}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -482,6 +484,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1834979453923109507
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752177391428456689}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7629811779324647873, guid: 2ab84cc325137564f80ee0caced876ab, type: 3}
 --- !u!1 &6211153055602060660
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,8 +509,9 @@ GameObject:
   - component: {fileID: 688764469859953724}
   - component: {fileID: 1406544824484664772}
   - component: {fileID: 7625915049339349326}
+  - component: {fileID: 3683425437156141876}
   m_Layer: 0
-  m_Name: pDisc1
+  m_Name: Techo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -565,6 +582,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3683425437156141876
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211153055602060660}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4523576878071891012, guid: 2ab84cc325137564f80ee0caced876ab, type: 3}
 --- !u!1 &6974741648105089231
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +608,7 @@ GameObject:
   - component: {fileID: 3014677587033725453}
   - component: {fileID: 2593035152082035752}
   m_Layer: 0
-  m_Name: pCylinder7
+  m_Name: Puerta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

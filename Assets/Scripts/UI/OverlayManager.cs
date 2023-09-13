@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverlayManager : MonoBehaviour
+public class OverlayManager : Singleton<OverlayManager>
 {
     [SerializeField] Overlay _defeatOverlay, _victoryOverlay, _mainQuestOverlay;
 
-    bool _isLocked;
+    public bool isLocked;
 
     [SerializeField] DialogueSO victoryTriggeringDialogue, mainQuestTriggeringDialogue;
 
@@ -44,15 +44,15 @@ public class OverlayManager : MonoBehaviour
     public void Lock(params object[] parameter)
     {
         LevelManager.Instance.inDialogue = true;
-        _isLocked = true;
+        isLocked = true;
     }
 
     public void Unlock(params object[] parameter)
     {
-        if (_isLocked)
+        if (isLocked)
         {
             LevelManager.Instance.inDialogue = false;
-            _isLocked = false;
+            isLocked = false;
             AudioManager.instance.PlayByName("PickupSFX", 2.5f);
         }
 

@@ -13,6 +13,7 @@ using UnityEngine;
 
 public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARRUINAN LA NUMERACION
 {
+    //algun dia voy a ordenarlos mas bonito y despues fijarme que no se rompa nada
     OnPlayerPressedE,
     OnPlayerPressedQ,
     OnPlayerPressedSpace,

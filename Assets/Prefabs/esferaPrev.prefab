@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3045144533296673910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -46.8, y: -0.6999999, z: 9.1}
-  m_LocalScale: {x: 10.413603, y: 19.666119, z: 87.318756}
+  m_LocalPosition: {x: -46, y: -0.7, z: 9.1}
+  m_LocalScale: {x: 10, y: 20, z: 87}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4367476928300308387}
@@ -113,8 +113,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0000001, y: 1.7020355, z: 1.226231}
+  m_Center: {x: 0, y: 0.35101762, z: -0.003736474}
 --- !u!1 &9119731632777025834
 GameObject:
   m_ObjectHideFlags: 0
@@ -4948,6 +4948,11 @@ PrefabInstance:
         type: 3}
       propertyPath: UVModule.tilesX
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8600538381334900058, guid: 71454af686854b0478e71dddc012a683,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8600538381334900058, guid: 71454af686854b0478e71dddc012a683,
         type: 3}
