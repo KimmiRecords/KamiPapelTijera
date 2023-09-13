@@ -34,6 +34,11 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void ShowDialogue(DialogueSO dialogue)
     {
+        if (OverlayManager.Instance.isLocked)
+        {
+            return;
+        }
+
         if (!isShowing && !LevelManager.Instance.inDialogue)
         {
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
