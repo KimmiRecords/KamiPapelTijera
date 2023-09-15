@@ -20,10 +20,10 @@ public class PlayerController
 
     public void CheckControls() //a este lo disparo en el update
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            EventManager.Trigger(Evento.OnPlayerPressedR);
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    EventManager.Trigger(Evento.OnPlayerPressedR);
+        //}
 
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -48,7 +48,7 @@ public class PlayerController
                 EventManager.Trigger(Evento.OnPlayerPressedEsc);
             }
 
-            if (!LevelManager.Instance.inDialogue && !_player.isAttacking) //este if mepa que va en model
+            if (!LevelManager.Instance.inDialogue && !_player.anim.GetBool("isCasting")) //este if mepa que va en model
             {
                 if (Input.GetButtonDown("Jump"))
                 {

@@ -18,19 +18,22 @@ public class PlayerView
 
     public void CheckMagnitude(float hor, float ver)
     {
-        if (!_player.isAttacking)
+        if (hor == 0 && ver == 0)
         {
-            if (hor == 0 && ver == 0)
-            {
-                StartIdleAnimation();
-                canRotate = false;
-            }
-            else
-            {
-                StartMoveAnimation();
-                canRotate = true;
-            }
+            StartIdleAnimation();
+            canRotate = false;
         }
+        else
+        {
+            StartMoveAnimation();
+            canRotate = true;
+        }
+
+
+        //if (!_player.isAttacking)
+        //{
+            
+        //}
     }
 
     public void RotateModel(Vector3 move)
