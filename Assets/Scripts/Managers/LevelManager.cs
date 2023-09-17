@@ -72,6 +72,8 @@ public class LevelManager : Singleton<LevelManager>
             AddResource(ResourceType.hongos, 100);
             AddResource(ResourceType.papel, 100);
             AddResource(ResourceType.flores, 100);
+            GiveWaterBoots();
+            GiveSprintBoots();
         }
     }
     public void AddResource(ResourceType pickupType, int valueToAdd)
