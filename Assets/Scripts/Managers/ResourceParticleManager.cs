@@ -13,7 +13,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
 
     public void SetParticlePosition(params object[] parameter)
     {
-        Debug.Log("set particle position");
+        //Debug.Log("set particle position");
         paperParticles.transform.position = (Vector3)parameter[0];
         paperParticles.gameObject.SetActive(false);
 
@@ -23,7 +23,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
     {
         if ((ResourceType)parameter[0] == ResourceType.papel)
         {
-            Debug.Log("shoot particle");
+            //Debug.Log("shoot particle");
             EmitParticlesAtTarget();
             StartCoroutine(TurnOffParticles());
         }

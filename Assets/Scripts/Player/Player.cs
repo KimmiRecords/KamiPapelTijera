@@ -13,8 +13,10 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
 
     [Header("Stats")]
     public bool hasTijera = false;
+    public bool hasTijeraMejorada = false;
     public bool hasSprintBoots = false;
     public bool hasWaterBoots = false;
+
     public float weaponCooldown;
     [SerializeField] float tijeraHitBoxDuration = 0.1f;
     public float jumpForce = 50f;
@@ -28,7 +30,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     [SerializeField] Renderer _renderer;
     [SerializeField] GameObject myPaperPlaneHat;
     [SerializeField] ParticleSystem sprintParticles;
-
+    [SerializeField] TijeraManager tijeraManager;
 
     [Header("Planeo")]
     public float augmentedJumpForce = 20f;
@@ -41,7 +43,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     Color originalColor;
     float originalJumpForce;
     float _maxHp;
-
+    float originalMaxSpeed;
 
     //auxiliars
     bool _readyToAttack = true;
@@ -53,14 +55,10 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     [HideInInspector] public int augmentedJumpsLeft;
     [HideInInspector] public Vector3 lastDirection;
 
-
-
     //MVC
     PlayerModel _model;
     [HideInInspector] public PlayerView _view;
     PlayerController _controller;
-    private float originalMaxSpeed;
-
 
     //Properties
     public float Speed
@@ -95,7 +93,6 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
             EventManager.Trigger(Evento.OnPlayerChangeVida, _hp, _maxHp);
         }
     }
-
     public bool IsSprinting
     {
         get
@@ -127,7 +124,6 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         _view = new PlayerView(this);
         _controller = new PlayerController(this);
 
-        miTijeraHitbox.tijeraDamage = _attackDamage;
         _maxHp = _hp;
         Vida = _maxHp;
         originalColor = _renderer.material.color;
@@ -238,7 +234,14 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     public void GetTijera(params object[] parameters)
     {
         hasTijera = true;
-        miTijeraHitbox.transform.parent.gameObject.SetActive(true);
+        tijeraManager.SetTijera();
+    }
+    public void GetTijeraMejorada()
+    {
+        Debug.Log("player - get tijera mejorada");
+        hasTijeraMejorada = true;
+        tijeraManager.SetTijeraMejorada();
+        miTijeraHitbox = tijeraManager.tijeraMejoradaHitbox;
     }
     public void StartOrigamiCast(params object[] parameters)
     {
@@ -281,4 +284,5 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         }
     }
 
+    
 }

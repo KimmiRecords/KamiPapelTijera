@@ -52,13 +52,18 @@ public class LevelManager : Singleton<LevelManager>
 
     public void GiveSprintBoots()
     {
-        Debug.Log("el player se gano las botas sprint x haber completado la quest");
+        //Debug.Log("el player se gano las botas sprint x haber completado la quest");
         player.hasSprintBoots = true;
     }
     public void GiveWaterBoots()
     {
-        Debug.Log("el player se gano las botas sprint x haber completado la quest");
+        //Debug.Log("el player se gano las botas water x haber completado la quest");
         player.hasWaterBoots = true;
+    }
+    public void GiveTijeraMejorada()
+    {
+        //Debug.Log("el player se gano la tijera mejorada x haber completado la quest");
+        player.GetTijeraMejorada();
     }
     public void GoToScene(string sceneName)
     {   
@@ -74,6 +79,7 @@ public class LevelManager : Singleton<LevelManager>
             AddResource(ResourceType.flores, 100);
             GiveWaterBoots();
             GiveSprintBoots();
+            GiveTijeraMejorada();
         }
     }
     public void AddResource(ResourceType pickupType, int valueToAdd)

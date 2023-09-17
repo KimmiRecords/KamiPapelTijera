@@ -8,6 +8,7 @@ public enum RewardType
 {
     SprintBoots,
     WaterBoots,
+    TijeraMejorada,
     None,
     Count
 }
@@ -36,6 +37,9 @@ public class QuestManager : Singleton<QuestManager>
                 break;
             case RewardType.WaterBoots:
                 LevelManager.Instance.GiveWaterBoots();
+                break;
+            case RewardType.TijeraMejorada:
+                LevelManager.Instance.GiveTijeraMejorada();
                 break;
             case RewardType.None:
                 break;
