@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using System;
 
 public class QuestManager : Singleton<QuestManager>
 {
     List<QuestSO> quests = new List<QuestSO>();
-
     Dictionary<Evento, bool> eventosSucedidos = new Dictionary<Evento, bool>();
 
     void Start()
     {
         EventManager.Subscribe(Evento.OnResourceUpdated, CheckQuests);
         EventManager.Subscribe(Evento.OnAbuelaDropoff, SetAbuelaDropoff); //deberia ser generico
+        EventManager.Subscribe(Evento.OnQuestDelivered, GiveReward);
+    }
+
+    private void GiveReward(object[] parameters)
+    {
+        LevelManager.Instance.GiveSprintBoots();
     }
 
     public void SetAbuelaDropoff(params object[] parameter)
@@ -21,7 +26,6 @@ public class QuestManager : Singleton<QuestManager>
         eventosSucedidos[Evento.OnAbuelaDropoff] = true;
         CheckQuests();
     }
-
     public void CheckQuests(params object[] parameters)
     {
         //Debug.Log("me pongo a chequear todas las quests");
@@ -42,7 +46,6 @@ public class QuestManager : Singleton<QuestManager>
             }
         }
     }
-
     public void AddQuest(QuestSO quest) //esto lo disparan los npcs cuando les hablo
     {
         //Debug.Log("agrego la quest");
@@ -55,13 +58,11 @@ public class QuestManager : Singleton<QuestManager>
         //    EventManager.Subscribe(quest.condition.evento, SetAbuelaDropoff); //deberia ser generico
         //}
     }
-
     public void RemoveQuest(QuestSO quest)
     {
         Debug.Log("remuevo la quest");
         quests.Remove(quest);
     }
-
     public void CompleteQuest(QuestSO quest)
     {
         EventManager.Trigger(Evento.OnQuestCompleted, quest);
@@ -73,6 +74,7 @@ public class QuestManager : Singleton<QuestManager>
         if(!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnResourceUpdated, CheckQuests);
+            EventManager.Unsubscribe(Evento.OnQuestDelivered, GiveReward);
         }
     }
 }

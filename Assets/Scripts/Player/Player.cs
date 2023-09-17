@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,12 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
 
     [Header("Stats")]
     public bool hasTijera = false;
+    public bool hasSprintBoots = false;
     public float weaponCooldown;
     [SerializeField] float tijeraHitBoxDuration = 0.1f;
     public float jumpForce = 50f;
     public float gravityValue; //gravedad extra para que quede linda la caida del salto
-
+    public float sprintingSpeedModifier = 1.5f;
 
     [Header("Componentes")]
     public CharacterController cc;
@@ -24,6 +26,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     public TijeraHitbox miTijeraHitbox;
     [SerializeField] Renderer _renderer;
     [SerializeField] GameObject myPaperPlaneHat;
+    [SerializeField] ParticleSystem sprintParticles;
 
 
     [Header("Planeo")]
@@ -45,6 +48,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     [HideInInspector] public bool isJumpButtonDown;
     [HideInInspector] public bool isAttacking = false;
     [HideInInspector] public bool isPaperPlaneHat = false; //pph es paper plane hat
+    [HideInInspector] public bool isSprinting; //cuando tocas shift
     [HideInInspector] public int augmentedJumpsLeft;
     [HideInInspector] public Vector3 lastDirection;
 
@@ -54,6 +58,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     PlayerModel _model;
     [HideInInspector] public PlayerView _view;
     PlayerController _controller;
+    private float originalMaxSpeed;
 
 
     //Properties
@@ -90,6 +95,30 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         }
     }
 
+    public bool IsSprinting
+    {
+        get
+        {
+            return isSprinting;
+        }
+        set
+        {
+            isSprinting = value;
+            if (isSprinting && hasSprintBoots)
+            {
+                //Debug.Log("voy rapidin");
+                Speed *= sprintingSpeedModifier;
+                sprintParticles.gameObject.SetActive(true);
+            }
+            else
+            {
+                //Debug.Log("voy normal");
+                Speed = originalMaxSpeed;
+                sprintParticles.gameObject.SetActive(false);
+            }
+        }
+    }
+
 
     void Awake()
     {
@@ -103,6 +132,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         originalColor = _renderer.material.color;
         augmentedJumpsLeft = augmentedJumpsMax;
         originalJumpForce = jumpForce;
+        originalMaxSpeed = _maxSpeed;
 
         EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
         EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
@@ -155,13 +185,10 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         isDrowning = true;
         StartCoroutine(DrowningCoroutine(wetDamage));
     }
-
-
     public void StopGettingWet()
     {
         isDrowning = false;
     }
-
     public IEnumerator DrowningCoroutine(float wetDamage)
     {
         while (isDrowning)
@@ -170,14 +197,12 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
             yield return new WaitForSeconds(0.8f);
         }
     }
-
     public void GetGolpeado(float dmg)
     {
         //print("me han golpeao");
         _view.StartGetGolpeadoAnimation(); //es solo x el sonido por ahora
         TakeDamage(dmg);
     }
-
     public override void TakeDamage(float dmg)
     {
         Vida -= dmg;
@@ -235,7 +260,6 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         //sfx de hacer bollo y destruir
         myPaperPlaneHat.SetActive(false);
     }
-
     public void AddPlaning()
     {
         //print("AddPlaning: dalee");

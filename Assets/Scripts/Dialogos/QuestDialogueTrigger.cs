@@ -45,6 +45,7 @@ public class QuestDialogueTrigger : TriggerDialogue
                 AudioManager.instance.PlayByName("QuestCompleted02");
                 currentDialogue = 2;
                 _questDelivered = true;
+                EventManager.Trigger(Evento.OnQuestDelivered, _quest);
             }
 
             //Debug.Log("dalia: muestro currentdialogue");

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,8 @@ public enum ResourceType
     Count 
 }
 
-
 //por ahi los resourcetype deberian estar en el resourcemanager
 //que deberia estar conectado con el inventorymanager
-
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -27,9 +26,7 @@ public class LevelManager : Singleton<LevelManager>
     public int initialPaper;
     public int initialHongos;
     public int initialFloresAzules;
-
     public Player player;
-        
 
     protected override void Awake()
     {
@@ -51,14 +48,17 @@ public class LevelManager : Singleton<LevelManager>
         recursosRecolectados[ResourceType.papel] = initialPaper;
         recursosRecolectados[ResourceType.hongos] = initialHongos;
         recursosRecolectados[ResourceType.flores] = initialFloresAzules;
-
     }
 
+    public void GiveSprintBoots(params object[] parameters)
+    {
+        Debug.Log("el player se gano las botas sprint x haber completado la quest");
+        player.hasSprintBoots = true;
+    }
     public void GoToScene(string sceneName)
     {   
         SceneManager.LoadScene(sceneName);
     }
-
     public void Update()
     {
         //CHEAT CODES
@@ -69,7 +69,6 @@ public class LevelManager : Singleton<LevelManager>
             AddResource(ResourceType.flores, 100);
         }
     }
-
     public void AddResource(ResourceType pickupType, int valueToAdd)
     {
         //agrega la cantidad valuetoadd al total. si quiero restar, valuetoadd deberia ser negativo
@@ -77,7 +76,6 @@ public class LevelManager : Singleton<LevelManager>
         EventManager.Trigger(Evento.OnResourceUpdated, pickupType, recursosRecolectados[pickupType]);
         //print(pickupType.ToString() + " // " + recursosRecolectados[pickupType]);
     }
-
     public void AddHealth(int curacion)
     {
         player.GetCured(curacion);

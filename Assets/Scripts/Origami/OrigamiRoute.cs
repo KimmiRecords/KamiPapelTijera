@@ -28,7 +28,7 @@ public class OrigamiRoute : MonoBehaviour
 
     public void SetImagePosition(Vector3 mousePosition)
     {
-        Debug.Log("SET IMAGE POSITION calculo posicion de la imagen inicio");
+        //Debug.Log("SET IMAGE POSITION calculo posicion de la imagen inicio");
         distanciaMouseInicio = mousePosition - posicionInicioOriginal;
         interpolation = distanciaMouseInicio.magnitude / distanciaTotal.magnitude;
         inicioRectangle.position = Vector3.Lerp(posicionInicioOriginal, finalRectangle.position, interpolation);
@@ -38,7 +38,7 @@ public class OrigamiRoute : MonoBehaviour
     {
         if (originalPositionWasSet)
         {
-            Debug.Log("RESET IMAGE POSITION");
+            //Debug.Log("RESET IMAGE POSITION");
             inicioRectangle.position = posicionInicioOriginal;
         }
     }

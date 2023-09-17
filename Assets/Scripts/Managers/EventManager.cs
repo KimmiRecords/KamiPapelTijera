@@ -46,7 +46,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerPressedEsc,
     OnPlayerPressedM,
     OnQuestCompleted, //param0 es Quest
-    OnObjectWasCut //param0 es la posicion del objeto cortado
+    OnObjectWasCut, //param0 es la posicion del objeto cortado
+    OnQuestDelivered //param0 es Quest
 }
 
 public class EventManager

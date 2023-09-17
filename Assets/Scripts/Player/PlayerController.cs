@@ -20,10 +20,15 @@ public class PlayerController
 
     public void CheckControls() //a este lo disparo en el update
     {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    EventManager.Trigger(Evento.OnPlayerPressedR);
-        //}
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _player.IsSprinting = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _player.IsSprinting = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.M))
         {

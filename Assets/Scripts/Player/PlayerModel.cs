@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerModel
@@ -10,21 +9,17 @@ public class PlayerModel
     Player _player;
     float _groundedTimer;
     float _verticalVelocity;
-    float _speedModifier;
-    float _playerSpeed;
 
     Vector3 _move; //el vector en el que guardo la suma de todo el movimiento para finalmente aplicarsela al character controller
     Vector3 auxForwardVector;
     float auxOriginalImpulse;
 
-
     public PlayerModel(Player player)
     {
         _player = player;
-        _playerSpeed = _player.Speed; 
-        _speedModifier = 1;
         auxOriginalImpulse = _player.planeoImpulse;
     }
+
     public void NewMove(float hor, float ver)
     {
         bool groundedPlayer = _player.cc.isGrounded;
@@ -88,7 +83,7 @@ public class PlayerModel
         }
 
 
-        _move *= _playerSpeed * _speedModifier;
+        _move *= _player.Speed;
         _move.y = _verticalVelocity; //sigo cargando el vector movieminto
         _player.cc.Move(_move * Time.deltaTime); //aplico el vector movieminto al character controller, con el metodo .Move
 
