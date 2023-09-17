@@ -14,6 +14,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     [Header("Stats")]
     public bool hasTijera = false;
     public bool hasSprintBoots = false;
+    public bool hasWaterBoots = false;
     public float weaponCooldown;
     [SerializeField] float tijeraHitBoxDuration = 0.1f;
     public float jumpForce = 50f;
@@ -179,11 +180,14 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     }
     public void GetWet(float wetDamage)
     {
-        //print("AAAA ME MOJO");
-        _view.StartGetWetAnimation();
-        //Die();
-        isDrowning = true;
-        StartCoroutine(DrowningCoroutine(wetDamage));
+        if (!hasWaterBoots)
+        {
+            //print("AAAA ME MOJO");
+            _view.StartGetWetAnimation();
+            //Die();
+            isDrowning = true;
+            StartCoroutine(DrowningCoroutine(wetDamage));
+        }
     }
     public void StopGettingWet()
     {

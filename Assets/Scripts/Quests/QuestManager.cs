@@ -4,6 +4,15 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+public enum RewardType
+{
+    SprintBoots,
+    WaterBoots,
+    None,
+    Count
+}
+
+
 public class QuestManager : Singleton<QuestManager>
 {
     List<QuestSO> quests = new List<QuestSO>();
@@ -16,9 +25,25 @@ public class QuestManager : Singleton<QuestManager>
         EventManager.Subscribe(Evento.OnQuestDelivered, GiveReward);
     }
 
-    private void GiveReward(object[] parameters)
+    private void GiveReward(params object[] parameters)
     {
-        LevelManager.Instance.GiveSprintBoots();
+        QuestSO deliveredQuest = (QuestSO)parameters[0];
+
+        switch (deliveredQuest.rewardType)
+        {
+            case RewardType.SprintBoots:
+                LevelManager.Instance.GiveSprintBoots();
+                break;
+            case RewardType.WaterBoots:
+                LevelManager.Instance.GiveWaterBoots();
+                break;
+            case RewardType.None:
+                break;
+            case RewardType.Count:
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetAbuelaDropoff(params object[] parameter)

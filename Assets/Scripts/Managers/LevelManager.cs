@@ -50,10 +50,15 @@ public class LevelManager : Singleton<LevelManager>
         recursosRecolectados[ResourceType.flores] = initialFloresAzules;
     }
 
-    public void GiveSprintBoots(params object[] parameters)
+    public void GiveSprintBoots()
     {
         Debug.Log("el player se gano las botas sprint x haber completado la quest");
         player.hasSprintBoots = true;
+    }
+    public void GiveWaterBoots()
+    {
+        Debug.Log("el player se gano las botas sprint x haber completado la quest");
+        player.hasWaterBoots = true;
     }
     public void GoToScene(string sceneName)
     {   
@@ -80,4 +85,6 @@ public class LevelManager : Singleton<LevelManager>
     {
         player.GetCured(curacion);
     }
+
+    
 }
