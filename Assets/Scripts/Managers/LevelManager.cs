@@ -94,5 +94,15 @@ public class LevelManager : Singleton<LevelManager>
         player.GetCured(curacion);
     }
 
-    
+    public void GameObjectActivator(List<GameObject> gameObjectsToActivate, List<GameObject> gameObjectsToDeactivate)
+    {
+        foreach (GameObject go in gameObjectsToActivate)
+        {
+            go.SetActive(true);
+        }
+        foreach (GameObject go in gameObjectsToDeactivate)
+        {
+            go.SetActive(false);
+        }
+    }
 }

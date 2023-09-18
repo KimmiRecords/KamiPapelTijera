@@ -28,14 +28,7 @@ public class QuestEffector : MonoBehaviour
     {
         if ((QuestSO)parameters[0] == _quest) 
         {
-            foreach (GameObject go in gameObjectsToActivate)
-            {
-                go.SetActive(true);
-            }
-            foreach (GameObject go in gameObjectsToDeactivate)
-            {
-                go.SetActive(false);
-            }
+            LevelManager.Instance.GameObjectActivator(gameObjectsToActivate, gameObjectsToDeactivate);
         }
     }
 
