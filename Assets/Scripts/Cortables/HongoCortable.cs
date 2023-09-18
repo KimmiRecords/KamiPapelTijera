@@ -20,11 +20,11 @@ public class HongoCortable : PickupCortable
 
         isCortable = false;
         LevelManager.Instance.AddResource(pickupType, pickupAmount);
-        StartCoroutine(WaitForSelfDestructCoroutine(selfDestructTime));
+        StartCoroutine(WaitForActionCoroutine(selfDestructTime, SelfDestruct));
 
         if (doesRespawn)
         {
-            StartCoroutine(WaitForRespawnCoroutine(respawnTime));
+            StartCoroutine(WaitForActionCoroutine(respawnTime, Respawn));
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PickupCortable : ObjetoCortable, IAplastable
 {
@@ -16,7 +17,6 @@ public class PickupCortable : ObjetoCortable, IAplastable
 
     protected float selfDestructTime = 1;
 
-
     protected override void ApplyCut()
     {
         base.ApplyCut();
@@ -24,14 +24,19 @@ public class PickupCortable : ObjetoCortable, IAplastable
         EventManager.Trigger(Evento.OnObjectWasCut, transform.position);
         
         LevelManager.Instance.AddResource(pickupType, pickupAmount);
-        StartCoroutine(WaitForSelfDestructCoroutine(selfDestructTime));
+        StartCoroutine(WaitForActionCoroutine(selfDestructTime, SelfDestruct));
 
         if (doesRespawn)
         {
-            StartCoroutine(WaitForRespawnCoroutine(respawnTime));
+            StartCoroutine(WaitForActionCoroutine(respawnTime, Respawn));
         }
     }
 
+    public void Aplastar()
+    {
+        Debug.Log("este cortable fue aplastado");
+        ApplyCut();
+    }
     protected void Respawn()
     {
         //print("respawn");
@@ -39,7 +44,11 @@ public class PickupCortable : ObjetoCortable, IAplastable
         ReunirSprites();
         isCortable = true;
     }
-
+    protected void SelfDestruct()
+    {
+        //Debug.Log("selfdestruct");
+        spriteTop.gameObject.transform.gameObject.SetActive(false);
+    }
     protected void ReunirSprites()
     {
         spriteEntero.gameObject.SetActive(true);
@@ -48,29 +57,9 @@ public class PickupCortable : ObjetoCortable, IAplastable
         spriteTop.gameObject.SetActive(false);
     }
 
-    protected IEnumerator WaitForSelfDestructCoroutine(float time)
+    protected IEnumerator WaitForActionCoroutine(float time, Action action)
     {
         yield return new WaitForSeconds(time);
-        spriteTop.gameObject.transform.gameObject.SetActive(false);
+        action();
     }
-
-    protected IEnumerator WaitForRespawnCoroutine(float time)
-    {
-        //print("delayed respawn");
-        yield return new WaitForSeconds(time);
-        Respawn();
-    }
-
-    public void Aplastar()
-    {
-        Debug.Log("este cortable fue aplastado");
-        ApplyCut();
-    }
-
-
-    //una pregunta copada:
-    //puedo generalizar estas corrutinas WaitForX usando lambdas o algo asi?
-    //tal que me quede WaitForAction(metodo, tiempo)
-
-
 }
