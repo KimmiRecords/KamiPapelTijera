@@ -17,8 +17,6 @@ public class AbuelaDialogueTrigger : TriggerDialogue
 
     public override void Interact(params object[] parameter)
     {
-        
-
         if (triggerBool)
         {
             DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
