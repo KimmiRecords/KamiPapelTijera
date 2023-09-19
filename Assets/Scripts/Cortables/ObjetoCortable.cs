@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ObjetoCortable : MonoBehaviour, ICortable
 {
@@ -18,6 +19,11 @@ public class ObjetoCortable : MonoBehaviour, ICortable
     protected Vector3 posicionInicial;
     protected float tiempoDeVuelo;
     protected readonly float gravedad = 9.81f;
+
+    [SerializeField] protected bool doesRespawn;
+    [SerializeField] protected float respawnTime = 30;
+
+    protected float selfDestructTime = 1;
 
     protected void Start()
     {
@@ -74,5 +80,33 @@ public class ObjetoCortable : MonoBehaviour, ICortable
             yield return null;
         }
     }
+
+    
+    protected void Respawn()
+    {
+        //print("respawn");
+        //apago las partes y prendo el entero
+        ReunirSprites();
+        isCortable = true;
+    }
+    protected void SelfDestruct()
+    {
+        //Debug.Log("selfdestruct");
+        spriteTop.gameObject.transform.gameObject.SetActive(false);
+    }
+    protected void ReunirSprites()
+    {
+        spriteEntero.gameObject.SetActive(true);
+        spriteBase.gameObject.SetActive(false);
+        spriteTop.gameObject.transform.position = posicionInicial;
+        spriteTop.gameObject.SetActive(false);
+    }
+
+    protected IEnumerator WaitForActionCoroutine(float time, Action action)
+    {
+        yield return new WaitForSeconds(time);
+        action();
+    }
+
 
 }
