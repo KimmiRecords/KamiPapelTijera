@@ -34,7 +34,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void ShowDialogue(DialogueSO dialogue)
     {
-        if (OverlayManager.Instance.isLocked)
+        if (OverlayManager.Instance != null && OverlayManager.Instance.isLocked)
         {
             return;
         }

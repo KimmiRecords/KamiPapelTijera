@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 69834710}
-  m_IndirectSpecularColor: {r: 0.122767225, g: 0.13369809, b: 0.31926546, a: 1}
+  m_IndirectSpecularColor: {r: 0.122767344, g: 0.1336981, b: 0.31926546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -669,6 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 113291481}
   - component: {fileID: 113291482}
+  - component: {fileID: 113291483}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -753,6 +754,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &113291483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113291480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!4 &128406885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 206154224303217038, guid: 903be7005f110824eaf50cfdb81559b6,
@@ -1821,15 +1842,21 @@ MonoBehaviour:
   _maxSpeed: 20
   _attackDamage: 50
   hasTijera: 0
+  hasTijeraMejorada: 0
+  hasSprintBoots: 0
+  hasWaterBoots: 0
   weaponCooldown: 0.05
   tijeraHitBoxDuration: 0.1
   jumpForce: 5
   gravityValue: 35
+  sprintingSpeedModifier: 1.5
   cc: {fileID: 756216780}
   anim: {fileID: 610554917}
   miTijeraHitbox: {fileID: 1444468409}
   _renderer: {fileID: 1966983198}
   myPaperPlaneHat: {fileID: 1536219788}
+  sprintParticles: {fileID: 0}
+  tijeraManager: {fileID: 0}
   augmentedJumpForce: 15
   augmentedJumpsMax: 3
   planeoImpulse: 0.5
@@ -1838,6 +1865,7 @@ MonoBehaviour:
   isJumpButtonDown: 0
   isAttacking: 0
   isPaperPlaneHat: 0
+  isSprinting: 0
   augmentedJumpsLeft: 0
   lastDirection: {x: 0, y: 0, z: 0}
 --- !u!143 &756216780
@@ -12689,6 +12717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1065487693}
   - component: {fileID: 1065487694}
+  - component: {fileID: 1065487695}
   m_Layer: 3
   m_Name: Luz
   m_TagString: Untagged
@@ -12773,6 +12802,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1065487695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065487692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1076007873
 GameObject:
   m_ObjectHideFlags: 0
@@ -13934,6 +13983,7 @@ GameObject:
   - component: {fileID: 1858270258}
   - component: {fileID: 1858270257}
   - component: {fileID: 1858270259}
+  - component: {fileID: 1858270260}
   m_Layer: 0
   m_Name: Lampara (1)
   m_TagString: Untagged
@@ -14072,6 +14122,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1858270260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858270255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1880140948
 GameObject:
   m_ObjectHideFlags: 0
