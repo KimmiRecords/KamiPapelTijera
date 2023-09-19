@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class NPC_Abuela : NPC
 {
+    //este script maneja los states y movimientos de la abuela
+    //nada que ver con los dialogos. eso esta en el dialoguetrigger
+
     [HideInInspector] public bool isDropoff;
     [HideInInspector] public Vector3 dropoffPoint;
 

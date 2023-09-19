@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class TriggerDialogue : TriggerScript
 {
-    [SerializeField]
-    protected bool _burnAfterReading;
-
-    [SerializeField]
-    protected DialogueSO[] _dialogues;
+    [SerializeField] protected bool _burnAfterReading;
+    [SerializeField] protected DialogueSO[] _dialogues;
 
     protected int currentDialogue = 0;
 
