@@ -28,7 +28,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -2.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7152877468955565720}
   m_Father: {fileID: 783937543483632998}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -493,6 +494,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5444428447928924403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7152877468955565720}
+  - component: {fileID: 3079691328898561398}
+  m_Layer: 0
+  m_Name: ArbolAsAPlatform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7152877468955565720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444428447928924403}
+  m_LocalRotation: {x: -0.0007256874, y: -0.000023245808, z: 0.02326181, w: 0.99972916}
+  m_LocalPosition: {x: 0.065191075, y: 0.95415115, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 783937542956873200}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -0.083, y: -0.005, z: 2.666}
+--- !u!65 &3079691328898561398
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444428447928924403}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9201338, y: 0.23117353, z: 1}
+  m_Center: {x: 0.028037092, y: -0.017708682, z: 0.000000006802859}
 --- !u!1001 &1635343690611974980
 PrefabInstance:
   m_ObjectHideFlags: 0
