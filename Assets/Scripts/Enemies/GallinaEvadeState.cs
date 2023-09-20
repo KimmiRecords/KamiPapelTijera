@@ -5,9 +5,9 @@ using UnityEngine;
 public class GallinaEvadeState : IState
 {
     FiniteStateMachine _fsm;
-    Gallina _gallina;
+    GallinaAI _gallina;
 
-    public GallinaEvadeState(FiniteStateMachine fsm, Gallina r)
+    public GallinaEvadeState(FiniteStateMachine fsm, GallinaAI r)
     {
         _fsm = fsm;
         _gallina = r;

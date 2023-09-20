@@ -5,7 +5,7 @@ using UnityEngine;
 public class HongoCortable : PickupCortable
 {
     //el hongo cortable debe cambiar la animacion de la gallina
-    [SerializeField] Animator _anim;
+    //[SerializeField] Animator _anim;
 
     protected override void ApplyCut()
     {
@@ -14,9 +14,7 @@ public class HongoCortable : PickupCortable
         AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
         AudioManager.instance.PlayByName("MagicSuccess", 2f);
 
-
-        //cambio las animaciones
-        _anim.SetBool("_isCortado", true);
+        SepararSprites();
 
         isCortable = false;
         LevelManager.Instance.AddResource(pickupType, pickupAmount);

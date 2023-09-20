@@ -6,13 +6,13 @@ public class GallinaWalkState : IState
 {
 
     FiniteStateMachine _fsm;
-    Gallina _gallina;
+    GallinaAI _gallina;
     private bool goalReached;
 
     [SerializeField]
     Node currentGoalNode;
 
-    public GallinaWalkState(FiniteStateMachine fsm, Gallina r)
+    public GallinaWalkState(FiniteStateMachine fsm, GallinaAI r)
     {
         _fsm = fsm;
         _gallina = r;
@@ -49,14 +49,14 @@ public class GallinaWalkState : IState
         //Debug.Log("gallina - entre a walk");
     }
 
-    public void SetGoal(Gallina yo)
+    public void SetGoal(GallinaAI yo)
     {
         //Debug.Log("gallina - arranca set goal");
         currentGoalNode = yo.allNodes[Random.Range(0, yo.allNodes.Length)];
         goalReached = false;
     }
     
-    public void WalkTowardsNode(Node goalNode, Gallina yo)
+    public void WalkTowardsNode(Node goalNode, GallinaAI yo)
     {
         Vector3 dir = goalNode.transform.position - yo.transform.position;
         dir.y = 0;

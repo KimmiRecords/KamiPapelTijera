@@ -324,6 +324,8 @@ MonoBehaviour:
   velocidadInicial: 30
   anguloLanzamiento: 85
   alturaInicial: 10
+  doesRespawn: 0
+  respawnTime: 30
   _anim: {fileID: 783937543483633002}
   _hitbox: {fileID: 783937543494786553}
   _particulasHojas: {fileID: 3875269926606238846}
@@ -419,6 +421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 783937543529692682}
   - component: {fileID: 783937543529692685}
+  - component: {fileID: 627369317691653571}
   m_Layer: 0
   m_Name: arbol_full
   m_TagString: Untagged
@@ -494,6 +497,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &627369317691653571
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783937543529692683}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5155358, y: 2.2893784, z: 0.20000018}
+  m_Center: {x: 0.08150626, y: -3.130316, z: 0.0000028593845}
 --- !u!1 &5444428447928924403
 GameObject:
   m_ObjectHideFlags: 0

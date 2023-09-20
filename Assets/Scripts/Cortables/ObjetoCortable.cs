@@ -25,7 +25,7 @@ public class ObjetoCortable : MonoBehaviour, ICortable
 
     protected float selfDestructTime = 1;
 
-    protected void Start()
+    protected virtual void Start()
     {
         posicionInicial = spriteTop.gameObject.transform.localPosition;
 

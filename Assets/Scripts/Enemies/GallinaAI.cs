@@ -2,48 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gallina : Enemy
+public class GallinaAI : Enemy
 {
-    //este script tiene que estar en donde esta el animator
-    //asi las animaciones pueden llamar a metodos de este script.
-    //unity, no lo entenderias.
-
-    public Animator anim; //mi animator
-
-    [HideInInspector]
-    public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
-
-    [HideInInspector]
-    public Player _player;
-    protected FiniteStateMachine fsm;
-
     float maxForce = 5;
-
+    protected FiniteStateMachine _fsm;
     public Node[] allNodes;
-
-    [HideInInspector]
-    public Vector3 velocity;
-    [HideInInspector]
-    public List<Node> _pathToFollow = new List<Node>();
-    [HideInInspector]
-    public Pathfinding _pf = new Pathfinding();
     public float arriveRadius = 0.1f;
     public float exitDistance = 30;
-
-    [HideInInspector]
-    public bool playerIsInRange;
+    [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
+    [HideInInspector] public Vector3 velocity;
+    [HideInInspector] public List<Node> _pathToFollow = new List<Node>();
+    [HideInInspector] public Pathfinding _pf = new Pathfinding();
+    [HideInInspector] public Player _player;
+    [HideInInspector] public bool playerIsInRange;
 
     private void Start()
     {
-        fsm = new FiniteStateMachine();
-        fsm.AddState(State.GallinaWalk, new GallinaWalkState(fsm, this));
-        fsm.AddState(State.GallinaEvade, new GallinaEvadeState(fsm, this));
-        fsm.ChangeState(State.GallinaWalk);
+        _fsm = new FiniteStateMachine();
+        _fsm.AddState(State.GallinaWalk, new GallinaWalkState(_fsm, this));
+        _fsm.AddState(State.GallinaEvade, new GallinaEvadeState(_fsm, this));
+        _fsm.ChangeState(State.GallinaWalk);
     }
 
     private void Update()
     {
-        fsm.Update();
+        _fsm.Update();
     }
 
     public void AddForce(Vector3 force)
@@ -102,5 +85,9 @@ public class Gallina : Enemy
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
+    }
+
+    private void OnDisable()
+    {
     }
 }
