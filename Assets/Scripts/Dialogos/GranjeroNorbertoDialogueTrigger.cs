@@ -2,38 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
+public class GranjeroNorbertoDialogueTrigger : QuestDialogueTrigger
 {
-    bool firstTime = true;
+    [SerializeField] GameObject tijeraPickup;
 
-    [SerializeField] GameObject tijeraPickup, triggerText;
-
-
-    protected override void Start()
+    protected override void ShowFirstTimeDialogue()
     {
-        EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
-        EventManager.Subscribe(Evento.OnAbuelaDropoff, PasarAlSiguienteDialogo);
+        tijeraPickup.SetActive(true);
+        base.ShowFirstTimeDialogue();
     }
 
-    public override void Interact(params object[] parameter)
+    protected override void DeliverQuest()
     {
-        if (triggerBool)
-        {
-            DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
-            if (firstTime)
-            {
-                tijeraPickup.SetActive(true);
-                triggerText.SetActive(true);
-
-                firstTime = false;
-                AudioManager.instance.PlayByName("MagicSuccess", 4.0f);
-            }
-        }
-
-        if (_burnAfterReading)
-        {
-            Destroy(this);
-        }
+        //Debug.Log("dalia: quest entregada!");
+        QuestManager.Instance.RemoveQuest(_quest);
+        AudioManager.instance.PlayByName("QuestCompleted02", 1.1f);
+        currentDialogue = 2;
+        _questDelivered = true;
+        EventManager.Trigger(Evento.OnQuestDelivered, _quest);
     }
 
     protected override void OnDestroy()
@@ -41,7 +27,7 @@ public class GranjeroNorbertoDialogueTrigger : TriggerDialogue
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
-            EventManager.Unsubscribe(Evento.OnAbuelaDropoff, PasarAlSiguienteDialogo);
+            EventManager.Unsubscribe(Evento.OnAbuelaDropoff, CompleteQuest);
         }
     }
 

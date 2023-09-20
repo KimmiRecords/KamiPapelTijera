@@ -13,7 +13,6 @@ public enum RewardType
     Count
 }
 
-
 public class QuestManager : Singleton<QuestManager>
 {
     List<QuestSO> quests = new List<QuestSO>();
@@ -49,9 +48,13 @@ public class QuestManager : Singleton<QuestManager>
                 break;
         }
     }
-
     public void SetAbuelaDropoff(params object[] parameter)
     {
+        if (!eventosSucedidos.ContainsKey(Evento.OnAbuelaDropoff))
+        {
+            eventosSucedidos.Add(Evento.OnAbuelaDropoff, false);
+        }
+
         eventosSucedidos[Evento.OnAbuelaDropoff] = true;
         CheckQuests();
     }
@@ -70,7 +73,7 @@ public class QuestManager : Singleton<QuestManager>
             if (quest.condition.conditionType == ConditionType.Event &&
                 eventosSucedidos[quest.condition.evento])
             {
-                Debug.Log("quest manager: se completo la " + quest.name);
+                Debug.Log("check quests: se completo la " + quest.name);
                 CompleteQuest(quest);
             }
         }
@@ -78,14 +81,15 @@ public class QuestManager : Singleton<QuestManager>
     public void AddQuest(QuestSO quest) //esto lo disparan los npcs cuando les hablo
     {
         //Debug.Log("agrego la quest");
+        if (quest.condition.conditionType == ConditionType.Event &&
+            !eventosSucedidos.ContainsKey(quest.condition.evento))
+        {
+            eventosSucedidos.Add(quest.condition.evento, false);
+            //EventManager.Subscribe(quest.condition.evento, SetAbuelaDropoff); //deberia ser generico
+        }
         quests.Add(quest);
         CheckQuests();
 
-        //if (quest.condition.conditionType == ConditionType.Event)
-        //{
-        //    eventosSucedidos.Add(quest.condition.evento, false);
-        //    EventManager.Subscribe(quest.condition.evento, SetAbuelaDropoff); //deberia ser generico
-        //}
     }
     public void RemoveQuest(QuestSO quest)
     {
@@ -95,7 +99,7 @@ public class QuestManager : Singleton<QuestManager>
     public void CompleteQuest(QuestSO quest)
     {
         EventManager.Trigger(Evento.OnQuestCompleted, quest);
-        Debug.Log("complete la quest");
+        Debug.Log("complete quest: " + quest);
     }
 
     void OnDestroy()

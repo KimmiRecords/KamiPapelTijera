@@ -113,7 +113,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         //insta
         PlayGlitter();
-        AudioManager.instance.PlayByName("MagicSuccess", 0.4f, 0.02f);
+        AudioManager.instance.PlayByName("MagicSuccess", 0.42f, 0.01f);
         StartCoroutine(PostProcessManager.Instance.LerpBloomIntensity());
         yield return new WaitForSeconds(delayTime);
 

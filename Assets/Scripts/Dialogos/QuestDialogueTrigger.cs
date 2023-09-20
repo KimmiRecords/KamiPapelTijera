@@ -7,18 +7,16 @@ public class QuestDialogueTrigger : TriggerDialogue
     //si tu npc tiene exactamente 4 dialogos y una quest de recursos:
     //este script es para vos
     
-
     [SerializeField] int _paperReward = 20;
-    [SerializeField] QuestSO _quest; //la quest que da este pj
-    bool _questCompleted;
-    bool _questDelivered;
-    bool firstTime = true;
+    [SerializeField] protected QuestSO _quest; //la quest que da este pj
+    protected bool _questCompleted;
+    protected bool _questDelivered;
+    protected bool firstTime = true;
 
     protected override void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
         EventManager.Subscribe(Evento.OnQuestCompleted, CompleteQuest);
-        //EventManager.Subscribe(Evento.OnDialogueEnd, PasarAlSiguienteDialogo);
     }
 
     //dialogos: 
@@ -31,14 +29,9 @@ public class QuestDialogueTrigger : TriggerDialogue
     {
         if (triggerBool && !LevelManager.Instance.inDialogue) //este temita del interact se podria hacer mejor, ya lo demostre en otro lado
         {
-
             if (firstTime)
             {
-                //mostrar el 0 si o si, y pasar al 1
-                DialogueManager.Instance.ShowDialogue(_dialogues[0]);
-                QuestManager.Instance.AddQuest(_quest);
-                currentDialogue++;
-                firstTime = false;
+                ShowFirstTimeDialogue();
                 return;
             }
 
@@ -60,17 +53,26 @@ public class QuestDialogueTrigger : TriggerDialogue
             Destroy(this);
         }
     }
-    protected void CompleteQuest(params object[] parameter)
+
+    protected virtual void ShowFirstTimeDialogue()
     {
-        Debug.Log("dalia: completar quest");
+        //mostrar el 0 si o si, y pasar al 1
+        DialogueManager.Instance.ShowDialogue(_dialogues[0]);
+        QuestManager.Instance.AddQuest(_quest);
+        currentDialogue++;
+        firstTime = false;
+    }
+
+    protected virtual void CompleteQuest(params object[] parameter)
+    {
+        Debug.Log("quest completada");
         if ((QuestSO)parameter[0] == _quest) //si la quest que se completo es la mia
         {
-            Debug.Log("dalia: me entero que se completo la quest");
             _questCompleted = true;
         }
     }
 
-    protected void DeliverQuest()
+    protected virtual void DeliverQuest()
     {
         //Debug.Log("dalia: quest entregada!");
         QuestManager.Instance.RemoveQuest(_quest);
@@ -81,15 +83,6 @@ public class QuestDialogueTrigger : TriggerDialogue
         _questDelivered = true;
         EventManager.Trigger(Evento.OnQuestDelivered, _quest);
     }
-
-    //protected override void PasarAlSiguienteDialogo(params object[] parameter)
-    //{
-    //    if ((Dialogue)parameter[1] == _dialogues[0])
-    //    {
-    //        //solo me interesa si el dialogo que terminó fue el 0
-    //        base.PasarAlSiguienteDialogo(parameter);
-    //    }
-    //}
 
     protected override void OnDestroy()
     {
