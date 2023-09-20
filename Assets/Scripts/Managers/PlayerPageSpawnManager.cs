@@ -3,50 +3,37 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[System.Serializable]
-public struct PageSpawnPositions
-{
-    public Vector3 entrySpawn;
-    public Vector3 exitSpawn;
-}
-
 public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 {
     //decime a que pagina pasaste, y yo te dire donde deberia spawnear el player.
     //tambien usan este script cuando el pj muere y debe respawnear
-    
-    [SerializeField] Player _player;
-    CharacterController _playerCC;
-
-    float pageEntryX = -135;
-    float pageExitX = 135;
-
 
     //isNext es true cuando estoy pasando a la SIGUIENTE pagina.
     //isNext seria como lo opuesto a isPrev.
 
+    [SerializeField] Player _player;
+    CharacterController _playerCC;
+    float pageEntryX = -135;
+    float pageExitX = 135;
     Vector3 lastUsedSpawn; //para recordar el ultimo usado para cuando el player muera
 
     void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerChangePage, PlacePlayer);
         _playerCC = _player.GetComponent<CharacterController>();
-        lastUsedSpawn = _player.transform.position;
+        lastUsedSpawn = _player.transform.position; //en principio, tu ultimo spawn es donde arranca el juego
     }
-
     public void PlacePlayer(params object[] parameter)
     {
         Debug.Log("place player");
         PositionPlayerAtPoint(GetProjectedPositionInNewPage(_player.transform.position, (bool)parameter[1]));
         SavePosition(_player.transform.position);
     }
-
     public void RespawnPlayer(params object[] parameter)
     {
         Debug.Log("respawn player");
         PositionPlayerAtPoint(lastUsedSpawn);
     }
-
     public void PositionPlayerAtPoint(Vector3 point)
     {
         Debug.Log("PositionPlayerAtPoint");
@@ -55,7 +42,6 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
         _playerCC.enabled = true;
         EventManager.Trigger(Evento.OnPlayerPlaced);
     }
-
     public Vector3 GetProjectedPositionInNewPage(Vector3 playerCurrentPosition, bool isNext)
     {
         float desiredX;
@@ -75,12 +61,10 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
         Debug.Log(newPosition);
         return newPosition;
     }
-
     public void SavePosition(Vector3 pos)
     {
         lastUsedSpawn = pos;
     }
-
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)

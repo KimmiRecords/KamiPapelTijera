@@ -58,6 +58,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
                     isNext = true;
                     StartChangePage();
                     isTurning = true;
+                    esferaNext.triggerBool = false;
                 }
             }
 
@@ -73,6 +74,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
                     isNext = false;
                     StartChangePage();
                     isTurning = true;
+                    esferaPrev.triggerBool = false;
                 }
             }
         }
@@ -107,11 +109,11 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
             esferaNext.gameObject.SetActive(true);
         }
     }
-    public IEnumerator CerrarPUBsCoroutine(float delayTime)
+    public IEnumerator CerrarPUBsCoroutine(float delayTime) //cierro la pag actual
     {
         //insta
         PlayGlitter();
-        AudioManager.instance.PlayByName("MagicSuccess", 0.4f);
+        AudioManager.instance.PlayByName("MagicSuccess", 0.4f, 0.02f);
         StartCoroutine(PostProcessManager.Instance.LerpBloomIntensity());
         yield return new WaitForSeconds(delayTime);
 
@@ -139,7 +141,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
             }
         }
         PUBManager.Instance.OpenPUBs();
-    }
+    } //abro la nueva pag
     void CreateHoja(bool isNext)
     {
         if (isNext)
@@ -155,23 +157,24 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         LevelManager.Instance.inDialogue = false;
         isTurning = false;
-        esferaNext.triggerBool = false;
-        esferaPrev.triggerBool = false;
+        //esferaNext.triggerBool = false;
+        //esferaPrev.triggerBool = false;
         CameraManager.Instance.SetCamera(CameraMode.Normal);
         //glitter.SetActive(false);
 
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
-    private void PlayPageSound()
+    void PlayPageSound()
     {
         if (isNext)
         {
-            AudioManager.instance.PlayByName("PageTurn01", 0.9f);
+            AudioManager.instance.PlayByName("PageTurn01", 0.9f, 0.03f);
         }
         else
         {
-            AudioManager.instance.PlayByName("PageTurn02", 0.9f);
+            AudioManager.instance.PlayByName("PageTurn02", 0.9f, 0.03f);
         }
     }
+
     public void PlayGlitter()
     {
         foreach (ParticleSystem ps in glitterSystems)

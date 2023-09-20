@@ -12,12 +12,12 @@ public class QuestDialogueTrigger : TriggerDialogue
     [SerializeField] QuestSO _quest; //la quest que da este pj
     bool _questCompleted;
     bool _questDelivered;
-    
+    bool firstTime = true;
 
     protected override void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
-        EventManager.Subscribe(Evento.OnQuestCompleted, CompletarQuest);
+        EventManager.Subscribe(Evento.OnQuestCompleted, CompleteQuest);
         //EventManager.Subscribe(Evento.OnDialogueEnd, PasarAlSiguienteDialogo);
     }
 
@@ -29,45 +29,29 @@ public class QuestDialogueTrigger : TriggerDialogue
 
     public override void Interact(params object[] parameter)
     {
-        if (triggerBool) //este temita del interact se podria hacer mejor, ya lo demostre en otro lado
+        if (triggerBool && !LevelManager.Instance.inDialogue) //este temita del interact se podria hacer mejor, ya lo demostre en otro lado
         {
-            //Debug.Log("dalia: me interactuan");
-            //known bug: si agrego la quest por primera vez con las condiciones
-            //           de la misma ya cumplidas, va directo al currentDialogue3
 
+            if (firstTime)
+            {
+                //mostrar el 0 si o si, y pasar al 1
+                DialogueManager.Instance.ShowDialogue(_dialogues[0]);
+                QuestManager.Instance.AddQuest(_quest);
+                currentDialogue++;
+                firstTime = false;
+                return;
+            }
 
             if (_questCompleted && !_questDelivered)
             {
-                //Debug.Log("dalia: quest entregada!");
-                QuestManager.Instance.RemoveQuest(_quest);
-                LevelManager.Instance.AddResource(_quest.condition.resourceType, -_quest.condition.requiredAmount); //esto deberia funcar para condition evento. tal vez con una interfaz IQuestCondition con metodo complete/deliver
-                LevelManager.Instance.AddResource(ResourceType.papel, _paperReward);
-                AudioManager.instance.PlayByName("QuestCompleted02");
-                currentDialogue = 2;
-                _questDelivered = true;
-                EventManager.Trigger(Evento.OnQuestDelivered, _quest);
+                DeliverQuest();
             }
 
-            //Debug.Log("dalia: muestro currentdialogue");
             DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
 
-            switch (currentDialogue)
+            if (currentDialogue == 2) //el 2 es el unico q pasa automatico al 3
             {
-                case 0:
-                    QuestManager.Instance.AddQuest(_quest);
-                    currentDialogue++;
-                    break;
-
-                case 1:
-                    break;
-
-                case 2:
-                    currentDialogue++;
-                    break;
-
-                case 3:
-                    break;
-
+                currentDialogue++;
             }
         }
 
@@ -76,7 +60,7 @@ public class QuestDialogueTrigger : TriggerDialogue
             Destroy(this);
         }
     }
-    protected void CompletarQuest(params object[] parameter)
+    protected void CompleteQuest(params object[] parameter)
     {
         Debug.Log("dalia: completar quest");
         if ((QuestSO)parameter[0] == _quest) //si la quest que se completo es la mia
@@ -84,6 +68,18 @@ public class QuestDialogueTrigger : TriggerDialogue
             Debug.Log("dalia: me entero que se completo la quest");
             _questCompleted = true;
         }
+    }
+
+    protected void DeliverQuest()
+    {
+        //Debug.Log("dalia: quest entregada!");
+        QuestManager.Instance.RemoveQuest(_quest);
+        LevelManager.Instance.AddResource(_quest.condition.resourceType, -_quest.condition.requiredAmount); //esto deberia funcar para condition evento. tal vez con una interfaz IQuestCondition con metodo complete/deliver
+        LevelManager.Instance.AddResource(ResourceType.papel, _paperReward);
+        AudioManager.instance.PlayByName("QuestCompleted02");
+        currentDialogue = 2;
+        _questDelivered = true;
+        EventManager.Trigger(Evento.OnQuestDelivered, _quest);
     }
 
     //protected override void PasarAlSiguienteDialogo(params object[] parameter)
@@ -100,7 +96,7 @@ public class QuestDialogueTrigger : TriggerDialogue
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
-            EventManager.Unsubscribe(Evento.OnQuestCompleted, CompletarQuest);
+            EventManager.Unsubscribe(Evento.OnQuestCompleted, CompleteQuest);
             //EventManager.Unsubscribe(Evento.OnDialogueEnd, PasarAlSiguienteDialogo);
         }
     }

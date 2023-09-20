@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 public class Rocoso : Enemy, IMojable
 {
-    //este script tiene que estar en donde esta el animator
-    //asi las animaciones pueden llamar a metodos de este script.
-    //unity, no lo entenderias.
-
     public Animator anim; //mi animator
     public RocosoHeadbuttHitBox _hitBox;
     public float attackRange = 11;
@@ -48,7 +44,6 @@ public class Rocoso : Enemy, IMojable
             target = _player.transform.position;
         }
     }
-
     public override void TakeDamage(float dmg)
     {
         AudioManager.instance.PlayByName("ShipCrash", 0.6f);
@@ -59,7 +54,6 @@ public class Rocoso : Enemy, IMojable
         }
         StartCoroutine(EnrojecerSprite());
     }
-
     public void RocosoDespierta(Player player) //este metodo es disparado por el trigger, solo la primera vez
     {
         if (!wasAwoken)
@@ -68,12 +62,10 @@ public class Rocoso : Enemy, IMojable
             wasAwoken = true;
         }
     }
-
     public void RocosoCamina() //disparada por el final de la animacion de start
     {
         startAnimationHasFinished = true;
     }
-
     IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo
     {
         EnableHeadbuttHitbox();
@@ -91,7 +83,6 @@ public class Rocoso : Enemy, IMojable
         _hitBox.gameObject.SetActive(false);
         isHitting = false;
     }
-
     public void GetWet(float wetDamage) //esto se dispara cuando collisiona con el rio
     {
         Debug.Log("rocoso se moja");
@@ -102,12 +93,10 @@ public class Rocoso : Enemy, IMojable
         isDrowning = true;
         StartCoroutine(DrowningCoroutine(wetDamage));
     }
-
     public void StopGettingWet()
     {
         isDrowning = false;
     }
-
     public IEnumerator DrowningCoroutine(float wetDamage)
     {
         while (isDrowning)
@@ -116,13 +105,11 @@ public class Rocoso : Enemy, IMojable
             yield return new WaitForSeconds(0.8f);
         }
     }
-
     public void DeathAnimationEnd() //esto lo dispara el animator (especificamente, el final de clip de death)
     {
         //Debug.Log("termina el clip de muerte");
         deathAnimationEnded = true;
     }
-
     public IEnumerator MorirCoroutine() //la corrutina esta es solo para esperar a la anim antes de disparar Die()
     {
         //Debug.Log("arranco corrutina de morir");
@@ -136,13 +123,17 @@ public class Rocoso : Enemy, IMojable
 
         Die();
     }
-
     private void OnDisable()
     {
-
         //cuando cambias de pagina el rocoso se apaga
         //cuando volves a la pagina en la que estaba, el animator se reinicia y vuelve a estar dormido
         //esta linea es para que despues de reiniciarse, vuelva al estado en el que estaba antes
+
+        if (isDead)
+        {
+            Die();
+            return;
+        }
 
         //Debug.Log("me deshabilitaron");
         _fsm.ChangeState(State.RocosoSleep);
