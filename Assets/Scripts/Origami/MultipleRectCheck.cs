@@ -21,11 +21,11 @@ public class MultipleRectCheck : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             StartOrigami(desiredOrigami);
         }
-        if (Input.GetKeyUp(KeyCode.Tab))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             EndOrigami(desiredOrigami);
             //print("invocacion cancelada x soltar tab");
@@ -33,7 +33,7 @@ public class MultipleRectCheck : MonoBehaviour
 
         if (invocando && Input.GetMouseButtonDown(0))
         {
-            //chequeo si el mouse esta dentro de la imagen roja, y habilito el arranque
+            //chequeo si el mouse esta dentro de la imagen de inicio, y habilito el arranque
             if (RectTransformUtility.RectangleContainsScreenPoint(desiredOrigami.origamiRoutes[desiredOrigami.currentRouteIndex].inicioRectangle, Input.mousePosition))
             {
                 arrastrando = true;
@@ -49,7 +49,7 @@ public class MultipleRectCheck : MonoBehaviour
         }
 
         //chequeo si el jugador solto el mouse mientras arrastraba
-        if (Input.GetMouseButtonUp(0))
+        if (invocando && arrastrando && Input.GetMouseButtonUp(0))
         {
             CursorManager.Instance.SetCursor(CursorType.OpenHand);
 
@@ -90,6 +90,7 @@ public class MultipleRectCheck : MonoBehaviour
                 break;
             }
         }
+
         if (arrastrando && !encimaDeAlgunRectangulo) //si no, end origami
         {
             //me salí de la ruta
