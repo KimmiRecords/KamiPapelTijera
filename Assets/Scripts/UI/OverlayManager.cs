@@ -10,8 +10,10 @@ public class OverlayManager : Singleton<OverlayManager>
 
     [SerializeField] DialogueSO victoryTriggeringDialogue, mainQuestTriggeringDialogue;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        DontDestroyOnLoad(this);
         EventManager.Subscribe(Evento.OnPlayerDie, ShowDefeatOverlay);
         EventManager.Subscribe(Evento.OnDialogueEnd, ShowOverlay);
         EventManager.Subscribe(Evento.OnPlayerPressedE, Unlock);
@@ -29,6 +31,7 @@ public class OverlayManager : Singleton<OverlayManager>
 
         if ((DialogueSO)parameter[1] == victoryTriggeringDialogue)
         {
+            Debug.Log("overlay manager: show victory overlay");
             _victoryOverlay.gameObject.SetActive(true);
             Lock();
         }
@@ -43,6 +46,7 @@ public class OverlayManager : Singleton<OverlayManager>
 
     public void Lock(params object[] parameter)
     {
+        Debug.Log("overlay manager: lock");
         LevelManager.Instance.inDialogue = true;
         isLocked = true;
     }
@@ -51,11 +55,13 @@ public class OverlayManager : Singleton<OverlayManager>
     {
         if (isLocked)
         {
+            Debug.Log("overlay unlock: set indialogue y islocked false");
             LevelManager.Instance.inDialogue = false;
             isLocked = false;
             AudioManager.instance.PlayByName("PickupSFX", 2.5f);
         }
 
+        Debug.Log("overlay unlock: apago todos los overlays");
         _defeatOverlay.gameObject.SetActive(false);
         _victoryOverlay.gameObject.SetActive(false);
         _mainQuestOverlay.gameObject.SetActive(false);

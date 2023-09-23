@@ -63,6 +63,7 @@ public class LevelManager : Singleton<LevelManager>
     public void GiveTijeraMejorada()
     {
         //Debug.Log("el player se gano la tijera mejorada x haber completado la quest");
+        player.hasTijera = true;
         player.GetTijeraMejorada();
     }
     public void GoToScene(string sceneName)
