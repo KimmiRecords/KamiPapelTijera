@@ -33,7 +33,7 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         triggerBool = true;
         if (!isLocked)
         {
-            TooltipManager.instance.ShowTooltip(tooltipTextToShow, postItColor);
+            TooltipManager.Instance.ShowTooltip(tooltipTextToShow, postItColor);
         }
     }
 

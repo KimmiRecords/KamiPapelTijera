@@ -109,7 +109,7 @@ public class MultipleRectCheck : MonoBehaviour
             //print("arranca la invocacion");
             origami.gameObject.SetActive(true);
             invocando = true;
-            TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
+            TooltipManager.Instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
             AudioManager.instance.PlayRandom("MagicChannelingLoop01", "MagicChannelingLoop02");
             EventManager.Trigger(Evento.OnOrigamiStart);
             //print("rect check: mando a actualizar");
@@ -125,7 +125,7 @@ public class MultipleRectCheck : MonoBehaviour
         origami.FailOrigami();
         origami.gameObject.SetActive(false);
         //print("invocacion cancelada");
-        TooltipManager.instance.HideTooltip();
+        TooltipManager.Instance.HideTooltip();
         AudioManager.instance.StopByName("PaperFoldLoop");
         AudioManager.instance.StopByName("MagicChannelingLoop01", "MagicChannelingLoop02");
         CursorManager.Instance.SetCursor(CursorType.OpenHand);

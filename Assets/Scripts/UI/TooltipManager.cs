@@ -12,42 +12,19 @@ public enum PostItColor
     Verde
 }
 
-public class TooltipManager : MonoBehaviour
+public class TooltipManager : Singleton<TooltipManager>
 {
-    [SerializeField]
-    int killTime = 10;
-    [SerializeField]
-    int azulKillTime, naranjaKillTime, rosaKillTime, amarilloKillTime, verdeKillTime;
+    //este script escribe el texto en los postits y los prende y apaga
 
-
-
-
-
-    //cambia los postits 
-
-    public static TooltipManager instance;
-
-    [SerializeField]
-    PostIt[] postIts;
+    [SerializeField] int killTime = 10;
+    [SerializeField] int azulKillTime, naranjaKillTime, rosaKillTime, amarilloKillTime, verdeKillTime;
+    [SerializeField] PostIt[] postIts;
 
     float killAllPostitsTimer;
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
 
     public void ShowTooltip(string text, PostItColor postIt) 
     {
         //print("show tooltip");
-
         postIts[(int)postIt].gameObject.SetActive(true); //prendo el postit. esto se reemplazara por una animacion
         postIts[(int)postIt].tmPro.text = text; //le cambio el texto
 

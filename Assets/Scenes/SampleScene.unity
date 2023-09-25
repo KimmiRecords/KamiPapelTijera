@@ -2629,6 +2629,11 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3664596389247205331, guid: e35f5c2be01f02a4ca224808aa10f4f1,
+        type: 3}
+      propertyPath: postItColor
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5429628501580455459, guid: e35f5c2be01f02a4ca224808aa10f4f1,
         type: 3}
       propertyPath: allNodes.Array.size
@@ -6302,12 +6307,17 @@ PrefabInstance:
     - target: {fileID: 5723557005826726060, guid: ec2adfa632176c64b8f793dffab5f997,
         type: 3}
       propertyPath: postItColor
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5723557005826726060, guid: ec2adfa632176c64b8f793dffab5f997,
         type: 3}
       propertyPath: isOneTimeOnly
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726060, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: tooltipHoldTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5723557005826726060, guid: ec2adfa632176c64b8f793dffab5f997,
         type: 3}
@@ -10025,6 +10035,11 @@ PrefabInstance:
       propertyPath: _isCortado
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3664596389247205331, guid: e35f5c2be01f02a4ca224808aa10f4f1,
+        type: 3}
+      propertyPath: postItColor
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4089768511499964558, guid: e35f5c2be01f02a4ca224808aa10f4f1,
         type: 3}
       propertyPath: aux
@@ -10613,6 +10628,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &415239722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 415239723}
+  - component: {fileID: 415239725}
+  - component: {fileID: 415239724}
+  m_Layer: 0
+  m_Name: TriggerText PuertaTooltip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &415239723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415239722}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00011140293}
+  m_LocalPosition: {x: -0.9531263, y: 1.6292212, z: -24.24328}
+  m_LocalScale: {x: 1.3952374, y: 1.5940771, z: 1.6544245}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 661508503}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &415239724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415239722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c3335d810ed744f8545fe6ec765666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerBool: 0
+  tooltipTextToShow: CLICK para cortar
+  postItColor: 0
+  isOneTimeOnly: 1
+--- !u!65 &415239725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415239722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &419306828
 GameObject:
   m_ObjectHideFlags: 0
@@ -13084,7 +13161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerBool: 0
   tooltipTextToShow: Toca E para charlar
-  postItColor: 1
+  postItColor: 0
   _burnAfterReading: 0
   _dialogues:
   - {fileID: 11400000, guid: 589192ec4561a6743bc630c4b7497b92, type: 2}
@@ -16775,12 +16852,14 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 909075883}
-  - {fileID: 1269111118}
   - {fileID: 2084337337}
+  - {fileID: 1981768844}
+  - {fileID: 1269111118}
   - {fileID: 1338427440}
   - {fileID: 1906573509}
   - {fileID: 1273515803}
   - {fileID: 856565145}
+  - {fileID: 415239723}
   m_Father: {fileID: 165442789}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18205,6 +18284,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664596389247205331, guid: e35f5c2be01f02a4ca224808aa10f4f1,
+        type: 3}
+      propertyPath: postItColor
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5429628501580455459, guid: e35f5c2be01f02a4ca224808aa10f4f1,
         type: 3}
@@ -20599,7 +20683,6 @@ GameObject:
   m_Component:
   - component: {fileID: 838894710}
   - component: {fileID: 838894712}
-  - component: {fileID: 838894713}
   - component: {fileID: 838894715}
   - component: {fileID: 838894714}
   m_Layer: 0
@@ -20637,25 +20720,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12, y: 12, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &838894713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838894709}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 248c60063e50b3841ab4c3f9153e88b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerBool: 0
-  tooltipTextToShow: Toca E para charlar
-  postItColor: 1
-  _burnAfterReading: 0
-  _dialogues:
-  - {fileID: 11400000, guid: 00a8f6cb5d1acf7428ee7646376f02c6, type: 2}
-  - {fileID: 11400000, guid: 750e085be4d60f248b205a28d8f232ca, type: 2}
 --- !u!114 &838894714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20691,7 +20755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerBool: 0
   tooltipTextToShow: Toca E para charlar
-  postItColor: 1
+  postItColor: 0
   _burnAfterReading: 0
   _dialogues:
   - {fileID: 11400000, guid: 00a8f6cb5d1acf7428ee7646376f02c6, type: 2}
@@ -20942,7 +21006,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 661508503}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &856565146
 MonoBehaviour:
@@ -21945,6 +22009,121 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3914798656235243572, guid: 4b6f2e4fa7eb93b4e84f311ec3baba4f, type: 3}
+--- !u!1001 &893158611
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1872555155}
+    m_Modifications:
+    - target: {fileID: 5723557005826726060, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: postItColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726060, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: tooltipTextToShow
+      value: "Toc\xE1 MiddleClick para cambiar de c\xE1mara."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7107
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.58597
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -62.989662
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 39.807552
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726062, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_Name
+      value: TriggerText toca mniddelclick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726099, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726099, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726099, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 50
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ec2adfa632176c64b8f793dffab5f997, type: 3}
+--- !u!4 &893158612 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
+    type: 3}
+  m_PrefabInstance: {fileID: 893158611}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &908553695
 GameObject:
   m_ObjectHideFlags: 0
@@ -22139,7 +22318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerBool: 0
   tooltipTextToShow: Dejaste a la abuela en casa!
-  postItColor: 3
+  postItColor: 4
   abuela: {fileID: 1440911855}
   dropOffPoint: {fileID: 1408152149}
 --- !u!65 &909075885
@@ -26030,7 +26209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerBool: 0
   tooltipTextToShow: Cuidado! El agua te arruina
-  postItColor: 4
+  postItColor: 2
   isOneTimeOnly: 1
 --- !u!65 &1076679631
 BoxCollider:
@@ -30198,7 +30377,7 @@ GameObject:
   - component: {fileID: 1269111120}
   - component: {fileID: 1269111119}
   m_Layer: 0
-  m_Name: TriggerText usa wasd y space
+  m_Name: TriggerText usa space
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30212,12 +30391,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269111117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -125.24368, y: 0, z: -55.980206}
-  m_LocalScale: {x: 0.46904185, y: 0.31987855, z: 0.8903771}
+  m_LocalPosition: {x: -86.87854, y: 0, z: -14.201836}
+  m_LocalScale: {x: 0.46904185, y: 0.31987855, z: 0.29545382}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 661508503}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1269111119
 MonoBehaviour:
@@ -30232,7 +30411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerBool: 0
-  tooltipTextToShow: "Us\xE1 WASD y Space para moverte."
+  tooltipTextToShow: "Us\xE1 SPACE para saltar."
   postItColor: 0
   isOneTimeOnly: 1
 --- !u!65 &1269111120
@@ -30319,7 +30498,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 661508503}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1273515804
 BoxCollider:
@@ -31003,7 +31182,7 @@ PrefabInstance:
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -31108,12 +31287,12 @@ PrefabInstance:
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 112
+      value: -1050
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 132
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -31158,7 +31337,8 @@ PrefabInstance:
     - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_text
-      value: E para interactuar
+      value: Mantene apretado  e y mientras tanto arrastra con clic sobre el verde
+        pero no lo sueltes y arrastra...
       objectReference: {fileID: 0}
     - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -31174,6 +31354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_margin.y
       value: -59.34018
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 27.914917
       objectReference: {fileID: 0}
     - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -31207,8 +31392,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3615648074418424197, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615648074418424197, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615648074418424197, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 155
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615648074418424197, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 3615648074418424218, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -31624,7 +31824,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 661508503}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1338427441
 MonoBehaviour:
@@ -31640,7 +31840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerBool: 0
   tooltipTextToShow: Las tijeras no vencen a la piedra!
-  postItColor: 0
+  postItColor: 1
   isOneTimeOnly: 1
 --- !u!65 &1338427442
 BoxCollider:
@@ -32670,7 +32870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 678, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1378377770
@@ -32693,7 +32893,7 @@ PrefabInstance:
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -32798,12 +32998,12 @@ PrefabInstance:
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 111.99994
+      value: 1050
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -368.50006
+      value: -160
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -32838,7 +33038,7 @@ PrefabInstance:
     - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_text
-      value: "MIDDLECLICK para cambiar de c\xE1mara"
+      value: "Completaste una quest! Bien ahi peque\xF1o muchacho"
       objectReference: {fileID: 0}
     - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -33593,7 +33793,7 @@ GameObject:
   - component: {fileID: 1414584662}
   - component: {fileID: 1414584661}
   m_Layer: 0
-  m_Name: TriggerText a los rocosos tambien
+  m_Name: TriggerText origamis consumen papel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33628,7 +33828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerBool: 0
   tooltipTextToShow: Acordate que los origami consumen papel.
-  postItColor: 2
+  postItColor: 1
   isOneTimeOnly: 1
 --- !u!65 &1414584662
 BoxCollider:
@@ -34038,7 +34238,7 @@ PrefabInstance:
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -34143,12 +34343,12 @@ PrefabInstance:
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 115.70993
+      value: 1050
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -95.999985
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -34183,7 +34383,7 @@ PrefabInstance:
     - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_text
-      value: CLICK para cortar
+      value: Ojo con eso!
       objectReference: {fileID: 0}
     - target: {fileID: 3615648074418424196, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -35102,7 +35302,7 @@ PrefabInstance:
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -35207,12 +35407,12 @@ PrefabInstance:
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 121.89993
+      value: 1050
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -244.64
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -35247,7 +35447,7 @@ PrefabInstance:
     - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_text
-      value: SPACE para saltar
+      value: Te falta tal cosa...
       objectReference: {fileID: 0}
     - target: {fileID: 3615648074418424196, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -40741,6 +40941,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1353359786}
     m_Modifications:
+    - target: {fileID: 3469385055474898540, guid: b4b779f5cccc8a544b4f9cfe07e8b0b2,
+        type: 3}
+      propertyPath: postItColor
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7897264121734106300, guid: b4b779f5cccc8a544b4f9cfe07e8b0b2,
         type: 3}
       propertyPath: m_RootOrder
@@ -42925,6 +43130,7 @@ Transform:
   - {fileID: 1273873390}
   - {fileID: 1460138854}
   - {fileID: 1414584660}
+  - {fileID: 893158612}
   m_Father: {fileID: 975816859}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -89.984, z: 0}
@@ -43025,6 +43231,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1353359786}
     m_Modifications:
+    - target: {fileID: 3469385055474898540, guid: b4b779f5cccc8a544b4f9cfe07e8b0b2,
+        type: 3}
+      propertyPath: postItColor
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7897264121734106300, guid: b4b779f5cccc8a544b4f9cfe07e8b0b2,
         type: 3}
       propertyPath: m_RootOrder
@@ -43848,7 +44059,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 661508503}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1906573510
 MonoBehaviour:
@@ -45333,6 +45544,68 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1126255362}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1981768843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1981768844}
+  - component: {fileID: 1981768846}
+  - component: {fileID: 1981768845}
+  m_Layer: 0
+  m_Name: TriggerText PuertaTooltip (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1981768844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981768843}
+  m_LocalRotation: {x: -0, y: -0.96896124, z: -0, w: -0.24721287}
+  m_LocalPosition: {x: -112.62274, y: 17.999294, z: -23.312874}
+  m_LocalScale: {x: 2.1916294, y: 1.0023078, z: 1.0402524}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 661508503}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 151.375, z: 0}
+--- !u!114 &1981768845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981768843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c3335d810ed744f8545fe6ec765666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerBool: 0
+  tooltipTextToShow: CLICK para cortar
+  postItColor: 0
+  isOneTimeOnly: 1
+--- !u!65 &1981768846
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981768843}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1991037303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4104525655400190835, guid: 04118d123dafae24aa868d22c2ad781c,
@@ -46503,6 +46776,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 857312713}
     m_Modifications:
+    - target: {fileID: 3469385055474898540, guid: b4b779f5cccc8a544b4f9cfe07e8b0b2,
+        type: 3}
+      propertyPath: postItColor
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7897264121734106300, guid: b4b779f5cccc8a544b4f9cfe07e8b0b2,
         type: 3}
       propertyPath: m_RootOrder
@@ -46863,12 +47141,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084337336}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -93.47627, y: 0, z: -40.707916}
-  m_LocalScale: {x: 0.15683205, y: 0.15683205, z: 0.15683205}
+  m_LocalPosition: {x: -93.99292, y: -0, z: -40.15621}
+  m_LocalScale: {x: 0.28021184, y: 0.28021184, z: 0.28021184}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 661508503}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2084337338
 MonoBehaviour:
@@ -46884,7 +47162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerBool: 0
   tooltipTextToShow: Cortar cosas te da papel.
-  postItColor: 0
+  postItColor: 1
   isOneTimeOnly: 1
 --- !u!65 &2084337339
 BoxCollider:
@@ -48545,17 +48823,17 @@ PrefabInstance:
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.0780025
+      value: 2.0986526
       objectReference: {fileID: 0}
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.0780022
+      value: 2.0986524
       objectReference: {fileID: 0}
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.0780203
+      value: 2.0986707
       objectReference: {fileID: 0}
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
@@ -48565,17 +48843,17 @@ PrefabInstance:
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.1
+      value: 4.0311356
       objectReference: {fileID: 0}
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.2
+      value: -0.6056869
       objectReference: {fileID: 0}
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9992641
+      value: 0.9998004
       objectReference: {fileID: 0}
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
@@ -48585,7 +48863,7 @@ PrefabInstance:
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.03835763
+      value: 0.0199836
       objectReference: {fileID: 0}
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
@@ -48600,7 +48878,7 @@ PrefabInstance:
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 4.397
+      value: 2.29
       objectReference: {fileID: 0}
     - target: {fileID: 307044074303130097, guid: c3ecabd61dc23754dbc2d289bd1a0e0f,
         type: 3}
@@ -50944,6 +51222,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3592439236952022923, guid: 1a1615b87ea2a734bbe5d085affc453f,
         type: 3}
+      propertyPath: postItColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3592439236952022923, guid: 1a1615b87ea2a734bbe5d085affc453f,
+        type: 3}
       propertyPath: triggerText
       value: 
       objectReference: {fileID: 1033124874}
@@ -51000,7 +51283,7 @@ PrefabInstance:
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871104, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -51105,12 +51388,12 @@ PrefabInstance:
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 111.99994
+      value: -1050
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 386
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3615648072738871105, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
@@ -51137,6 +51420,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 3615648074330863147, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
+      propertyPath: m_text
+      value: WASD para moverte
+      objectReference: {fileID: 0}
     - target: {fileID: 3615648074418424196, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
         type: 3}
       propertyPath: m_Layer
@@ -51151,6 +51439,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.78635013
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615648074418424197, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615648074418424197, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615648074418424197, guid: 033f5b5aa64aaab49a6eadbeccc2549f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033f5b5aa64aaab49a6eadbeccc2549f, type: 3}
@@ -52103,6 +52406,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1127308858}
     m_Modifications:
+    - target: {fileID: 3649359020304989098, guid: 5242af2ee5dc6a74da62f7f53cb59575,
+        type: 3}
+      propertyPath: postItColor
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5357465104666805706, guid: 5242af2ee5dc6a74da62f7f53cb59575,
         type: 3}
       propertyPath: dialogue.Array.size
@@ -52344,7 +52652,12 @@ PrefabInstance:
     - target: {fileID: 5723557005826726060, guid: ec2adfa632176c64b8f793dffab5f997,
         type: 3}
       propertyPath: postItColor
-      value: 4
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723557005826726060, guid: ec2adfa632176c64b8f793dffab5f997,
+        type: 3}
+      propertyPath: tooltipHoldTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5723557005826726061, guid: ec2adfa632176c64b8f793dffab5f997,
         type: 3}
@@ -52834,6 +53147,11 @@ PrefabInstance:
         type: 3}
       propertyPath: paperReward
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937294576803951173, guid: 8893303d143f30f439903566c0e16b48,
+        type: 3}
+      propertyPath: postItColor
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2937294576803951173, guid: 8893303d143f30f439903566c0e16b48,
         type: 3}

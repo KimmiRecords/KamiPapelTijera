@@ -53,7 +53,7 @@ public class TriggerOrigami : TriggerScript
             else
             {
                 print("no tenes suficiente papel para hacer este origami");
-                TooltipManager.instance.ShowTooltip("No tenes suficiente papel para hacer este origami", postItColor);
+                TooltipManager.Instance.ShowTooltip("No tenes suficiente papel para hacer este origami", postItColor);
             }
         }
     }

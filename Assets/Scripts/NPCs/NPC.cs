@@ -48,7 +48,7 @@ public class NPC : Entity
     }
     public override void Die()
     {
-        TooltipManager.instance.ShowTooltip("Este NPC no puede morir", PostItColor.Verde);
+        TooltipManager.Instance.ShowTooltip("Este NPC no puede morir", PostItColor.Verde);
     }
 
     public void AddForce(Vector3 force)
