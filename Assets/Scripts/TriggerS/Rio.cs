@@ -18,7 +18,6 @@ public class Rio : TriggerScript
         }
     }
 
-
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
@@ -28,11 +27,4 @@ public class Rio : TriggerScript
             mojable.StopGettingWet();
         }
     }
-
-    //public override void OnEnterBehaviour(Collider other)
-    //{
-    //    triggerBool = true;
-    //    MojarPlayer(other);
-    //}
-
 }

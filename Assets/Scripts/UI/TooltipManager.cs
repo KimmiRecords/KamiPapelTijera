@@ -42,6 +42,8 @@ public class TooltipManager : Singleton<TooltipManager>
         }
     }
 
+    
+
     public IEnumerator KillAllPostItsCoroutine()
     {
         //print("[TooltipManager] arranca la corrutina killallpostits");

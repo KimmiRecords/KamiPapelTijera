@@ -14,6 +14,7 @@ public abstract class TriggerScript : MonoBehaviour
 
     [HideInInspector] public bool triggerBool = false;
 
+    [SerializeField] protected bool showTooltip = true;
     [SerializeField] protected string tooltipTextToShow;
     [SerializeField] protected PostItColor postItColor;
 
@@ -43,7 +44,11 @@ public abstract class TriggerScript : MonoBehaviour
     {
         //print("entro el player");
         triggerBool = true;
-        TooltipManager.Instance.ShowTooltip(tooltipTextToShow, postItColor);
+
+        if (showTooltip)
+        {
+            TooltipManager.Instance.ShowTooltip(tooltipTextToShow, postItColor);
+        }
     }
 
     public virtual void OnExitBehaviour()
