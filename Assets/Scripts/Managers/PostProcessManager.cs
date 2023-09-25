@@ -8,21 +8,27 @@ using UnityEngine.Rendering.Universal;
 public class PostProcessManager : Singleton<PostProcessManager>
 {
     [SerializeField] Volume bloomVolume;
-    [SerializeField] Volume colorGradingVolume;
 
     [SerializeField] float bloomLerpTime = 3;
-    [SerializeField] float maxWeight = 0.05f;
-    [SerializeField] float minWeight = 1;
+    [SerializeField] float maxBloom = 30f;
+    [SerializeField] float baseBloom = 3f;
 
     ColorAdjustments colorAdjustment;
+    Bloom bloom;
 
     private void Start()
     {
         ColorAdjustments colorAdj;
+        Bloom bloomAdj;
 
-        if (colorGradingVolume.profile.TryGet<ColorAdjustments>(out colorAdj))
+        if (bloomVolume.profile.TryGet<ColorAdjustments>(out colorAdj))
         {
             colorAdjustment = colorAdj;
+        }
+
+        if (bloomVolume.profile.TryGet<Bloom>(out bloomAdj))
+        {
+            bloom = bloomAdj;
         }
     }
 
@@ -43,14 +49,14 @@ public class PostProcessManager : Singleton<PostProcessManager>
         float t = 0;
         while (t < bloomLerpTime)
         {
-            bloomVolume.weight = Mathf.Lerp(minWeight, maxWeight, t);
+            bloom.intensity.value = Mathf.Lerp(baseBloom, maxBloom, t);
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         t = 0;
         while (t < bloomLerpTime)
         {
-            bloomVolume.weight = Mathf.Lerp(maxWeight, minWeight, t);
+            bloom.intensity.value = Mathf.Lerp(maxBloom, baseBloom, t);
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
