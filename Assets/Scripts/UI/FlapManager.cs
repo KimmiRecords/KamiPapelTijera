@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct FlapDisplay
+{
+    public int number;
+    public GameObject display;
+    public FlapDisplayButton flapButton;
+}
+
 public class FlapManager : Singleton<FlapManager>
 {
-    [SerializeField] float posYOpen = 350;
-    [SerializeField] float flapTransitionDuration = 0.5f; // Tiempo de transición en segundos
-    float posYClosed = 0;
-    bool isOpen = false;
+    [SerializeField] float _posYOpen = 350;
+    [SerializeField] float _flapTransitionDuration = 0.5f; // Tiempo de transición en segundos
+    [SerializeField] GameObject _seguroOverlay;
+    [SerializeField] Slider _sliderBrillo, _sliderContraste, _sliderVolumen;
+    [SerializeField] FlapDisplay[] _flapDisplays;
 
-    [SerializeField] GameObject seguroOverlay;
-    [SerializeField] Slider sliderBrillo, sliderContraste, sliderVolumen;
-    float valueBeforeMute = 1;
+    float _posYClosed = 0;
+    bool _isOpen = false;
+    float _valueBeforeMute = 1;
 
     private void Start()
     {
-        posYClosed = transform.position.y;
+        _posYClosed = transform.position.y;
         EventManager.Subscribe(Evento.OnPlayerPressedEsc, ToggleFlap);
         EventManager.Subscribe(Evento.OnPlayerPressedM, ToggleMute);
     }
@@ -26,7 +35,7 @@ public class FlapManager : Singleton<FlapManager>
         Debug.Log("FlapManager: open flap");
         AudioManager.instance.PlayByName("PageTurn02", 1.6f, 0.01f);
         StopAllCoroutines();
-        StartCoroutine(MoveFlap(posYOpen));
+        StartCoroutine(MoveFlap(_posYOpen));
     }   
 
     public void CloseFlap()
@@ -34,12 +43,12 @@ public class FlapManager : Singleton<FlapManager>
         Debug.Log("FlapManager: close flap");
         AudioManager.instance.PlayByName("PageTurn01", 1.6f, 0.01f);
         StopAllCoroutines();
-        StartCoroutine(MoveFlap(posYClosed));
+        StartCoroutine(MoveFlap(_posYClosed));
     }
 
     public void ToggleFlap(params object[] parameters)
     {
-        if (isOpen)
+        if (_isOpen)
         {
             CloseFlap();
         }
@@ -56,9 +65,9 @@ public class FlapManager : Singleton<FlapManager>
         float elapsedTime = 0f;
         float t;
 
-        while (elapsedTime < flapTransitionDuration)
+        while (elapsedTime < _flapTransitionDuration)
         {
-            t = Mathf.SmoothStep(0, 1, elapsedTime / flapTransitionDuration);
+            t = Mathf.SmoothStep(0, 1, elapsedTime / _flapTransitionDuration);
             transform.position = Vector3.Lerp(startPosition, new Vector3(transform.position.x, targetY, transform.position.z), t);
 
             elapsedTime += Time.deltaTime;
@@ -66,8 +75,8 @@ public class FlapManager : Singleton<FlapManager>
         }
 
         transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
-        isOpen = (targetY == posYOpen);
-        if (isOpen)
+        _isOpen = (targetY == _posYOpen);
+        if (_isOpen)
         {
             Time.timeScale = 0;
         }
@@ -75,11 +84,29 @@ public class FlapManager : Singleton<FlapManager>
 
     public void BTN_Salir()
     {
-        seguroOverlay.SetActive(true);
+        _seguroOverlay.SetActive(true);
         Debug.Log("prendo el overlay");
         AudioManager.instance.PlayByName("PickupSFX", 2.5f);
     }
 
+    public void BTN_Settings()
+    {
+        ShowDesiredDisplay(_flapDisplays[0]);
+        //Debug.Log("prendo el overlay");
+        AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
+    }
+    public void BTN_Inventory()
+    {
+        ShowDesiredDisplay(_flapDisplays[1]);
+        //Debug.Log("muestro el inventario");
+        AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
+    }
+    public void BTN_Quests()
+    {
+        ShowDesiredDisplay(_flapDisplays[2]);
+        //Debug.Log("muestro las quests");
+        AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
+    }
     public void BTN_Si()
     {
         Debug.Log("chau :(");
@@ -90,7 +117,7 @@ public class FlapManager : Singleton<FlapManager>
 
     public void BTN_No()
     {
-        seguroOverlay.SetActive(false);
+        _seguroOverlay.SetActive(false);
         AudioManager.instance.PlayByName("PickupReversedSFX", 2.5f);
 
         Debug.Log("apago el overlay");
@@ -98,32 +125,48 @@ public class FlapManager : Singleton<FlapManager>
 
     public void SLIDER_Volumen()
     {
-        AudioManager.instance.SetGlobalVolume(sliderVolumen.value);
+        AudioManager.instance.SetGlobalVolume(_sliderVolumen.value);
     }
 
     public void SLIDER_Brillo()
     {
-        PostProcessManager.Instance.SetBrightnessValue(sliderBrillo.value);
+        PostProcessManager.Instance.SetBrightnessValue(_sliderBrillo.value);
     }
 
     public void SLIDER_Contraste()
     {
-        PostProcessManager.Instance.SetContrastValue(sliderContraste.value);
+        PostProcessManager.Instance.SetContrastValue(_sliderContraste.value);
     }
 
     public void ToggleMute(params object[] parameters)
     {
         Debug.Log("toggle mute");
 
-        if (sliderVolumen.value == 0)
+        if (_sliderVolumen.value == 0)
         {
-            sliderVolumen.value = valueBeforeMute;
+            _sliderVolumen.value = _valueBeforeMute;
         }
         else
         {
-            valueBeforeMute = sliderVolumen.value;
-            sliderVolumen.value = 0;
+            _valueBeforeMute = _sliderVolumen.value;
+            _sliderVolumen.value = 0;
         }
+    }
+
+    public void ShowDesiredDisplay(FlapDisplay flapDisplay)
+    {
+        foreach (FlapDisplay d in _flapDisplays)
+        {
+            //Debug.Log("apago display");
+            d.display.SetActive(false);
+            d.flapButton.Deactivate();
+        }
+
+        //Debug.Log("show desired display - " + flapDisplay);
+        flapDisplay.display.SetActive(true);
+        flapDisplay.flapButton.Activate();
+
+        
     }
 
     private void OnDestroy()
