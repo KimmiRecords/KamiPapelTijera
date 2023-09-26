@@ -38,11 +38,6 @@ public class AudioManager : MonoBehaviour
 
     [HideInInspector] public Dictionary<string, AudioSource> soundDict = new Dictionary<string, AudioSource>();
 
-    string thisLevelBgm;
-    Dictionary<string, string> levelBGMs = new Dictionary<string, string>();
-    [SerializeField] string[] levelNames;
-    [SerializeField] string[] bgmNames;
-
     float globalVolume = 1;
 
     void Awake()
@@ -68,13 +63,6 @@ public class AudioManager : MonoBehaviour
 
             originalVolumes[new KeyValuePair<string, AudioSource>(s, _allSounds[i])] = _allSounds[i].volume;
         }
-
-        for (int i = 0; i < levelNames.Length; i++) //lleno el dictionary con los bgm
-        {
-            levelBGMs.Add(levelNames[i], bgmNames[i]);
-        }
-
-        SceneManager.sceneLoaded += StartLevelBGM;
     }
 
     public void PlayByName(string clipName) //el mas groso. le das el string y te da play a ese audio. muy global y sencillo.
@@ -180,44 +168,6 @@ public class AudioManager : MonoBehaviour
         }
 
         sound.volume = originalVolume;
-    }
-
-    //Metodos de BGM
-    public void StartLevelBGM(Scene scene, LoadSceneMode lsm)
-    {
-        //print(scene.name);
-        if (thisLevelBgm != null)
-        {
-            StopBGM();
-
-            if (soundDict["IntroStoryboardLoop"].isPlaying)
-            {
-                StopByName("IntroStoryboardLoop");
-            }
-        }
-
-        thisLevelBgm = levelBGMs[scene.name];
-        PlayBGM();
-        //PlayByName(thisLevelBgm);
-    } //si cargas bien los nombres, esto se encarga de poner play al bgm correcto en cada escena
-    public void PlayBGM()
-    {
-        //print("reproduje el sonido " + thisLevelBgm);
-        soundDict[thisLevelBgm].Play();
-    }
-    public void StopBGM()
-    {
-        soundDict[thisLevelBgm].Stop();
-    }
-    public void FadeInBGM(float fadetime)
-    {
-        float timer = Time.time / fadetime;
-        soundDict[thisLevelBgm].volume = Mathf.Lerp(0, 1, timer);
-    }
-    public void FadeOutBGM(float fadetime)
-    {
-        float timer = Time.time / fadetime;
-        soundDict[thisLevelBgm].volume = Mathf.Lerp(1, 0, timer);
     }
 
     //Metodos de Settings

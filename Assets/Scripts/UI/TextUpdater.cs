@@ -8,11 +8,9 @@ public abstract class TextUpdater : MonoBehaviour
     //los updaters de cosas de la ui agarran la info usando eventos
     protected TextMeshProUGUI myText;
 
-    [SerializeField]
-    protected Evento eventoQueMeInteresa;
+    [SerializeField] protected Evento eventoQueMeInteresa;
 
-    [SerializeField]
-    protected string textoInicial;
+    [SerializeField] protected string textoInicial;
 
     protected virtual void Awake()
     {
@@ -23,6 +21,13 @@ public abstract class TextUpdater : MonoBehaviour
     protected virtual void UpdateText(params object[] parameter)
     {
         //print("updateo el text");
-        
+    }
+
+    protected void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(eventoQueMeInteresa, UpdateText);
+        }
     }
 }

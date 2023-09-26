@@ -12,24 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7dbce3668a28f42bb62a3c585866f0, type: 3}
   m_Name: Intro_01
   m_EditorClassIdentifier: 
-  textos:
-  - '[NARRADOR]: Hola Kami. '
-  - '[NARRADOR]: Bienvenida a mi biblioteca. Tengo muchos libros para que leamos.'
-  - "[NARRADOR]: Si me permit\xEDs, te puedo narrar todos los cuentos que quieras."
-  - '[...]'
-  - '[NARRADOR]: Muy bien. Nuestro primer libro es KAMI, PAPEL Y TIJERA. '
-  - "[NARRADOR]: Lo conoc\xE9s? "
-  - '[...]'
-  - "[NARRADOR]: Claro que lo conoc\xE9s! Si este es tu libro! Te acord\xE1s como
-    empieza? "
   wasRead: 0
-  sprite: {fileID: 21300000, guid: ae10adc85f85cea4f8822ffa8247c8ad, type: 3}
   events:
   - text: '[NARRADOR]: Hola Kami. '
     sprite: {fileID: 21300000, guid: 20ca68b313ae1c34cadf06bb1bea0d33, type: 3}
   - text: '[NARRADOR]: Bienvenida a mi biblioteca. Tengo muchos libros para que leamos.'
     sprite: {fileID: 21300000, guid: 20ca68b313ae1c34cadf06bb1bea0d33, type: 3}
-  - text: "[NARRADOR]: Si me permit\xEDs, te puedo narrar todos los cuentos que quieras."
+  - text: "[NARRADOR]: Si me permit\xEDs, te puedo contar todos los cuentos que quieras."
     sprite: {fileID: 21300000, guid: 123c93e3f2ca7e4438ab429c13a54a1c, type: 3}
   - text: '[...]'
     sprite: {fileID: 21300000, guid: 123c93e3f2ca7e4438ab429c13a54a1c, type: 3}

@@ -15,6 +15,8 @@ public class MainMenuManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         EventManager.Subscribe(Evento.OnDialogueEnd, ChangeScene);
+        AudioManager.instance.StopAll();
+        AudioManager.instance.PlayByName("4S_IntroBigChords");
     }
 
     public void OnNewGameButtonDown()
@@ -49,6 +51,7 @@ public class MainMenuManager : MonoBehaviour
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnDialogueEnd, ChangeScene);
+            AudioManager.instance.StopByName("IntroStoryboardLoop");
         }
     }
 

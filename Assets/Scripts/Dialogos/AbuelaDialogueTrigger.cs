@@ -21,6 +21,18 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         //print("me suscribo a onplayerpressed E y abueladropoff - awela");
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
         EventManager.Subscribe(Evento.OnAbuelaDropoff, Unlock);
+        EventManager.Subscribe(Evento.OnDialogueEnd, EndAllInteractions);
+        EventManager.Subscribe(Evento.OnPlayerChooseContinueGame, Unlock);
+    }
+
+    public void EndAllInteractions(params object[] parameters)
+    {
+        //si el dialogo q termino es el ultimo de la abuela
+        if ((DialogueSO)parameters[1] == _dialogues[1])
+        {
+            Debug.Log("listo, se acabo todo. chau.");
+            isLocked = true;   
+        }
     }
 
     void Unlock(object[] parameters)
@@ -66,7 +78,9 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
-            EventManager.Unsubscribe(Evento.OnAbuelaDropoff, PasarAlSiguienteDialogo);
+            EventManager.Unsubscribe(Evento.OnAbuelaDropoff, Unlock);
+            EventManager.Unsubscribe(Evento.OnDialogueEnd, EndAllInteractions);
+            EventManager.Unsubscribe(Evento.OnPlayerChooseContinueGame, Unlock);
         }
     }
 }

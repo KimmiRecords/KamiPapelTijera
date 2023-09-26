@@ -26,15 +26,15 @@ public class CameraManager : Singleton<CameraManager>
     [SerializeField] DialogueSO[] dialoguesEspeciales;
     [SerializeField] CameraMode[] camarasEspeciales;
 
-    private void Start()
+    protected override void Awake()
     {
-        EventManager.Subscribe(Evento.OnDialogueStart, SetCamera);
-        EventManager.Subscribe(Evento.OnDialogueEnd, PrepareCamera);
+        base.Awake();
+
+        //EventManager.Subscribe(Evento.OnDialogueStart, SetCamera);
+        //EventManager.Subscribe(Evento.OnDialogueEnd, PrepareCamera);
         EventManager.Subscribe(Evento.OnEncounterStart, SetCamera);
         EventManager.Subscribe(Evento.OnEncounterEnd, SetCamera);
         EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
-
-
         currentCamera = startingCamera;
         StartCoroutine(LevelStartCameraMovement());
     }
@@ -134,10 +134,12 @@ public class CameraManager : Singleton<CameraManager>
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnDialogueStart, SetCamera);
-            EventManager.Unsubscribe(Evento.OnDialogueEnd, SetCamera);
-            EventManager.Unsubscribe(Evento.OnEncounterEnd, SetCamera);
+            //Debug.Log("camera manager - me desuscribo");
+            //EventManager.Unsubscribe(Evento.OnDialogueStart, SetCamera);
+            //EventManager.Unsubscribe(Evento.OnDialogueEnd, SetCamera);
             EventManager.Unsubscribe(Evento.OnEncounterStart, SetCamera);
+            EventManager.Unsubscribe(Evento.OnEncounterEnd, SetCamera);
+            EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
         }
     }
 }

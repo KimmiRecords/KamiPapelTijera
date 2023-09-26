@@ -48,6 +48,12 @@ public class LevelManager : Singleton<LevelManager>
         recursosRecolectados[ResourceType.papel] = initialPaper;
         recursosRecolectados[ResourceType.hongos] = initialHongos;
         recursosRecolectados[ResourceType.flores] = initialFloresAzules;
+
+
+        if (gameObject.scene.name == "SampleScene")
+        {
+            AudioManager.instance.PlayByName("MemoFloraMainLoop01");
+        }
     }
 
     public void GiveSprintBoots()
@@ -73,7 +79,7 @@ public class LevelManager : Singleton<LevelManager>
     public void Update()
     {
         //CHEAT CODES
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && player != null)
         {
             AddResource(ResourceType.hongos, 100);
             AddResource(ResourceType.papel, 100);

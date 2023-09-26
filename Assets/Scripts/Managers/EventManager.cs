@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 //este es el mejor script del mundo, tengo un diccionario de eventos (que yo elijo los nombres jeje) y de metodos con parametros genericos (gg easy)
 //entonces en cualquier script del juego puedo llamar a EventManager.Trigger, .Subscribe y .Unsubscribe
 
@@ -23,7 +21,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPageFinishTurning,
     
     OnDialogueStart, //param0 es el numero de camara
-    OnDialogueEnd, //param0 es camara, param1 es dialogue
+    OnDialogueEnd, //param0 es camara, param1 es dialogueso
 
     OnPlayerChangeVida, //param 0 es float hp. param1 es max hp
     OnPlayerChangePage,//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
@@ -49,7 +47,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnObjectWasCut, //param0 es la posicion del objeto cortado
     OnQuestDelivered, //param0 es Quest
     OnPlayerGetTijeraMejorada,
-    OnRepresaWasCut //param0 es represacortable
+    OnRepresaWasCut, //param0 es represacortable
+    OnPlayerChooseContinueGame
 }
 
 public class EventManager
@@ -80,8 +79,10 @@ public class EventManager
 
     public static void Trigger(Evento evento, params object[] parameters)
     {
+        //Debug.Log("event manager - trigger");
         if (_events.ContainsKey(evento))
         {
+            //Debug.Log("tengo al evento en dict, lo disparo");
             _events[evento](parameters);
         }
     }

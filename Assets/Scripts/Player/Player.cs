@@ -124,18 +124,23 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         _view = new PlayerView(this);
         _controller = new PlayerController(this);
 
+        EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
+        EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
+        EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
+        EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
+    }
+
+    private void Start()
+    {
         _maxHp = _hp;
         Vida = _maxHp;
         originalColor = _renderer.material.color;
         augmentedJumpsLeft = augmentedJumpsMax;
         originalJumpForce = jumpForce;
         originalMaxSpeed = _maxSpeed;
-
-        EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
-        EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
-        EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
-        EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
     }
+
+
     private void Update()
     {
         //todo el tiempo chequeo los controles. eso seguro.

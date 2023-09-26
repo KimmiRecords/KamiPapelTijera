@@ -7,8 +7,6 @@ public class DialogueManager : Singleton<DialogueManager>
 {
     //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto
 
-    //public static DialogueManager instance;
-
     [SerializeField] GameObject dialogueGlobe;
     [SerializeField] TMPro.TextMeshProUGUI dialogueTextComponent;
     [SerializeField] Image npcQueTeHablaImage;
@@ -17,8 +15,9 @@ public class DialogueManager : Singleton<DialogueManager>
     bool waitingForInput = false;
     [HideInInspector] public bool isShowing = false;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         EventManager.Subscribe(Evento.OnPlayerPressedE, CheckPlayerInput);
     }
 
@@ -47,7 +46,7 @@ public class DialogueManager : Singleton<DialogueManager>
             dialogueGlobe.SetActive(true);
             LevelManager.Instance.inDialogue = true;
             isShowing = true;
-            EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
+            //EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
             StartCoroutine(WriteText(dialogue));
         }
     }
@@ -61,6 +60,7 @@ public class DialogueManager : Singleton<DialogueManager>
         isShowing = false;
         EventManager.Trigger(Evento.OnDialogueEnd, CameraMode.Normal, dialogue);
     }
+
     public IEnumerator WriteText(DialogueSO dialogue)
     {
         for (int i = 0; i < dialogue.events.Length; i++)

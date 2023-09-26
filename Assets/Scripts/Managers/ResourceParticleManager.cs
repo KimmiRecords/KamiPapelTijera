@@ -39,4 +39,13 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
         yield return new WaitForSeconds(1f);
         paperParticles.gameObject.SetActive(false);
     }
+
+    private void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnObjectWasCut, SetParticlePosition);
+            EventManager.Unsubscribe(Evento.OnResourceUpdated, ShootParticles);
+        }
+    }
 }

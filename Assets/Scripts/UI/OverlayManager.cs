@@ -43,7 +43,6 @@ public class OverlayManager : Singleton<OverlayManager>
         }
     }
 
-
     public void Lock(params object[] parameter)
     {
         Debug.Log("overlay manager: lock");
@@ -63,8 +62,29 @@ public class OverlayManager : Singleton<OverlayManager>
 
         Debug.Log("overlay unlock: apago todos los overlays");
         _defeatOverlay.gameObject.SetActive(false);
-        _victoryOverlay.gameObject.SetActive(false);
         _mainQuestOverlay.gameObject.SetActive(false);
+        //_victoryOverlay.gameObject.SetActive(false);
+    }
+
+    public void BTN_ContinueGame()
+    {
+        Debug.Log("continua el juego");
+        _victoryOverlay.gameObject.SetActive(false);
+        EventManager.Trigger(Evento.OnPlayerChooseContinueGame);
+        Unlock();
+    }
+
+    public void BTN_GoToCutscene()
+    {
+        Debug.Log("go to cutscene");
+        _victoryOverlay.gameObject.SetActive(false);
+        InitializeCutscene();
+    }
+
+    public void InitializeCutscene()
+    {
+        Debug.Log("arranca la cutscene");
+        LevelManager.Instance.GoToScene("Nivel1_EndCutscene");
     }
 
     void OnDestroy()

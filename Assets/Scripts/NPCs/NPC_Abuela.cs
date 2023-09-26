@@ -59,8 +59,8 @@ public class NPC_Abuela : NPC
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnDialogueEnd, StartFollowingPlayer);
-            EventManager.Unsubscribe(Evento.OnPlayerChangePage, PlaceAbuelaNextToPlayer);
+            EventManager.Unsubscribe(Evento.OnEncounterEnd, StartFollowingPlayer);
+            EventManager.Unsubscribe(Evento.OnPlayerPlaced, PlaceAbuelaNextToPlayer);
             EventManager.Unsubscribe(Evento.OnAbuelaDropoff, StartAbuelaDropoff);
         }
     }
