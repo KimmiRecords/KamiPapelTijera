@@ -9,6 +9,10 @@ public enum ResourceType
     hongos,
     flores,
     papel,
+    botasAgua,
+    botasRapidas,
+    tijera,
+    tijeraMejorada,
     Count 
 }
 
@@ -23,9 +27,9 @@ public class LevelManager : Singleton<LevelManager>
     //el dictionario capo con cada tipo de recurso y valor
     public Dictionary<ResourceType, int> recursosRecolectados = new Dictionary<ResourceType, int>();
 
-    public int initialPaper;
-    public int initialHongos;
-    public int initialFloresAzules;
+    //public int initialPaper;
+    //public int initialHongos;
+    //public int initialFloresAzules;
     public Player player;
 
     protected override void Awake()
@@ -45,9 +49,9 @@ public class LevelManager : Singleton<LevelManager>
             //print( ((ResourceType)i).ToString() + " // " + recursosRecolectados[(ResourceType)i].ToString());
         }
 
-        recursosRecolectados[ResourceType.papel] = initialPaper;
-        recursosRecolectados[ResourceType.hongos] = initialHongos;
-        recursosRecolectados[ResourceType.flores] = initialFloresAzules;
+        //recursosRecolectados[ResourceType.papel] = initialPaper;
+        //recursosRecolectados[ResourceType.hongos] = initialHongos;
+        //recursosRecolectados[ResourceType.flores] = initialFloresAzules;
 
 
         if (gameObject.scene.name == "SampleScene")
@@ -60,17 +64,23 @@ public class LevelManager : Singleton<LevelManager>
     {
         //Debug.Log("el player se gano las botas sprint x haber completado la quest");
         player.hasSprintBoots = true;
+        AddResource(ResourceType.botasRapidas, 1);
+
     }
     public void GiveWaterBoots()
     {
         //Debug.Log("el player se gano las botas water x haber completado la quest");
         player.hasWaterBoots = true;
+        AddResource(ResourceType.botasAgua, 1);
+
     }
     public void GiveTijeraMejorada()
     {
         //Debug.Log("el player se gano la tijera mejorada x haber completado la quest");
         player.hasTijera = true;
         player.GetTijeraMejorada();
+        AddResource(ResourceType.tijeraMejorada, 1);
+
     }
     public void GoToScene(string sceneName)
     {   

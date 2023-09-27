@@ -239,6 +239,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     public void GetTijera(params object[] parameters)
     {
         hasTijera = true;
+        LevelManager.Instance.AddResource(ResourceType.tijera, 1);
         tijeraManager.SetTijera();
     }
     public void GetTijeraMejorada()

@@ -48,7 +48,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnQuestDelivered, //param0 es Quest
     OnPlayerGetTijeraMejorada,
     OnRepresaWasCut, //param0 es represacortable
-    OnPlayerChooseContinueGame
+    OnPlayerChooseContinueGame,
 }
 
 public class EventManager
