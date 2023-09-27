@@ -12,13 +12,13 @@ public class TijeraManager : MonoBehaviour
 
     public void SetTijera(params object[] parameters)
     {
-        Debug.Log("prendo la tijera");
+        //Debug.Log("prendo la tijera");
         tijeraHitbox.transform.parent.gameObject.SetActive(true);
     }
 
     public void SetTijeraMejorada(params object[] parameters)
     {
-        Debug.Log("prendo la tijera mejorada");
+        //Debug.Log("prendo la tijera mejorada");
         tijeraHitbox.transform.parent.gameObject.SetActive(false);
         tijeraMejoradaHitbox.transform.parent.gameObject.SetActive(true);
     }

@@ -31,7 +31,7 @@ public class OverlayManager : Singleton<OverlayManager>
 
         if ((DialogueSO)parameter[1] == victoryTriggeringDialogue)
         {
-            Debug.Log("overlay manager: show victory overlay");
+            //Debug.Log("overlay manager: show victory overlay");
             _victoryOverlay.gameObject.SetActive(true);
             Lock();
         }
@@ -45,7 +45,7 @@ public class OverlayManager : Singleton<OverlayManager>
 
     public void Lock(params object[] parameter)
     {
-        Debug.Log("overlay manager: lock");
+        //Debug.Log("overlay manager: lock");
         LevelManager.Instance.inDialogue = true;
         isLocked = true;
     }
@@ -54,13 +54,13 @@ public class OverlayManager : Singleton<OverlayManager>
     {
         if (isLocked)
         {
-            Debug.Log("overlay unlock: set indialogue y islocked false");
+            //Debug.Log("overlay unlock: set indialogue y islocked false");
             LevelManager.Instance.inDialogue = false;
             isLocked = false;
             AudioManager.instance.PlayByName("PickupSFX", 2.5f);
         }
 
-        Debug.Log("overlay unlock: apago todos los overlays");
+        //Debug.Log("overlay unlock: apago todos los overlays");
         _defeatOverlay.gameObject.SetActive(false);
         _mainQuestOverlay.gameObject.SetActive(false);
         //_victoryOverlay.gameObject.SetActive(false);
@@ -68,7 +68,7 @@ public class OverlayManager : Singleton<OverlayManager>
 
     public void BTN_ContinueGame()
     {
-        Debug.Log("continua el juego");
+        //Debug.Log("continua el juego");
         _victoryOverlay.gameObject.SetActive(false);
         EventManager.Trigger(Evento.OnPlayerChooseContinueGame);
         Unlock();
@@ -76,14 +76,14 @@ public class OverlayManager : Singleton<OverlayManager>
 
     public void BTN_GoToCutscene()
     {
-        Debug.Log("go to cutscene");
+        //Debug.Log("go to cutscene");
         _victoryOverlay.gameObject.SetActive(false);
         InitializeCutscene();
     }
 
     public void InitializeCutscene()
     {
-        Debug.Log("arranca la cutscene");
+        //Debug.Log("arranca la cutscene");
         LevelManager.Instance.GoToScene("Nivel1_EndCutscene");
     }
 

@@ -20,34 +20,34 @@ public class PlayerController
 
     public void CheckControls() //a este lo disparo en el update
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetButtonDown("Run"))
         {
             _player.IsSprinting = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetButtonUp("Run"))
         {
             _player.IsSprinting = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetButtonDown("Mute"))
         {
             EventManager.Trigger(Evento.OnPlayerPressedM);
         }
 
         if (LevelManager.Instance.agency) 
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetButtonDown("Interact"))
             {
                 EventManager.Trigger(Evento.OnPlayerPressedE);
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetButtonDown("Fire1"))
             {
                 _player.OnPrimaryClick();
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetButtonDown("Options"))
             {
                 //Application.Quit();
                 EventManager.Trigger(Evento.OnPlayerPressedEsc);

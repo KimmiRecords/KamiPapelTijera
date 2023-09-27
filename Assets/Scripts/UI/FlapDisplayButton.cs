@@ -4,28 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[RequireComponent(typeof(Image))]
+
 public class FlapDisplayButton : MonoBehaviour
 {
     //tienen 2 sprites q cambian segun que esta mostrando el flap
 
     [SerializeField] Sprite inactive, active;
-    Image _image;
+    [SerializeField] Image _imageOnOff;
     
-    void Start()
-    {
-        _image = GetComponent<Image>();
-    }
-
     public void Activate()
     {
-        Debug.Log("muestro el activado");
-        _image.sprite = active;
+        //Debug.Log("muestro el activado");
+        _imageOnOff.sprite = active;
     }
 
     public void Deactivate()
     {
-        Debug.Log("muestro el inactivado");
-        _image.sprite = inactive;
+        //Debug.Log("muestro el inactivado");
+        _imageOnOff.sprite = inactive;
     }
 }

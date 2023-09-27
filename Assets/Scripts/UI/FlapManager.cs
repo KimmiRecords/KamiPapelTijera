@@ -18,6 +18,7 @@ public class FlapManager : Singleton<FlapManager>
     [SerializeField] GameObject _seguroOverlay;
     [SerializeField] Slider _sliderBrillo, _sliderContraste, _sliderVolumen;
     [SerializeField] FlapDisplay[] _flapDisplays;
+    [SerializeField] Image _tiritaPull, _tiritaPush;
 
     float _posYClosed = 0;
     bool _isOpen = false;
@@ -32,8 +33,11 @@ public class FlapManager : Singleton<FlapManager>
 
     public void OpenFlap()
     {
-        Debug.Log("FlapManager: open flap");
+        //Debug.Log("FlapManager: open flap");
         AudioManager.instance.PlayByName("PageTurn02", 1.6f, 0.01f);
+        _tiritaPull.gameObject.SetActive(false);
+        _tiritaPush.gameObject.SetActive(true);
+
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posYOpen));
     }   
@@ -42,8 +46,12 @@ public class FlapManager : Singleton<FlapManager>
     {
         Debug.Log("FlapManager: close flap");
         AudioManager.instance.PlayByName("PageTurn01", 1.6f, 0.01f);
+        _tiritaPull.gameObject.SetActive(true);
+        _tiritaPush.gameObject.SetActive(false);
+
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posYClosed));
+
     }
 
     public void ToggleFlap(params object[] parameters)
@@ -104,6 +112,13 @@ public class FlapManager : Singleton<FlapManager>
     public void BTN_Quests()
     {
         ShowDesiredDisplay(_flapDisplays[2]);
+        //Debug.Log("muestro las quests");
+        AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
+    }
+
+    public void BTN_Controles()
+    {
+        ShowDesiredDisplay(_flapDisplays[3]);
         //Debug.Log("muestro las quests");
         AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
     }

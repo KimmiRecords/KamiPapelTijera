@@ -7,7 +7,8 @@ public class InventorySlot : MonoBehaviour
 {
     public InventoryItem currentItem;
 
-    [SerializeField] Image imageComponent;
+    [SerializeField] Image itemImageComponent;
+    [SerializeField] Image slotStickerImageComponent;
     [SerializeField] TextMeshProUGUI nameTextComponent;
     [SerializeField] TextMeshProUGUI amountTextComponent;
 
@@ -16,7 +17,8 @@ public class InventorySlot : MonoBehaviour
     {
         currentItem = item;
 
-        imageComponent.sprite = currentItem.itemSprite;
+        itemImageComponent.sprite = currentItem.itemSprite;
+        slotStickerImageComponent.color = currentItem.itemColor;
         nameTextComponent.text = currentItem.itemName;
 
         if (currentItem.amount <= 1)
@@ -32,9 +34,10 @@ public class InventorySlot : MonoBehaviour
     public virtual void ClearSlot()
     {
         currentItem = null;
-        imageComponent.sprite = null;
+        itemImageComponent.sprite = null;
         nameTextComponent.text = "";
         amountTextComponent.text = "";
+        slotStickerImageComponent.color = Color.white;
     }
 
 

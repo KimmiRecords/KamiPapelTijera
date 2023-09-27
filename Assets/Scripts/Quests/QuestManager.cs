@@ -18,6 +18,10 @@ public class QuestManager : Singleton<QuestManager>
     List<QuestSO> quests = new List<QuestSO>();
     Dictionary<Evento, bool> eventosSucedidos = new Dictionary<Evento, bool>();
 
+    [SerializeField] GameObject questSlotPrefab;
+    [SerializeField] GameObject questSlotsParent;
+    List<QuestSlot> questSlots = new List<QuestSlot>();
+
     void Start()
     {
         EventManager.Subscribe(Evento.OnResourceUpdated, CheckQuests);
@@ -81,25 +85,50 @@ public class QuestManager : Singleton<QuestManager>
     public void AddQuest(QuestSO quest) //esto lo disparan los npcs cuando les hablo
     {
         //Debug.Log("agrego la quest");
+
         if (quest.condition.conditionType == ConditionType.Event &&
             !eventosSucedidos.ContainsKey(quest.condition.evento))
         {
             eventosSucedidos.Add(quest.condition.evento, false);
-            //EventManager.Subscribe(quest.condition.evento, SetAbuelaDropoff); //deberia ser generico
         }
         quests.Add(quest);
+
+        //aca habria que agregarlas a la ui
+        questSlots.Add(Instantiate(questSlotPrefab, questSlotsParent.transform).GetComponent<QuestSlot>());
+        questSlots.Last().SetQuest(quest);
+
+
         CheckQuests();
+
+
 
     }
     public void RemoveQuest(QuestSO quest)
     {
         Debug.Log("remuevo la quest");
         quests.Remove(quest);
+
+        //find questslot in my list with this quest
+        foreach (QuestSlot questSlot in questSlots)
+        {
+            if (questSlot.currentQuest == quest)
+            {
+                questSlots.Remove(questSlot);
+                Destroy(questSlot.gameObject);
+                break;
+            }
+        }
     }
+
+    public void RemoveQuestSlot(QuestSlot questSlot)
+    {
+
+    }
+
     public void CompleteQuest(QuestSO quest)
     {
         EventManager.Trigger(Evento.OnQuestCompleted, quest);
-        Debug.Log("complete quest: " + quest);
+        //Debug.Log("complete quest: " + quest);
     }
 
     void OnDestroy()
@@ -107,6 +136,7 @@ public class QuestManager : Singleton<QuestManager>
         if(!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnResourceUpdated, CheckQuests);
+            EventManager.Unsubscribe(Evento.OnAbuelaDropoff, SetAbuelaDropoff);
             EventManager.Unsubscribe(Evento.OnQuestDelivered, GiveReward);
         }
     }

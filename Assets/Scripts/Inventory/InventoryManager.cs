@@ -53,6 +53,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
             if (_slots[i].currentItem == null) //si no, lo agrego en el primer slot vacio
             {
+                //_slots[i].currentItem.amount = (int)parameters[1];
                 _slots[i].SetItem(itemsByResourceType[(ResourceType)parameters[0]]);
                 return;
             }
