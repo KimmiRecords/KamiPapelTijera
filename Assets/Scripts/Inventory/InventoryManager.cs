@@ -10,7 +10,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [SerializeField] InventoryItem[] _allItems;
 
-    //diccionary that relates all items to each resourcetype
     public Dictionary<ResourceType, InventoryItem> itemsByResourceType = new Dictionary<ResourceType, InventoryItem>();
 
     private void Start()

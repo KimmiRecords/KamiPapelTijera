@@ -29,7 +29,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerPlaced, //triggereado por PlacePlayer. cuando muere, o cambia de pag, etc
 
     OnOrigamiApplied, //param0 es papercost (numero negativo), param1 es Origami origami
-    OnResourceUpdated, //se triggerea cuando uso AddResource, param0 es el tipo, param1 es el amount total actual
+    OnResourceUpdated, //se triggerea cuando uso AddResource, param0 es el tipo, param1 es el amount total actual, param2 bool es si suma
     OnOrigamiStart, //le interesa al player para arrancar animaciones
     OnOrigamiEnd, //le interesa al player para arrancar animaciones
     OnOrigamiFoldChange, //param0 el fold actual, param1 los fold totales

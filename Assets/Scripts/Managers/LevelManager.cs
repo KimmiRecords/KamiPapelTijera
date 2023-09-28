@@ -102,8 +102,15 @@ public class LevelManager : Singleton<LevelManager>
     public void AddResource(ResourceType pickupType, int valueToAdd)
     {
         //agrega la cantidad valuetoadd al total. si quiero restar, valuetoadd deberia ser negativo
+        bool isAdding = false;
         recursosRecolectados[pickupType] += valueToAdd;
-        EventManager.Trigger(Evento.OnResourceUpdated, pickupType, recursosRecolectados[pickupType]);
+        
+        if (valueToAdd >= 1)
+        {
+            isAdding = true;
+        }
+
+        EventManager.Trigger(Evento.OnResourceUpdated, pickupType, recursosRecolectados[pickupType], isAdding);
         //print(pickupType.ToString() + " // " + recursosRecolectados[pickupType]);
     }
     public void AddHealth(int curacion)

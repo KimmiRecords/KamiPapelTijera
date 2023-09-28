@@ -3,49 +3,106 @@ using UnityEngine;
 
 public class ResourceParticleManager : Singleton<ResourceParticleManager>
 {
-    public ParticleSystem paperParticles;
+    [SerializeField] float duration = 1f;
+    [SerializeField] float offset;
+    public ParticleSystem glitterParticles;
+    public InventorySlot sticker;
+
+    public Canvas canvas;
 
     private void Start()
     {
-        EventManager.Subscribe(Evento.OnObjectWasCut, SetParticlePosition);
-        EventManager.Subscribe(Evento.OnResourceUpdated, ShootParticles);
+        EventManager.Subscribe(Evento.OnObjectWasCut, PrepareSystem);
+        EventManager.Subscribe(Evento.OnResourceUpdated, StartSystem);
     }
 
-    public void SetParticlePosition(params object[] parameter)
+    #region prepare system
+    public void PrepareSystem(params object[] parameter)
+    {
+        Debug.Log("prepare system");
+        Vector3 position = (Vector3)parameter[0];
+        SetParticlePosition(position);
+        SetStickerPosition(position);
+    }
+
+    public void SetParticlePosition(Vector3 pos)
     {
         //Debug.Log("set particle position");
-        paperParticles.transform.position = (Vector3)parameter[0];
-        paperParticles.gameObject.SetActive(false);
-
+        glitterParticles.transform.position = pos;
+        glitterParticles.gameObject.SetActive(false);
     }
 
-    public void ShootParticles(params object[] parameter)
+    public void SetStickerPosition(Vector3 position)
     {
-        if ((ResourceType)parameter[0] == ResourceType.papel)
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(position);
+        float canvasScaleFactor = canvas.scaleFactor;
+        Vector3 canvasPosition = new Vector3(screenPosition.x / canvasScaleFactor, screenPosition.y / canvasScaleFactor, 0f);
+
+        sticker.gameObject.transform.position = canvasPosition + (Vector3.up + Vector3.right * offset);
+    }
+    #endregion
+
+    #region start system
+
+    public void StartSystem(params object[] parameter)
+    {
+        Debug.Log("start system");
+        ResourceType rt = (ResourceType)parameter[0];
+
+        if ((bool)parameter[2] &&
+            (rt == ResourceType.papel || rt == ResourceType.flores ||
+            rt == ResourceType.hongos))
         {
-            //Debug.Log("shoot particle");
-            EmitParticlesAtTarget();
-            StartCoroutine(TurnOffParticles());
+            ActivateSystem(rt);
         }
     }
 
-    public void EmitParticlesAtTarget()
+    public void ActivateSystem(ResourceType rt)
     {
-        paperParticles.gameObject.SetActive(true);
+        Debug.Log("activate system");
+        ShowParticles();
+        ShowSticker(rt);
+        StartCoroutine(HideParticles());
+        StartCoroutine(HideSticker());
     }
 
-    public IEnumerator TurnOffParticles()
+    public void ShowParticles()
     {
-        yield return new WaitForSeconds(1f);
-        paperParticles.gameObject.SetActive(false);
+        glitterParticles.gameObject.SetActive(true);
+    }
+
+    public void ShowSticker(ResourceType rt)
+    {
+        Debug.Log("muestro sticker");
+        sticker.gameObject.SetActive(true);
+        sticker.SetItem(InventoryManager.Instance.itemsByResourceType[rt]);
+
+        //lerp de alpha o algo asi
+    }
+    #endregion
+
+    #region turn off system
+
+    public IEnumerator HideParticles()
+    {
+        yield return new WaitForSeconds(duration);
+        glitterParticles.gameObject.SetActive(false);
+    }
+
+    public IEnumerator HideSticker()
+    {
+        yield return new WaitForSeconds(duration);
+        Debug.Log("hide sticker");
+        sticker.gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnObjectWasCut, SetParticlePosition);
-            EventManager.Unsubscribe(Evento.OnResourceUpdated, ShootParticles);
+            EventManager.Unsubscribe(Evento.OnObjectWasCut, PrepareSystem);
+            EventManager.Unsubscribe(Evento.OnResourceUpdated, StartSystem);
         }
     }
+    #endregion
 }

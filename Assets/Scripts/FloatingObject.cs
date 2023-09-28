@@ -13,6 +13,11 @@ public class FloatingObject : MonoBehaviour
         startPosition = transform.position;
     }
 
+    public void UpdateOriginPosition(Vector3 pos, Vector3 offset)
+    {
+        startPosition = pos + offset;
+    }
+
     private void Update()
     {
         // Calcula la posición en el eje Y utilizando una función sinusoidal
