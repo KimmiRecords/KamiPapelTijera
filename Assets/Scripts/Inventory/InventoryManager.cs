@@ -39,12 +39,28 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void AddItem(params object[] parameters)
     {
+        ResourceType rt = (ResourceType)parameters[0];
+        itemsByResourceType[rt].amount = (int)parameters[1];
+
+        bool shouldClear = false;
+
+        if ((int)parameters[1] <= 0)
+        {
+            shouldClear = true;
+        }
+
         for (int i = 0; i < _slots.Length; i++)
         {
-
             //si el ivnentory ya tiene un inventoryslot con el item del tipo q es el resourcetype, actualizo su amount
-            if (_slots[i].currentItem == itemsByResourceType[(ResourceType)parameters[0]]) //si ya esta en inventory, sumo 1
+            if (_slots[i].currentItem == itemsByResourceType[rt]) //si ya esta en inventory, actualizo el amount
             {
+                if (shouldClear)
+                {
+                    _slots[i].ClearSlot();
+                    ReorganizeSlots();
+                    return;
+                }
+
                 _slots[i].currentItem.amount = (int)parameters[1];
                 _slots[i].SetItem(_slots[i].currentItem);
                 return;
@@ -52,10 +68,28 @@ public class InventoryManager : Singleton<InventoryManager>
 
             if (_slots[i].currentItem == null) //si no, lo agrego en el primer slot vacio
             {
-                //_slots[i].currentItem.amount = (int)parameters[1];
-                _slots[i].SetItem(itemsByResourceType[(ResourceType)parameters[0]]);
+                _slots[i].SetItem(itemsByResourceType[rt]);
                 return;
             }
+        }
+    }
+
+    public void ReorganizeSlots()
+    {
+        List<InventoryItem> nonEmptyItems = new List<InventoryItem>();
+
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            if (_slots[i].currentItem != null)
+            {
+                nonEmptyItems.Add(_slots[i].currentItem); //me lleno mi lista aux, borro todos
+                _slots[i].ClearSlot();
+            }
+        }
+
+        for (int i = 0; i < nonEmptyItems.Count; i++)
+        {
+            _slots[i].SetItem(nonEmptyItems[i]); //lleno de nuevo
         }
     }
 

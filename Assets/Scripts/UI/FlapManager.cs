@@ -24,13 +24,22 @@ public class FlapManager : Singleton<FlapManager>
     bool _isOpen = false;
     float _valueBeforeMute = 1;
 
+    //flapdisplays:
+    //0 es quests
+    //1 es inventory
+    //2 es settings
+    //3 es controles
+
     private void Start()
     {
         _posYClosed = transform.position.y;
-        EventManager.Subscribe(Evento.OnPlayerPressedEsc, ToggleFlap);
+        EventManager.Subscribe(Evento.OnPlayerPressedEsc, OpenSettings);
         EventManager.Subscribe(Evento.OnPlayerPressedM, ToggleMute);
+        EventManager.Subscribe(Evento.OnPlayerPressedI, OpenInventory);
+        EventManager.Subscribe(Evento.OnPlayerPressedU, OpenQuests);
     }
 
+    //funcionamiento del flap
     public void OpenFlap()
     {
         //Debug.Log("FlapManager: open flap");
@@ -41,7 +50,6 @@ public class FlapManager : Singleton<FlapManager>
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posYOpen));
     }   
-
     public void CloseFlap()
     {
         Debug.Log("FlapManager: close flap");
@@ -51,21 +59,7 @@ public class FlapManager : Singleton<FlapManager>
 
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posYClosed));
-
     }
-
-    public void ToggleFlap(params object[] parameters)
-    {
-        if (_isOpen)
-        {
-            CloseFlap();
-        }
-        else
-        {
-            OpenFlap();
-        }
-    }
-
     private IEnumerator MoveFlap(float targetY)
     {
         Time.timeScale = 1;
@@ -90,13 +84,44 @@ public class FlapManager : Singleton<FlapManager>
         }
     }
 
+
+    //teclas del jugador
+    public void ToggleFlap(params object[] parameters)
+    {
+        if (_isOpen)
+        {
+            CloseFlap();
+        }
+        else
+        {
+            OpenFlap();
+        }
+    }
+    public void OpenQuests(params object[] parameters)
+    {
+        ShowDesiredDisplay(_flapDisplays[0]);
+        ToggleFlap();
+    }
+    public void OpenInventory(params object[] parameters)
+    {
+        ShowDesiredDisplay(_flapDisplays[1]);
+        ToggleFlap();
+    }
+    public void OpenSettings(params object[] parameters)
+    {
+        ShowDesiredDisplay(_flapDisplays[2]);
+        ToggleFlap();
+    }
+
+
+
+    //botones y sliders
     public void BTN_Salir()
     {
         _seguroOverlay.SetActive(true);
         Debug.Log("prendo el overlay");
         AudioManager.instance.PlayByName("PickupSFX", 2.5f);
     }
-
     public void BTN_Settings()
     {
         ShowDesiredDisplay(_flapDisplays[0]);
@@ -115,7 +140,6 @@ public class FlapManager : Singleton<FlapManager>
         //Debug.Log("muestro las quests");
         AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
     }
-
     public void BTN_Controles()
     {
         ShowDesiredDisplay(_flapDisplays[3]);
@@ -129,7 +153,6 @@ public class FlapManager : Singleton<FlapManager>
 
         Application.Quit();
     }
-
     public void BTN_No()
     {
         _seguroOverlay.SetActive(false);
@@ -137,22 +160,18 @@ public class FlapManager : Singleton<FlapManager>
 
         Debug.Log("apago el overlay");
     }
-
     public void SLIDER_Volumen()
     {
         AudioManager.instance.SetGlobalVolume(_sliderVolumen.value);
     }
-
     public void SLIDER_Brillo()
     {
         PostProcessManager.Instance.SetBrightnessValue(_sliderBrillo.value);
     }
-
     public void SLIDER_Contraste()
     {
         PostProcessManager.Instance.SetContrastValue(_sliderContraste.value);
     }
-
     public void ToggleMute(params object[] parameters)
     {
         Debug.Log("toggle mute");
@@ -168,6 +187,9 @@ public class FlapManager : Singleton<FlapManager>
         }
     }
 
+
+
+    //auxiliares
     public void ShowDesiredDisplay(FlapDisplay flapDisplay)
     {
         foreach (FlapDisplay d in _flapDisplays)
@@ -180,8 +202,6 @@ public class FlapManager : Singleton<FlapManager>
         //Debug.Log("show desired display - " + flapDisplay);
         flapDisplay.display.SetActive(true);
         flapDisplay.flapButton.Activate();
-
-        
     }
 
     private void OnDestroy()

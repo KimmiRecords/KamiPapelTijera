@@ -53,6 +53,18 @@ public class PlayerController
                 EventManager.Trigger(Evento.OnPlayerPressedEsc);
             }
 
+            if (Input.GetButtonDown("Inventory"))
+            {
+                //Application.Quit();
+                EventManager.Trigger(Evento.OnPlayerPressedI);
+            }
+
+            if (Input.GetButtonDown("Quests"))
+            {
+                //Application.Quit();
+                EventManager.Trigger(Evento.OnPlayerPressedU);
+            }
+
             if (!LevelManager.Instance.inDialogue && !_player.anim.GetBool("isCasting")) //este if mepa que va en model
             {
                 if (Input.GetButtonDown("Jump"))

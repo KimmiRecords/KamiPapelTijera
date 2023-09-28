@@ -21,13 +21,18 @@ public class InventorySlot : MonoBehaviour
         slotStickerImageComponent.color = currentItem.itemColor;
         nameTextComponent.text = currentItem.itemName;
 
-        if (currentItem.amount <= 1)
+        if (currentItem.amount < 1)
+        {
+            ClearSlot();
+        }
+        else if (currentItem.amount == 1)
         {
             amountTextComponent.text = "";
         }
         else
         {
             amountTextComponent.text = currentItem.amount.ToString();
+
         }
     }
 
