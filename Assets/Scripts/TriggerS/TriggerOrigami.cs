@@ -8,20 +8,19 @@ public class TriggerOrigami : TriggerScript
     //el origami check se va a encargar de chequear que apretes tab y hagas el origami
 
     public Origami origami;
-
     public MultipleRectCheck checkPrefab;
     MultipleRectCheck currentCheck;
-
     [SerializeField] GameObject particleSystemGO;
-    
     ParticleSystem ps;
     ParticleSystem.MainModule mainModule;
-
-    public Color blueParticleActiveColor;
     Color originalStartColor;
     float originalStartSpeed;
     float originalStartSize;
-    //private float originalEmissionRate;
+
+    [Header("Particle Parameters When Step On")]
+    public Color blueParticleActiveColor;
+    public float activeSpeed = 1.5f;
+    public float activeSize = 2f;
 
     protected override void Start()
     {
@@ -75,8 +74,8 @@ public class TriggerOrigami : TriggerScript
     public void SetParticleParameters()
     {
         mainModule.startColor = blueParticleActiveColor;
-        mainModule.startSpeed = originalStartSpeed * 1.5f;
-        mainModule.startSize = 2f;
+        mainModule.startSpeed = originalStartSpeed * activeSpeed;
+        mainModule.startSize = activeSize;
         //mainModule.emission.rateOverTime = originalEmissionRate * 2f;
     }
 

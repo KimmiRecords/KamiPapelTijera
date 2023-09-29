@@ -134,7 +134,9 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     {
         _maxHp = _hp;
         Vida = _maxHp;
-        originalColor = _renderer.material.color;
+        //originalColor = _renderer.material.color;
+        originalColor = _renderer.material.GetColor("_DiffuseColor");
+
         augmentedJumpsLeft = augmentedJumpsMax;
         originalJumpForce = jumpForce;
         originalMaxSpeed = _maxSpeed;
@@ -221,9 +223,9 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     public IEnumerator EnrojecerSprite()
     {
         //print("enrojeci el sprite");
-        _renderer.material.color = Color.red;
+        _renderer.material.SetColor("_DiffuseColor", Color.red);
         yield return new WaitForSeconds(0.25f);
-        _renderer.material.color = originalColor;
+        _renderer.material.SetColor("_DiffuseColor", originalColor);
     }
     public override void Die()
     {
