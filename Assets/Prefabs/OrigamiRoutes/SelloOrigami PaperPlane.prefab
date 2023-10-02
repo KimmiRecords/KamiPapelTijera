@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5019034003175297753}
   - component: {fileID: 5019034003175297752}
   m_Layer: 0
-  m_Name: Trigger
+  m_Name: TriggerOrigami
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerBool: 0
+  showTooltip: 1
   tooltipTextToShow: "Manten\xE9 E para comenzar un origami"
   postItColor: 0
   origami: {fileID: 0}
@@ -99,6 +100,8 @@ MonoBehaviour:
     type: 3}
   particleSystemGO: {fileID: 2906438330741447121}
   blueParticleActiveColor: {r: 0.15686275, g: 0.18039216, b: 0.50980395, a: 0.5372549}
+  activeSpeed: 1.5
+  activeSize: 2
 --- !u!1001 &1983794156916600905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -166,6 +169,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PedestalParent
       objectReference: {fileID: 0}
+    - target: {fileID: 8148756059669502358, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: triggerOrigami
+      value: 
+      objectReference: {fileID: 5019034003175297752}
     - target: {fileID: 8747860609549830176, guid: 30a22737b1dbca347b4086af4fa8494e,
         type: 3}
       propertyPath: myTriggerOrigami

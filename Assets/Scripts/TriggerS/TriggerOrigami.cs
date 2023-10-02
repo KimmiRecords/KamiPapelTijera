@@ -7,20 +7,23 @@ public class TriggerOrigami : TriggerScript
     //cuando entras a este trigger hace nacer al origamicheck
     //el origami check se va a encargar de chequear que apretes tab y hagas el origami
 
+    //para cargar en el inspector
     public Origami origami;
     public MultipleRectCheck checkPrefab;
-    MultipleRectCheck currentCheck;
     [SerializeField] GameObject particleSystemGO;
-    ParticleSystem ps;
-    ParticleSystem.MainModule mainModule;
-    Color originalStartColor;
-    float originalStartSpeed;
-    float originalStartSize;
 
     [Header("Particle Parameters When Step On")]
     public Color blueParticleActiveColor;
     public float activeSpeed = 1.5f;
     public float activeSize = 2f;
+
+    //auxiliares
+    MultipleRectCheck currentCheck;
+    ParticleSystem ps;
+    ParticleSystem.MainModule mainModule;
+    Color originalStartColor;
+    float originalStartSpeed;
+    float originalStartSize;
 
     protected override void Start()
     {

@@ -157,11 +157,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         LevelManager.Instance.inDialogue = false;
         isTurning = false;
-        //esferaNext.triggerBool = false;
-        //esferaPrev.triggerBool = false;
         CameraManager.Instance.SetCamera(CameraMode.Normal);
-        //glitter.SetActive(false);
-
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
     void PlayPageSound()
     {

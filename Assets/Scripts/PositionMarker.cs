@@ -14,6 +14,11 @@ public class PositionMarker : MonoBehaviour
     float distanceToPlayer;
     float desiredAlpha;
 
+    private void Start()
+    {
+        EventManager.Subscribe(Evento.OnPlayerChangePage, OnChangePage);
+    }
+
     public void ShowMarker()
     {
         _spriteRenderer.enabled = true;
@@ -33,5 +38,10 @@ public class PositionMarker : MonoBehaviour
         distanceToPlayer = Vector3.Distance(transform.position, playerPos);
         desiredAlpha = powerFactor / (distanceToPlayer * distanceToPlayer);
         _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, desiredAlpha);
+    }
+
+    public void OnChangePage(params object[] parameters)
+    {
+        HideMarker();
     }
 }

@@ -5,11 +5,12 @@ using TMPro;
 
 public abstract class TextUpdater : MonoBehaviour
 {
-    //los updaters de cosas de la ui agarran la info usando eventos
+    //los text updaters de cosas de la ui agarran la info usando eventos
+
+
     protected TextMeshProUGUI myText;
 
     [SerializeField] protected Evento eventoQueMeInteresa;
-
     [SerializeField] protected string textoInicial;
 
     protected virtual void Awake()
