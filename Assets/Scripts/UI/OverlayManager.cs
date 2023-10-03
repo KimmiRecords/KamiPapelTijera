@@ -16,7 +16,7 @@ public class OverlayManager : Singleton<OverlayManager>
         DontDestroyOnLoad(this);
         EventManager.Subscribe(Evento.OnPlayerDie, ShowDefeatOverlay);
         EventManager.Subscribe(Evento.OnDialogueEnd, ShowOverlay);
-        EventManager.Subscribe(Evento.OnPlayerPressedE, Unlock);
+        EventManager.Subscribe(Evento.OnPlayerPressedE, RequestUnlock);
     }
 
     public void ShowDefeatOverlay(params object[] parameter)
@@ -33,6 +33,7 @@ public class OverlayManager : Singleton<OverlayManager>
         {
             //Debug.Log("overlay manager: show victory overlay");
             _victoryOverlay.gameObject.SetActive(true);
+            _victoryOverlay.isShowing = true;
             Lock();
         }
 
@@ -50,26 +51,35 @@ public class OverlayManager : Singleton<OverlayManager>
         isLocked = true;
     }
 
-    public void Unlock(params object[] parameter)
+    public void RequestUnlock(params object[] parameter)
     {
-        if (isLocked)
+        if (_victoryOverlay.isShowing) //pues yo quiero q no se pueda desbloquear el victory con E, sino solo con los botones
         {
-            //Debug.Log("overlay unlock: set indialogue y islocked false");
-            LevelManager.Instance.inDialogue = false;
-            isLocked = false;
-            AudioManager.instance.PlayByName("PickupSFX", 2.5f);
+            return;
         }
+        else if (isLocked)
+        {
+            Unlock();
+        }
+    }
 
-        //Debug.Log("overlay unlock: apago todos los overlays");
+    public void Unlock()
+    {
+        //Debug.Log("overlay unlock: set indialogue y islocked false");
+        LevelManager.Instance.inDialogue = false;
+        isLocked = false;
+        AudioManager.instance.PlayByName("PickupSFX", 2.5f);
+
+
         _defeatOverlay.gameObject.SetActive(false);
         _mainQuestOverlay.gameObject.SetActive(false);
-        //_victoryOverlay.gameObject.SetActive(false);
     }
 
     public void BTN_ContinueGame()
     {
         //Debug.Log("continua el juego");
         _victoryOverlay.gameObject.SetActive(false);
+        _victoryOverlay.isShowing = false;
         EventManager.Trigger(Evento.OnPlayerChooseContinueGame);
         Unlock();
     }
@@ -93,7 +103,7 @@ public class OverlayManager : Singleton<OverlayManager>
         {
             EventManager.Unsubscribe(Evento.OnPlayerDie, ShowDefeatOverlay);
             EventManager.Unsubscribe(Evento.OnDialogueEnd, ShowOverlay);
-            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Unlock);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, RequestUnlock);
         }
     }
 }

@@ -16,6 +16,8 @@ public class AbuelaDialogueTrigger : TriggerDialogue
     [SerializeField] NPC_Abuela abuela;
     bool isLocked = false;
 
+    [SerializeField] GameObject globitoDialogo;
+
     protected override void Start()
     {
         //print("me suscribo a onplayerpressed E y abueladropoff - awela");
@@ -31,13 +33,15 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         if ((DialogueSO)parameters[1] == _dialogues[1])
         {
             Debug.Log("listo, se acabo todo. chau.");
-            isLocked = true;   
+            isLocked = true;
+            //igual este lock se unlockea si el player elige continue game
         }
     }
 
     void Unlock(object[] parameters)
     {
         isLocked = false;
+        globitoDialogo.SetActive(true);
     }
 
     public override void OnEnterBehaviour(Collider other)
@@ -67,6 +71,7 @@ public class AbuelaDialogueTrigger : TriggerDialogue
             {
                 firstTime = false;
                 isLocked = true; //la lockeo para q no te hable mas hasta ser deslockeada
+                globitoDialogo.SetActive(false);
                 AudioManager.instance.PlayByName("MagicSuccess", 4.0f);
                 PasarAlSiguienteDialogo(); //despues de hablarle x primera vez a la awela, pasa al dialogo 2
             }

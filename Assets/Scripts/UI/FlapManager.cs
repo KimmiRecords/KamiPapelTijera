@@ -208,8 +208,10 @@ public class FlapManager : Singleton<FlapManager>
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPlayerPressedEsc, ToggleFlap);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedEsc, OpenSettings);
             EventManager.Unsubscribe(Evento.OnPlayerPressedM, ToggleMute);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedI, OpenInventory);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedU, OpenQuests);
         }
     }
 }

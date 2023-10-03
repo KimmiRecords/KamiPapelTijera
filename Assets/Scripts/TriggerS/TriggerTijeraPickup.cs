@@ -12,6 +12,7 @@ public class TriggerTijeraPickup : TriggerScript
             AudioManager.instance.PlayByName("PickupSFX", 0.7f);
             AudioManager.instance.PlayByName("PickupSFX", 1.4f);
             AudioManager.instance.PlayByName("MagicSuccess", 0.7f);
+            CameraManager.Instance.SetCamera(CameraMode.General);
 
             OnExitBehaviour();
             Destroy(gameObject);
