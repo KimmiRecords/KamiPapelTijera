@@ -70,6 +70,7 @@ public class PlayerController
                 if (Input.GetButtonDown("Jump"))
                 {
                     _player.isJumpButtonDown = true;
+                    EventManager.Trigger(Evento.OnPlayerPressedSpace); 
                 }
 
                 if (Input.GetButtonUp("Jump"))

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6769776120814233759}
-  - component: {fileID: 1274764763196888517}
   m_Layer: 0
   m_Name: Valla
   m_TagString: Untagged
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1274764763196888517
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656920693918023266}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 11.615093, y: 11.626545, z: 1.8736649}
-  m_Center: {x: -2.8188286, y: 2.0608428, z: -4.102371}
 --- !u!1001 &4974560493517544140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,3 +132,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4974560493517544140}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5159240147391795298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: 4689ed9b81193694abc2f3cd07d45bc8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4974560493517544140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5110298528393593006
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5159240147391795298}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.041144226, y: 0.04276609, z: 0.0038790626}
+  m_Center: {x: -0.00009101212, y: -0.000000002561137, z: -0.0000000030267984}

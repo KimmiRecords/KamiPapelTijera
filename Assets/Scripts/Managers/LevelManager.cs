@@ -46,14 +46,11 @@ public class LevelManager : Singleton<LevelManager>
         for (int i = 0; i < (int)ResourceType.Count; i++) //creo el dict con uno de cada pickuptype y 0
         {
             recursosRecolectados.Add((ResourceType)i, 0);
-            //print( ((ResourceType)i).ToString() + " // " + recursosRecolectados[(ResourceType)i].ToString());
         }
+    }
 
-        //recursosRecolectados[ResourceType.papel] = initialPaper;
-        //recursosRecolectados[ResourceType.hongos] = initialHongos;
-        //recursosRecolectados[ResourceType.flores] = initialFloresAzules;
-
-
+    private void Start()
+    {
         if (gameObject.scene.name == "SampleScene")
         {
             AudioManager.instance.PlayByName("MemoFloraMainLoop01");
@@ -65,14 +62,12 @@ public class LevelManager : Singleton<LevelManager>
         //Debug.Log("el player se gano las botas sprint x haber completado la quest");
         player.hasSprintBoots = true;
         AddResource(ResourceType.botasRapidas, 1);
-
     }
     public void GiveWaterBoots()
     {
         //Debug.Log("el player se gano las botas water x haber completado la quest");
         player.hasWaterBoots = true;
         AddResource(ResourceType.botasAgua, 1);
-
     }
     public void GiveTijeraMejorada()
     {
@@ -80,7 +75,6 @@ public class LevelManager : Singleton<LevelManager>
         player.hasTijera = true;
         player.GetTijeraMejorada();
         AddResource(ResourceType.tijeraMejorada, 1);
-
     }
     public void GoToScene(string sceneName)
     {   
@@ -111,7 +105,6 @@ public class LevelManager : Singleton<LevelManager>
         }
 
         EventManager.Trigger(Evento.OnResourceUpdated, pickupType, recursosRecolectados[pickupType], isAdding);
-        //print(pickupType.ToString() + " // " + recursosRecolectados[pickupType]);
     }
     public void AddHealth(int curacion)
     {
