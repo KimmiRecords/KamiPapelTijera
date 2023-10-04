@@ -107,27 +107,30 @@ public class PlayerModel
         _player.miTijeraHitbox.gameObject.SetActive(false);
     }
 
-    public IEnumerator AddExtraForwardForce(float delayTime, float duration)
+    public IEnumerator AddExtraForwardForce(float delayTime, float duration, float planeoImpulse, Vector3 lastDirection)
     {
         yield return new WaitForSeconds(delayTime);
 
-        _player.planeoImpulse = auxOriginalImpulse;
+        planeoImpulse = auxOriginalImpulse;
         float elapsedTime = 0f;
-        float startImpulse = _player.planeoImpulse;
+        float startImpulse = planeoImpulse;
 
         while (elapsedTime < duration)
         {
-            auxForwardVector = _player.lastDirection * _player.planeoImpulse;
+            auxForwardVector = lastDirection * planeoImpulse;
             _player.cc.Move(auxForwardVector * Time.deltaTime);
 
-            // Reducción lineal del planeoImpulse en función del tiempo transcurrido
-            _player.planeoImpulse = Mathf.Lerp(startImpulse, 0f, elapsedTime / duration);
+            planeoImpulse = Mathf.Lerp(startImpulse, 0f, elapsedTime / duration);
 
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        // Asegurarse de que el planeoImpulse sea exactamente 0 al final de la corrutina
-        _player.planeoImpulse = 0f;
+        planeoImpulse = 0f;
+    }
+
+    public void ForcedMove(Vector3 move)
+    {
+        _player.cc.Move(move);
     }
 }

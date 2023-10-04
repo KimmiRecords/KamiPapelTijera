@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity, IMojable, IGolpeable, ICurable
+public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
 {
 
     //player esta partido en 4. aca solo pongo lo que quiero que pase. 
@@ -277,8 +277,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
     }
     public void AddPlaning()
     {
-        //print("AddPlaning: dalee");
-        StartCoroutine(_model.AddExtraForwardForce(planeoDelayTime, planeoDuration));
+        StartCoroutine(_model.AddExtraForwardForce(planeoDelayTime, planeoDuration, planeoImpulse, lastDirection));
     }
 
     private void OnDestroy()
@@ -292,5 +291,8 @@ public class Player : Entity, IMojable, IGolpeable, ICurable
         }
     }
 
-    
+    public void GetAffectedByWind(float windForce, Vector3 windDirection)
+    {
+        _model.ForcedMove(windDirection * windForce);
+    }
 }
