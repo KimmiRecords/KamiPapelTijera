@@ -30,9 +30,10 @@ public class InputTutorialsManager : MonoBehaviour
 
         while (elapsedTime < duration)
         {
+            Debug.Log("lerpeo");
             elapsedTime += Time.deltaTime;
             float newAlpha = Mathf.Lerp(startAlpha, 0, elapsedTime / duration);
-            tutorial.color = new Color(tutorial.color.r, tutorial.color.g, tutorial.color.b, newAlpha);
+            tutorial.material.SetColor("_BaseColor", new Color(tutorial.color.r, tutorial.color.g, tutorial.color.b, newAlpha));
             yield return null;
         }
 
