@@ -7,6 +7,8 @@ public class InputTutorialsManager : MonoBehaviour
     [SerializeField] SpriteRenderer[] tutorials;
     [SerializeField] float lerpDuration = 2f;
 
+    bool alreadyTriggeredWASD, alreadyTriggeredSPACE = false;
+
     void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerMove, HideWASDTutorial);
@@ -15,12 +17,21 @@ public class InputTutorialsManager : MonoBehaviour
 
     public void HideWASDTutorial(params object[] parameters)
     {
-        StartCoroutine(HideTutorialCoroutine(tutorials[0], lerpDuration));
+        if (!alreadyTriggeredWASD)
+        { 
+            StartCoroutine(HideTutorialCoroutine(tutorials[0], lerpDuration));
+            alreadyTriggeredWASD = true;
+        }
+
     }
 
     public void HideSPACETutorial(params object[] parameters)
     {
-        StartCoroutine(HideTutorialCoroutine(tutorials[1], lerpDuration));
+        if (!alreadyTriggeredSPACE)
+        {
+            StartCoroutine(HideTutorialCoroutine(tutorials[1], lerpDuration));
+            alreadyTriggeredSPACE = true;
+        }
     }
 
     IEnumerator HideTutorialCoroutine(SpriteRenderer tutorial, float duration)
@@ -30,7 +41,7 @@ public class InputTutorialsManager : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            Debug.Log("lerpeo");
+            //Debug.Log("lerpeo");
             elapsedTime += Time.deltaTime;
             float newAlpha = Mathf.Lerp(startAlpha, 0, elapsedTime / duration);
             tutorial.material.SetColor("_BaseColor", new Color(tutorial.color.r, tutorial.color.g, tutorial.color.b, newAlpha));
@@ -42,7 +53,11 @@ public class InputTutorialsManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventManager.Unsubscribe(Evento.OnPlayerMove, HideWASDTutorial);
-        EventManager.Unsubscribe(Evento.OnPlayerPressedSpace, HideSPACETutorial);
+        if (gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnPlayerMove, HideWASDTutorial);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedSpace, HideSPACETutorial);
+
+        }
     }
 }

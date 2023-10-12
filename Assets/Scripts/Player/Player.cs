@@ -27,9 +27,9 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     public CharacterController cc;
     public Animator anim;
     public TijeraHitbox miTijeraHitbox;
+    public ParticleShooter particleShooter;
     [SerializeField] Renderer _renderer;
     [SerializeField] GameObject myPaperPlaneHat;
-    [SerializeField] ParticleSystem sprintParticles;
     [SerializeField] TijeraManager tijeraManager;
 
     [Header("Planeo")]
@@ -102,17 +102,21 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         set
         {
             isSprinting = value;
-            if (isSprinting && hasSprintBoots)
+            if (!hasSprintBoots)
+            {
+                return;
+            }
+            if (isSprinting)
             {
                 //Debug.Log("voy rapidin");
                 Speed *= sprintingSpeedModifier;
-                sprintParticles.gameObject.SetActive(true);
+                _view.StartSprint();
             }
             else
             {
                 //Debug.Log("voy normal");
                 Speed = originalMaxSpeed;
-                sprintParticles.gameObject.SetActive(false);
+                _view.EndSprint();
             }
         }
     }

@@ -28,12 +28,6 @@ public class PlayerView
             StartMoveAnimation();
             canRotate = true;
         }
-
-
-        //if (!_player.isAttacking)
-        //{
-            
-        //}
     }
 
     public void RotateModel(Vector3 move)
@@ -86,7 +80,8 @@ public class PlayerView
 
     public void StartJumpAnimation()
     {
-        AudioManager.instance.PlayByName("JumpSFX", 2f);
+        AudioManager.instance.PlayByName("JumpSFX", 2f, 0.05f);
+        _player.particleShooter.Create(1, _anim.transform);
         _anim.SetBool("isWalk", false);
         _anim.SetBool("isJump", true);
     }
@@ -104,5 +99,17 @@ public class PlayerView
     public void EndCast()
     {
         _anim.SetBool("isCasting", false);
+    }
+
+    public void StartSprint()
+    {
+        _player.particleShooter.Enable(0, true);
+        AudioManager.instance.PlayByName("JumpSFX", 1.5f);
+    }
+
+    public void EndSprint()
+    {
+        _player.particleShooter.Enable(0, false);
+        AudioManager.instance.PlayByName("JumpSFX", 1.2f);
     }
 }
