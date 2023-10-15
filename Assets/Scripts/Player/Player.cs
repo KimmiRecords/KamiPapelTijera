@@ -233,7 +233,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     }
     public override void Die()
     {
-        print("player: me mori");
+        //print("player: me mori");
         Vida = _maxHp;
         EventManager.Trigger(Evento.OnPlayerDie);
         PlayerPageSpawnManager.Instance.RespawnPlayer(/*PageScroller.Instance.activeIndex + 1, PageScroller.Instance.isNext*/); //spawnea al player en el inicio de la pagina actual

@@ -31,12 +31,12 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
     }
     public void RespawnPlayer(params object[] parameter)
     {
-        Debug.Log("respawn player");
+        //Debug.Log("respawn player");
         PositionPlayerAtPoint(lastUsedSpawn);
     }
     public void PositionPlayerAtPoint(Vector3 point)
     {
-        Debug.Log("PositionPlayerAtPoint");
+        //Debug.Log("PositionPlayerAtPoint");
         _playerCC.enabled = false;
         _player.transform.position = point;
         _playerCC.enabled = true;

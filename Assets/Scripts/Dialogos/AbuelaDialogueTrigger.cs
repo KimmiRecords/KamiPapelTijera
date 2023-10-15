@@ -10,21 +10,26 @@ public class AbuelaDialogueTrigger : TriggerDialogue
 
     //la abuela tiene 2 dialogos. 
     //cuando te la encontras (que dispara la bossfight)
-    //y el post-entrega (que dispara el final)
+    //y el post-entrega (que dispara el final storyboard)
+
+    //el segundo dialogo recien se desbloquea cuando entregas la quest de norberto
 
     bool firstTime = true;
     [SerializeField] NPC_Abuela abuela;
     bool isLocked = false;
 
     [SerializeField] GameObject globitoDialogo;
+    [SerializeField] QuestSO requiredQuest; //la quest necesaria para desbloquear el segundo dialogo
 
     protected override void Start()
     {
         //print("me suscribo a onplayerpressed E y abueladropoff - awela");
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
-        EventManager.Subscribe(Evento.OnAbuelaDropoff, Unlock);
+        //EventManager.Subscribe(Evento.OnAbuelaDropoff, Unlock);
         EventManager.Subscribe(Evento.OnDialogueEnd, EndAllInteractions);
         EventManager.Subscribe(Evento.OnPlayerChooseContinueGame, Unlock);
+        EventManager.Subscribe(Evento.OnQuestDelivered, CheckQuestCompletion);
+
     }
 
     public void EndAllInteractions(params object[] parameters)
@@ -32,13 +37,20 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         //si el dialogo q termino es el ultimo de la abuela
         if ((DialogueSO)parameters[1] == _dialogues[1])
         {
-            Debug.Log("listo, se acabo todo. chau.");
+            //Debug.Log("listo, se acabo todo. chau.");
             isLocked = true;
             //igual este lock se unlockea si el player elige continue game
         }
     }
+    void CheckQuestCompletion(params object[] parameters)
+    {
+        if ((QuestSO)parameters[0] == requiredQuest)
+        {
+            Unlock();
+        }
+    }
 
-    void Unlock(object[] parameters)
+    void Unlock(params object[] parameters)
     {
         isLocked = false;
         globitoDialogo.SetActive(true);
@@ -83,9 +95,11 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
-            EventManager.Unsubscribe(Evento.OnAbuelaDropoff, Unlock);
+            //EventManager.Unsubscribe(Evento.OnAbuelaDropoff, Unlock);
             EventManager.Unsubscribe(Evento.OnDialogueEnd, EndAllInteractions);
             EventManager.Unsubscribe(Evento.OnPlayerChooseContinueGame, Unlock);
+            EventManager.Unsubscribe(Evento.OnQuestDelivered, CheckQuestCompletion);
+
         }
     }
 }

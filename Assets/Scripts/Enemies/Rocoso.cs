@@ -23,7 +23,7 @@ public class Rocoso : Enemy, IMojable
 
     private void Start()
     {
-        Debug.Log("Rocoso Start");
+        //Debug.Log("Rocoso Start");
         _fsm = new FiniteStateMachine();
         _fsm.AddState(State.RocosoSleep, new RocosoSleepState(_fsm, this));
         _fsm.AddState(State.RocosoStart, new RocosoStartState(_fsm, this));

@@ -13,7 +13,7 @@ public class OrigamiPaperCostTextUpdater : TextUpdater
 
     private void OnEnable()
     {
-        Debug.Log("on enable");
+        //Debug.Log("on enable");
         if (LevelManager.Instance != null)
         {
             currentPaperAmount = LevelManager.Instance.recursosRecolectados[ResourceType.papel];
@@ -25,7 +25,7 @@ public class OrigamiPaperCostTextUpdater : TextUpdater
 
     protected override void UpdateText(params object[] parameter)
     {
-        Debug.Log("update text");
+        //Debug.Log("update text");
         //me interesa resourceupdate, que param1 es amount
         if ((ResourceType)parameter[0] == ResourceType.papel)
         {
@@ -36,7 +36,7 @@ public class OrigamiPaperCostTextUpdater : TextUpdater
 
     public void SetText(int currentAmount, int cost)
     {
-        Debug.Log("set text");
+        //Debug.Log("set text");
         
         myText.text = textoInicial + currentAmount.ToString() + " / " + cost.ToString();
         myText.color = CheckFontColor(currentAmount, cost);
@@ -44,12 +44,12 @@ public class OrigamiPaperCostTextUpdater : TextUpdater
 
     Color CheckFontColor(int currentAmount, int cost)
     {
-        Debug.Log("check font color");
+        //Debug.Log("check font color");
         Color resultColor = originalColor;
 
         if (currentAmount < cost || triggerOrigami.origami.wasUsed)
         {
-            Debug.Log("colorWhenNotEnoughPaper");
+            //Debug.Log("colorWhenNotEnoughPaper");
             resultColor = colorWhenNotEnoughPaper;
         }
 

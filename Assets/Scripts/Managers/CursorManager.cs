@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 //using static UnityEditor.Progress;
 
-
 public enum CursorType
 {
     ClosedHand,
@@ -13,6 +12,8 @@ public enum CursorType
 public class CursorManager : Singleton<CursorManager>
 {
     public Texture2D openHand, closedHand;
+
+    [SerializeField] bool isCursorAlwaysVisible = true;
 
     public void SetCursor(CursorType type)
     {
@@ -28,6 +29,11 @@ public class CursorManager : Singleton<CursorManager>
 
     public void ShowCursor(bool value)
     {
+        if (isCursorAlwaysVisible)
+        {
+            return;
+        }
+
         Cursor.visible = value;
     }
 }
