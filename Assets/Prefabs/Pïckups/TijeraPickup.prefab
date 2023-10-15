@@ -137,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8500205940140165411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.7004, y: 2.7204075, z: 16.976793}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -158,7 +158,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: -0.82, y: -0.24, z: -2.87}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8500205940140165413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,8 +172,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerBool: 0
+  showTooltip: 1
   tooltipTextToShow: Toca E para agarrar la tijera
   postItColor: 0
+  isAutoPickup: 1
 --- !u!1001 &8500205940024373741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -204,52 +206,52 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.5310543
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.4563255
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.4843175
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7497823
+      value: 0.7500009
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.38602757
+      value: -0.4330114
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.44554305
+      value: -0.2500003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.30050054
+      value: 0.43301228
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -18.126
+      value: -25.659
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -71.284
+      value: -56.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 56.73
+      value: 73.898
       objectReference: {fileID: 0}
     - target: {fileID: -8513424388201257645, guid: 86e032d7beab9d24886b7b80854dbe8a,
         type: 3}
@@ -434,17 +436,17 @@ PrefabInstance:
     - target: {fileID: 8600538381334900060, guid: 71454af686854b0478e71dddc012a683,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8600538381334900060, guid: 71454af686854b0478e71dddc012a683,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.03
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8600538381334900060, guid: 71454af686854b0478e71dddc012a683,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.37
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8600538381334900060, guid: 71454af686854b0478e71dddc012a683,
         type: 3}
