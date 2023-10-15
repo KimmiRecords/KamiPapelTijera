@@ -25,4 +25,9 @@ public class CursorManager : Singleton<CursorManager>
             Cursor.SetCursor(openHand, Vector2.zero, CursorMode.Auto);
         }
     }
+
+    public void ShowCursor(bool value)
+    {
+        Cursor.visible = value;
     }
+}

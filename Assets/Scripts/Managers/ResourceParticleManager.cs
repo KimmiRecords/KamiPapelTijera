@@ -19,7 +19,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
     #region prepare system
     public void PrepareSystem(params object[] parameter)
     {
-        Debug.Log("prepare system");
+        //Debug.Log("prepare system");
         Vector3 position = (Vector3)parameter[0];
         SetParticlePosition(position);
         SetStickerPosition(position);
@@ -46,7 +46,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
 
     public void StartSystem(params object[] parameter)
     {
-        Debug.Log("start system");
+        //Debug.Log("start system");
         ResourceType rt = (ResourceType)parameter[0];
 
         if ((bool)parameter[2] &&
@@ -59,7 +59,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
 
     public void ActivateSystem(ResourceType rt)
     {
-        Debug.Log("activate system");
+        //Debug.Log("activate system");
         ShowParticles();
         ShowSticker(rt);
         StartCoroutine(HideParticles());
@@ -73,7 +73,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
 
     public void ShowSticker(ResourceType rt)
     {
-        Debug.Log("muestro sticker");
+        //Debug.Log("muestro sticker");
         sticker.gameObject.SetActive(true);
         sticker.SetItem(InventoryManager.Instance.itemsByResourceType[rt]);
 
@@ -92,7 +92,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
     public IEnumerator HideSticker()
     {
         yield return new WaitForSeconds(duration);
-        Debug.Log("hide sticker");
+        //Debug.Log("hide sticker");
         sticker.gameObject.SetActive(false);
     }
 

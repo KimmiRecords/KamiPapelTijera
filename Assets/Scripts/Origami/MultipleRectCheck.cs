@@ -114,6 +114,8 @@ public class MultipleRectCheck : MonoBehaviour
             EventManager.Trigger(Evento.OnOrigamiStart);
             //print("rect check: mando a actualizar");
             origami.TriggerPliegueTextUpdater();
+            CursorManager.Instance.ShowCursor(true);
+
         }
 
     }
@@ -130,5 +132,7 @@ public class MultipleRectCheck : MonoBehaviour
         AudioManager.instance.StopByName("MagicChannelingLoop01", "MagicChannelingLoop02");
         CursorManager.Instance.SetCursor(CursorType.OpenHand);
         EventManager.Trigger(Evento.OnOrigamiEnd);
+        CursorManager.Instance.ShowCursor(false);
+
     }
 }

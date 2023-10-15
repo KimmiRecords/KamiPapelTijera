@@ -27,9 +27,6 @@ public class LevelManager : Singleton<LevelManager>
     //el dictionario capo con cada tipo de recurso y valor
     public Dictionary<ResourceType, int> recursosRecolectados = new Dictionary<ResourceType, int>();
 
-    //public int initialPaper;
-    //public int initialHongos;
-    //public int initialFloresAzules;
     public Player player;
 
     protected override void Awake()
@@ -55,6 +52,8 @@ public class LevelManager : Singleton<LevelManager>
         {
             AudioManager.instance.PlayByName("MemoFloraMainLoop01");
         }
+
+        CursorManager.Instance.ShowCursor(false);
     }
 
     public void GiveSprintBoots()
