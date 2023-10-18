@@ -51,7 +51,7 @@ public class MainMenuManager : MonoBehaviour
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnDialogueEnd, ChangeScene);
-            AudioManager.instance.StopByName("IntroStoryboardLoop");
+            //AudioManager.instance.StopByName("IntroStoryboardLoop");
         }
     }
 

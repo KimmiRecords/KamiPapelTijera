@@ -50,6 +50,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (gameObject.scene.name == "SampleScene")
         {
+            AudioManager.instance.StopByName("IntroStoryboardLoop");
             AudioManager.instance.PlayByName("MemoFloraMainLoop01");
         }
 

@@ -31,6 +31,17 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
+    public void FakePlayerInput()
+    {
+        if (waitingForInput)
+        {
+            //print("recibi input true");
+            input = true;
+            AudioManager.instance.PlayByName("PickupSFX", 1.1f);
+        }
+    }
+
+
     public void ShowDialogue(DialogueSO dialogue)
     {
         if (OverlayManager.Instance != null && OverlayManager.Instance.isLocked)

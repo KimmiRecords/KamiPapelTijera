@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ImageFadeIn : MonoBehaviour
 {
+    //esta clase esta mal nombrada. solo sirve para la placa negra.
+    //en realidad deberia llamarse "placa negra fade out manager" o algo asi xd
+
     [SerializeField]
     float fadeSpeed; // velocidad a la que se hace el fade in
     [SerializeField]
