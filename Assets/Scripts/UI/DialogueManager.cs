@@ -27,7 +27,7 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             //print("recibi input true");
             input = true;
-            AudioManager.instance.PlayByName("PickupSFX", 2.5f);
+            AudioManager.instance.PlayByName("PickupSFX", 1.1f);
         }
     }
 
@@ -42,8 +42,8 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
             dialogue.currentText = 0;
-
             dialogueGlobe.SetActive(true);
+            AudioManager.instance.PlayByName("PickupSFX", 1.1f);
             LevelManager.Instance.inDialogue = true;
             isShowing = true;
             //EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);

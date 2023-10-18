@@ -48,6 +48,7 @@ public class PlayerView
     public void StartAttack()
     {
         _anim.SetBool("isAttacking", true);
+        AudioManager.instance.PlayByName("ActionWind", 1f, 0.01f);
     }
 
     public void EndAttack()
@@ -64,7 +65,7 @@ public class PlayerView
 
     public void StartGetGolpeadoAnimation()
     {
-        AudioManager.instance.PlayByName("ShipCrash", 0.75f);
+        AudioManager.instance.PlayByName("HurtPaper", 1.5f);
     }
 
     public void StartMoveAnimation()
@@ -80,7 +81,7 @@ public class PlayerView
 
     public void StartJumpAnimation()
     {
-        AudioManager.instance.PlayByName("JumpSFX", 2f, 0.05f);
+        AudioManager.instance.PlayByName("JumpStart", 1f, 0.02f);
         _player.particleShooter.Create(1, _anim.transform);
         _anim.SetBool("isWalk", false);
         _anim.SetBool("isJump", true);
@@ -104,12 +105,12 @@ public class PlayerView
     public void StartSprint()
     {
         _player.particleShooter.Enable(0, true);
-        AudioManager.instance.PlayByName("JumpSFX", 1.5f);
+        AudioManager.instance.PlayByName("BootsOn", 2f, 0.01f);
     }
 
     public void EndSprint()
     {
         _player.particleShooter.Enable(0, false);
-        AudioManager.instance.PlayByName("JumpSFX", 1.2f);
+        AudioManager.instance.PlayByName("BootsOff", 2f, 0.01f);
     }
 }

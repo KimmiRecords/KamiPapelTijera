@@ -120,7 +120,7 @@ public class FlapManager : Singleton<FlapManager>
     {
         _seguroOverlay.SetActive(true);
         Debug.Log("prendo el overlay");
-        AudioManager.instance.PlayByName("PickupSFX", 2.5f);
+        AudioManager.instance.PlayByName("PickupSFX", 1.25f);
     }
     public void BTN_Settings()
     {
@@ -149,7 +149,7 @@ public class FlapManager : Singleton<FlapManager>
     public void BTN_Si()
     {
         Debug.Log("chau :(");
-        AudioManager.instance.PlayByName("PickupSFX", 2.5f);
+        AudioManager.instance.PlayByName("PickupSFX", 1.25f);
 
         Application.Quit();
     }

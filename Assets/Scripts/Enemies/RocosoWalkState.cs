@@ -61,7 +61,7 @@ public class RocosoWalkState : IState
 
         if (dir.magnitude < 0.1f)
         {
-            Debug.Log("WALK METHOD - me cambio a attack");
+            //Debug.Log("WALK METHOD - me cambio a attack");
             _fsm.ChangeState(State.RocosoAttack);
         }
     }

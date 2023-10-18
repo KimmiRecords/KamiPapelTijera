@@ -9,10 +9,10 @@ public class Arbol2DTrigger : TriggerScript
     protected override void OnTriggerEnter(Collider other)
     {
         //base.OnTriggerEnter(other);
-        Debug.Log("colisione con " + other);
+        //Debug.Log("colisione con " + other);
         if (other.gameObject.GetComponent<IAplastable>() != null)
         {
-            Debug.Log(other + " era aplastable");
+            //Debug.Log(other + " era aplastable");
             other.gameObject.GetComponent<IAplastable>().Aplastar();
         }
     }

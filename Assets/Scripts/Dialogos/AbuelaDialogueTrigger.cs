@@ -84,7 +84,7 @@ public class AbuelaDialogueTrigger : TriggerDialogue
                 firstTime = false;
                 isLocked = true; //la lockeo para q no te hable mas hasta ser deslockeada
                 globitoDialogo.SetActive(false);
-                AudioManager.instance.PlayByName("MagicSuccess", 4.0f);
+                AudioManager.instance.PlayByName("MagicSuccess", 2f);
                 PasarAlSiguienteDialogo(); //despues de hablarle x primera vez a la awela, pasa al dialogo 2
             }
         }

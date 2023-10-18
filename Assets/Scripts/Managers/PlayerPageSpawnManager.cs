@@ -25,7 +25,7 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
     }
     public void PlacePlayer(params object[] parameter)
     {
-        Debug.Log("place player");
+        //Debug.Log("place player");
         PositionPlayerAtPoint(GetProjectedPositionInNewPage(_player.transform.position, (bool)parameter[1]));
         SavePosition(_player.transform.position);
     }
@@ -58,7 +58,7 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
         }
 
         newPosition = new Vector3(desiredX, playerCurrentPosition.y, playerCurrentPosition.z);
-        Debug.Log(newPosition);
+        //Debug.Log(newPosition);
         return newPosition;
     }
     public void SavePosition(Vector3 pos)

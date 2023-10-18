@@ -39,7 +39,7 @@ public class RocosoAttackState : IState
 
         if (_rocoso.isDead)
         {
-            Debug.Log("attack - ONUPDATE - me cambio a death porque me mori");
+            //Debug.Log("attack - ONUPDATE - me cambio a death porque me mori");
             _fsm.ChangeState(State.RocosoDeath);
         }
     }

@@ -11,7 +11,7 @@ public class Rocoso : Enemy, IMojable
     [SerializeField] GameObject _particulasSplash;
 
     [HideInInspector] public bool wasAwoken; //si el player ya se acerco y me despertó
-    [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
+    [HideInInspector] public bool startAnimationHasFinished = false;
     [HideInInspector] public Vector3 target;
     [HideInInspector] public bool isHitting;
     [HideInInspector] public bool isDead = false;

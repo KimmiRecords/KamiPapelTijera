@@ -17,5 +17,9 @@ public class PiedraCortable : PickupCortable
         {
             ApplyCut();
         }
+        else
+        {
+            AudioManager.instance.PlayByName("Tijera_Miss_Roca");
+        }
     }
 }

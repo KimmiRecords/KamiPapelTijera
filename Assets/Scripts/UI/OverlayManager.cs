@@ -68,8 +68,7 @@ public class OverlayManager : Singleton<OverlayManager>
         //Debug.Log("overlay unlock: set indialogue y islocked false");
         LevelManager.Instance.inDialogue = false;
         isLocked = false;
-        AudioManager.instance.PlayByName("PickupSFX", 2.5f);
-
+        AudioManager.instance.PlayByName("PickupSFX", 0.66f);
 
         _defeatOverlay.gameObject.SetActive(false);
         _mainQuestOverlay.gameObject.SetActive(false);

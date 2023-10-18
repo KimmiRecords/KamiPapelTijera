@@ -14,6 +14,8 @@ public class PlayerModel
     Vector3 auxForwardVector;
     float auxOriginalImpulse;
 
+    bool isFalling = false;
+
     public PlayerModel(Player player)
     {
         _player = player;
@@ -27,8 +29,13 @@ public class PlayerModel
         {
             _groundedTimer = 0.2f; //mientras este en el suelo
             _player._view.StopJump();
-            //_player._view.StartIdleAnimation();
-            //pAnims.StopJumping();
+
+            if (isFalling)
+            {
+                //Debug.Log("jump land sfx - falling");
+                AudioManager.instance.PlayByName("JumpLand", 1f, 0.02f);
+            }
+            isFalling = false;
             //pAnims.StopFalling();
             //pAnims.PlayLanding();
         }
@@ -38,16 +45,17 @@ public class PlayerModel
             _groundedTimer -= Time.deltaTime;
         }
 
-        //if (!groundedPlayer && _verticalVelocity <= -2f) //si esta cayendo pero no tocando el suelo empieza a caer
-        //{
-        //    pAnims.StopJumping();
-        //    pAnims.PlayFalling();
-        //}
+        if (!groundedPlayer && _verticalVelocity <= -2f) //si esta cayendo pero no tocando el suelo empieza a caer
+        {
+            isFalling = true;
+            //pAnims.StopJumping();
+            //pAnims.PlayFalling();
+        }
 
         if (groundedPlayer && _verticalVelocity <= 0) //corta la caida cuando toco el suelo
         {
             _verticalVelocity = 0f;
-            //AudioManager.instance.PlayJumpDown();
+            
             if (_player.augmentedJumpsLeft == 0)
             {
                 _player.DestroyPaperPlaneHat();
@@ -70,18 +78,16 @@ public class PlayerModel
                 _groundedTimer = 0;
                 _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
                 _player.isJumpButtonDown = false;
-                //AudioManager.instance.StopPasos();
                 _player._view.StartJumpAnimation();
+                //AudioManager.instance.StopPasos();
                 //pAnims.StopLanding();
                 if (_player.isPaperPlaneHat)
                 {
-                    //Debug.Log("Move: salte con hat. add planing porfaa");
                     _player.AddPlaning();
                     _player.augmentedJumpsLeft--;
                 }
             }
         }
-
 
         _move *= _player.Speed;
         _move.y = _verticalVelocity; //sigo cargando el vector movieminto

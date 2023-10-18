@@ -53,7 +53,7 @@ public class LevelManager : Singleton<LevelManager>
             AudioManager.instance.PlayByName("MemoFloraMainLoop01");
         }
 
-        CursorManager.Instance.ShowCursor(false);
+        //CursorManager.Instance.ShowCursor(false);
     }
 
     public void GiveSprintBoots()

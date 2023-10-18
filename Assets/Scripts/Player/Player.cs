@@ -235,8 +235,9 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     {
         //print("player: me mori");
         Vida = _maxHp;
+        AudioManager.instance.PlayByName("GameOverOrchestral");
         EventManager.Trigger(Evento.OnPlayerDie);
-        PlayerPageSpawnManager.Instance.RespawnPlayer(/*PageScroller.Instance.activeIndex + 1, PageScroller.Instance.isNext*/); //spawnea al player en el inicio de la pagina actual
+        PlayerPageSpawnManager.Instance.RespawnPlayer(); //spawnea al player en el inicio de la pagina actual
     }
     public void GetCured(int curacion)
     {
