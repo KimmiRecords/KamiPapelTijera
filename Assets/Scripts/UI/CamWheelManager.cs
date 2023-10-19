@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CamWheelManager : Singleton<CamWheelManager>, IFlap
 {
@@ -11,6 +12,7 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
 
     bool _isOpen;
     float _posXClosed, _posYClosed;
+    CamWheelButton[] _buttons;
 
     public void Start()
     {
@@ -20,30 +22,26 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
         _posXOpen += 960;
         _posYOpen += 540;
 
+        _buttons = GetComponentsInChildren<CamWheelButton>();
+
+        EventManager.Subscribe(Evento.OnCameraChange, FakeSelectButton);
     }
     public void OpenFlap()
     {
-        Debug.Log("open flap");
         AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posXOpen, _posYOpen, _transitionDuration));
     }
     public void CloseFlap()
     {
-        Debug.Log("close flap");
-
         AudioManager.instance.PlayByName("PageTurn01", 2.6f, 0.01f);
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posXClosed, _posYClosed, _transitionDuration));
     }
     public IEnumerator MoveFlap(float targetX, float targetY, float transitionDuration)
     {
-        Debug.Log("move flap");
-
         Vector3 startPosition = camWheelParent.transform.localPosition;
-        Debug.Log(startPosition);
         Vector3 targetPosition = new Vector3(targetX, targetY, camWheelParent.transform.localPosition.z);
-        Debug.Log(targetPosition);
         float elapsedTime = 0f;
         float t;
 
@@ -59,11 +57,8 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
         camWheelParent.transform.localPosition = targetPosition;
         _isOpen = (targetY == _posYOpen);
     }
-
     public void ToggleFlap()
     {
-        Debug.Log("toggle flap");
-
         if (_isOpen)
         {
             CloseFlap();
@@ -73,11 +68,19 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
             OpenFlap();
         }
     }
-
     public void ChangeCamera(int index)
     {
-        Debug.Log("change camera" + index);
-        AudioManager.instance.PlayByName("PickupSFX", 0.8f - (index/100f));
         CameraManager.Instance.SetCamera(index);
+        FakeSelectButton(index);
+    }
+    public void FakeSelectButton(params object[] parameters)
+    {
+        for (int i = 0; i < _buttons.Length; i++)
+        {
+            if (i == (int)parameters[0])
+            {
+                _buttons[i].button.Select();
+            }
+        }
     }
 }

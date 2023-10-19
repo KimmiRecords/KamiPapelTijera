@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,6 +88,9 @@ public class CameraManager : Singleton<CameraManager>
         }
 
         _virtualCameras[previousCamera].gameObject.SetActive(false);
+        EventManager.Trigger(Evento.OnCameraChange, currentCamera);
+        AudioManager.instance.PlayByName("PickupSFX", 0.8f - (currentCamera / 100f));
+
     }
     public void SetCamera(int index)
     {
