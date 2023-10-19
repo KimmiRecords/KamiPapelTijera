@@ -60,7 +60,7 @@ public class FlapManager : Singleton<FlapManager>
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posYClosed));
     }
-    private IEnumerator MoveFlap(float targetY)
+    public IEnumerator MoveFlap(float targetY)
     {
         Time.timeScale = 1;
         Vector3 startPosition = transform.position;
