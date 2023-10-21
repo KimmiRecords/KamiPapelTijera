@@ -10,7 +10,7 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
     [SerializeField] float _posYOpen;
     [SerializeField] float _transitionDuration;
 
-    bool _isOpen;
+    bool _isOpen = false;
     float _posXClosed, _posYClosed;
     CamWheelButton[] _buttons;
 
@@ -28,18 +28,24 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
     }
     public void OpenFlap()
     {
+        Debug.Log("open");
         AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posXOpen, _posYOpen, _transitionDuration));
+        _isOpen = true;
     }
     public void CloseFlap()
     {
+        Debug.Log("close");
         AudioManager.instance.PlayByName("PageTurn01", 2.6f, 0.01f);
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posXClosed, _posYClosed, _transitionDuration));
+        _isOpen = false;
+        
     }
     public IEnumerator MoveFlap(float targetX, float targetY, float transitionDuration)
     {
+        Debug.Log("move");
         Vector3 startPosition = camWheelParent.transform.localPosition;
         Vector3 targetPosition = new Vector3(targetX, targetY, camWheelParent.transform.localPosition.z);
         float elapsedTime = 0f;
@@ -55,7 +61,6 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
         }
 
         camWheelParent.transform.localPosition = targetPosition;
-        _isOpen = (targetY == _posYOpen);
     }
     public void ToggleFlap()
     {
@@ -67,6 +72,8 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
         {
             OpenFlap();
         }
+        Debug.Log("isopen" + _isOpen);
+
     }
     public void ChangeCamera(int index)
     {
