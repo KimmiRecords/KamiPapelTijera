@@ -27,7 +27,7 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             //print("recibi input true");
             input = true;
-            AudioManager.instance.PlayByName("PickupSFX", 1.1f);
+            PlayEToInteractSound();
         }
     }
 
@@ -37,7 +37,7 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             //print("recibi input true");
             input = true;
-            AudioManager.instance.PlayByName("PickupSFX", 1.1f);
+            PlayEToInteractSound();
         }
     }
 
@@ -54,7 +54,7 @@ public class DialogueManager : Singleton<DialogueManager>
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
             dialogue.currentText = 0;
             dialogueGlobe.SetActive(true);
-            AudioManager.instance.PlayByName("PickupSFX", 1.1f);
+            PlayEToInteractSound();
             LevelManager.Instance.inDialogue = true;
             isShowing = true;
             //EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
@@ -80,7 +80,7 @@ public class DialogueManager : Singleton<DialogueManager>
             dialogue.currentText++;
 
             dialogueTextComponent.text = dialogue.events[i].text;
-            npcQueTeHablaImage.sprite = dialogue.events[i].sprite; 
+            npcQueTeHablaImage.sprite = dialogue.events[i].sprite;
 
             SetNativeSize(npcQueTeHablaImage.sprite); //??? esto es necesario si todos los sprites son del mismo tamaño?
 
@@ -99,8 +99,14 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void SetNativeSize(Sprite sprite)
     {
-          float spriteRatio = sprite.rect.width / sprite.rect.height;
-          npcQueTeHablaImage.rectTransform.sizeDelta = new Vector2(npcQueTeHablaImage.rectTransform.sizeDelta.y * spriteRatio, npcQueTeHablaImage.rectTransform.sizeDelta.y);
+        float spriteRatio = sprite.rect.width / sprite.rect.height;
+        npcQueTeHablaImage.rectTransform.sizeDelta = new Vector2(npcQueTeHablaImage.rectTransform.sizeDelta.y * spriteRatio, npcQueTeHablaImage.rectTransform.sizeDelta.y);
+    }
+
+    public void PlayEToInteractSound()
+    {
+        AudioManager.instance.PlayByName("PickupSFX", 0.5f);
+
     }
 
     private void OnDestroy()

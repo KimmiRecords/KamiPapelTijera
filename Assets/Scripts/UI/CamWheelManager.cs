@@ -78,6 +78,7 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
     public void ChangeCamera(int index)
     {
         CameraManager.Instance.SetCamera(index);
+        CameraManager.Instance.PlaySetCameraSound();
         FakeSelectButton(index);
     }
     public void FakeSelectButton(params object[] parameters)

@@ -32,10 +32,7 @@ public class CameraManager : Singleton<CameraManager>
     {
         base.Awake();
 
-        //EventManager.Subscribe(Evento.OnDialogueStart, SetCamera);
-        //EventManager.Subscribe(Evento.OnDialogueEnd, PrepareCamera);
         EventManager.Subscribe(Evento.OnEncounterStart, SetCamera);
-        //EventManager.Subscribe(Evento.OnEncounterEnd, SetCamera);
         EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
         currentCamera = startingCamera;
         StartCoroutine(LevelStartCameraMovement());
@@ -89,16 +86,8 @@ public class CameraManager : Singleton<CameraManager>
 
         _virtualCameras[previousCamera].gameObject.SetActive(false);
         EventManager.Trigger(Evento.OnCameraChange, currentCamera);
-        AudioManager.instance.PlayByName("PickupSFX", 0.8f - (currentCamera / 100f));
+        PlaySetCameraSound();
 
-    }
-    public void SetCamera(int index)
-    {
-        //_virtualCameras[currentCamera].gameObject.SetActive(false);
-        TurnOffAllVirtualCameras();
-
-        currentCamera = index;
-        _virtualCameras[currentCamera].gameObject.SetActive(true);
     }
     public void TurnOffAllVirtualCameras()
     {
@@ -107,13 +96,19 @@ public class CameraManager : Singleton<CameraManager>
             cam.gameObject.SetActive(false);
         }
     }
+    public void SetCamera(int index)
+    {
+        TurnOffAllVirtualCameras();
+        currentCamera = index;
+        _virtualCameras[currentCamera].gameObject.SetActive(true);
+
+    }
     public void SetCamera(CameraMode cam)
     {
-        //Debug.Log("cambio la camara a " + cam);
         TurnOffAllVirtualCameras();
-
         currentCamera = (int)cam;
         _virtualCameras[currentCamera].gameObject.SetActive(true);
+
     }
     public void SetCamera(params object[] parameters)
     {
@@ -130,15 +125,16 @@ public class CameraManager : Singleton<CameraManager>
             SetCamera((CameraMode)parameters[0]);
         }
     }
+
+    public void PlaySetCameraSound()
+    {
+        AudioManager.instance.PlayByName("PickupSFX", 1.8f - (currentCamera / 100f));
+    }
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
-            //Debug.Log("camera manager - me desuscribo");
-            //EventManager.Unsubscribe(Evento.OnDialogueStart, SetCamera);
-            //EventManager.Unsubscribe(Evento.OnDialogueEnd, SetCamera);
             EventManager.Unsubscribe(Evento.OnEncounterStart, SetCamera);
-            //EventManager.Unsubscribe(Evento.OnEncounterEnd, SetCamera);
             EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
         }
     }
