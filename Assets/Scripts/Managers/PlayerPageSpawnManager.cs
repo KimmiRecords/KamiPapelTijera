@@ -13,8 +13,8 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 
     [SerializeField] Player _player;
     CharacterController _playerCC;
-    float pageEntryX = -135;
-    float pageExitX = 135;
+    float pageEntryX = -75;
+    float pageExitX = 80;
     Vector3 lastUsedSpawn; //para recordar el ultimo usado para cuando el player muera
 
     void Start()
