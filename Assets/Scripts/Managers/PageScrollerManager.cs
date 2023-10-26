@@ -10,10 +10,10 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     //entre ellos, cerrar/abrir pubs, luego mover al player
     
     //tambien chequea cual zona de cambio de pagina deberia mostrarse
-    [SerializeField] GameObject[] objectsToToggle; //las 5 carpetas (buildingspagina1, 2, 3, 4 y 5)
+    [SerializeField] GameObject[] pagesToToggle; //las 5 carpetas (buildingspagina1, 2, 3, 4 y 5)
 
-    [HideInInspector] public int activeIndex = 0; //currentpage = activeindex - 1
-    public int startingPage = 0;
+    public int startingPage = 1;
+    [HideInInspector] public int activePageIndex = 0; //activeIndex = startingPage - 1;
     public TriggerScript esferaPrev; //la zona para volver a pag anterior
     public TriggerScript esferaNext; //la zona para ir a pag siguiente
 
@@ -21,74 +21,90 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     public GameObject hojaMasterRev; //idem para atras
     [SerializeField] float delayTime;
     [SerializeField] float popupDelayTime;
-    public bool isNext = true;
+    public bool _isNext = true;
 
-    bool isTurning = false;
+    bool _isTurning = false;
 
     public GameObject glitterParent;
     ParticleSystem[] glitterSystems;
+
+    GameObject hojaAux; //solo la guardo para luego poder destruirla
+
 
     protected override void Awake()
     {
         base.Awake();
         EventManager.Subscribe(Evento.OnPlayerPressedE, TriggerPageScroll);
         EventManager.Subscribe(Evento.OnPageFinishTurning, FinishTurning);
-        activeIndex = startingPage - 1;
-        CheckSpheres(activeIndex);
+        activePageIndex = startingPage - 1;
+        CheckSpheres(activePageIndex);
         GetAllParticleSystemsInChildren(glitterParent);
     }
-
     public void GetAllParticleSystemsInChildren(GameObject glitterParent)
     {
         glitterSystems = glitterParent.GetComponentsInChildren<ParticleSystem>();
     }
+
+
     public void TriggerPageScroll(params object[] parameters)
     {
         if (!OverlayManager.Instance.isLocked)
         {
-            if (esferaNext.triggerBool && !isTurning) //pregunta si el player esta encima del trigger
+            if (esferaNext.triggerBool && !_isTurning) //pregunta si el player esta encima del trigger
             {
-                if (activeIndex >= objectsToToggle.Length - 1)
+                if (activePageIndex >= pagesToToggle.Length - 1)
                 {
                     print("no hay mas paginas");
                 }
                 else
                 {
-                    activeIndex++;
-                    isNext = true;
-                    StartChangePage();
-                    isTurning = true;
-                    esferaNext.triggerBool = false;
+                    ChangeToNextPage();
                 }
             }
 
-            if (esferaPrev.triggerBool && !isTurning)
+            if (esferaPrev.triggerBool && !_isTurning)
             {
-                if (activeIndex <= 0)
+                if (activePageIndex <= 0)
                 {
                     print("no hay mas paginas");
                 }
                 else
                 {
-                    activeIndex--;
-                    isNext = false;
-                    StartChangePage();
-                    isTurning = true;
-                    esferaPrev.triggerBool = false;
+                    ChangeToPrevPage();
                 }
             }
         }
     }
+
+    private void ChangeToPrevPage()
+    {
+        activePageIndex--; //el paso de pagina posta, para atras
+        _isNext = false; //isNext es una variable piola que mucha gente necesita
+        StartChangePage();
+        _isTurning = true;
+        esferaPrev.triggerBool = false;
+        EventManager.Trigger(Evento.OnPageTurned, activePageIndex);
+    }
+
+    private void ChangeToNextPage(/*bool isNext, bool isTurning, bool esferaTriggerBool*/)
+    {
+        activePageIndex++; //el paso de pagina posta
+        _isNext = true; //isNext es una variable piola que mucha gente necesita
+        StartChangePage();
+        _isTurning = true;
+        esferaNext.triggerBool = false;
+    }
+
     void StartChangePage() //aca EMPIEZA a girar la pagina
     {
         CameraManager.Instance.SetCamera(CameraMode.BookCenter);
         StartCoroutine(CerrarPUBsCoroutine(delayTime));
         StartCoroutine(AbrirPUBsCoroutine(popupDelayTime));
     }
-    public void CheckSpheres(int currentPage)
+    public void CheckSpheres(int activePageIndex)
     {
         //este metodo chequea, segun la currentPage, que esferas deberian estar activas
-        if (currentPage <= 0)
+        if (activePageIndex <= 0)
         {
             esferaPrev.OnExitBehaviour();
             esferaPrev.gameObject.SetActive(false);
@@ -99,7 +115,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
         }
 
-        if (currentPage >= objectsToToggle.Length - 1)
+        if (activePageIndex >= pagesToToggle.Length - 1)
         {
             esferaNext.OnExitBehaviour();
             esferaNext.gameObject.SetActive(false);
@@ -111,7 +127,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     }
     public IEnumerator CerrarPUBsCoroutine(float delayTime) //cierro la pag actual
     {
-        //insta
+        //insta (efectos y boludeces)
         PlayGlitter();
         AudioManager.instance.PlayByName("MagicSuccess", 0.42f, 0.01f);
         StartCoroutine(PostProcessManager.Instance.LerpBloomIntensity());
@@ -120,24 +136,24 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         //despues de esperar un toque
         PlayPageSound();
         LevelManager.Instance.inDialogue = true;  //freezeo a kami
-        CreateHoja(isNext); //instancio la hoja que corresponda
-        CheckSpheres(activeIndex); //chequeo si hay que poner/sacar zona
+        CreateHoja(_isNext); //instancio la hoja que corresponda
+        CheckSpheres(activePageIndex); //chequeo si hay que poner/sacar zona
         PUBManager.Instance.ClosePUBs();
     }
     public IEnumerator AbrirPUBsCoroutine(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
-        EventManager.Trigger(Evento.OnPlayerChangePage, activeIndex + 1, isNext);
+        EventManager.Trigger(Evento.OnPlayerChangePage, activePageIndex + 1, _isNext);
 
-        for (int i = 0; i < objectsToToggle.Length; i++) //este es el core, el q prende y apaga la carpeta de cada pagina
+        for (int i = 0; i < pagesToToggle.Length; i++) //este es el core, el q prende y apaga la carpeta de cada pagina
         {
-            if (i == activeIndex)
+            if (i == activePageIndex)
             {
-                objectsToToggle[i].SetActive(true);
+                pagesToToggle[i].SetActive(true);
             }
             else
             {
-                objectsToToggle[i].SetActive(false);
+                pagesToToggle[i].SetActive(false);
             }
         }
         PUBManager.Instance.OpenPUBs();
@@ -146,22 +162,23 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         if (isNext)
         {
-            Instantiate(hojaMaster, transform);
+            hojaAux = Instantiate(hojaMaster, transform);
         }
         else
         {
-            Instantiate(hojaMasterRev, transform);
+            hojaAux = Instantiate(hojaMasterRev, transform);
         }
     }
     void FinishTurning(params object[] parameter) //esto recien se triggerea cuando TERMINA de cambiar la pagina
     {
         LevelManager.Instance.inDialogue = false;
-        isTurning = false;
+        _isTurning = false;
         CameraManager.Instance.SetCamera(CameraMode.Normal);
+        Destroy(hojaAux);
     } //este se dispara cuando la hoja termina de girar y avisa "che ya termine de girar" a traves el evento onpagefinishturnng
     void PlayPageSound()
     {
-        if (isNext)
+        if (_isNext)
         {
             AudioManager.instance.PlayByName("PageTurn01", 0.9f, 0.03f);
         }

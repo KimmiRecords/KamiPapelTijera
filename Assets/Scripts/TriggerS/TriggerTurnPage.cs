@@ -5,6 +5,7 @@ using UnityEngine;
 public class TriggerTurnPage : TriggerScript
 {
     [SerializeField] PositionMarker _positionMarker;
+    public bool soyElIsNext = false;
 
     public override void OnEnterBehaviour(Collider other)
     {

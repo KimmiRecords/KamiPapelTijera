@@ -60,7 +60,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerChooseContinueGame,
     OnPlayerPressedI,
     OnPlayerPressedU,
-    OnCameraChange //param0 es current camera
+    OnCameraChange, //param0 es current camera
+    OnPageTurned, //param0 es activeindex
 }
 
 public class EventManager
