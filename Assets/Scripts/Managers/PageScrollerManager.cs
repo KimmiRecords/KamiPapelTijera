@@ -80,25 +80,28 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         activePageIndex--; //el paso de pagina posta, para atras
         _isNext = false; //isNext es una variable piola que mucha gente necesita
-        StartChangePage();
+        StartChangePageFX();
         _isTurning = true;
         esferaPrev.triggerBool = false;
         EventManager.Trigger(Evento.OnPageTurned, activePageIndex);
     }
 
-    private void ChangeToNextPage(/*bool isNext, bool isTurning, bool esferaTriggerBool*/)
+    private void ChangeToNextPage()
     {
         activePageIndex++; //el paso de pagina posta
         _isNext = true; //isNext es una variable piola que mucha gente necesita
-        StartChangePage();
+        StartChangePageFX();
         _isTurning = true;
         esferaNext.triggerBool = false;
         EventManager.Trigger(Evento.OnPageTurned, activePageIndex);
     }
 
-    void StartChangePage() //aca EMPIEZA a girar la pagina
+    void StartChangePageFX()
     {
         CameraManager.Instance.SetCamera(CameraMode.BookCenter);
+        PlayGlitter();
+        AudioManager.instance.PlayByName("MagicSuccess", 0.42f, 0.01f);
+        StartCoroutine(PostProcessManager.Instance.LerpBloomIntensity());
         StartCoroutine(CerrarPUBsCoroutine(delayTime));
         StartCoroutine(AbrirPUBsCoroutine(popupDelayTime));
     }
@@ -128,10 +131,6 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     }
     public IEnumerator CerrarPUBsCoroutine(float delayTime) //cierro la pag actual
     {
-        //insta (efectos y boludeces)
-        PlayGlitter();
-        AudioManager.instance.PlayByName("MagicSuccess", 0.42f, 0.01f);
-        StartCoroutine(PostProcessManager.Instance.LerpBloomIntensity());
         yield return new WaitForSeconds(delayTime);
 
         //despues de esperar un toque
