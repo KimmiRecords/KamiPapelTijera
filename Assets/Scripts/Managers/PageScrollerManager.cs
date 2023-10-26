@@ -93,6 +93,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         StartChangePage();
         _isTurning = true;
         esferaNext.triggerBool = false;
+        EventManager.Trigger(Evento.OnPageTurned, activePageIndex);
     }
 
     void StartChangePage() //aca EMPIEZA a girar la pagina

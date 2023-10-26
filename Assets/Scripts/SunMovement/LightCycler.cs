@@ -18,6 +18,8 @@ public class LightCycler : MonoBehaviour
     [SerializeField] LightState[] _lightStates;
     LightState _currentLightState;
 
+    [SerializeField] float _transitionDuration = 2f; // Tiempo de transición en segundos
+
     //a series of methods that change the light's position, rotation, color and intensity
     //these methods should be called by the event manager, which should be called by the page scroller manager
     //these methods should store the original values of the light, so that they can be restored when the player goes back to the original page
@@ -41,23 +43,83 @@ public class LightCycler : MonoBehaviour
 
     public void ChangeLightPosition(Vector3 newPosition)
     {
+        StartCoroutine(LerpVector3Coroutine(light.transform.position, newPosition, _transitionDuration));
         light.transform.position = newPosition;
     }
 
     public void ChangeLightRotation(Vector3 newRotation)
     {
+        StartCoroutine(LerpVector3Coroutine(light.transform.eulerAngles, newRotation, _transitionDuration));
         light.transform.eulerAngles = newRotation;
     }
 
     public void ChangeLightColor(Color newColor)
     {
+        StartCoroutine(LerpColorCoroutine(light.color, newColor, _transitionDuration));
         light.color = newColor;
     }
 
     public void ChangeLightIntensity(float newIntensity)
     {
+        StartCoroutine(LerpFloatCoroutine(light.intensity, newIntensity, _transitionDuration));
         light.intensity = newIntensity;
     }
+
+    public IEnumerator LerpVector3Coroutine(Vector3 currentVector, Vector3 targetVector, float transitionDuration)
+    {
+        Vector3 startPosition = currentVector;
+        float elapsedTime = 0f;
+        float t;
+
+        while (elapsedTime < transitionDuration)
+        {
+            t = Mathf.SmoothStep(0, 1, elapsedTime / transitionDuration);
+            transform.position = Vector3.Lerp(startPosition, targetVector, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetVector;
+    }
+
+    public IEnumerator LerpColorCoroutine(Color currentColor, Color targetColor, float transitionDuration)
+    {
+        Color startColor = currentColor;
+        float elapsedTime = 0f;
+        float t;
+
+        while (elapsedTime < transitionDuration)
+        {
+            t = Mathf.SmoothStep(0, 1, elapsedTime / transitionDuration);
+            light.color = Color.Lerp(startColor, targetColor, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        light.color = targetColor;
+    }
+
+    public IEnumerator LerpFloatCoroutine(float currentFloat, float targetFloat, float transitionDuration)
+    {
+        float startFloat = currentFloat;
+        float elapsedTime = 0f;
+        float t;
+
+        while (elapsedTime < transitionDuration)
+        {
+            t = Mathf.SmoothStep(0, 1, elapsedTime / transitionDuration);
+            light.intensity = Mathf.Lerp(startFloat, targetFloat, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        light.intensity = targetFloat;
+    }
+
+
 }
 
 
