@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7350744575451216130}
   - component: {fileID: 4146358920690030086}
-  - component: {fileID: 3297762750390698796}
+  - component: {fileID: 2389647684597178931}
   m_Layer: 0
   m_Name: MojableCollider
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8, y: 5.249808, z: 2}
   m_Center: {x: 0, y: 0.37510216, z: 0}
---- !u!114 &3297762750390698796
+--- !u!114 &2389647684597178931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,10 +55,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 386566045809580733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9061b05274536d145ba42fda45b0bf50, type: 3}
+  m_Script: {fileID: 11500000, guid: 08434a01c719e9943b95567f19e4073f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisRocoso: {fileID: 2429854604947804655}
+  rocoso: {fileID: 2429854604947804655}
 --- !u!1 &1127719464192760841
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +492,7 @@ MonoBehaviour:
   viewRange: 30
   _particulasSplash: {fileID: 7250192349626849009}
   startAnimationHasFinished: 0
+  playerEnteredWakeUpCollider: 0
   target: {x: 0, y: 0, z: 0}
   isHitting: 0
   isDead: 0
