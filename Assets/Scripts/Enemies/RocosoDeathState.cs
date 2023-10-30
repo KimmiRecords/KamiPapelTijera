@@ -16,7 +16,7 @@ public class RocosoDeathState : IState
     public void OnEnter()
     {
         //Debug.Log("entre a death");
-        _rocoso.anim.SetBool("isDead", true);
+        _rocoso.anim.SetTrigger("isDie");
 
         float cryPitch = 1f;
         if (_rocoso.endsEncounter)

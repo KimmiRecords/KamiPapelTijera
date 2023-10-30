@@ -6,13 +6,13 @@ public class RocosoCortable : MonoBehaviour, ICortable
 {
     [SerializeField] Rocoso _thisRocoso;
 
-    public virtual void GetCut(float dmg)
+    public virtual void GetCut(float receivedDamage)
     {
-        if (dmg >= 100) //programming is my passion and this is my code
+        if (receivedDamage >= 100) //programming is my passion and this is my code
         {
             //print("rocoso: me cortaron");
             AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
-            _thisRocoso.TakeDamage(dmg);
+            _thisRocoso.TakeDamage(receivedDamage);
         }
     }
 

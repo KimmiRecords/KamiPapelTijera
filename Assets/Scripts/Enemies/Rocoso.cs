@@ -6,12 +6,12 @@ public class Rocoso : Enemy, IMojable
 {
     public Animator anim; //mi animator
     public RocosoHeadbuttHitBox _hitBox;
-    public float attackRange = 11;
-    public float disengageRange = 30;
+    public float enterAttackRange = 11; //si el pj se acerca a 11, le pego
+    public float exitAttackRange = 30; //si se aleja a 30, dejo de pegarle y lo vuelvo a perseguir
+    public float viewRange = 60; //me despierto si el pj se acerca a 50 o menos. me duermo si se aleja eso
     [SerializeField] GameObject _particulasSplash;
 
-    [HideInInspector] public bool wasAwoken; //si el player ya se acerco y me despertó
-    [HideInInspector] public bool startAnimationHasFinished = false;
+    public bool startAnimationHasFinished = false;
     [HideInInspector] public Vector3 target;
     [HideInInspector] public bool isHitting;
     [HideInInspector] public bool isDead = false;
@@ -56,11 +56,7 @@ public class Rocoso : Enemy, IMojable
     }
     public void RocosoDespierta(Player player) //este metodo es disparado por el trigger, solo la primera vez
     {
-        if (!wasAwoken)
-        {
-            _player = player;
-            wasAwoken = true;
-        }
+        _player = player;
     }
     public void RocosoCamina() //disparada por el final de la animacion de start
     {
@@ -137,5 +133,32 @@ public class Rocoso : Enemy, IMojable
 
         //Debug.Log("me deshabilitaron");
         _fsm.ChangeState(State.RocosoSleep);
+    }
+
+    //ondrawgizmos, draw a spheres of radius enterattackrange, exitattackrange and viewrange
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, enterAttackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, exitAttackRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, viewRange);
+
+        if (_player != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, _player.transform.position);
+        }
+    }
+
+    public float DistanceToPlayer()
+    {
+        return Vector3.Distance(target, transform.position);
+    }
+
+    public bool PlayerIsInViewRange()
+    {
+        return DistanceToPlayer() < viewRange;
     }
 }

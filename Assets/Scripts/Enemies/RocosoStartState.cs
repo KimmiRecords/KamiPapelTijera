@@ -15,13 +15,13 @@ public class RocosoStartState : IState
 
     public void OnEnter()
     {
-        //Debug.Log("entre a start");
-        _rocoso.anim.SetBool("isStart", true);
+        _rocoso.startAnimationHasFinished = false;
+        _rocoso.anim.SetTrigger("isWakeUp");
     }
 
     public void OnUpdate()
     {
-        if (_rocoso.startAnimationHasFinished)
+        if (_rocoso.startAnimationHasFinished) //en el rocoso esto se va a poner true en el ultimo frame de la anim
         {
             _fsm.ChangeState(State.RocosoWalk);
         }

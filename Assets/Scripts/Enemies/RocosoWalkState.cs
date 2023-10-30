@@ -16,7 +16,7 @@ public class RocosoWalkState : IState
     public void OnEnter()
     {
         //Debug.Log("entre a walk");
-        _rocoso.anim.SetBool("isWalk", true);
+        _rocoso.anim.SetTrigger("isWalks");
 
     }
 
@@ -33,10 +33,16 @@ public class RocosoWalkState : IState
             _rocoso.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
-        if (Vector3.Distance(_rocoso.target, _rocoso.transform.position) < _rocoso.attackRange)
+        if (_rocoso.DistanceToPlayer() < _rocoso.enterAttackRange)
         {
             //Debug.Log("ONUPDATE - me cambio a attack");
             _fsm.ChangeState(State.RocosoAttack);
+        }
+
+        if (!_rocoso.PlayerIsInViewRange())
+        {
+            //Debug.Log("ONUPDATE - me cambio a attack");
+            _fsm.ChangeState(State.RocosoSleep);
         }
 
         if (_rocoso.isDead)
@@ -45,6 +51,7 @@ public class RocosoWalkState : IState
             _fsm.ChangeState(State.RocosoDeath);
         }
     }
+
 
     public void OnExit()
     {

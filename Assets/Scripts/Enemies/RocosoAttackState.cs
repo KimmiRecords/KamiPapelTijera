@@ -17,15 +17,14 @@ public class RocosoAttackState : IState
     public void OnEnter()
     {
         //Debug.Log("entre a attack");
-        _rocoso.anim.SetBool("isWalk", false);
-        _rocoso.anim.SetBool("isAttack", true);
         _rocoso.isHitting = true;
         _rocoso._hitBox.didHit = false;
+        _rocoso.anim.SetTrigger("isAttacks");
     }
 
     public void OnUpdate()
     {
-        if (Vector3.Distance(_rocoso.target, _rocoso.transform.position) > _rocoso.disengageRange)
+        if (_rocoso.DistanceToPlayer() > _rocoso.exitAttackRange)
         {
             //Debug.Log("ONUPDATE - me cambio a walk xq ta re lejos");
             _fsm.ChangeState(State.RocosoWalk);
@@ -48,6 +47,5 @@ public class RocosoAttackState : IState
     {
         //Debug.Log("salgo de attack");
         //_rocoso.isHitting = false;
-        _rocoso.anim.SetBool("isAttack", false);
     }
 }
