@@ -23,7 +23,7 @@ public class RocosoSleepState : IState
     {
         if (_rocoso.playerEnteredWakeUpCollider)
         {
-            Debug.Log("sleep: me paso a start");
+            //Debug.Log("sleep: me paso a start");
             _fsm.ChangeState(State.RocosoStart);
         }
 

@@ -38,6 +38,7 @@ public class GallinaEvadeState : IState
     {
         Vector3 dir = _gallina._player.transform.position - _gallina.transform.position;
         dir.y = 0;
-        _gallina.transform.position += _gallina.Speed * 3 * Time.deltaTime * -dir.normalized;
+        //_gallina.transform.position += _gallina.Speed * 3 * Time.deltaTime * -dir.normalized;
+        _gallina.rb.AddForce(_gallina.Speed * 1.5f * Time.deltaTime * -dir.normalized, ForceMode.VelocityChange);
     }
 }

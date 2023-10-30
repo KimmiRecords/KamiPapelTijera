@@ -9,6 +9,7 @@ public class GallinaAI : Enemy
     public Node[] allNodes;
     public float arriveRadius = 0.1f;
     public float exitDistance = 30;
+    public Rigidbody rb;
     [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
     [HideInInspector] public Vector3 velocity;
     [HideInInspector] public List<Node> _pathToFollow = new List<Node>();
@@ -27,11 +28,6 @@ public class GallinaAI : Enemy
     private void Update()
     {
         _fsm.Update();
-    }
-
-    public void AddForce(Vector3 force)
-    {
-        velocity = Vector3.ClampMagnitude(velocity + force, Speed);
     }
 
     public Node FindClosestNode(Vector3 pos)

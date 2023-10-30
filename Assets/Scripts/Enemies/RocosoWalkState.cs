@@ -38,7 +38,7 @@ public class RocosoWalkState : IState
 
         if (!_rocoso.PlayerIsInViewRange())
         {
-            Debug.Log("walk: me paso a sleep");
+            //Debug.Log("walk: me paso a sleep");
             _fsm.ChangeState(State.RocosoSleep);
         }
 

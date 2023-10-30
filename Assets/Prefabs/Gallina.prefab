@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerBool: 0
+  showTooltip: 1
   tooltipTextToShow: La gallina intenta esquivarte!
   postItColor: 0
   _thisGallina: {fileID: 5429628501580455459}
@@ -127,13 +128,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
-  _maxSpeed: 3
+  _maxSpeed: 8
   _attackDamage: 10
   _sr: {fileID: 6008200199915845047}
   endsEncounter: 0
   allNodes: []
   arriveRadius: 0.1
   exitDistance: 30
+  rb: {fileID: 2698636374348165167}
   startAnimationHasFinished: 0
   velocity: {x: 0, y: 0, z: 0}
   _pathToFollow: []

@@ -251,7 +251,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     }
     public void GetTijeraMejorada()
     {
-        Debug.Log("player - get tijera mejorada");
+        //Debug.Log("player - get tijera mejorada");
         hasTijeraMejorada = true;
         tijeraManager.SetTijeraMejorada();
         miTijeraHitbox = tijeraManager.tijeraMejoradaHitbox;

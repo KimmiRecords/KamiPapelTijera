@@ -60,8 +60,8 @@ public class GallinaWalkState : IState
     {
         Vector3 dir = goalNode.transform.position - yo.transform.position;
         dir.y = 0;
-        yo.transform.position += yo.Speed * Time.deltaTime * dir.normalized;
-
+        //yo.transform.position += yo.Speed * Time.deltaTime * dir.normalized;
+        yo.rb.AddForce(yo.Speed * Time.deltaTime * dir.normalized, ForceMode.VelocityChange);
         if (dir.magnitude < yo.arriveRadius*2)
         {
             //Debug.Log("llegue al node");
