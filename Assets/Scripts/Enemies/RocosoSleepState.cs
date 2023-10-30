@@ -15,13 +15,15 @@ public class RocosoSleepState : IState
 
     public void OnEnter()
     {
+        _rocoso.playerEnteredWakeUpCollider = false;
         _rocoso.anim.SetTrigger("isEepy");
     }
 
     public void OnUpdate()
     {
-        if (_rocoso.PlayerIsInViewRange())
+        if (_rocoso.playerEnteredWakeUpCollider)
         {
+            Debug.Log("sleep: me paso a start");
             _fsm.ChangeState(State.RocosoStart);
         }
 

@@ -10,6 +10,6 @@ public class TriggerRocoso : TriggerScript
     public override void OnEnterBehaviour(Collider other)
     {
         _player = other.GetComponent<Player>();
-        _thisRocoso.RocosoDespierta(_player);
+        _thisRocoso.OnPlayerEnterWakeUpCollider(_player);
     }
 }

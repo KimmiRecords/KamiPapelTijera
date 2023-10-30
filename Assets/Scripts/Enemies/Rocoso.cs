@@ -2,8 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Rocoso : Enemy, IMojable
+public class Rocoso : Enemy
 {
+    public Rigidbody myRigidbody;
     public Animator anim; //mi animator
     public RocosoHeadbuttHitBox _hitBox;
     public float enterAttackRange = 11; //si el pj se acerca a 11, le pego
@@ -12,6 +13,7 @@ public class Rocoso : Enemy, IMojable
     [SerializeField] GameObject _particulasSplash;
 
     public bool startAnimationHasFinished = false;
+    public bool playerEnteredWakeUpCollider = false;
     [HideInInspector] public Vector3 target;
     [HideInInspector] public bool isHitting;
     [HideInInspector] public bool isDead = false;
@@ -54,11 +56,12 @@ public class Rocoso : Enemy, IMojable
         }
         StartCoroutine(EnrojecerSprite());
     }
-    public void RocosoDespierta(Player player) //este metodo es disparado por el trigger, solo la primera vez
+    public void OnPlayerEnterWakeUpCollider(Player player) //este metodo es disparado por el trigger, solo la primera vez
     {
         _player = player;
+        playerEnteredWakeUpCollider = true;
     }
-    public void RocosoCamina() //disparada por el final de la animacion de start
+    public void OnStartAnimationEnd() //disparada por el final de la animacion de start
     {
         startAnimationHasFinished = true;
     }
@@ -135,7 +138,6 @@ public class Rocoso : Enemy, IMojable
         _fsm.ChangeState(State.RocosoSleep);
     }
 
-    //ondrawgizmos, draw a spheres of radius enterattackrange, exitattackrange and viewrange
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

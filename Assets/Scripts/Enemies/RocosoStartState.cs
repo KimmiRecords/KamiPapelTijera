@@ -23,6 +23,7 @@ public class RocosoStartState : IState
     {
         if (_rocoso.startAnimationHasFinished) //en el rocoso esto se va a poner true en el ultimo frame de la anim
         {
+            Debug.Log("start: me paso a walk");
             _fsm.ChangeState(State.RocosoWalk);
         }
 

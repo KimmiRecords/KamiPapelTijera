@@ -26,7 +26,7 @@ public class RocosoAttackState : IState
     {
         if (_rocoso.DistanceToPlayer() > _rocoso.exitAttackRange)
         {
-            //Debug.Log("ONUPDATE - me cambio a walk xq ta re lejos");
+            Debug.Log("attack: me paso a walk");
             _fsm.ChangeState(State.RocosoWalk);
         }
 
