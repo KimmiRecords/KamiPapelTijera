@@ -22,6 +22,9 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     public float jumpForce = 50f;
     public float gravityValue; //gravedad extra para que quede linda la caida del salto
     public float sprintingSpeedModifier = 1.5f;
+    public float landingLagModifier = 0.75f;
+    public float landingLagTime = 0.25f;
+
 
     [Header("Componentes")]
     public CharacterController cc;
@@ -185,6 +188,33 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         _view.EndAttack();
 
     }
+    public override void TakeDamage(float dmg)
+    {
+        Vida -= dmg;
+        if (Vida <= 0)
+        {
+            Die();
+            isDrowning = false;
+        }
+        StartCoroutine(EnrojecerSprite());
+    }
+    public IEnumerator EnrojecerSprite()
+    {
+        //print("enrojeci el sprite");
+        _renderer.material.SetColor("_DiffuseColor", Color.red);
+        yield return new WaitForSeconds(0.25f);
+        _renderer.material.SetColor("_DiffuseColor", originalColor);
+    }
+    public override void Die()
+    {
+        //print("player: me mori");
+        Vida = _maxHp;
+        AudioManager.instance.PlayByName("GameOverOrchestral");
+        EventManager.Trigger(Evento.OnPlayerDie);
+        PlayerPageSpawnManager.Instance.RespawnPlayer(); //spawnea al player en el inicio de la pagina actual
+    }
+
+    //Interfaces
     public void GetWet(float wetDamage)
     {
         if (!hasWaterBoots)
@@ -214,35 +244,12 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         _view.StartGetGolpeadoAnimation(); //es solo x el sonido por ahora
         TakeDamage(dmg);
     }
-    public override void TakeDamage(float dmg)
-    {
-        Vida -= dmg;
-        if (Vida <= 0)
-        {
-            Die();
-            isDrowning = false;
-        }
-        StartCoroutine(EnrojecerSprite());
-    }
-    public IEnumerator EnrojecerSprite()
-    {
-        //print("enrojeci el sprite");
-        _renderer.material.SetColor("_DiffuseColor", Color.red);
-        yield return new WaitForSeconds(0.25f);
-        _renderer.material.SetColor("_DiffuseColor", originalColor);
-    }
-    public override void Die()
-    {
-        //print("player: me mori");
-        Vida = _maxHp;
-        AudioManager.instance.PlayByName("GameOverOrchestral");
-        EventManager.Trigger(Evento.OnPlayerDie);
-        PlayerPageSpawnManager.Instance.RespawnPlayer(); //spawnea al player en el inicio de la pagina actual
-    }
     public void GetCured(int curacion)
     {
         Vida += curacion;
     }
+
+    //Eventos
     public void GetTijera(params object[] parameters)
     {
         hasTijera = true;
@@ -280,9 +287,26 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         //sfx de hacer bollo y destruir
         myPaperPlaneHat.SetActive(false);
     }
+
+    //Utilities
     public void AddPlaning()
     {
         StartCoroutine(_model.AddExtraForwardForce(planeoDelayTime, planeoDuration, planeoImpulse, lastDirection));
+    }
+    public void GetAffectedByWind(float windForce, Vector3 windDirection)
+    {
+        _model.ForcedMove(windDirection * windForce);
+    }
+    public void BrieflySlowDown()
+    {
+        StartCoroutine(SlowDownCoroutine(landingLagModifier, landingLagTime));
+        particleShooter.Create(1, anim.transform);
+    }
+    public IEnumerator SlowDownCoroutine(float speedModifier, float time)
+    {
+        Speed = originalMaxSpeed * speedModifier;
+        yield return new WaitForSeconds(time);
+        Speed = originalMaxSpeed;
     }
 
     private void OnDestroy()
@@ -294,10 +318,5 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
             EventManager.Unsubscribe(Evento.OnPlayerGetTijera, GetTijera);
             EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
         }
-    }
-
-    public void GetAffectedByWind(float windForce, Vector3 windDirection)
-    {
-        _model.ForcedMove(windDirection * windForce);
     }
 }

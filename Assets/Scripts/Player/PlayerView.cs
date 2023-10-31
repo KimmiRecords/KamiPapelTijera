@@ -81,15 +81,38 @@ public class PlayerView
 
     public void StartJumpAnimation()
     {
+        //Debug.Log("anim start jump");
         AudioManager.instance.PlayByName("JumpStart", 1f, 0.02f);
         _player.particleShooter.Create(1, _anim.transform);
         _anim.SetBool("isWalk", false);
         _anim.SetBool("isJump", true);
     }
-
     public void StopJump()
     {
+        //Debug.Log("anim stop jump");
         _anim.SetBool("isJump", false);
+    }
+
+    public void StartFalling()
+    {
+        //Debug.Log("anim start falling");
+        _anim.SetBool("isFalling", true);
+    }
+    public void StopFalling()
+    {
+        //Debug.Log("anim stop falling");
+        _anim.SetBool("isFalling", false);
+    }
+
+    public void StartLanding()
+    {
+        //Debug.Log("anim start landing");
+        _anim.SetBool("isLanding", true);
+    }
+    public void StopLanding()
+    {
+        //Debug.Log("anim stop landing");
+        _anim.SetBool("isLanding", false);
     }
 
     public void StartCast()

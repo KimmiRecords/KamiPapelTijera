@@ -16,6 +16,8 @@ public class PlayerModel
 
     bool isFalling = false;
 
+    float fallingTimer = 0f;
+
     public PlayerModel(Player player)
     {
         _player = player;
@@ -27,17 +29,7 @@ public class PlayerModel
         bool groundedPlayer = _player.cc.isGrounded;
         if (groundedPlayer)
         {
-            _groundedTimer = 0.2f; //mientras este en el suelo
-            _player._view.StopJump();
-
-            if (isFalling)
-            {
-                //Debug.Log("jump land sfx - falling");
-                AudioManager.instance.PlayByName("JumpLand", 1f, 0.02f);
-            }
-            isFalling = false;
-            //pAnims.StopFalling();
-            //pAnims.PlayLanding();
+            OnGrounded();
         }
 
         if (_groundedTimer > 0)
@@ -47,19 +39,12 @@ public class PlayerModel
 
         if (!groundedPlayer && _verticalVelocity <= -2f) //si esta cayendo pero no tocando el suelo empieza a caer
         {
-            isFalling = true;
-            //pAnims.StopJumping();
-            //pAnims.PlayFalling();
+            OnStartFalling();
         }
 
-        if (groundedPlayer && _verticalVelocity <= 0) //corta la caida cuando toco el suelo
+        if (groundedPlayer && _verticalVelocity <= 0) //si acabo de estar grounded
         {
-            _verticalVelocity = 0f;
-            
-            if (_player.augmentedJumpsLeft == 0)
-            {
-                _player.DestroyPaperPlaneHat();
-            }
+            OnTouchGround();
         }
 
         _verticalVelocity -= _player.gravityValue * Time.deltaTime; //aplica gravedad extra
@@ -75,17 +60,7 @@ public class PlayerModel
         {
             if (_groundedTimer > 0)
             {
-                _groundedTimer = 0;
-                _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
-                _player.isJumpButtonDown = false;
-                _player._view.StartJumpAnimation();
-                //AudioManager.instance.StopPasos();
-                //pAnims.StopLanding();
-                if (_player.isPaperPlaneHat)
-                {
-                    _player.AddPlaning();
-                    _player.augmentedJumpsLeft--;
-                }
+                OnJump();
             }
         }
 
@@ -100,6 +75,71 @@ public class PlayerModel
 
         //Debug.Log(_move);
     }
+
+    private void OnGrounded()
+    {
+        //Debug.Log("on grounded");
+        _groundedTimer = 0.2f; //mientras este en el suelo
+        _player._view.StopJump();
+
+        if (isFalling)
+        {
+            //Debug.Log("jump land sfx - falling");
+            AudioManager.instance.PlayByName("JumpLand", 1f, 0.02f);
+
+            if (fallingTimer > 0.2f)
+            {
+                _player.BrieflySlowDown();
+            }
+
+            fallingTimer = 0f;
+        }
+        isFalling = false;
+
+        _player._view.StopFalling();
+        _player._view.StartLanding();
+    }
+
+    private void OnStartFalling()
+    {
+        //Debug.Log("on start falling");
+        isFalling = true;
+        _player._view.StopJump();
+        _player._view.StartFalling();
+        //Debug.Log("falling timer" + fallingTimer);
+        fallingTimer += Time.deltaTime;
+    }
+
+    private void OnTouchGround()
+    {
+        //Debug.Log("ongrounded y vertical velocity => 0");
+        _verticalVelocity = 0f;
+
+        //_player._view.StopLanding();
+
+        if (_player.augmentedJumpsLeft == 0)
+        {
+            _player.DestroyPaperPlaneHat();
+        }
+    }
+
+    private void OnJump()
+    {
+        _groundedTimer = 0;
+        _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
+        _player.isJumpButtonDown = false;
+        _player._view.StartJumpAnimation();
+        //AudioManager.instance.StopPasos();
+        _player._view.StopLanding();
+
+        if (_player.isPaperPlaneHat)
+        {
+            _player.AddPlaning();
+            _player.augmentedJumpsLeft--;
+        }
+    }
+
+    
 
     public void EnableTijeraHitbox()
     {

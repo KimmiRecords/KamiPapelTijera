@@ -10,7 +10,7 @@ public class Rocoso : Enemy
     public float enterAttackRange = 11; //si el pj se acerca a 11, le pego
     public float exitAttackRange = 30; //si se aleja a 30, dejo de pegarle y lo vuelvo a perseguir
     public float viewRange = 60; //me despierto si el pj se acerca a 50 o menos. me duermo si se aleja eso
-    [SerializeField] GameObject _particulasSplash;
+    [SerializeField] protected GameObject _particulasSplash;
 
     public bool startAnimationHasFinished = false;
     public bool playerEnteredWakeUpCollider = false;
@@ -21,9 +21,9 @@ public class Rocoso : Enemy
 
     Player _player;
     protected FiniteStateMachine _fsm;
-    bool isDrowning;
+    protected bool isDrowning;
 
-    private void Start()
+    protected virtual void Start()
     {
         //Debug.Log("Rocoso Start");
         _fsm = new FiniteStateMachine();
@@ -35,9 +35,10 @@ public class Rocoso : Enemy
         _fsm.ChangeState(State.RocosoSleep);
 
         _hitBox.headbuttDamage = _attackDamage;
+
     }
 
-    private void Update()
+    protected void Update()
     {
         _fsm.Update();
 
@@ -56,7 +57,7 @@ public class Rocoso : Enemy
         }
         StartCoroutine(EnrojecerSprite());
     }
-    public void OnPlayerEnterWakeUpCollider(Player player) //este metodo es disparado por el trigger, solo la primera vez
+    public virtual void OnPlayerEnterWakeUpCollider(Player player) //este metodo es disparado por el trigger, solo la primera vez
     {
         _player = player;
         playerEnteredWakeUpCollider = true;
@@ -65,7 +66,7 @@ public class Rocoso : Enemy
     {
         startAnimationHasFinished = true;
     }
-    IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo
+    protected IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo
     {
         EnableHeadbuttHitbox();
         yield return new WaitForSeconds(0.1f);
@@ -122,7 +123,7 @@ public class Rocoso : Enemy
 
         Die();
     }
-    private void OnDisable()
+    protected void OnDisable()
     {
         //cuando cambias de pagina el rocoso se apaga
         //cuando volves a la pagina en la que estaba, el animator se reinicia y vuelve a estar dormido
@@ -138,7 +139,7 @@ public class Rocoso : Enemy
         _fsm.ChangeState(State.RocosoSleep);
     }
 
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, enterAttackRange);

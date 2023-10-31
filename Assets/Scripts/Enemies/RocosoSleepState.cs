@@ -16,6 +16,7 @@ public class RocosoSleepState : IState
     public void OnEnter()
     {
         _rocoso.playerEnteredWakeUpCollider = false;
+        _rocoso.startAnimationHasFinished = false;
         _rocoso.anim.SetTrigger("isEepy");
     }
 
