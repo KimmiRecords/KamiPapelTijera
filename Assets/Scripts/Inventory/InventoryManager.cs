@@ -12,12 +12,20 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public Dictionary<ResourceType, InventoryItem> itemsByResourceType = new Dictionary<ResourceType, InventoryItem>();
 
+    public Sprite emptyItemSprite;
+
     private void Start()
     {
         _slots = _inventorySlotsParent.GetComponentsInChildren<InventorySlot>();
 
         foreach (InventoryItem item in _allItems)
         {
+            //check if it wasnt added already
+            if (itemsByResourceType.ContainsKey(item.resourceType))
+            {
+                Debug.Log("ya estaba");
+            }
+
             itemsByResourceType.Add(item.resourceType, item);
         }
 

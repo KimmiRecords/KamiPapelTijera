@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI amountTextComponent;
 
 
+
     public virtual void SetItem(InventoryItem item)
     {
         currentItem = item;
@@ -32,14 +33,13 @@ public class InventorySlot : MonoBehaviour
         else
         {
             amountTextComponent.text = currentItem.amount.ToString();
-
         }
     }
 
     public virtual void ClearSlot()
     {
         currentItem = null;
-        itemImageComponent.sprite = null;
+        itemImageComponent.sprite = InventoryManager.Instance.emptyItemSprite;
         nameTextComponent.text = "";
         amountTextComponent.text = "";
         slotStickerImageComponent.color = Color.white;
