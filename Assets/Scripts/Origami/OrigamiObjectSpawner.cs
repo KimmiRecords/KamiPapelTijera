@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrigamiPuente : Origami
+public class OrigamiObjectSpawner : Origami
 {
     //este script va en la RUTA, no en el objeto puente
     [SerializeField]

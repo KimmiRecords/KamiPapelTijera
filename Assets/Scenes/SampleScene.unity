@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.121591635, g: 0.13366936, b: 0.31923681, a: 1}
+  m_IndirectSpecularColor: {r: 0.12159174, g: 0.13366938, b: 0.31923681, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1277,6 +1277,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -180
+      objectReference: {fileID: 0}
     - target: {fileID: 6478343302391910878, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
       propertyPath: m_Layer
@@ -1306,6 +1321,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034252464885019076, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8058319565404511656, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
@@ -2923,7 +2943,7 @@ PrefabInstance:
         type: 3}
       propertyPath: origami
       value: 
-      objectReference: {fileID: 1786991998}
+      objectReference: {fileID: 1786992002}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e1f800fee87ec1469b5b40197b586be, type: 3}
 --- !u!4 &142546647 stripped
@@ -3348,7 +3368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &165442789
 Transform:
   m_ObjectHideFlags: 0
@@ -10624,7 +10644,7 @@ PrefabInstance:
         type: 3}
       propertyPath: origami
       value: 
-      objectReference: {fileID: 987750621}
+      objectReference: {fileID: 987750624}
     - target: {fileID: 5019034003175297752, guid: 7e1f800fee87ec1469b5b40197b586be,
         type: 3}
       propertyPath: blueActiveColor.a
@@ -12904,6 +12924,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2132137547}
     m_Modifications:
+    - target: {fileID: 740609282754798990, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1258998801657783540, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Layer
@@ -12913,6 +12938,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734851576748872792, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2247903675443777174, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
@@ -12938,6 +12968,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331948463414976216, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 620
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331948463414976216, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331948463414976216, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0009116827
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331948463414976216, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5418449224565384174, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
@@ -13057,7 +13107,7 @@ PrefabInstance:
     - target: {fileID: 5418449225323618739, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Name
-      value: OrigamiRoute Pag2 PuenteGallina
+      value: Origami Pag2 EscaleraGallina
       objectReference: {fileID: 0}
     - target: {fileID: 5418449225323618739, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
@@ -13079,6 +13129,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6022382303509819250, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6579544025435514202, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Layer
@@ -13089,11 +13144,41 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6904075073929928314, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904075073929928314, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904075073929928314, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904075073929928314, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904075073929928314, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 7025091877410510242, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: objetoParaSpawnear
       value: 
       objectReference: {fileID: 1914279507}
+    - target: {fileID: 7334900166691902500, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7748088204408900359, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Layer
@@ -13114,6 +13199,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8619483624729716210, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8706497211138172483, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Layer
@@ -13128,6 +13218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202624469220049005, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc, type: 3}
@@ -15636,58 +15731,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 686661605}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &686661607 stripped
+--- !u!114 &686661613 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5598585001905656120, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
+  m_CorrespondingSourceObject: {fileID: 1744987861688858552, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
     type: 3}
   m_PrefabInstance: {fileID: 686661605}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &686661608 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 811311523485784188, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 686661605}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &686661609 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6270943521979633780, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 686661605}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &686661610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686661609}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee627f3180e14de41a1aded76bd56229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origamiRoutes:
-  - {fileID: 686661608}
-  - {fileID: 686661607}
-  paperCost: 2
-  isReusable: 1
-  tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
-    rojo. No te salgas del camino indicado!"
-  postItColor: 1
-  currentRouteIndex: 0
-  wasUsed: 0
 --- !u!1 &695684886
 GameObject:
   m_ObjectHideFlags: 0
@@ -16509,7 +16564,7 @@ PrefabInstance:
         type: 3}
       propertyPath: origami
       value: 
-      objectReference: {fileID: 686661610}
+      objectReference: {fileID: 686661613}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e1f800fee87ec1469b5b40197b586be, type: 3}
 --- !u!1 &722131899
@@ -19055,64 +19110,24 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2032512339387199949, guid: bdc3a0a0933b3ae4cb10d4a79626d62a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bdc3a0a0933b3ae4cb10d4a79626d62a, type: 3}
---- !u!114 &836118872 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5598585001905656120, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 836118871}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &836118873 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6270943521979633783, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
     type: 3}
   m_PrefabInstance: {fileID: 836118871}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &836118874 stripped
+--- !u!114 &836118879 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 811311523485784188, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
+  m_CorrespondingSourceObject: {fileID: 1744987861688858552, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
     type: 3}
   m_PrefabInstance: {fileID: 836118871}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &836118875 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6270943521979633780, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 836118871}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &836118876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836118875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee627f3180e14de41a1aded76bd56229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origamiRoutes:
-  - {fileID: 836118874}
-  - {fileID: 836118872}
-  paperCost: 2
-  isReusable: 1
-  tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
-    rojo. No te salgas del camino indicado!"
-  postItColor: 1
-  currentRouteIndex: 0
-  wasUsed: 0
 --- !u!1001 &837727037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20173,7 +20188,7 @@ PrefabInstance:
         type: 3}
       propertyPath: origami
       value: 
-      objectReference: {fileID: 836118876}
+      objectReference: {fileID: 836118879}
     - target: {fileID: 5019034003175297758, guid: 7e1f800fee87ec1469b5b40197b586be,
         type: 3}
       propertyPath: m_Name
@@ -22276,58 +22291,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 987750616}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &987750618 stripped
+--- !u!114 &987750624 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5598585001905656120, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
+  m_CorrespondingSourceObject: {fileID: 1744987861688858552, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
     type: 3}
   m_PrefabInstance: {fileID: 987750616}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &987750619 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 811311523485784188, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 987750616}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &987750620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6270943521979633780, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 987750616}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &987750621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 987750620}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee627f3180e14de41a1aded76bd56229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origamiRoutes:
-  - {fileID: 987750619}
-  - {fileID: 987750618}
-  paperCost: 2
-  isReusable: 1
-  tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
-    rojo. No te salgas del camino indicado!"
-  postItColor: 1
-  currentRouteIndex: 0
-  wasUsed: 0
 --- !u!1 &988889803
 GameObject:
   m_ObjectHideFlags: 3
@@ -23550,7 +23525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1034421067
 Transform:
   m_ObjectHideFlags: 0
@@ -25054,7 +25029,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096615391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.88, y: -3.9, z: -14.82}
+  m_LocalPosition: {x: -61.8, y: -1.9, z: -0.8}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27346,18 +27321,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.17276299, y: 0.19024628, z: 0.16679996}
   m_Center: {x: -0.0026012359, y: -0.036323965, z: -0.0060327644}
---- !u!114 &1245884481 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5598585001905656120, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 2032512338763246085}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1247999697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39371,6 +39334,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2132137547}
     m_Modifications:
+    - target: {fileID: 740609282754798990, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1258998801657783540, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Layer
@@ -39380,6 +39348,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734851576748872792, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2247903675443777174, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
@@ -39415,6 +39388,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331948463414976216, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 620
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331948463414976216, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331948463414976216, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5418449224565384174, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
@@ -39561,6 +39549,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6022382303509819250, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6579544025435514202, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Layer
@@ -39576,6 +39569,11 @@ PrefabInstance:
       propertyPath: objetoParaSpawnear
       value: 
       objectReference: {fileID: 1732127976}
+    - target: {fileID: 7334900166691902500, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7748088204408900359, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Layer
@@ -39596,6 +39594,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8619483624729716210, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8706497211138172483, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
         type: 3}
       propertyPath: m_Layer
@@ -39610,6 +39613,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202624469220049005, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b81dc50b76d1747a4c8a63ad5c6ffc, type: 3}
@@ -41650,58 +41658,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1786991993}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1786991995 stripped
+--- !u!114 &1786992002 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5598585001905656120, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
+  m_CorrespondingSourceObject: {fileID: 1744987861688858552, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
     type: 3}
   m_PrefabInstance: {fileID: 1786991993}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1786991996 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 811311523485784188, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1786991993}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1786991997 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6270943521979633780, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1786991993}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1786991998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786991997}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee627f3180e14de41a1aded76bd56229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origamiRoutes:
-  - {fileID: 1786991996}
-  - {fileID: 1786991995}
-  paperCost: 2
-  isReusable: 1
-  tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
-    rojo. No te salgas del camino indicado!"
-  postItColor: 1
-  currentRouteIndex: 0
-  wasUsed: 0
 --- !u!1001 &1789691436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41892,18 +41860,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1796647426}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1799597625 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 811311523485784188, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 2032512338763246085}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1812310180
 GameObject:
   m_ObjectHideFlags: 0
@@ -43058,10 +43014,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2460184918978838587, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 305
+      objectReference: {fileID: 0}
     - target: {fileID: 3426570245279619210, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3426570245279619210, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4110724393329022962, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
@@ -43077,6 +43043,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418449224565384175, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418449224565384175, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 253.7
       objectReference: {fileID: 0}
     - target: {fileID: 5418449225157633109, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
@@ -43203,6 +43179,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -180
+      objectReference: {fileID: 0}
     - target: {fileID: 6478343302391910878, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
       propertyPath: m_Layer
@@ -43218,6 +43209,11 @@ PrefabInstance:
       propertyPath: objetoParaSpawnear
       value: 
       objectReference: {fileID: 346032914}
+    - target: {fileID: 7957624312456306609, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_Name
+      value: CurrentPliegueText
+      objectReference: {fileID: 0}
     - target: {fileID: 7957624312456306609, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
       propertyPath: m_Layer
@@ -43237,6 +43233,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462920433621860474, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8825717796159132359, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
@@ -43579,12 +43580,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7897264121734106300, guid: b4b779f5cccc8a544b4f9cfe07e8b0b2,
     type: 3}
   m_PrefabInstance: {fileID: 1874086313}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1877022866 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6270943521979633780, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
-    type: 3}
-  m_PrefabInstance: {fileID: 2032512338763246085}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1877106801
 GameObject:
@@ -45922,6 +45917,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0000059604645
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 12.913147
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260437682827715145, guid: ea3a2e8d718892242a76f47dbd65eea9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -359.999
       objectReference: {fileID: 0}
     - target: {fileID: 6478343302391910878, guid: ea3a2e8d718892242a76f47dbd65eea9,
         type: 3}
@@ -51357,7 +51377,7 @@ PrefabInstance:
         type: 3}
       propertyPath: origami
       value: 
-      objectReference: {fileID: 5418449224766782068}
+      objectReference: {fileID: 5418449224766782070}
     - target: {fileID: 5019034003175297752, guid: 7e1f800fee87ec1469b5b40197b586be,
         type: 3}
       propertyPath: blueActiveColor.a
@@ -52954,28 +52974,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2032512338763246085}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5418449224766782068
+--- !u!114 &5418449224766782070 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1744987861688858552, guid: bdc3a0a0933b3ae4cb10d4a79626d62a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2032512338763246085}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877022866}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee627f3180e14de41a1aded76bd56229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origamiRoutes:
-  - {fileID: 1799597625}
-  - {fileID: 1245884481}
-  paperCost: 2
-  isReusable: 1
-  tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
-    rojo. No te salgas del camino indicado!"
-  postItColor: 1
-  currentRouteIndex: 0
-  wasUsed: 0
 --- !u!23 &5917893842833558359
 MeshRenderer:
   m_ObjectHideFlags: 0

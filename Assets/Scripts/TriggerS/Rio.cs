@@ -12,7 +12,7 @@ public class Rio : TriggerScript
         base.OnTriggerEnter(other);
         if (other.gameObject.GetComponent<IMojable>() != null)
         {
-            Debug.Log("rio: mojo a " + other.gameObject.name);
+            //Debug.Log("rio: mojo a " + other.gameObject.name);
             IMojable mojable = other.gameObject.GetComponent<IMojable>();
             mojable.GetWet(wetDamage);
         }
