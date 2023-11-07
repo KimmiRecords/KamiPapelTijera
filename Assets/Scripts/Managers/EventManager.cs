@@ -30,8 +30,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
 
     OnOrigamiApplied, //param0 es papercost (numero negativo), param1 es Origami origami
     OnResourceUpdated, //se triggerea cuando uso AddResource, param0 es el tipo, param1 es el amount total actual, param2 bool es si suma
-    OnOrigamiStart, //le interesa al player para arrancar animaciones
-    OnOrigamiEnd, //le interesa al player para arrancar animaciones
+    OnOrigamiStart, //param0 deberia ser origami
+    OnOrigamiEnd, //param0 deberia ser origami
     
     OnOrigamiFoldChange, //param0 el fold actual, param1 los fold totales
     OnPlayerGetTijera,
@@ -40,7 +40,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     
     OnOrigamiGivePaperPlaneHat, //param0 es camara
     
-    OnEncounterEnd, //cuando mato al ultimo enemigo, por ej
+    OnEncounterEnd, //cuando mato a un enemigo marcado con EndsEncounter
     OnEncounterStart,
    
     OnMouseEnterFlap,

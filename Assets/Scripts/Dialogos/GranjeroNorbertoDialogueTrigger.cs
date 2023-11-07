@@ -21,14 +21,4 @@ public class GranjeroNorbertoDialogueTrigger : QuestDialogueTrigger
         _questDelivered = true;
         EventManager.Trigger(Evento.OnQuestDelivered, _quest);
     }
-
-    protected override void OnDestroy()
-    {
-        if (!gameObject.scene.isLoaded)
-        {
-            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
-            EventManager.Unsubscribe(Evento.OnAbuelaDropoff, CompleteQuest); //????
-        }
-    }
-
 }

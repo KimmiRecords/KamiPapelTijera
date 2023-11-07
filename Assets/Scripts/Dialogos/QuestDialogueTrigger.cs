@@ -90,7 +90,6 @@ public class QuestDialogueTrigger : TriggerDialogue
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
             EventManager.Unsubscribe(Evento.OnQuestCompleted, CompleteQuest);
-            //EventManager.Unsubscribe(Evento.OnDialogueEnd, PasarAlSiguienteDialogo);
         }
     }
 }
