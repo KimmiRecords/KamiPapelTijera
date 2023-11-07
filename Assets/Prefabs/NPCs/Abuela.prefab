@@ -41,7 +41,7 @@ BoxCollider:
   m_GameObject: {fileID: 1861318684866486772}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 6.883386, y: 9.228793, z: 1}
   m_Center: {x: -0.21184778, y: -0.6093036, z: -1.1564476e-10}
@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 5357465105482584965}
   - component: {fileID: 5357465105482584966}
   - component: {fileID: 8621498527565570154}
-  - component: {fileID: 6460524119705627060}
   - component: {fileID: 3175414029089527560}
   m_Layer: 0
   m_Name: Abuela
@@ -233,24 +232,8 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   maxForce: 40
   isDropoff: 0
-  dropoffPoint: {x: 0, y: 0, z: 0}
+  dropoffPoint: {fileID: 0}
   anim: {fileID: 3175414029089527560}
---- !u!54 &6460524119705627060
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5357465105482584964}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!95 &3175414029089527560
 Animator:
   serializedVersion: 4

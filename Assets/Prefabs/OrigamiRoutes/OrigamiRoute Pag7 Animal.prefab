@@ -596,8 +596,8 @@ MonoBehaviour:
   - {fileID: 3171762405834153050}
   paperCost: 1
   isReusable: 0
-  tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
-    rojo. No te salgas del camino indicado!"
+  tooltipMessage: "Arrastr\xE1 la flecha verde hasta el objetivo y solt\xE1. No te
+    salgas del camino!"
   postItColor: 1
   currentRouteIndex: 0
   wasUsed: 0
@@ -653,6 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingPoint: {fileID: 0}
   inicioRectangle: {fileID: 1270709585924235491}
   routeRectangles:
   - {fileID: 1914094596598327852}
@@ -660,10 +661,7 @@ MonoBehaviour:
   - {fileID: 5507861113964205253}
   finalRectangle: {fileID: 1270709586651096926}
   wasCompleted: 0
-  interpolation: 0
-  distanciaMouseInicio: {x: 0, y: 0, z: 0}
-  distanciaTotal: {x: 0, y: 0, z: 0}
-  posicionInicioOriginal: {x: 0, y: 0, z: 0}
+  _flipbookAnimator: {fileID: 0}
 --- !u!1001 &6614675461462713268
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class NPC_Abuela : NPC
     //creo que solo va a moverse desde ser entregada hasta la mesa.
 
     [HideInInspector] public bool isDropoff;
-    [HideInInspector] public Vector3 dropoffPoint;
+    public Transform dropoffPoint;
 
     public Animator anim;
 
@@ -22,6 +22,19 @@ public class NPC_Abuela : NPC
         _fsm.AddState(State.Abuela_FollowPlayer, new Abuela_FollowPlayerState(_fsm, this));
         _fsm.AddState(State.Abuela_Dropoff, new Abuela_DropoffState(_fsm, this));
         _fsm.ChangeState(State.Abuela_Idle);
+    }
+
+    public void GetFolded()
+    {
+        Debug.Log("get folded");
+        _sr.enabled = false;
+    }
+
+    public void GetUnfolded()
+    {
+        Debug.Log("get unfolded");
+        _sr.enabled = true;
+        StartAbuelaDropoff();
     }
 
     public void StartFollowingPlayer(params object[] parameter)
@@ -36,26 +49,19 @@ public class NPC_Abuela : NPC
     public void StartAbuelaDropoff(params object[] parameter)
     {
         isDropoff = true;
-        if (parameter[0] is Transform)
-        {
-            Transform dropOffTransform = (Transform)parameter[0];
-            dropoffPoint = dropOffTransform.position;
-            transform.parent = dropOffTransform;
-        }
     }
     public void PlaceAbuelaNextToPlayer(params object[] parameter)
     {
-        if (isFollowing)
-        {
-            transform.position = player.transform.position + (player.transform.forward * (playerOffsetDistance / 2));
-        }
+        Vector3 desiredPos = player.transform.position + (player.transform.forward * (playerOffsetDistance / 2));
+        transform.position = new Vector3(desiredPos.x, transform.position.y, desiredPos.z);
     }
+
 
     //private void OnDestroy()
     //{
     //    if (!gameObject.scene.isLoaded)
     //    {
-            
+
     //    }
     //}
 }

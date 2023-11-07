@@ -38,20 +38,17 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         EventManager.Subscribe(Evento.OnPlayerChooseContinueGame, Unlock);
         EventManager.Subscribe(Evento.OnQuestDelivered, CheckQuestCompletion);
         EventManager.Subscribe(Evento.OnEncounterEnd, Unlock);
+        EventManager.Subscribe(Evento.OnAbuelaFold, OnAbuelaFolded);
+        EventManager.Subscribe(Evento.OnAbuelaUnfold, OnAbuelaUnfolded);
+
 
         foldOrigami = foldOrigamiSeal.GetComponentInChildren<TriggerOrigami>().origami;
         unfoldOrigami = unfoldOrigamiSeal.GetComponentInChildren<TriggerOrigami>().origami;
-
     }
 
     public void OnDialogueEnded(params object[] parameters)
     {
         Debug.Log("on dialogue ended");
-
-        if ((DialogueSO)parameters[1] == _dialogues[0])
-        {
-            OnFirstDialogueEnded();
-        }
 
         if ((DialogueSO)parameters[1] == _dialogues[1])
         {
@@ -63,36 +60,23 @@ public class AbuelaDialogueTrigger : TriggerDialogue
             OnThirdDialogueEnded();
         }
     }
-
-    public void OnOrigamiEnded(params object[] parameters)
+    private void OnAbuelaFolded(params object[] parameters)
     {
-        Debug.Log("on origami ended");
+        Debug.Log("on abuela folded");
+        EnableOrigamiSeal(foldOrigamiSeal, false);
+        LevelManager.Instance.AddResource(ResourceType.abuela, 1);
+        abuela.GetFolded();
+        AudioManager.instance.PlayByName("MagicSuccess", 1.6f);
+    }
 
-        if ((Origami)parameters[0] == foldOrigami)
-        {
-            Debug.Log("on origami ended - fold origami");
-            EnableOrigamiSeal(foldOrigamiSeal, false);
-
-            //termine de doblar a la abuela
-            //avisar al inventario que agregue a la abuela
-            //hacer desaparecer a la abuela de la escena
-            //sonidito y particulas
-            //mostrar el icono de la abuela durante unos segundos
-        }
-
-        if ((Origami)parameters[0] == unfoldOrigami)
-        {
-            Debug.Log("on origami ended - unfold origami");
-
-            EnableOrigamiSeal(unfoldOrigamiSeal, false);
-
-            //termine de desdoblar a la abuela
-            //avisar al inventario que saque a la abuela
-            //hacer aparecer a la abuela en la escena
-            //sonidito y particulas
-
-            Unlock();
-        }
+    private void OnAbuelaUnfolded(params object[] parameters)
+    {
+        Debug.Log("on abuela unfolded");
+        EnableOrigamiSeal(unfoldOrigamiSeal, false);
+        LevelManager.Instance.AddResource(ResourceType.abuela, -1);
+        abuela.GetUnfolded();
+        AudioManager.instance.PlayByName("MagicSuccess", 1.06f);
+        Unlock();
     }
 
     void CheckQuestCompletion(params object[] parameters)
@@ -102,9 +86,8 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         {
             Debug.Log("required quest completed");
 
-            //ubicar a la abuela next to kami
+            abuela.PlaceAbuelaNextToPlayer();
             EnableOrigamiSeal(unfoldOrigamiSeal, true);
-            Unlock();
         }
     }
 
@@ -185,6 +168,8 @@ public class AbuelaDialogueTrigger : TriggerDialogue
             EventManager.Unsubscribe(Evento.OnPlayerChooseContinueGame, Unlock);
             EventManager.Unsubscribe(Evento.OnQuestDelivered, CheckQuestCompletion);
             EventManager.Unsubscribe(Evento.OnEncounterEnd, Unlock);
+            EventManager.Unsubscribe(Evento.OnAbuelaFold, OnAbuelaFolded);
+            EventManager.Unsubscribe(Evento.OnAbuelaUnfold, OnAbuelaUnfolded);
         }
     }
 }

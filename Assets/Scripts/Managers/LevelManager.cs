@@ -13,6 +13,7 @@ public enum ResourceType
     botasRapidas,
     tijera,
     tijeraMejorada,
+    abuela,
     Count 
 }
 

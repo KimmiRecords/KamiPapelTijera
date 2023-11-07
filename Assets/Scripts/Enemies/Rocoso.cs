@@ -85,7 +85,7 @@ public class Rocoso : Enemy
     }
     public void GetWet(float wetDamage) //esto se dispara cuando collisiona con el rio
     {
-        Debug.Log("rocoso se moja");
+        //Debug.Log("rocoso se moja");
 
         _particulasSplash.SetActive(true);
         AudioManager.instance.PlayByName("BigWaterSplash");

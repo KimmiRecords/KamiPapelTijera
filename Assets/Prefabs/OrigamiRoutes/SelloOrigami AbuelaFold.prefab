@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5019034001922312300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0760903, y: 1.0760903, z: 1.0760903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5019034003175297759}
@@ -169,12 +169,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: PedestalParent
       objectReference: {fileID: 0}
+    - target: {fileID: 1427629558346619298, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194551645250254429, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6310065071649380702, guid: 30a22737b1dbca347b4086af4fa8494e,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 73dae787d13d9da408bf34225b97d804,
         type: 3}
+    - target: {fileID: 6310065071649380702, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8148756059669502358, guid: 30a22737b1dbca347b4086af4fa8494e,
         type: 3}
       propertyPath: triggerOrigami

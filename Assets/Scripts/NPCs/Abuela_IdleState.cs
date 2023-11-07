@@ -19,6 +19,7 @@ public class Abuela_IdleState : IState
     public void OnEnter()
     {
         //Debug.Log("[NPC] entro al idle state");
+        _abuela.anim.SetBool("IsWalking", false);
     }
     public void OnUpdate()
     {
@@ -26,6 +27,11 @@ public class Abuela_IdleState : IState
         if (_abuela.isFollowing)
         {
             _fsm.ChangeState(State.Abuela_FollowPlayer);
+        }
+
+        if (_abuela.isDropoff)
+        {
+            _fsm.ChangeState(State.Abuela_Dropoff);
         }
     }
 
