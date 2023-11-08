@@ -12,21 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7dbce3668a28f42bb62a3c585866f0, type: 3}
   m_Name: Honguero_Tiburcio_01
   m_EditorClassIdentifier: 
-  textos:
-  - '[GRANJERO TIBURCIO]: Kami! Por favor ayudame!'
-  - "[GRANJERO TIBURCIO]: Tengo que cortarle los hongos a 3 de las gallinas pero
-    no tengo c\xF3mo."
-  - "[GRANJERO TIBURCIO]: Vos no ten\xE9s unas tijeras de casualidad y me quer\xE9s
-    dar una mano?"
   wasRead: 0
-  sprite: {fileID: 21300000, guid: 31d4f2ee376930c49b6c8cb14c9d1b41, type: 3}
   events:
   - text: '[GRANJERO TIBURCIO]: Kami! Por favor ayudame!'
     sprite: {fileID: 21300000, guid: 31d4f2ee376930c49b6c8cb14c9d1b41, type: 3}
-  - text: "[GRANJERO TIBURCIO]: Tengo que cortarle los hongos a 3 de las gallinas
-      pero no tengo c\xF3mo."
+  - text: "[GRANJERO TIBURCIO]: A las gallinas les crecieron hongos en la cabeza!
+      Hay que cort\xE1rselos lo antes posible."
     sprite: {fileID: 21300000, guid: 31d4f2ee376930c49b6c8cb14c9d1b41, type: 3}
   - text: "[GRANJERO TIBURCIO]: Vos no ten\xE9s unas tijeras de casualidad y me quer\xE9s
       dar una mano?"
     sprite: {fileID: 21300000, guid: 6cfeea0ddbbbb3b45b5e290774666a68, type: 3}
-  currentText: 0
+  currentText: 3

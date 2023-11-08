@@ -28,7 +28,7 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
     }
     public void OpenFlap()
     {
-        Debug.Log("open");
+        //Debug.Log("open");
         AudioManager.instance.PlayByName("PageTurn02", 2.6f, 0.01f);
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posXOpen, _posYOpen, _transitionDuration));
@@ -36,7 +36,7 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
     }
     public void CloseFlap()
     {
-        Debug.Log("close");
+        //Debug.Log("close");
         AudioManager.instance.PlayByName("PageTurn01", 2.6f, 0.01f);
         StopAllCoroutines();
         StartCoroutine(MoveFlap(_posXClosed, _posYClosed, _transitionDuration));
@@ -45,7 +45,7 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
     }
     public IEnumerator MoveFlap(float targetX, float targetY, float transitionDuration)
     {
-        Debug.Log("move");
+        //Debug.Log("move");
         Vector3 startPosition = camWheelParent.transform.localPosition;
         Vector3 targetPosition = new Vector3(targetX, targetY, camWheelParent.transform.localPosition.z);
         float elapsedTime = 0f;
@@ -72,7 +72,7 @@ public class CamWheelManager : Singleton<CamWheelManager>, IFlap
         {
             OpenFlap();
         }
-        Debug.Log("isopen" + _isOpen);
+        //Debug.Log("isopen" + _isOpen);
 
     }
     public void ChangeCamera(int index)

@@ -8,7 +8,7 @@ public class RocosoAplastadoBehaviour : AplastadoBehaviour
 
     public override void Aplastar()
     {
-        Debug.Log("Aplastado: Aplastar");
+        //Debug.Log("Aplastado: Aplastar");
         StartCoroutine(LerpScaleY(transform, lerpTime));
         _miRocoso.StartCoroutine(_miRocoso.MorirCoroutine());
         AudioManager.instance.PlayByName("RockSmash");

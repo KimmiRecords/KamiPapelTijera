@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 24.32002, y: 15.000083, z: 22.267977}
+  m_Size: {x: 60, y: 15, z: 60}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3664596389247205331
 MonoBehaviour:
@@ -133,9 +133,9 @@ MonoBehaviour:
   _sr: {fileID: 6008200199915845047}
   endsEncounter: 0
   allNodes: []
-  arriveRadius: 0.1
-  exitDistance: 30
+  arriveRadius: 1
   rb: {fileID: 2698636374348165167}
+  evadeSpeed: 40
   startAnimationHasFinished: 0
   velocity: {x: 0, y: 0, z: 0}
   _pathToFollow: []

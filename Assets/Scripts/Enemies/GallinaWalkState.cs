@@ -9,8 +9,8 @@ public class GallinaWalkState : IState
     GallinaAI _gallina;
     private bool goalReached;
 
-    [SerializeField]
-    Node currentGoalNode;
+    [SerializeField] Node currentGoalNode;
+    int currentNodeIndex = 0;
 
     public GallinaWalkState(FiniteStateMachine fsm, GallinaAI r)
     {
@@ -40,7 +40,6 @@ public class GallinaWalkState : IState
         {
             _fsm.ChangeState(State.GallinaEvade);
         }
-        //_gallina.transform.position += _gallina.velocity * Time.deltaTime;
     }
 
     public void OnExit()
@@ -51,8 +50,8 @@ public class GallinaWalkState : IState
 
     public void SetGoal(GallinaAI yo)
     {
-        //Debug.Log("gallina - arranca set goal");
-        currentGoalNode = yo.allNodes[Random.Range(0, yo.allNodes.Length)];
+        currentGoalNode = yo.allNodes[currentNodeIndex];
+        currentNodeIndex = (currentNodeIndex + 1) % yo.allNodes.Length;
         goalReached = false;
     }
     
@@ -60,8 +59,8 @@ public class GallinaWalkState : IState
     {
         Vector3 dir = goalNode.transform.position - yo.transform.position;
         dir.y = 0;
-        //yo.transform.position += yo.Speed * Time.deltaTime * dir.normalized;
         yo.rb.AddForce(yo.Speed * Time.deltaTime * dir.normalized, ForceMode.VelocityChange);
+        
         if (dir.magnitude < yo.arriveRadius*2)
         {
             //Debug.Log("llegue al node");

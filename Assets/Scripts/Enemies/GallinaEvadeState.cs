@@ -22,7 +22,7 @@ public class GallinaEvadeState : IState
     {
         _gallina.RotateAccordingly();
         WalkAwayFromPlayer();
-        if (Vector3.Distance(_gallina._player.transform.position, _gallina.transform.position) > _gallina.exitDistance)
+        if (!_gallina.playerIsInRange)
         {
             _fsm.ChangeState(State.GallinaWalk);
         }
@@ -38,7 +38,6 @@ public class GallinaEvadeState : IState
     {
         Vector3 dir = _gallina._player.transform.position - _gallina.transform.position;
         dir.y = 0;
-        //_gallina.transform.position += _gallina.Speed * 3 * Time.deltaTime * -dir.normalized;
-        _gallina.rb.AddForce(_gallina.Speed * 1.5f * Time.deltaTime * -dir.normalized, ForceMode.VelocityChange);
+        _gallina.rb.AddForce(_gallina.evadeSpeed * Time.deltaTime * -dir.normalized, ForceMode.VelocityChange);
     }
 }

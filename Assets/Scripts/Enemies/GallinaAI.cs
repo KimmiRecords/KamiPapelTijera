@@ -7,9 +7,9 @@ public class GallinaAI : Enemy
     float maxForce = 5;
     protected FiniteStateMachine _fsm;
     public Node[] allNodes;
-    public float arriveRadius = 0.1f;
-    public float exitDistance = 30;
+    public float arriveRadius = 1;
     public Rigidbody rb;
+    public float evadeSpeed = 20;
     [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
     [HideInInspector] public Vector3 velocity;
     [HideInInspector] public List<Node> _pathToFollow = new List<Node>();

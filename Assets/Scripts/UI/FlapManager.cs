@@ -52,7 +52,7 @@ public class FlapManager : Singleton<FlapManager>
     }   
     public void CloseFlap()
     {
-        Debug.Log("FlapManager: close flap");
+        //Debug.Log("FlapManager: close flap");
         AudioManager.instance.PlayByName("PageTurn01", 1.6f, 0.01f);
         _tiritaPull.gameObject.SetActive(true);
         _tiritaPush.gameObject.SetActive(false);
