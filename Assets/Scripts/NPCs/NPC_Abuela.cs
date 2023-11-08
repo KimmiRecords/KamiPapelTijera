@@ -52,6 +52,7 @@ public class NPC_Abuela : NPC
     }
     public void PlaceAbuelaNextToPlayer(params object[] parameter)
     {
+        transform.parent = dropoffPoint.parent;
         Vector3 desiredPos = player.transform.position + (player.transform.forward * (playerOffsetDistance / 2));
         transform.position = new Vector3(desiredPos.x, transform.position.y, desiredPos.z);
     }
