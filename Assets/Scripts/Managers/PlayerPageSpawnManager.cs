@@ -12,9 +12,9 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
     //isNext seria como lo opuesto a isPrev.
 
     [SerializeField] Player _player;
+    [SerializeField] float pageEntryX = -75;
+    [SerializeField] float pageExitX = 80;
     CharacterController _playerCC;
-    float pageEntryX = -75;
-    float pageExitX = 80;
     Vector3 lastUsedSpawn; //para recordar el ultimo usado para cuando el player muera
 
     void Start()
