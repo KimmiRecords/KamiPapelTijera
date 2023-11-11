@@ -35,9 +35,9 @@ public class MaterialColorRandomizer : MonoBehaviour
         Color.RGBToHSV(originalColor, out float originalHue, out float originalSaturation, out float originalValue);
 
         //randomizo el hsv teniendo en cuenta la variacion
-        float newHue = Random.Range(originalHue - hueVariation, originalHue + hueVariation);
-        float newSaturation = Random.Range(originalSaturation - saturationVariation, originalSaturation + saturationVariation);
-        float newValue = Random.Range(originalValue - valueVariation, originalValue + valueVariation);
+        float newHue = Mathf.Clamp(Random.Range(originalHue - hueVariation, originalHue + hueVariation), 0, 1);
+        float newSaturation = Mathf.Clamp(Random.Range(originalSaturation - saturationVariation, originalSaturation + saturationVariation), 0, 1);
+        float newValue = Mathf.Clamp(Random.Range(originalValue - valueVariation, originalValue + valueVariation), 0, 1);
 
         //convierto y devuelvo
         Color resultColor = Color.HSVToRGB(newHue, newSaturation, newValue);

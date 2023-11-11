@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TutorialStarterTrigger : TriggerScript
 {
-    [SerializeField] GameObject tutorial;
+    //cuando el jugador pisa este trigger, se activa el tutorial
+
+    [SerializeField] GameObject tutorialObject;
     bool alreadyTriggered = false;
 
     public override void OnEnterBehaviour(Collider other)
@@ -12,7 +14,7 @@ public class TutorialStarterTrigger : TriggerScript
         base.OnEnterBehaviour(other);
         if (!alreadyTriggered)
         {
-            tutorial.SetActive(true);
+            tutorialObject.SetActive(true);
             alreadyTriggered = true;
         }
     }
