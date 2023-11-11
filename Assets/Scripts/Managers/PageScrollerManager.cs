@@ -11,6 +11,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     
     //tambien chequea cual zona de cambio de pagina deberia mostrarse
     [SerializeField] GameObject[] pagesToToggle; //las 5 carpetas (buildingspagina1, 2, 3, 4 y 5)
+    [SerializeField] Animator[] pagesAnimators; //sus 5 animators
 
     public int startingPage = 1;
     [HideInInspector] public int activePageIndex = 0; //activeIndex = startingPage - 1;
@@ -40,38 +41,32 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         CheckSpheres(activePageIndex);
         GetAllParticleSystemsInChildren(glitterParent);
     }
+
     public void GetAllParticleSystemsInChildren(GameObject glitterParent)
     {
         glitterSystems = glitterParent.GetComponentsInChildren<ParticleSystem>();
     }
 
 
-    public void TriggerPageScroll(params object[] parameters)
+    public void TriggerPageScroll(params object[] parameters) //cuando tocas E
     {
         if (!OverlayManager.Instance.isLocked)
         {
-            if (esferaNext.triggerBool && !_isTurning) //pregunta si el player esta encima del trigger
+            Debug.Log("shrink page index " + activePageIndex);
+            pagesAnimators[activePageIndex].SetTrigger("Shrink"); //cierro la pag
+
+            if (esferaNext.triggerBool 
+                && !_isTurning 
+                && activePageIndex < pagesToToggle.Length - 1)
             {
-                if (activePageIndex >= pagesToToggle.Length - 1)
-                {
-                    print("no hay mas paginas");
-                }
-                else
-                {
-                    ChangeToNextPage();
-                }
+                ChangeToNextPage();
             }
 
-            if (esferaPrev.triggerBool && !_isTurning)
+            if (esferaPrev.triggerBool 
+                && !_isTurning 
+                && activePageIndex > 0)
             {
-                if (activePageIndex <= 0)
-                {
-                    print("no hay mas paginas");
-                }
-                else
-                {
-                    ChangeToPrevPage();
-                }
+                ChangeToPrevPage();
             }
         }
     }
@@ -80,30 +75,30 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         activePageIndex--; //el paso de pagina posta, para atras
         _isNext = false; //isNext es una variable piola que mucha gente necesita
-        StartChangePageFX();
         _isTurning = true;
         esferaPrev.triggerBool = false;
         EventManager.Trigger(Evento.OnPageTurned, activePageIndex);
+        StartChangePageFX();
     }
 
     private void ChangeToNextPage()
     {
         activePageIndex++; //el paso de pagina posta
         _isNext = true; //isNext es una variable piola que mucha gente necesita
-        StartChangePageFX();
         _isTurning = true;
         esferaNext.triggerBool = false;
         EventManager.Trigger(Evento.OnPageTurned, activePageIndex);
+        StartChangePageFX();
     }
 
     void StartChangePageFX()
     {
         CameraManager.Instance.SetCamera(CameraMode.BookCenter);
-        PlayGlitter();
         AudioManager.instance.PlayByName("MagicSuccess", 0.42f, 0.01f);
         StartCoroutine(PostProcessManager.Instance.LerpBloomIntensity());
-        StartCoroutine(CerrarPUBsCoroutine(delayTime));
-        StartCoroutine(AbrirPUBsCoroutine(popupDelayTime));
+        StartCoroutine(CerrarPaginaCoroutine(delayTime));
+        StartCoroutine(AbrirPaginaCoroutine(popupDelayTime));
+        PlayGlitter();
     }
     public void CheckSpheres(int activePageIndex)
     {
@@ -129,25 +124,33 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
             esferaNext.gameObject.SetActive(true);
         }
     }
-    public IEnumerator CerrarPUBsCoroutine(float delayTime) //cierro la pag actual
+    public IEnumerator CerrarPaginaCoroutine(float cerrarDelayTime) //cierro la pag actual
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(cerrarDelayTime);
 
         //despues de esperar un toque
-        PlayPageSound();
         LevelManager.Instance.inDialogue = true;  //freezeo a kami
+        PUBManager.Instance.ClosePUBs();
         CreateHoja(_isNext); //instancio la hoja que corresponda
         CheckSpheres(activePageIndex); //chequeo si hay que poner/sacar zona
-        PUBManager.Instance.ClosePUBs();
+        PlayPageSound();
     }
-    public IEnumerator AbrirPUBsCoroutine(float delayTime)
+    public IEnumerator AbrirPaginaCoroutine(float abrirDelayTime)
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(abrirDelayTime);
         EventManager.Trigger(Evento.OnPlayerChangePage, activePageIndex + 1, _isNext);
+        PUBManager.Instance.OpenPUBs();
+        TogglePages(activePageIndex);
+        Debug.Log("enlarge page index " + activePageIndex);
+        pagesAnimators[activePageIndex].SetTrigger("Enlarge"); //cierro la pag
 
+    } //abro la nueva pag
+
+    public void TogglePages(int pageIndex)
+    {
         for (int i = 0; i < pagesToToggle.Length; i++) //este es el core, el q prende y apaga la carpeta de cada pagina
         {
-            if (i == activePageIndex)
+            if (i == pageIndex)
             {
                 pagesToToggle[i].SetActive(true);
             }
@@ -156,8 +159,8 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
                 pagesToToggle[i].SetActive(false);
             }
         }
-        PUBManager.Instance.OpenPUBs();
-    } //abro la nueva pag
+    }
+
     void CreateHoja(bool isNext)
     {
         if (isNext)
@@ -200,7 +203,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         if (!gameObject.scene.isLoaded)
         {
-            //EventManager.Unsubscribe(Evento.OnPlayerPressedE, TriggerPageScroll);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, TriggerPageScroll);
             EventManager.Unsubscribe(Evento.OnPageFinishTurning, FinishTurning);
         }
     }
