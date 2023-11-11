@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3884983670711628665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.62, y: 0.62, z: 0.62}
+  m_LocalPosition: {x: 2.48, y: -6.44, z: 3.78}
+  m_LocalScale: {x: 0.49702564, y: 0.49702564, z: 0.49702564}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6973194943832075054}
@@ -98,7 +98,12 @@ PrefabInstance:
     - target: {fileID: 5209825450588238441, guid: 3bc7638cb78b1b34da62aece966d3fad,
         type: 3}
       propertyPath: m_Name
-      value: Hoja
+      value: HojaCaraAbajo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209825450588238441, guid: 3bc7638cb78b1b34da62aece966d3fad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5964168108464359383, guid: 3bc7638cb78b1b34da62aece966d3fad,
         type: 3}
@@ -178,7 +183,12 @@ PrefabInstance:
     - target: {fileID: 5282191013695589251, guid: 4a91eb41038b7af4ea91ea70b22e0e3f,
         type: 3}
       propertyPath: m_Name
-      value: Hoja2
+      value: HojaCaraArriba
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282191013695589251, guid: 4a91eb41038b7af4ea91ea70b22e0e3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6037043770845085245, guid: 4a91eb41038b7af4ea91ea70b22e0e3f,
         type: 3}
