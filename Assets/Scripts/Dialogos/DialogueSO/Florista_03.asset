@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wasRead: 0
   events:
-  - text: '[FLORISTA DALIA]: Gracias por traerme las flores!'
+  - text: Gracias por traerme las flores!
     sprite: {fileID: 21300000, guid: c164b1e00b6452d4caf416a1c568dedf, type: 3}
-  - text: '[FLORISTA DALIA]: Por haberme ayudado, te voy a regalar estos papeles,
-      espero que te sirvan!'
+    speakerName: Dalia
+  - text: Por haberme ayudado, te voy a regalar estos papeles, espero que te sirvan!
     sprite: {fileID: 21300000, guid: c164b1e00b6452d4caf416a1c568dedf, type: 3}
+    speakerName: Dalia
   - text: '[Kami recibe 50 papeles de Dalia.]'
     sprite: {fileID: 21300000, guid: c164b1e00b6452d4caf416a1c568dedf, type: 3}
+    speakerName: Narrador
   currentText: 3
