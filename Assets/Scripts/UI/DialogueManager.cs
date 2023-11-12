@@ -8,7 +8,8 @@ public class DialogueManager : Singleton<DialogueManager>
     //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto
 
     [SerializeField] GameObject dialogueGlobe;
-    [SerializeField] TMPro.TextMeshProUGUI dialogueTextComponent;
+    [SerializeField] TMPro.TextMeshProUGUI dialogueGlobeText;
+    [SerializeField] TMPro.TextMeshProUGUI dialogueGlobeSpeaker;
     [SerializeField] Image npcQueTeHablaImage;
 
     bool input = false;
@@ -65,7 +66,8 @@ public class DialogueManager : Singleton<DialogueManager>
     public void HideDialogue(DialogueSO dialogue)
     {
         //print("hide dialogue " + dialogue.name);
-        dialogueTextComponent.text = ""; //esto es lo que deberia estar animado despues
+        dialogueGlobeText.text = ""; //esto es lo que deberia estar animado despues
+        dialogueGlobeSpeaker.text = "";
         LevelManager.Instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
@@ -79,7 +81,8 @@ public class DialogueManager : Singleton<DialogueManager>
             //print("ARRANCA EL WRITE TEXT ");
             dialogue.currentText++;
 
-            dialogueTextComponent.text = dialogue.events[i].text;
+            dialogueGlobeText.text = dialogue.events[i].text;
+            dialogueGlobeSpeaker.text = dialogue.events[i].speakerName;
             npcQueTeHablaImage.sprite = dialogue.events[i].sprite;
 
             SetNativeSize(npcQueTeHablaImage.sprite); //??? esto es necesario si todos los sprites son del mismo tamaño?
