@@ -52,9 +52,6 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         if (!OverlayManager.Instance.isLocked)
         {
-            Debug.Log("shrink page index " + activePageIndex);
-            pagesAnimators[activePageIndex].SetTrigger("Shrink"); //cierro la pag
-
             if (esferaNext.triggerBool 
                 && !_isTurning 
                 && activePageIndex < pagesToToggle.Length - 1)
@@ -73,6 +70,8 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
     private void ChangeToPrevPage()
     {
+        pagesAnimators[activePageIndex].SetTrigger("Shrink"); //cierro la pag
+
         activePageIndex--; //el paso de pagina posta, para atras
         _isNext = false; //isNext es una variable piola que mucha gente necesita
         _isTurning = true;
@@ -83,6 +82,8 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
     private void ChangeToNextPage()
     {
+        pagesAnimators[activePageIndex].SetTrigger("Shrink"); //cierro la pag
+
         activePageIndex++; //el paso de pagina posta
         _isNext = true; //isNext es una variable piola que mucha gente necesita
         _isTurning = true;
