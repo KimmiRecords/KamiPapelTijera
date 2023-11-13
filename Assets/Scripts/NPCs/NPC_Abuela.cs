@@ -12,6 +12,8 @@ public class NPC_Abuela : NPC
 
     [HideInInspector] public bool isDropoff;
     public Transform dropoffPoint;
+    public Transform unfoldPoint;
+
 
     public Animator anim;
 
@@ -26,13 +28,13 @@ public class NPC_Abuela : NPC
 
     public void GetFolded()
     {
-        Debug.Log("get folded");
+        //Debug.Log("get folded");
         _sr.enabled = false;
     }
 
     public void GetUnfolded()
     {
-        Debug.Log("get unfolded");
+        //Debug.Log("get unfolded");
         _sr.enabled = true;
         StartAbuelaDropoff();
     }
@@ -50,11 +52,10 @@ public class NPC_Abuela : NPC
     {
         isDropoff = true;
     }
-    public void PlaceAbuelaNextToPlayer(params object[] parameter)
+    public void PlaceAbuelaAtUnfoldPoint(params object[] parameter)
     {
-        transform.parent = dropoffPoint.parent;
-        Vector3 desiredPos = player.transform.position + (player.transform.forward * (playerOffsetDistance / 2));
-        transform.position = new Vector3(desiredPos.x, transform.position.y, desiredPos.z);
+        transform.parent = unfoldPoint.parent;
+        transform.position = unfoldPoint.position;
     }
 
 

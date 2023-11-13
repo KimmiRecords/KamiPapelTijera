@@ -29,7 +29,6 @@ public class AbuelaDialogueTrigger : TriggerDialogue
     [SerializeField] GameObject globitoDialogo;
     [SerializeField] QuestSO requiredQuest; //la quest necesaria para desbloquear el segundo dialogo
     [SerializeField] GameObject foldOrigamiSeal, unfoldOrigamiSeal;
-    Origami foldOrigami, unfoldOrigami;
 
     protected override void Start()
     {
@@ -40,15 +39,11 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         EventManager.Subscribe(Evento.OnEncounterEnd, Unlock);
         EventManager.Subscribe(Evento.OnAbuelaFold, OnAbuelaFolded);
         EventManager.Subscribe(Evento.OnAbuelaUnfold, OnAbuelaUnfolded);
-
-
-        foldOrigami = foldOrigamiSeal.GetComponentInChildren<TriggerOrigami>().origami;
-        unfoldOrigami = unfoldOrigamiSeal.GetComponentInChildren<TriggerOrigami>().origami;
     }
 
     public void OnDialogueEnded(params object[] parameters)
     {
-        Debug.Log("on dialogue ended");
+        //Debug.Log("on dialogue ended");
 
         if ((DialogueSO)parameters[1] == _dialogues[1])
         {
@@ -62,16 +57,17 @@ public class AbuelaDialogueTrigger : TriggerDialogue
     }
     private void OnAbuelaFolded(params object[] parameters)
     {
-        Debug.Log("on abuela folded");
+        //Debug.Log("on abuela folded");
         EnableOrigamiSeal(foldOrigamiSeal, false);
         LevelManager.Instance.AddResource(ResourceType.abuela, 1);
         abuela.GetFolded();
         AudioManager.instance.PlayByName("MagicSuccess", 1.6f);
+        abuela.PlaceAbuelaAtUnfoldPoint();
     }
 
     private void OnAbuelaUnfolded(params object[] parameters)
     {
-        Debug.Log("on abuela unfolded");
+        //Debug.Log("on abuela unfolded");
         EnableOrigamiSeal(unfoldOrigamiSeal, false);
         LevelManager.Instance.AddResource(ResourceType.abuela, -1);
         abuela.GetUnfolded();
@@ -84,9 +80,8 @@ public class AbuelaDialogueTrigger : TriggerDialogue
         //si la quest que se completó es la required...
         if ((QuestSO)parameters[0] == requiredQuest)
         {
-            Debug.Log("required quest completed");
+            //Debug.Log("required quest completed");
 
-            abuela.PlaceAbuelaNextToPlayer();
             EnableOrigamiSeal(unfoldOrigamiSeal, true);
         }
     }
@@ -131,7 +126,7 @@ public class AbuelaDialogueTrigger : TriggerDialogue
 
     public void OnFirstDialogueEnded()
     {
-        Debug.Log("on first dialogue ended");
+        //Debug.Log("on first dialogue ended");
 
         firstTime = false;
         AudioManager.instance.PlayByName("MagicSuccess", 2f);
@@ -141,7 +136,7 @@ public class AbuelaDialogueTrigger : TriggerDialogue
 
     public void OnSecondDialogueEnded()
     {
-        Debug.Log("on second dialogue ended");
+        //Debug.Log("on second dialogue ended");
         EnableOrigamiSeal(foldOrigamiSeal, true);
         Lock();
         PasarAlSiguienteDialogo();
@@ -149,13 +144,13 @@ public class AbuelaDialogueTrigger : TriggerDialogue
 
     public void OnThirdDialogueEnded()
     {
-        Debug.Log("on third dialogue ended");
+        //Debug.Log("on third dialogue ended");
         isLocked = true;
     }
 
     public void EnableOrigamiSeal(GameObject origamiSeal, bool value)
     {
-        Debug.Log("enable origami seal" + origamiSeal + value);
+        //Debug.Log("enable origami seal" + origamiSeal + value);
         origamiSeal.SetActive(value);
     }
 

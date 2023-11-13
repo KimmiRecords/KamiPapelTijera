@@ -18,6 +18,11 @@ public class RocosoStartState : IState
         _rocoso.startAnimationHasFinished = false;
         _rocoso.anim.SetTrigger("isWakeUp");
         EventManager.Trigger(Evento.OnRocosoWokeUp, _rocoso.endsEncounter);
+        if (_rocoso.endsEncounter)
+        {
+            AudioManager.instance.PlayByName("RocosoWakeUp");
+        }
+
     }
 
     public void OnUpdate()

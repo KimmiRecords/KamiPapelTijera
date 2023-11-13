@@ -12,31 +12,41 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
     //isNext seria como lo opuesto a isPrev.
 
     [SerializeField] Player _player;
-    [SerializeField] float pageEntryX = -75;
-    [SerializeField] float pageExitX = 80;
+    [SerializeField] float pageEntryX;
+    [SerializeField] float pageExitX;
     CharacterController _playerCC;
     Vector3 lastUsedSpawn; //para recordar el ultimo usado para cuando el player muera
 
     void Start()
     {
-        EventManager.Subscribe(Evento.OnPlayerChangePage, PlacePlayer);
+        EventManager.Subscribe(Evento.OnPlayerChangePage, PlacePlayerInNewPage);
+        EventManager.Subscribe(Evento.OnEncounterStart, SaveCurrentPosition);
         _playerCC = _player.GetComponent<CharacterController>();
         lastUsedSpawn = _player.transform.position; //en principio, tu ultimo spawn es donde arranca el juego
     }
-    public void PlacePlayer(params object[] parameter)
+
+    //subscribing methods
+    public void PlacePlayerInNewPage(params object[] parameter)
     {
         //Debug.Log("place player");
         PositionPlayerAtPoint(GetProjectedPositionInNewPage(_player.transform.position, (bool)parameter[1]));
         SavePosition(_player.transform.position);
     }
+    public void SaveCurrentPosition(params object[] parameter)
+    {
+        SavePosition(_player.transform.position);
+    }
+
+    //methods called from other managers
     public void RespawnPlayer(params object[] parameter)
     {
         //Debug.Log("respawn player");
         PositionPlayerAtPoint(lastUsedSpawn);
     }
+
+    //utilities
     public void PositionPlayerAtPoint(Vector3 point)
     {
-        //Debug.Log("PositionPlayerAtPoint");
         _playerCC.enabled = false;
         _player.transform.position = point;
         _playerCC.enabled = true;
@@ -65,11 +75,12 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
     {
         lastUsedSpawn = pos;
     }
+
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPlayerChangePage, PlacePlayer);
+            EventManager.Unsubscribe(Evento.OnPlayerChangePage, PlacePlayerInNewPage);
         }
     }
 }

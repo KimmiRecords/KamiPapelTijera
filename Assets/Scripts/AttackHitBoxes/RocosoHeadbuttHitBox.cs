@@ -19,7 +19,6 @@ public class RocosoHeadbuttHitBox : MonoBehaviour
 
             IGolpeable objetoGolpeable = other.GetComponent<IGolpeable>();
             objetoGolpeable.GetGolpeado(headbuttDamage);
-            AudioManager.instance.PlayByName("Headbutt", 1f, 0.05f);
             didHit = true;
         }
     }

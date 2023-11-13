@@ -45,24 +45,19 @@ public class Rocoso : Enemy
             target = _player.transform.position;
         }
     }
-    public override void TakeDamage(float dmg)
-    {
-        AudioManager.instance.PlayByName("ShipCrash", 0.6f);
-        _hp -= dmg;
-        if (_hp <= 0)
-        {
-            StartCoroutine(MorirCoroutine());
-        }
-        StartCoroutine(EnrojecerSprite());
-    }
-    public virtual void OnPlayerEnterWakeUpCollider(Player player) //este metodo es disparado por el trigger, solo la primera vez
-    {
-        _player = player;
-        playerEnteredWakeUpCollider = true;
-    }
+
+    //triggered by animator
     public void OnStartAnimationEnd() //disparada por el final de la animacion de start
     {
         startAnimationHasFinished = true;
+    }
+    protected void PlayHeadbuttSound() //se dispara por la animacion
+    {
+        AudioManager.instance.PlayByName("RocosoHeadbutt", 1f, 0.02f);
+    }
+    protected void PlayPasoSound()
+    {
+        AudioManager.instance.PlayByName("RocosoPaso", 1f, 0.05f);
     }
     protected IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo
     {
@@ -70,6 +65,13 @@ public class Rocoso : Enemy
         yield return new WaitForSeconds(0.1f);
         DisableHeadbuttHitbox();
     }
+    public void DeathAnimationEnd() //esto lo dispara el animator (especificamente, el final de clip de death)
+    {
+        //Debug.Log("termina el clip de muerte");
+        deathAnimationEnded = true;
+    }
+    
+    //utilities
     public void EnableHeadbuttHitbox()
     {
         //Debug.Log("prendo el headbutt");
@@ -81,12 +83,19 @@ public class Rocoso : Enemy
         _hitBox.gameObject.SetActive(false);
         isHitting = false;
     }
+
+    //interfaces and triggers
+    public virtual void OnPlayerEnterWakeUpCollider(Player player) //este metodo es disparado por el trigger, solo la primera vez
+    {
+        _player = player;
+        playerEnteredWakeUpCollider = true;
+    }
     public void GetWet(float wetDamage) //esto se dispara cuando collisiona con el rio
     {
         //Debug.Log("rocoso se moja");
 
         _particulasSplash.SetActive(true);
-        AudioManager.instance.PlayByName("BigWaterSplash");
+        AudioManager.instance.PlayByName("RocosoMojado");
 
         isDrowning = true;
         StartCoroutine(DrowningCoroutine(wetDamage));
@@ -103,10 +112,17 @@ public class Rocoso : Enemy
             yield return new WaitForSeconds(0.8f);
         }
     }
-    public void DeathAnimationEnd() //esto lo dispara el animator (especificamente, el final de clip de death)
+
+    //dmg and death
+    public override void TakeDamage(float dmg)
     {
-        //Debug.Log("termina el clip de muerte");
-        deathAnimationEnded = true;
+        AudioManager.instance.PlayByName("ShipCrash", 0.6f);
+        _hp -= dmg;
+        if (_hp <= 0)
+        {
+            StartCoroutine(MorirCoroutine());
+        }
+        StartCoroutine(EnrojecerSprite());
     }
     public IEnumerator MorirCoroutine() //la corrutina esta es solo para esperar a la anim antes de disparar Die()
     {
@@ -137,21 +153,21 @@ public class Rocoso : Enemy
         _fsm.ChangeState(State.RocosoSleep);
     }
 
-    protected void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enterAttackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, exitAttackRange);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, viewRange);
+    //protected void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, enterAttackRange);
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, exitAttackRange);
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(transform.position, viewRange);
 
-        if (_player != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, _player.transform.position);
-        }
-    }
+    //    if (_player != null)
+    //    {
+    //        Gizmos.color = Color.blue;
+    //        Gizmos.DrawLine(transform.position, _player.transform.position);
+    //    }
+    //}
 
     public float DistanceToPlayer()
     {

@@ -58,14 +58,14 @@ public class PlayerView
 
     public void StartGetWetAnimation()
     {
-        AudioManager.instance.PlayByName("BigWaterSplash", 1.4f);
+        AudioManager.instance.PlayByName("BigWaterSplash", 1.2f);
         //triggerear loop de particulas
         //triggerear loop de sonido de nadar splashsplash
     }
 
     public void StartGetGolpeadoAnimation()
     {
-        AudioManager.instance.PlayByName("HurtPaper", 1.5f);
+        AudioManager.instance.PlayByName("HurtPaper", 1.2f);
     }
 
     public void StartMoveAnimation()

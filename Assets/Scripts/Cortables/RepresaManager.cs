@@ -12,7 +12,9 @@ public class RepresaManager : MonoBehaviour
     int represasCortadas = 0;
 
     [SerializeField] GameObject rioVertical, rioAbajo;
-    [SerializeField] float delayEntreRios = 1f;
+    [SerializeField] float delayTimeEntreRios = 1f;
+    [SerializeField] float delayTimeRepresaFall = 1f;
+
 
     void Start()
     {
@@ -24,7 +26,7 @@ public class RepresaManager : MonoBehaviour
         represasCortadas++;
         if (represasCortadas >= represasCortables.Count)
         {
-            AudioManager.instance.PlayByName("BigWaterSplash", 0.6f);
+            AudioManager.instance.PlayByName("RepresaFall", 1f);
             AudioManager.instance.PlayByName("MagicSuccess", 0.9f);
             particulasSplash.SetActive(true);
             StartCoroutine(ActivarRiosCoroutine());
@@ -34,11 +36,12 @@ public class RepresaManager : MonoBehaviour
     IEnumerator ActivarRiosCoroutine()
     {
         //desaparece la represa y quedan solo los troncos
+        yield return new WaitForSeconds(delayTimeRepresaFall);
         LevelManager.Instance.GameObjectActivator(troncos, represasCortables);
 
         //aparecen los rios en orden
         rioVertical.SetActive(true);
-        yield return new WaitForSeconds(delayEntreRios);
+        yield return new WaitForSeconds(delayTimeEntreRios);
         rioAbajo.SetActive(true);
     }
 

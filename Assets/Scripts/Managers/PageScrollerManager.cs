@@ -69,7 +69,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
     private void ChangeToPrevPage()
     {
-        Debug.Log("shrink page index " + activePageIndex);
+        //Debug.Log("shrink page index " + activePageIndex);
 
         pagesAnimators[activePageIndex].SetBool("isEnlarge", false);
         pagesAnimators[activePageIndex].SetBool("isShrink", true);
@@ -84,7 +84,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
     private void ChangeToNextPage()
     {
-        Debug.Log("shrink page index " + activePageIndex);
+        //Debug.Log("shrink page index " + activePageIndex);
         pagesAnimators[activePageIndex].SetBool("isEnlarge", false);
         pagesAnimators[activePageIndex].SetBool("isShrink", true);
 
