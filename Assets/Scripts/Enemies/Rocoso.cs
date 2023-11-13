@@ -33,9 +33,7 @@ public class Rocoso : Enemy
         _fsm.AddState(State.RocosoAttack, new RocosoAttackState(_fsm, this));
         _fsm.AddState(State.RocosoDeath, new RocosoDeathState(_fsm, this));
         _fsm.ChangeState(State.RocosoSleep);
-
         _hitBox.headbuttDamage = _attackDamage;
-
     }
 
     protected void Update()
@@ -139,27 +137,26 @@ public class Rocoso : Enemy
         _fsm.ChangeState(State.RocosoSleep);
     }
 
-    //protected void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, enterAttackRange);
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawWireSphere(transform.position, exitAttackRange);
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawWireSphere(transform.position, viewRange);
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, enterAttackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, exitAttackRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, viewRange);
 
-    //    if (_player != null)
-    //    {
-    //        Gizmos.color = Color.blue;
-    //        Gizmos.DrawLine(transform.position, _player.transform.position);
-    //    }
-    //}
+        if (_player != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, _player.transform.position);
+        }
+    }
 
     public float DistanceToPlayer()
     {
         return Vector3.Distance(target, transform.position);
     }
-
     public bool PlayerIsInViewRange()
     {
         return DistanceToPlayer() < viewRange;

@@ -63,7 +63,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnCameraChange, //param0 es current camera
     OnPageTurned, //param0 es activeindex
     OnAbuelaFold,
-    OnAbuelaUnfold
+    OnAbuelaUnfold,
+    OnRocosoWokeUp //param0 es bool endsEncounter
 }
 
 public class EventManager

@@ -17,6 +17,7 @@ public class RocosoStartState : IState
     {
         _rocoso.startAnimationHasFinished = false;
         _rocoso.anim.SetTrigger("isWakeUp");
+        EventManager.Trigger(Evento.OnRocosoWokeUp, _rocoso.endsEncounter);
     }
 
     public void OnUpdate()
