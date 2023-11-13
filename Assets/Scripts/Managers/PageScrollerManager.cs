@@ -47,7 +47,6 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         glitterSystems = glitterParent.GetComponentsInChildren<ParticleSystem>();
     }
 
-
     public void TriggerPageScroll(params object[] parameters) //cuando tocas E
     {
         if (!OverlayManager.Instance.isLocked)
@@ -70,7 +69,10 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
     private void ChangeToPrevPage()
     {
-        pagesAnimators[activePageIndex].SetTrigger("Shrink"); //cierro la pag
+        Debug.Log("shrink page index " + activePageIndex);
+
+        pagesAnimators[activePageIndex].SetBool("isEnlarge", false);
+        pagesAnimators[activePageIndex].SetBool("isShrink", true);
 
         activePageIndex--; //el paso de pagina posta, para atras
         _isNext = false; //isNext es una variable piola que mucha gente necesita
@@ -82,7 +84,9 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
     private void ChangeToNextPage()
     {
-        pagesAnimators[activePageIndex].SetTrigger("Shrink"); //cierro la pag
+        Debug.Log("shrink page index " + activePageIndex);
+        pagesAnimators[activePageIndex].SetBool("isEnlarge", false);
+        pagesAnimators[activePageIndex].SetBool("isShrink", true);
 
         activePageIndex++; //el paso de pagina posta
         _isNext = true; //isNext es una variable piola que mucha gente necesita
@@ -143,8 +147,8 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         PUBManager.Instance.OpenPUBs();
         TogglePages(activePageIndex);
         Debug.Log("enlarge page index " + activePageIndex);
-        pagesAnimators[activePageIndex].SetTrigger("Enlarge"); //cierro la pag
-
+        pagesAnimators[activePageIndex].SetBool("isShrink", false);
+        pagesAnimators[activePageIndex].SetBool("isEnlarge", true);
     } //abro la nueva pag
 
     public void TogglePages(int pageIndex)

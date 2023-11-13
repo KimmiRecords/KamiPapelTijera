@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 69834710}
-  m_IndirectSpecularColor: {r: 0.12097076, g: 0.13365415, b: 0.31922194, a: 1}
+  m_IndirectSpecularColor: {r: 0.12097077, g: 0.13365416, b: 0.31922194, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1603,6 +1603,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeSpeed: 0.5
   holdTime: 2
+--- !u!114 &1556505321 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1091824912638018874, guid: 04118d123dafae24aa868d22c2ad781c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4199950712035814738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1710437896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,9 +2305,19 @@ PrefabInstance:
       objectReference: {fileID: 2146439628}
     - target: {fileID: 4104525655400190836, guid: 04118d123dafae24aa868d22c2ad781c,
         type: 3}
+      propertyPath: dialogueGlobeText
+      value: 
+      objectReference: {fileID: 861057900}
+    - target: {fileID: 4104525655400190836, guid: 04118d123dafae24aa868d22c2ad781c,
+        type: 3}
       propertyPath: npcQueTeHablaImage
       value: 
       objectReference: {fileID: 1808348886}
+    - target: {fileID: 4104525655400190836, guid: 04118d123dafae24aa868d22c2ad781c,
+        type: 3}
+      propertyPath: dialogueGlobeSpeaker
+      value: 
+      objectReference: {fileID: 1556505321}
     - target: {fileID: 4104525655400190836, guid: 04118d123dafae24aa868d22c2ad781c,
         type: 3}
       propertyPath: dialogueTextComponent

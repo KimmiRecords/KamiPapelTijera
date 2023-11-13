@@ -89,7 +89,7 @@ public class LevelManager : Singleton<LevelManager>
             AddResource(ResourceType.hongos, 100);
             AddResource(ResourceType.papel, 100);
             AddResource(ResourceType.flores, 100);
-            AddResource(ResourceType.abuela, 1);
+            //AddResource(ResourceType.abuela, 1);
             GiveWaterBoots();
             GiveSprintBoots();
             GiveTijeraMejorada();
