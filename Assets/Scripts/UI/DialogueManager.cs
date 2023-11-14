@@ -32,14 +32,9 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
-    public void FakePlayerInput()
+    public void BUTTON_NextText() //para que el button lo dispare. unity "2021"
     {
-        if (waitingForInput)
-        {
-            //print("recibi input true");
-            input = true;
-            PlayEToInteractSound();
-        }
+        CheckPlayerInput();
     }
 
 

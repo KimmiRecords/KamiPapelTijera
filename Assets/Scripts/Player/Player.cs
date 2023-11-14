@@ -172,6 +172,11 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
             _view.StartAttack();
         }
     }
+    //triggered by animator - unity "2021"
+    public void StartPasoSFX(int step) //del animator me dicen en qué paso de la animation estoy.
+    {
+        _view.StartPasoSFX(step); //le paso el valor y el view se encarga
+    }
     public void StartTijeraCoroutine() //este metodo es solo xq el estupido animator no sabe disparar corrutinas. unity "2021"
     {
         StartCoroutine(TijeraCoroutine());

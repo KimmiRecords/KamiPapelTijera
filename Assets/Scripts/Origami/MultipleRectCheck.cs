@@ -69,7 +69,7 @@ public class MultipleRectCheck : MonoBehaviour
             else
             {
                 //Debug.Log("invocación cancelada x soltar mal");
-                AudioManager.instance.PlayByName("MagicFail", 1, 0.05f);
+                AudioManager.instance.PlayByName("Origami_Fail_Crumble", 1, 0.05f);
                 EndOrigami(desiredOrigami);
             }
 
@@ -95,7 +95,7 @@ public class MultipleRectCheck : MonoBehaviour
         {
             //me salí de la ruta
             arrastrando = false;
-            AudioManager.instance.PlayByName("MagicFail", 1, 0.05f);
+            AudioManager.instance.PlayByName("Origami_Fail_Crumble", 1, 0.05f);
             Debug.Log("invocación cancelada x salir de la ruta");
             EndOrigami(desiredOrigami);
         }

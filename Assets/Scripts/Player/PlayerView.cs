@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -135,5 +136,27 @@ public class PlayerView
     {
         _player.particleShooter.Enable(0, false);
         AudioManager.instance.PlayByName("BootsOff", 2f, 0.01f);
+    }
+
+    public void StartPasoSFX(int step)
+    {
+        switch(step)
+        {
+            case 0:
+                AudioManager.instance.PlayRandom("Pasos_Kami_01", "Pasos_Kami_03");
+                break;
+            case 1:
+                AudioManager.instance.PlayRandom("Pasos_Kami_02", "Pasos_Kami_04");
+                break;
+            case 2:
+                AudioManager.instance.PlayByName("Pasos_Kami_03", 1f, 0.01f);
+                break;
+            case 3:
+                AudioManager.instance.PlayByName("Pasos_Kami_04", 1f, 0.01f);
+                break;
+            default:
+                AudioManager.instance.PlayRandom("Pasos_Kami_01", "Pasos_Kami_02", "Pasos_Kami_03", "Pasos_Kami_04");
+                break;
+        }
     }
 }

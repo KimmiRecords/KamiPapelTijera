@@ -34,6 +34,11 @@ public class PlayerAnimationRelay : MonoBehaviour
         //print("isAttacking es " + player.isAttacking);
     }
 
+    public void StartPasoSFX(int step)
+    {
+        player.StartPasoSFX(step);
+    }
+
     //public void SetIsReadyToJumpOn()
     //{
     //    player.isReadyToJump = true;
