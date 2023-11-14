@@ -54,7 +54,7 @@ public class NPC_Abuela : NPC
     }
     public void PlaceAbuelaAtUnfoldPoint(params object[] parameter)
     {
-        transform.parent = unfoldPoint.parent;
+        transform.parent = unfoldPoint.transform;
         transform.position = unfoldPoint.position;
     }
 
