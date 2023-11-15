@@ -13,7 +13,7 @@ public class NPC_Abuela : NPC
     [HideInInspector] public bool isDropoff;
     public Transform dropoffPoint;
     public Transform unfoldPoint;
-
+    Vector3 originalScale;
 
     public Animator anim;
 
@@ -24,6 +24,7 @@ public class NPC_Abuela : NPC
         _fsm.AddState(State.Abuela_FollowPlayer, new Abuela_FollowPlayerState(_fsm, this));
         _fsm.AddState(State.Abuela_Dropoff, new Abuela_DropoffState(_fsm, this));
         _fsm.ChangeState(State.Abuela_Idle);
+        originalScale = transform.localScale;
     }
 
     public void GetFolded()
@@ -56,6 +57,7 @@ public class NPC_Abuela : NPC
     {
         transform.parent = unfoldPoint.transform;
         transform.position = unfoldPoint.position;
+        transform.localScale = originalScale;
     }
 
 
