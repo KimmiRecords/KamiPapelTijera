@@ -14,15 +14,12 @@ public struct LightState
 
 public class LightCycler : MonoBehaviour
 {
-    private new Light light;
-    [SerializeField] LightState[] _lightStates;
+    private new Light light; //la luz que se va a mover en cuestion
+    [SerializeField] LightState[] _lightStates; //los distintos tipos de luz que va a haber en cada pag
     LightState _currentLightState;
 
-    [SerializeField] float _transitionDuration = 2f; // Tiempo de transición en segundos
+    [SerializeField] float _transitionDuration = 2f;
 
-    //a series of methods that change the light's position, rotation, color and intensity
-    //these methods should be called by the event manager, which should be called by the page scroller manager
-    //these methods should store the original values of the light, so that they can be restored when the player goes back to the original page
     private void Start()
     {
         light = GetComponent<Light>();
@@ -119,7 +116,13 @@ public class LightCycler : MonoBehaviour
         light.intensity = targetFloat;
     }
 
-
+    private void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnPageTurned, OnChangeLightState);
+        }
+    }
 }
 
 
