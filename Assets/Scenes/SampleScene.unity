@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12212748, g: 0.13368249, b: 0.31924987, a: 1}
+  m_IndirectSpecularColor: {r: 0.12212758, g: 0.1336825, b: 0.31924987, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6922,7 +6922,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1503947070}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9956587
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13265,7 +13265,7 @@ PrefabInstance:
     - target: {fileID: 5549367394310565229, guid: b10d773730f3e814c80e3450cd124562,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b10d773730f3e814c80e3450cd124562, type: 3}
@@ -18571,7 +18571,6 @@ MonoBehaviour:
   levelStartDelayTime: 1
   dialoguesEspeciales: []
   camarasEspeciales: 
-  origamiRepresa: {fileID: 1700251920}
 --- !u!114 &963194237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21588,6 +21587,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a67f73dd624214c4c97dcc12b65b55dd, type: 3}
+--- !u!1001 &1109100707
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 731990252}
+    m_Modifications:
+    - target: {fileID: 5873345392777358829, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_Name
+      value: HumoChimenea
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 49.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071069
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873345392777358830, guid: a80211f3e1115474fa3072ec9145d63e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a80211f3e1115474fa3072ec9145d63e, type: 3}
 --- !u!1001 &1111496321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28865,7 +28933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.999987, y: 0.000095972}
+  m_AnchoredPosition: {x: 4.999987, y: 0.00024680892}
   m_SizeDelta: {x: -5, y: 600}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1394980291
@@ -46319,7 +46387,7 @@ PrefabInstance:
     - target: {fileID: 5549367394310565229, guid: b10d773730f3e814c80e3450cd124562,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5549367394491038700, guid: b10d773730f3e814c80e3450cd124562,
         type: 3}
