@@ -159,4 +159,14 @@ public class PlayerView
                 break;
         }
     }
+
+    public void EnableTijeraParticles()
+    {
+        _player.tijeraParticles.gameObject.SetActive(true);
+    }
+
+    public void DisableTijeraParticles()
+    {
+        _player.tijeraParticles.gameObject.SetActive(false);
+    }
 }

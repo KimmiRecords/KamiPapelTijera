@@ -34,6 +34,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     [SerializeField] Renderer _renderer;
     [SerializeField] GameObject myPaperPlaneHat;
     [SerializeField] TijeraManager tijeraManager;
+    public ParticleSystem tijeraParticles, tijeraTrail;
 
     [Header("Planeo")]
     public float augmentedJumpForce = 20f;
@@ -191,8 +192,23 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         _readyToAttack = true;
         isAttacking = false;
         _view.EndAttack();
-
     }
+
+    public void StartTijeraParticles()
+    {
+        //_view.EnableTijeraParticles();
+        tijeraManager.EnableTijeraParticles();
+    }
+
+    public void StopTijeraParticles()
+    {
+        //_view.DisableTijeraParticles();
+        tijeraManager.DisableTijeraParticles();
+    }
+
+
+    //entity
+
     public override void TakeDamage(float dmg)
     {
         Vida -= dmg;
