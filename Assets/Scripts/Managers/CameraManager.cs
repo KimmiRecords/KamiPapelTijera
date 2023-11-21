@@ -26,7 +26,6 @@ public class CameraManager : Singleton<CameraManager>
     [Header("Casos Especiales")]
     [SerializeField] DialogueSO[] dialoguesEspeciales;
     [SerializeField] CameraMode[] camarasEspeciales;
-    [SerializeField] Origami origamiRepresa;
 
     protected override void Awake()
     {
@@ -108,7 +107,6 @@ public class CameraManager : Singleton<CameraManager>
         TurnOffAllVirtualCameras();
         currentCamera = (int)cam;
         _virtualCameras[currentCamera].gameObject.SetActive(true);
-
     }
     public void SetCamera(params object[] parameters)
     {
