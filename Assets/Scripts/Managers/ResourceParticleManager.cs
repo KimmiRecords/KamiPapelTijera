@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class ResourceParticleManager : Singleton<ResourceParticleManager>
 {
-    [SerializeField] float duration = 1f;
+    [SerializeField] float duration = 2;
     [SerializeField] float offset;
     public ParticleSystem glitterParticles;
     public InventorySlot sticker;
+    public float alphaFadeInDuration = 0.5f;
 
     public Canvas canvas;
 
@@ -49,9 +50,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
         //Debug.Log("start system");
         ResourceType rt = (ResourceType)parameter[0];
 
-        if ((bool)parameter[2] &&
-            (rt == ResourceType.papel || rt == ResourceType.flores ||
-            rt == ResourceType.hongos))
+        if ((bool)parameter[2]) //si suma. no quiero que aparezca cuando me quitan recursos
         {
             ActivateSystem(rt);
         }
@@ -62,6 +61,8 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
         //Debug.Log("activate system");
         ShowParticles();
         ShowSticker(rt);
+        
+
         StartCoroutine(HideParticles());
         StartCoroutine(HideSticker());
     }
@@ -74,6 +75,7 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
     public void ShowSticker(ResourceType rt)
     {
         //Debug.Log("muestro sticker");
+        StartCoroutine(AlphaLerpFadeIn(alphaFadeInDuration));
         sticker.gameObject.SetActive(true);
         sticker.SetItem(InventoryManager.Instance.itemsByResourceType[rt]);
 
@@ -92,6 +94,8 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
     public IEnumerator HideSticker()
     {
         yield return new WaitForSeconds(duration);
+        StartCoroutine(AlphaLerpFadeOut(alphaFadeInDuration));
+        yield return new WaitForSeconds(alphaFadeInDuration);
         //Debug.Log("hide sticker");
         sticker.gameObject.SetActive(false);
     }
@@ -105,4 +109,30 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
         }
     }
     #endregion
+
+    public IEnumerator AlphaLerpFadeIn(float duration)
+    {         
+        float elapsedTime = 0;
+        sticker.SetTransparency(0);
+    
+        while (elapsedTime < duration)
+        {
+            sticker.SetTransparency(Mathf.Lerp(0, 1, elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    public IEnumerator AlphaLerpFadeOut(float duration)
+    {
+        float elapsedTime = 0;
+        sticker.SetTransparency(1);
+
+        while (elapsedTime < duration)
+        {
+            sticker.SetTransparency(Mathf.Lerp(1, 0, elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
 }

@@ -11,4 +11,7 @@ public class MovingStickerSlot : InventorySlot
         //move upwards
         transform.position += Vector3.up * Time.deltaTime * upwardsSpeed;
     }
+
+    
+
 }
