@@ -7,6 +7,7 @@ public class Rocoso : Enemy
     public Rigidbody myRigidbody;
     public Animator anim; //mi animator
     public RocosoHeadbuttHitBox _hitBox;
+    [SerializeField] float hitboxDuration = 0.2f;
     public float enterAttackRange = 11; //si el pj se acerca a 11, le pego
     public float exitAttackRange = 30; //si se aleja a 30, dejo de pegarle y lo vuelvo a perseguir
     public float viewRange = 60; //me despierto si el pj se acerca a 50 o menos. me duermo si se aleja eso
@@ -62,7 +63,7 @@ public class Rocoso : Enemy
     protected IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo
     {
         EnableHeadbuttHitbox();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(hitboxDuration);
         DisableHeadbuttHitbox();
     }
     public void DeathAnimationEnd() //esto lo dispara el animator (especificamente, el final de clip de death)

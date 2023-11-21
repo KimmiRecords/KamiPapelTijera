@@ -488,6 +488,7 @@ MonoBehaviour:
   myRigidbody: {fileID: 2698636374348165167}
   anim: {fileID: 7897264121734106303}
   _hitBox: {fileID: 2412841192040739279}
+  hitboxDuration: 0.2
   enterAttackRange: 7.5
   exitAttackRange: 18
   viewRange: 30
@@ -645,6 +646,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4692066203251883459}
     m_Modifications:
+    - target: {fileID: 4188647691539489679, guid: 2952ed3c1e0ca1e4ba2d07ba8d61e6f9,
+        type: 3}
+      propertyPath: m_SortMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188647691539489679, guid: 2952ed3c1e0ca1e4ba2d07ba8d61e6f9,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188647691539489679, guid: 2952ed3c1e0ca1e4ba2d07ba8d61e6f9,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -195761597
+      objectReference: {fileID: 0}
     - target: {fileID: 5896508253609951290, guid: 2952ed3c1e0ca1e4ba2d07ba8d61e6f9,
         type: 3}
       propertyPath: m_RootOrder
@@ -663,7 +679,7 @@ PrefabInstance:
     - target: {fileID: 5896508253609951290, guid: 2952ed3c1e0ca1e4ba2d07ba8d61e6f9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.995
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5896508253609951290, guid: 2952ed3c1e0ca1e4ba2d07ba8d61e6f9,
         type: 3}
@@ -704,6 +720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hit VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195126678881069240, guid: 2952ed3c1e0ca1e4ba2d07ba8d61e6f9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2952ed3c1e0ca1e4ba2d07ba8d61e6f9, type: 3}
