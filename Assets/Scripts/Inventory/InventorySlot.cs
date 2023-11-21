@@ -24,7 +24,7 @@ public class InventorySlot : MonoBehaviour
 
     public void SetTransparency(float alpha)
     {
-        Debug.Log("set transparency");
+        //Debug.Log("set transparency");
         nameTextComponent.color = new Color(nameTextComponent.color.r, nameTextComponent.color.g, nameTextComponent.color.b, alpha);
         slotStickerImageComponent.color = new Color(slotStickerImageComponent.color.r, slotStickerImageComponent.color.g, slotStickerImageComponent.color.b, alpha);
         itemImageComponent.color = new Color(itemImageComponent.color.r, itemImageComponent.color.g, itemImageComponent.color.b, alpha);
@@ -32,7 +32,7 @@ public class InventorySlot : MonoBehaviour
 
     public void ResetColor()
     {
-        Debug.Log("reset color");
+        //Debug.Log("reset color");
         nameTextComponent.color = _originalTextColor;
         slotStickerImageComponent.color = _originalSlotColor;
         itemImageComponent.color = _originalIconColor;
