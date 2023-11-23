@@ -169,4 +169,15 @@ public class PlayerView
     {
         _player.tijeraParticles.gameObject.SetActive(false);
     }
+
+    public void StartReceiveReward()
+    {
+        _anim.SetBool("isReceivingReward", true);
+        //seria genial un timer, para forzar al jugador a fumarse toda la anim
+    }
+
+    public void EndReceiveReward()
+    {
+        _anim.SetBool("isReceivingReward", false);
+    }
 }

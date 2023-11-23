@@ -64,7 +64,10 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPageTurned, //param0 es activeindex
     OnAbuelaFold,
     OnAbuelaUnfold,
-    OnRocosoWokeUp //param0 es bool endsEncounter
+    OnRocosoWokeUp, //param0 es bool endsEncounter
+    OnQuestRewardedEnd, //param0 es quest
+    OnDialogueWriteText, //param0 es dialogue (pro tip: podes pedir dialogue.currentText)
+    OnQuestRewardedStart //param0 es quest
 }
 
 public class EventManager

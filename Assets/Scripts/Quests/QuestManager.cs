@@ -15,6 +15,14 @@ public enum RewardType
 
 public class QuestManager : Singleton<QuestManager>
 {
+    //las quests son de tipo
+    //Evento (se cumplen cuando se triggerea ese evento)
+    //o Resource (se cumplen cuando obtenes N de ese resource)
+
+    //quest completed se triggerea EN EL MOMENTO en el que pasa el evento o se obtiene el resource
+    //quest delivered, cuando empezas el dialogo con el npc teniendo la quest completa
+    //quest rewarded, cuando se TERMINA el dialogo de entregar la quest y empieza la secuencia de reward
+
     List<QuestSO> quests = new List<QuestSO>();
     Dictionary<Evento, bool> eventosSucedidos = new Dictionary<Evento, bool>();
 
@@ -25,7 +33,7 @@ public class QuestManager : Singleton<QuestManager>
     void Start()
     {
         EventManager.Subscribe(Evento.OnResourceUpdated, CheckQuests);
-        EventManager.Subscribe(Evento.OnAbuelaDropoff, SetAbuelaDropoff); //deberia ser generico
+        EventManager.Subscribe(Evento.OnAbuelaDropoff, SetAbuelaDropoff);
         EventManager.Subscribe(Evento.OnQuestDelivered, GiveReward);
     }
 
@@ -85,7 +93,6 @@ public class QuestManager : Singleton<QuestManager>
     public void AddQuest(QuestSO quest) //esto lo disparan los npcs cuando les hablo
     {
         //Debug.Log("agrego la quest");
-
         if (quest.condition.conditionType == ConditionType.Event &&
             !eventosSucedidos.ContainsKey(quest.condition.evento))
         {
@@ -93,15 +100,10 @@ public class QuestManager : Singleton<QuestManager>
         }
         quests.Add(quest);
 
-        //aca habria que agregarlas a la ui
         questSlots.Add(Instantiate(questSlotPrefab, questSlotsParent.transform).GetComponent<QuestSlot>());
         questSlots.Last().SetQuest(quest);
 
-
         CheckQuests();
-
-
-
     }
     public void RemoveQuest(QuestSO quest)
     {
@@ -119,7 +121,6 @@ public class QuestManager : Singleton<QuestManager>
             }
         }
     }
-
     public void RemoveQuestSlot(QuestSlot questSlot)
     {
 

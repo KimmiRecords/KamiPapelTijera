@@ -57,11 +57,10 @@ public class GranjeroNorbertoDialogueTrigger : QuestDialogueTrigger
         isLocked = false;
     }
 
-    private void OnDialogueEnded(object[] parameters)
+    protected override void OnDialogueEnded(object[] parameters)
     {
         if ((DialogueSO)parameters[1] == _dialogues[2])
         {
-            Debug.Log("termino el dialogo de quest entregada");
             EventManager.Trigger(Evento.OnQuestDelivered, _quest);
             isLocked = true;
         }

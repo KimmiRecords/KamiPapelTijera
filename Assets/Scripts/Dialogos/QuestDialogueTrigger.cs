@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,22 @@ public class QuestDialogueTrigger : TriggerDialogue
     {
         EventManager.Subscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
         EventManager.Subscribe(Evento.OnQuestCompleted, CompleteQuest);
+        EventManager.Subscribe(Evento.OnDialogueEnd, OnDialogueEnded);
+        EventManager.Subscribe(Evento.OnDialogueWriteText, OnDialogueTextWritten);
     }
+
+
+
 
     //dialogos: 
     //el 0 es pedir la quest (first time)
     //el 1 es el fijo mientras la quest esta prendida
     //el 2 es el de gracias por traerme las flores con reward (first time)
     //el 3 es el fijo despues de haber completado la quest
+
+    //los dialogo2 tienen una particularidad:
+    //mandan mensaje de OnQuestRewarded despues de su penultimo y ultimo texto.
+    //esto se usa para disparar la fanfarrria de obtener reward
 
     public override void Interact(params object[] parameter)
     {
@@ -84,12 +94,36 @@ public class QuestDialogueTrigger : TriggerDialogue
         EventManager.Trigger(Evento.OnQuestDelivered, _quest);
     }
 
+    protected virtual void OnDialogueTextWritten(params object[] parameters)
+    {
+        //si es el dialogo 2
+        if ((DialogueSO)parameters[0] == _dialogues[2])
+        {
+            DialogueSO dialogue = (DialogueSO)parameters[0];
+            if (dialogue.currentText == dialogue.events.Length) //si es el penultimo textito
+            {
+                Debug.Log("disparo el penultimo texto del dialogo de reward");
+                EventManager.Trigger(Evento.OnQuestRewardedStart, _quest);
+            }
+        }
+    }
+
+    protected virtual void OnDialogueEnded(params object[] parameters)
+    {
+        //si es el dialogo 2
+        if ((DialogueSO)parameters[1] == _dialogues[2])
+        {
+            EventManager.Trigger(Evento.OnQuestRewardedEnd, _quest);
+        }
+    }
+
     protected override void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
             EventManager.Unsubscribe(Evento.OnQuestCompleted, CompleteQuest);
+            EventManager.Unsubscribe(Evento.OnDialogueEnd, OnDialogueEnded);
         }
     }
 }

@@ -136,7 +136,13 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
         EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
         EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
+        EventManager.Subscribe(Evento.OnQuestRewardedStart, StartReceiveReward);
+        EventManager.Subscribe(Evento.OnQuestRewardedEnd, EndReceiveReward);
     }
+
+   
+
+    
 
     private void Start()
     {
@@ -166,7 +172,12 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     }
     public void OnPrimaryClick()
     {
-        if (_readyToAttack && hasTijera && !anim.GetBool("isCasting")) //readytoattack se pone false cuando estoy en cooldown
+        if (LevelManager.Instance.inDialogue)
+        {
+            return;
+        }
+
+        if (_readyToAttack && hasTijera && !anim.GetBool("isCasting")) //readytoattack esta false cuando estoy en cooldown
         {
             _readyToAttack = false;
             isAttacking = true;
@@ -307,6 +318,14 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         jumpForce = originalJumpForce;
         //sfx de hacer bollo y destruir
         myPaperPlaneHat.SetActive(false);
+    }
+    private void StartReceiveReward(object[] parameters)
+    {
+        _view.StartReceiveReward();
+    }
+    private void EndReceiveReward(object[] parameters)
+    {
+        _view.EndReceiveReward();
     }
 
     //Utilities

@@ -60,8 +60,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void HideDialogue(DialogueSO dialogue)
     {
-        //print("hide dialogue " + dialogue.name);
-        dialogueGlobeText.text = ""; //esto es lo que deberia estar animado despues
+        dialogueGlobeText.text = "";
         dialogueGlobeSpeaker.text = "";
         LevelManager.Instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
@@ -74,7 +73,8 @@ public class DialogueManager : Singleton<DialogueManager>
         for (int i = 0; i < dialogue.events.Length; i++)
         {
             //print("ARRANCA EL WRITE TEXT ");
-            dialogue.currentText++;
+            dialogue.currentText++; //??? empieza desde el 1
+            EventManager.Trigger(Evento.OnDialogueWriteText, dialogue);
 
             dialogueGlobeText.text = dialogue.events[i].text;
             dialogueGlobeSpeaker.text = dialogue.events[i].speakerName;
