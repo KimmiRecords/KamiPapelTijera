@@ -70,7 +70,7 @@ public class PlayerModel
 
         if (hor != 0 || ver != 0)
         {
-            _player._view.RotateModel(_move);
+            _player._view.CheckCanRotateModel(_move);
         }
 
         //Debug.Log(_move);
@@ -99,7 +99,6 @@ public class PlayerModel
         _player._view.StopFalling();
         _player._view.StartLanding();
     }
-
     private void OnStartFalling()
     {
         //Debug.Log("on start falling");
@@ -109,7 +108,6 @@ public class PlayerModel
         //Debug.Log("falling timer" + fallingTimer);
         fallingTimer += Time.deltaTime;
     }
-
     private void OnTouchGround()
     {
         //Debug.Log("ongrounded y vertical velocity => 0");
@@ -122,7 +120,6 @@ public class PlayerModel
             _player.DestroyPaperPlaneHat();
         }
     }
-
     private void OnJump()
     {
         _groundedTimer = 0;
@@ -139,14 +136,11 @@ public class PlayerModel
         }
     }
 
-    
-
     public void EnableTijeraHitbox()
     {
         //Debug.Log("prendo la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(true);
     }
-
     public void DisableTijeraHitbox()
     {
         //Debug.Log("apago la tijera");
@@ -174,7 +168,6 @@ public class PlayerModel
 
         planeoImpulse = 0f;
     }
-
     public void ForcedMove(Vector3 move)
     {
         _player.cc.Move(move);

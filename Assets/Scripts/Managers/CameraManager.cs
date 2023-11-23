@@ -9,7 +9,8 @@ public enum CameraMode
     CloseUp,
     Normal,
     General,
-    BookCenter
+    BookCenter,
+    ReceiveReward
 }
 
 public class CameraManager : Singleton<CameraManager>

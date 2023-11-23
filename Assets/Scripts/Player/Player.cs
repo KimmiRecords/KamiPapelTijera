@@ -140,10 +140,6 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         EventManager.Subscribe(Evento.OnQuestRewardedEnd, EndReceiveReward);
     }
 
-   
-
-    
-
     private void Start()
     {
         _maxHp = _hp;
@@ -155,8 +151,6 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         originalJumpForce = jumpForce;
         originalMaxSpeed = _maxSpeed;
     }
-
-
     private void Update()
     {
         //todo el tiempo chequeo los controles. eso seguro.
@@ -170,6 +164,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         _model.NewMove(_controller.hor, _controller.ver); //de todos modos el model hace lo suyo. aunque no me mueva, pues caidas y bla
         _view.CheckMagnitude(_controller.hor, _controller.ver); //el view tambien necesita enterarse para donde me muevo
     }
+
     public void OnPrimaryClick()
     {
         if (LevelManager.Instance.inDialogue)
@@ -204,13 +199,11 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         isAttacking = false;
         _view.EndAttack();
     }
-
     public void StartTijeraParticles()
     {
         //_view.EnableTijeraParticles();
         tijeraManager.EnableTijeraParticles();
     }
-
     public void StopTijeraParticles()
     {
         //_view.DisableTijeraParticles();
@@ -218,8 +211,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     }
 
 
-    //entity
-
+    //Entity
     public override void TakeDamage(float dmg)
     {
         Vida -= dmg;

@@ -31,14 +31,19 @@ public class PlayerView
         }
     }
 
-    public void RotateModel(Vector3 move)
+    public void CheckCanRotateModel(Vector3 move)
     {
         if (canRotate)
         {
-            _lastDirection = new Vector3(move.x, _anim.transform.forward.y, move.z);
-            _anim.transform.forward = _lastDirection;
-            _player.lastDirection = _lastDirection;
+            RotateModel(move);
         }
+    }
+
+    public void RotateModel(Vector3 move)
+    {
+        _lastDirection = new Vector3(move.x, _anim.transform.forward.y, move.z);
+        _anim.transform.forward = _lastDirection;
+        _player.lastDirection = _lastDirection;
     }
 
     public void StartTijeraAnimation()
@@ -173,11 +178,15 @@ public class PlayerView
     public void StartReceiveReward()
     {
         _anim.SetBool("isReceivingReward", true);
+        RotateModel(Vector3.back);
+        AudioManager.instance.PlayByName("Receive_Reward");
+        CameraManager.Instance.SetCamera(CameraMode.ReceiveReward);
         //seria genial un timer, para forzar al jugador a fumarse toda la anim
     }
 
     public void EndReceiveReward()
     {
+        CameraManager.Instance.SetCamera(CameraMode.Normal);
         _anim.SetBool("isReceivingReward", false);
     }
 }
