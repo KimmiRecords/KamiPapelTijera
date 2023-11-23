@@ -182,6 +182,8 @@ public class PlayerView
         RotateModel(Vector3.back);
         _anim.SetBool("isReceivingReward", true);
         _player.particleShooter.Enable(2, true);
+        //_player.rewardSticker.gameObject.SetActive(true);
+        //_player.rewardSticker.StartLerpSequence(_player.rewardAnimationWaitTime);
     }
 
     
@@ -191,5 +193,6 @@ public class PlayerView
         CameraManager.Instance.SetCamera(CameraMode.Normal);
         _anim.SetBool("isReceivingReward", false);
         _player.particleShooter.Enable(2, false);
+        //_player.rewardSticker.gameObject.SetActive(false);
     }
 }

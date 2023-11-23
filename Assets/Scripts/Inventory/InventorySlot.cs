@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using System.Collections;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -81,7 +81,42 @@ public class InventorySlot : MonoBehaviour
         }
     }
 
+    public void StartLerpSequence(float duration)
+    {
+        StartCoroutine(AlphaLerpSequence(duration));
+    }
+    public IEnumerator AlphaLerpSequence(float duration)
+    {
+        StartCoroutine(AlphaLerpFadeIn(duration));
+        yield return new WaitForSeconds(duration * 2);
+        StartCoroutine(AlphaLerpFadeOut(duration));
+    }
+    public IEnumerator AlphaLerpFadeIn(float duration)
+    {
+        float elapsedTime = 0;
+        SetTransparency(0);
+
+        while (elapsedTime < duration)
+        {
+            SetTransparency(Mathf.Lerp(0, 1, elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+    public IEnumerator AlphaLerpFadeOut(float duration)
+    {
+        float elapsedTime = 0;
+        SetTransparency(1);
+
+        while (elapsedTime < duration)
+        {
+            SetTransparency(Mathf.Lerp(1, 0, elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        ResourceParticleManager.Instance.isShowingRewardSticker = false;
+    }
 
 
-   
+
 }

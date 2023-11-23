@@ -9,6 +9,7 @@ public class QuestSO : ScriptableObject
     public Condition condition;
     public RewardType rewardType;
     public Sprite questSprite;
+    public ResourceType rewardRt;
 
     //eventualmente podrian tener un reward,
     //tambien podrian tener un string descripcion de cada condicion

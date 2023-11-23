@@ -101,11 +101,11 @@ public class QuestDialogueTrigger : TriggerDialogue
             {
                 Debug.Log("disparo el penultimo texto del dialogo de reward");
                 LevelManager.Instance.AddResource(_quest.condition.resourceType, -_quest.condition.requiredAmount); //esto deberia funcar para condition evento. tal vez con una interfaz IQuestCondition con metodo complete/deliver
-                LevelManager.Instance.AddResource(ResourceType.papel, _paperReward);
 
                 EventManager.Trigger(Evento.OnQuestRewardedStart, _quest);
                 DialogueManager.Instance.lockedByAnimation = true; //el player lo va a poner en false cuando termine la animacion
                 EventManager.Trigger(Evento.OnQuestDelivered, _quest);
+                LevelManager.Instance.AddResource(ResourceType.papel, _paperReward);
             }
         }
     }

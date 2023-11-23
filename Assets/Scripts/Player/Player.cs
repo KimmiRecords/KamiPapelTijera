@@ -36,6 +36,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     [SerializeField] GameObject myPaperPlaneHat;
     [SerializeField] TijeraManager tijeraManager;
     public ParticleSystem tijeraParticles, tijeraTrail;
+    public InventorySlot rewardSticker;
 
     [Header("Planeo")]
     public float augmentedJumpForce = 20f;
