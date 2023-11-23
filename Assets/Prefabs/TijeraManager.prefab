@@ -48,6 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tijeraHitbox: {fileID: 0}
   tijeraMejoradaHitbox: {fileID: 0}
+  tijeraParticles: {fileID: 0}
+  tijeraTrail: {fileID: 0}
+  tijeraMejoradaParticles: {fileID: 0}
+  tijeraMejoradaTrail: {fileID: 0}
 --- !u!1 &5197432352440738518
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +424,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trail Dorado
+      objectReference: {fileID: 0}
+    - target: {fileID: 5983629935844812763, guid: fd7b188e2cacfb6429633a33f1494735,
+        type: 3}
+      propertyPath: NoiseModule.frequency
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5983629935844812763, guid: fd7b188e2cacfb6429633a33f1494735,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5983629935844812763, guid: fd7b188e2cacfb6429633a33f1494735,
+        type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8818661445984156462, guid: fd7b188e2cacfb6429633a33f1494735,
         type: 3}
