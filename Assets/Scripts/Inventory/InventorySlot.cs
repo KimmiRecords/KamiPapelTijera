@@ -13,6 +13,8 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI amountTextComponent;
 
     protected Color _originalTextColor, _originalSlotColor, _originalIconColor;
+    public float upwardsSpeed = 100;
+
 
 
     private void Start()

@@ -13,6 +13,10 @@ public class ParticleShooter : MonoBehaviour
     public float timeToDestroy = 2;
     public Vector3 offset = Vector3.zero;
 
+    //la 0 es sprint particles
+    //la 1 es jump particles
+    //la 2 va a ser reward received particles
+
     private void Start()
     {
         //get all the particle systems in each gameobject and create a list for each of them

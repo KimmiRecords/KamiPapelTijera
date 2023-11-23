@@ -86,12 +86,9 @@ public class QuestDialogueTrigger : TriggerDialogue
     {
         //Debug.Log("dalia: quest entregada!");
         QuestManager.Instance.RemoveQuest(_quest);
-        LevelManager.Instance.AddResource(_quest.condition.resourceType, -_quest.condition.requiredAmount); //esto deberia funcar para condition evento. tal vez con una interfaz IQuestCondition con metodo complete/deliver
-        LevelManager.Instance.AddResource(ResourceType.papel, _paperReward);
         AudioManager.instance.PlayByName("QuestCompleted02");
         currentDialogue = 2;
         _questDelivered = true;
-        EventManager.Trigger(Evento.OnQuestDelivered, _quest);
     }
 
     protected virtual void OnDialogueTextWritten(params object[] parameters)
@@ -103,7 +100,12 @@ public class QuestDialogueTrigger : TriggerDialogue
             if (dialogue.currentText == dialogue.events.Length) //si es el penultimo textito
             {
                 Debug.Log("disparo el penultimo texto del dialogo de reward");
+                LevelManager.Instance.AddResource(_quest.condition.resourceType, -_quest.condition.requiredAmount); //esto deberia funcar para condition evento. tal vez con una interfaz IQuestCondition con metodo complete/deliver
+                LevelManager.Instance.AddResource(ResourceType.papel, _paperReward);
+
                 EventManager.Trigger(Evento.OnQuestRewardedStart, _quest);
+                DialogueManager.Instance.lockedByAnimation = true; //el player lo va a poner en false cuando termine la animacion
+                EventManager.Trigger(Evento.OnQuestDelivered, _quest);
             }
         }
     }

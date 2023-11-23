@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResourceParticleManager : Singleton<ResourceParticleManager>
@@ -8,20 +10,37 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
     public ParticleSystem glitterParticles;
     public InventorySlot sticker;
     public float alphaFadeInDuration = 0.5f;
-
     public Canvas canvas;
+    public Transform receiveRewardPoint;
+    public float stickerRescaleFactor = 0.5f;
+    float originalStickerUpwardsSpeed;
+    Vector3 originalStickerScale;
 
     private void Start()
     {
+        originalStickerUpwardsSpeed = sticker.upwardsSpeed;
+        originalStickerScale = sticker.transform.localScale;
         EventManager.Subscribe(Evento.OnObjectWasCut, PrepareSystem);
+        EventManager.Subscribe(Evento.OnQuestDelivered, PrepareSystemFromQuest);
         EventManager.Subscribe(Evento.OnResourceUpdated, StartSystem);
     }
+
+    
 
     #region prepare system
     public void PrepareSystem(params object[] parameter)
     {
-        //Debug.Log("prepare system");
+        Debug.Log("prepare system normal");
         Vector3 position = (Vector3)parameter[0];
+        SetParticlePosition(position);
+        SetStickerPosition(position);
+    }
+    private void PrepareSystemFromQuest(object[] parameters)
+    {
+        Debug.Log("prepare system from quest");
+        sticker.upwardsSpeed = 0;
+        sticker.transform.localScale = Vector3.one * stickerRescaleFactor;
+        Vector3 position = receiveRewardPoint.position;
         SetParticlePosition(position);
         SetStickerPosition(position);
     }
@@ -47,22 +66,24 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
 
     public void StartSystem(params object[] parameter)
     {
-        //Debug.Log("start system");
-        ResourceType rt = (ResourceType)parameter[0];
-
-        if ((bool)parameter[2]) //si suma. no quiero que aparezca cuando me quitan recursos
+        if (!(bool)parameter[2]) //si suma. no quiero que aparezca cuando me quitan recursos
         {
-            ActivateSystem(rt);
+            return;
         }
+        ResourceType rt = (ResourceType)parameter[0];
+        ActivateSystem(rt);
+    }
+
+    public IEnumerator DelayActivateSystem(ResourceType rt)
+    {
+        yield return new WaitForSeconds(0.5f);
+        ActivateSystem(rt);
     }
 
     public void ActivateSystem(ResourceType rt)
     {
-        //Debug.Log("activate system");
         ShowParticles();
         ShowSticker(rt);
-        
-
         StartCoroutine(HideParticles());
         StartCoroutine(HideSticker());
     }
@@ -97,19 +118,15 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
         StartCoroutine(AlphaLerpFadeOut(alphaFadeInDuration));
         yield return new WaitForSeconds(alphaFadeInDuration);
         //Debug.Log("hide sticker");
+        sticker.upwardsSpeed = originalStickerUpwardsSpeed;
+        sticker.transform.localScale = originalStickerScale;
         sticker.gameObject.SetActive(false);
     }
 
-    private void OnDestroy()
-    {
-        if (!gameObject.scene.isLoaded)
-        {
-            EventManager.Unsubscribe(Evento.OnObjectWasCut, PrepareSystem);
-            EventManager.Unsubscribe(Evento.OnResourceUpdated, StartSystem);
-        }
-    }
+
     #endregion
 
+    #region AlphaLerp
     public IEnumerator AlphaLerpFadeIn(float duration)
     {         
         float elapsedTime = 0;
@@ -122,7 +139,6 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
             yield return null;
         }
     }
-
     public IEnumerator AlphaLerpFadeOut(float duration)
     {
         float elapsedTime = 0;
@@ -133,6 +149,17 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
             sticker.SetTransparency(Mathf.Lerp(1, 0, elapsedTime / duration));
             elapsedTime += Time.deltaTime;
             yield return null;
+        }
+    }
+    #endregion
+
+    private void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnObjectWasCut, PrepareSystem);
+            EventManager.Unsubscribe(Evento.OnResourceUpdated, StartSystem);
+            EventManager.Unsubscribe(Evento.OnQuestDelivered, PrepareSystemFromQuest);
         }
     }
 }

@@ -24,6 +24,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     public float sprintingSpeedModifier = 1.5f;
     public float landingLagModifier = 0.75f;
     public float landingLagTime = 0.25f;
+    public float rewardAnimationWaitTime = 2;
 
 
     [Header("Componentes")]
@@ -314,6 +315,12 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     private void StartReceiveReward(object[] parameters)
     {
         _view.StartReceiveReward();
+        StartCoroutine(WaitForReceiveRewardAnimation(rewardAnimationWaitTime));
+    }
+    public IEnumerator WaitForReceiveRewardAnimation(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        DialogueManager.Instance.lockedByAnimation = false;
     }
     private void EndReceiveReward(object[] parameters)
     {

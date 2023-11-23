@@ -177,16 +177,19 @@ public class PlayerView
 
     public void StartReceiveReward()
     {
-        _anim.SetBool("isReceivingReward", true);
-        RotateModel(Vector3.back);
         AudioManager.instance.PlayByName("Receive_Reward");
         CameraManager.Instance.SetCamera(CameraMode.ReceiveReward);
-        //seria genial un timer, para forzar al jugador a fumarse toda la anim
+        RotateModel(Vector3.back);
+        _anim.SetBool("isReceivingReward", true);
+        _player.particleShooter.Enable(2, true);
     }
+
+    
 
     public void EndReceiveReward()
     {
         CameraManager.Instance.SetCamera(CameraMode.Normal);
         _anim.SetBool("isReceivingReward", false);
+        _player.particleShooter.Enable(2, false);
     }
 }

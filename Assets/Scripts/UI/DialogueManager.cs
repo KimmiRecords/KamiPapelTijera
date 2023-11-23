@@ -15,6 +15,7 @@ public class DialogueManager : Singleton<DialogueManager>
     bool input = false;
     bool waitingForInput = false;
     [HideInInspector] public bool isShowing = false;
+    public bool lockedByAnimation = false;
 
     protected override void Awake()
     {
@@ -24,7 +25,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void CheckPlayerInput(params object[] parameter)
     {
-        if (waitingForInput)
+        if (waitingForInput && !lockedByAnimation)
         {
             //print("recibi input true");
             input = true;
