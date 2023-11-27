@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RepresaManager : MonoBehaviour
@@ -14,6 +15,10 @@ public class RepresaManager : MonoBehaviour
     [SerializeField] GameObject rioVertical, rioAbajo;
     [SerializeField] float delayTimeEntreRios = 1f;
     [SerializeField] float delayTimeRepresaFall = 1f;
+
+    [SerializeField] List<GameObject> objectsToEliminate = new List<GameObject>();
+    [SerializeField] List<GameObject> objectsToActivate = new List<GameObject>();
+
 
 
     void Start()
@@ -37,7 +42,10 @@ public class RepresaManager : MonoBehaviour
     {
         //desaparece la represa y quedan solo los troncos
         yield return new WaitForSeconds(delayTimeRepresaFall);
+
         LevelManager.Instance.GameObjectActivator(troncos, represasCortables);
+        LevelManager.Instance.GameObjectActivator(objectsToActivate, objectsToEliminate);
+
 
         //aparecen los rios en orden
         rioVertical.SetActive(true);

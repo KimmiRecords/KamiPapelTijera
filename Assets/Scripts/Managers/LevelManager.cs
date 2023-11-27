@@ -78,7 +78,7 @@ public class LevelManager : Singleton<LevelManager>
         AddResource(ResourceType.tijeraMejorada, 1);
     }
     public void GoToScene(string sceneName)
-    {   
+    {
         SceneManager.LoadScene(sceneName);
     }
     public void Update()
@@ -100,7 +100,7 @@ public class LevelManager : Singleton<LevelManager>
         //agrega la cantidad valuetoadd al total. si quiero restar, valuetoadd deberia ser negativo
         bool isAdding = false;
         recursosRecolectados[pickupType] += valueToAdd;
-        
+
         if (valueToAdd >= 1)
         {
             isAdding = true;
@@ -112,7 +112,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         player.GetCured(curacion);
     }
-
+    
     public void GameObjectActivator(List<GameObject> gameObjectsToActivate, List<GameObject> gameObjectsToDeactivate)
     {
         foreach (GameObject go in gameObjectsToActivate)
