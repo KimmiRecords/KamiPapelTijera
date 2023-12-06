@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public Dictionary<string, AudioSource> soundDict = new Dictionary<string, AudioSource>();
 
     float globalVolume = 1;
-
+    List<AudioSource> bgms = new List<AudioSource>();
     void Awake()
     {
         if (instance) 
@@ -56,13 +56,16 @@ public class AudioManager : MonoBehaviour
 
         for (int i = 0; i < _allSounds.Length; i++) //lleno el diccionario de pares string-audiosource
         {
+            //print("agregue el key " + s + " con value " + allSounds[i]+ " al diccionario");
             string s = _allSounds[i].ToString(); //convierto a string
             s = s.Substring(0, s.Length - 26); //formateo para borrar el "UnityEngine.AudioSource" de cada nombre
             soundDict.Add(s, _allSounds[i]);
-            //print("agregue el key " + s + " con value " + allSounds[i]+ " al diccionario");
-
             originalVolumes[new KeyValuePair<string, AudioSource>(s, _allSounds[i])] = _allSounds[i].volume;
         }
+
+        bgms.Add(soundDict["MemoFloraMainLoop01"]);
+        bgms.Add(soundDict["MemoFloraBattleLoop01"]);
+        bgms.Add(soundDict["MemoFloraPostBattle01"]);
     }
 
     public void PlayByName(string clipName) //el mas groso. le das el string y te da play a ese audio. muy global y sencillo.
@@ -205,4 +208,21 @@ public class AudioManager : MonoBehaviour
             sound.volume = originalVolume * globalVolume;
         }
     }
+    
+    public void SetBGMVolumes(float volume)
+    {
+        foreach (AudioSource bgm in bgms)
+        {
+            bgm.volume = originalVolumes[new KeyValuePair<string, AudioSource>(bgm.name, bgm)] * volume;
+        }
+    }
+
+    public void ResetBGMVolumes()
+    {
+        foreach (AudioSource bgm in bgms)
+        {
+            bgm.volume = originalVolumes[new KeyValuePair<string, AudioSource>(bgm.name, bgm)];
+        }
+    }
+
 }

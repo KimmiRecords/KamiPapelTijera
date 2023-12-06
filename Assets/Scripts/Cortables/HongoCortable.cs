@@ -5,7 +5,7 @@ using UnityEngine;
 public class HongoCortable : PickupCortable
 {
     //el hongo cortable debe cambiar la animacion de la gallina
-    //[SerializeField] Animator _anim;
+    [SerializeField] GallinaSounds gallinaSounds;
 
     protected override void ApplyCut()
     {
@@ -13,6 +13,7 @@ public class HongoCortable : PickupCortable
         AudioManager.instance.PlayRandom("TijeraHit01", "TijeraHit02");
         AudioManager.instance.PlayRandom("PaperCut01", "PaperCut02");
         AudioManager.instance.PlayByName("MagicSuccess", 2f);
+        gallinaSounds.PlayCortadaSound();
 
         SepararSprites();
 

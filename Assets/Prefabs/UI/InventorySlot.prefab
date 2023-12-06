@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 1566535328521352157}
   - component: {fileID: 4510795625061034454}
   - component: {fileID: 4069498510482426908}
+  - component: {fileID: 4913315665028479807}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -394,7 +395,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5298481299639133575}
         m_TargetAssemblyTypeName: InventorySlot, Assembly-CSharp
-        m_MethodName: BTN_OnPress
+        m_MethodName: BUTTON_OnPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -404,6 +405,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4913315665028479807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379786836294334337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5298481299639133575}
+          m_TargetAssemblyTypeName: InventorySlot, Assembly-CSharp
+          m_MethodName: BUTTON_OnHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8729965768935538678
 GameObject:
   m_ObjectHideFlags: 0

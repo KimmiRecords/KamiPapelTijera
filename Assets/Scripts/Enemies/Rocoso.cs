@@ -117,7 +117,7 @@ public class Rocoso : Enemy
     //dmg and death
     public override void TakeDamage(float dmg)
     {
-        AudioManager.instance.PlayByName("ShipCrash", 0.6f);
+        AudioManager.instance.PlayByName("PaperCut01", 0.8f);
         _hp -= dmg;
         if (_hp <= 0)
         {

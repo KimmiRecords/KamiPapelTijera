@@ -16,6 +16,7 @@ public class GallinaEvadeState : IState
     public void OnEnter()
     {
         //Debug.Log("gallina - entre a evade");
+        _gallina.gallinaSounds.PlayEvadeSound();
     }
 
     public void OnUpdate()

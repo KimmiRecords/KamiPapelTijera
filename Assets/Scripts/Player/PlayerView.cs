@@ -85,9 +85,13 @@ public class PlayerView
         _anim.SetTrigger("Idle");
     }
 
-    public void StartJumpAnimation()
+    public void StartJumpAnimation(bool isPaperPlaneHat)
     {
         //Debug.Log("anim start jump");
+        if (isPaperPlaneHat)
+        {
+            AudioManager.instance.PlayByName("Jump_Paperplane", 1f, 0.02f);
+        }
         AudioManager.instance.PlayByName("JumpStart", 1f, 0.02f);
         _player.particleShooter.Create(1, _anim.transform);
         _anim.SetBool("isWalk", false);

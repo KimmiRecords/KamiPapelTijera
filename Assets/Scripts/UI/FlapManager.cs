@@ -44,6 +44,7 @@ public class FlapManager : Singleton<FlapManager>
     {
         //Debug.Log("FlapManager: open flap");
         AudioManager.instance.PlayByName("PageTurn02", 1.6f, 0.01f);
+        AudioManager.instance.SetBGMVolumes(0.4f);
         _tiritaPull.gameObject.SetActive(false);
         _tiritaPush.gameObject.SetActive(true);
 
@@ -54,6 +55,7 @@ public class FlapManager : Singleton<FlapManager>
     {
         //Debug.Log("FlapManager: close flap");
         AudioManager.instance.PlayByName("PageTurn01", 1.6f, 0.01f);
+        AudioManager.instance.ResetBGMVolumes();
         _tiritaPull.gameObject.SetActive(true);
         _tiritaPush.gameObject.SetActive(false);
 

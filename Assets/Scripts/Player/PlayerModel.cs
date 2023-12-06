@@ -125,8 +125,7 @@ public class PlayerModel
         _groundedTimer = 0;
         _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
         _player.isJumpButtonDown = false;
-        _player._view.StartJumpAnimation();
-        //AudioManager.instance.StopPasos();
+        _player._view.StartJumpAnimation(_player.isPaperPlaneHat);
         _player._view.StopLanding();
 
         if (_player.isPaperPlaneHat)
