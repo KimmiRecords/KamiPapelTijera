@@ -61,7 +61,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerPressedI,
     OnPlayerPressedU,
     OnCameraChange, //param0 es current camera
-    OnPageTurned, //param0 es activeindex
+    OnPageTurned, //param0 es activeindex, param1 es isnext
     OnAbuelaFold,
     OnAbuelaUnfold,
     OnRocosoWokeUp, //param0 es bool endsEncounter

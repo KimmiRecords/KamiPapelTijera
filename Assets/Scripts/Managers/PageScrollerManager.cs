@@ -78,7 +78,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         _isNext = false; //isNext es una variable piola que mucha gente necesita
         _isTurning = true;
         esferaPrev.triggerBool = false;
-        EventManager.Trigger(Evento.OnPageTurned, activePageIndex);
+        EventManager.Trigger(Evento.OnPageTurned, activePageIndex, _isNext);
         StartChangePageFX();
     }
 
@@ -92,7 +92,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         _isNext = true; //isNext es una variable piola que mucha gente necesita
         _isTurning = true;
         esferaNext.triggerBool = false;
-        EventManager.Trigger(Evento.OnPageTurned, activePageIndex);
+        EventManager.Trigger(Evento.OnPageTurned, activePageIndex, _isNext);
         StartChangePageFX();
     }
 
@@ -146,7 +146,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         EventManager.Trigger(Evento.OnPlayerChangePage, activePageIndex + 1, _isNext);
         PUBManager.Instance.OpenPUBs();
         TogglePages(activePageIndex);
-        Debug.Log("enlarge page index " + activePageIndex);
+        //Debug.Log("enlarge page index " + activePageIndex);
         pagesAnimators[activePageIndex].SetBool("isShrink", false);
         pagesAnimators[activePageIndex].SetBool("isEnlarge", true);
     } //abro la nueva pag

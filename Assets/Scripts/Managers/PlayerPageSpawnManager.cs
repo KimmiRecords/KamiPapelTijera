@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,20 +17,27 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
     [SerializeField] float pageExitX;
     CharacterController _playerCC;
     Vector3 lastUsedSpawn; //para recordar el ultimo usado para cuando el player muera
+    Vector3 targetPos = Vector3.zero; //para cuando el player cambia de pagina, saber a donde debe ir
 
     void Start()
     {
         EventManager.Subscribe(Evento.OnPlayerChangePage, PlacePlayerInNewPage);
         EventManager.Subscribe(Evento.OnEncounterStart, SaveCurrentPosition);
+        EventManager.Subscribe(Evento.OnPageTurned, SetPlayerTargetPosition);
         _playerCC = _player.GetComponent<CharacterController>();
         lastUsedSpawn = _player.transform.position; //en principio, tu ultimo spawn es donde arranca el juego
+    }
+
+    public void SetPlayerTargetPosition(params object[] parameters)
+    {
+        targetPos = GetProjectedPositionInNewPage(_player.transform.position, (bool)parameters[1]);
     }
 
     //subscribing methods
     public void PlacePlayerInNewPage(params object[] parameter)
     {
         //Debug.Log("place player");
-        PositionPlayerAtPoint(GetProjectedPositionInNewPage(_player.transform.position, (bool)parameter[1]));
+        PositionPlayerAtPoint(targetPos);
         SavePosition(_player.transform.position);
     }
     public void SaveCurrentPosition(params object[] parameter)
@@ -81,6 +89,8 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerChangePage, PlacePlayerInNewPage);
+            EventManager.Unsubscribe(Evento.OnEncounterStart, SaveCurrentPosition);
+            EventManager.Unsubscribe(Evento.OnPageTurned, SetPlayerTargetPosition);
         }
     }
 }
