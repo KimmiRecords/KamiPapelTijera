@@ -15,6 +15,7 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
     [SerializeField] Player _player;
     [SerializeField] float pageEntryX;
     [SerializeField] float pageExitX;
+    [SerializeField] float spawnY = 5;
     CharacterController _playerCC;
     Vector3 lastUsedSpawn; //para recordar el ultimo usado para cuando el player muera
     Vector3 targetPos = Vector3.zero; //para cuando el player cambia de pagina, saber a donde debe ir
@@ -75,7 +76,7 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 
         }
 
-        newPosition = new Vector3(desiredX, playerCurrentPosition.y, playerCurrentPosition.z);
+        newPosition = new Vector3(desiredX, spawnY, playerCurrentPosition.z);
         //Debug.Log(newPosition);
         return newPosition;
     }
