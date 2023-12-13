@@ -68,6 +68,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         //Debug.Log("el player se gano las botas water x haber completado la quest");
         player.hasWaterBoots = true;
+        player.kamiRenderer.material = player.waterBootsMaterial;
         AddResource(ResourceType.botasAgua, 1);
     }
     public void GiveTijeraMejorada()

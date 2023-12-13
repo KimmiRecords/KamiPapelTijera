@@ -32,11 +32,13 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     public Animator anim;
     public TijeraHitbox miTijeraHitbox;
     public ParticleShooter particleShooter;
-    [SerializeField] Renderer _renderer;
+    public Renderer kamiRenderer;
     [SerializeField] GameObject myPaperPlaneHat;
     [SerializeField] TijeraManager tijeraManager;
     public ParticleSystem tijeraParticles, tijeraTrail;
     public InventorySlot rewardSticker;
+    public Material waterBootsMaterial;
+
 
     [Header("Planeo")]
     public float augmentedJumpForce = 20f;
@@ -53,7 +55,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
 
     //auxiliars
     bool _readyToAttack = true;
-    bool isDrowning = false;
+    [HideInInspector] public bool isGettingWet = false;
     [HideInInspector] public bool isJumpButtonDown;
     [HideInInspector] public bool isAttacking = false;
     [HideInInspector] public bool isPaperPlaneHat = false; //pph es paper plane hat
@@ -147,7 +149,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         _maxHp = _hp;
         Vida = _maxHp;
         //originalColor = _renderer.material.color;
-        originalColor = _renderer.material.GetColor("_DiffuseColor");
+        originalColor = kamiRenderer.material.GetColor("_DiffuseColor");
 
         augmentedJumpsLeft = augmentedJumpsMax;
         originalJumpForce = jumpForce;
@@ -181,6 +183,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
             _view.StartAttack();
         }
     }
+
     //triggered by animator - unity "2021"
     public void StartPasoSFX(int step) //del animator me dicen en qué paso de la animation estoy.
     {
@@ -220,16 +223,16 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         if (Vida <= 0)
         {
             Die();
-            isDrowning = false;
+            isGettingWet = false;
         }
         StartCoroutine(EnrojecerSprite());
     }
     public IEnumerator EnrojecerSprite()
     {
         //print("enrojeci el sprite");
-        _renderer.material.SetColor("_DiffuseColor", Color.red);
+        kamiRenderer.material.SetColor("_DiffuseColor", Color.red);
         yield return new WaitForSeconds(0.25f);
-        _renderer.material.SetColor("_DiffuseColor", originalColor);
+        kamiRenderer.material.SetColor("_DiffuseColor", originalColor);
     }
     public override void Die()
     {
@@ -243,22 +246,22 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     //Interfaces
     public void GetWet(float wetDamage)
     {
+        //mojarse se moja siempre. solo que con las botas no te hace daño
+        isGettingWet = true;
+
         if (!hasWaterBoots)
         {
-            //print("AAAA ME MOJO");
-            _view.StartGetWetAnimation();
-            //Die();
-            isDrowning = true;
+            _view.StartGetWetAnimation(); //solo el trigger de arranque. los pasos van aparte
             StartCoroutine(DrowningCoroutine(wetDamage));
         }
     }
     public void StopGettingWet()
     {
-        isDrowning = false;
+        isGettingWet = false;
     }
     public IEnumerator DrowningCoroutine(float wetDamage)
     {
-        while (isDrowning)
+        while (isGettingWet)
         {
             TakeDamage(wetDamage);
             yield return new WaitForSeconds(0.8f);

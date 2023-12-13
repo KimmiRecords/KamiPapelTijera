@@ -16,6 +16,7 @@ public class ParticleShooter : MonoBehaviour
     //la 0 es sprint particles
     //la 1 es jump particles
     //la 2 va a ser reward received particles
+    //la 3 es splash (pisar sobre agua)
 
     private void Start()
     {

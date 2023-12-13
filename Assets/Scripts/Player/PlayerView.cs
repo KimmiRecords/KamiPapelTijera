@@ -64,9 +64,9 @@ public class PlayerView
 
     public void StartGetWetAnimation()
     {
+        //solo el sonido de arranque
+        //los pasos mojados se disparan abajo desde otro metodo
         AudioManager.instance.PlayByName("BigWaterSplash", 1.2f);
-        //triggerear loop de particulas
-        //triggerear loop de sonido de nadar splashsplash
     }
 
     public void StartGetGolpeadoAnimation()
@@ -149,24 +149,37 @@ public class PlayerView
 
     public void StartPasoSFX(int step)
     {
-        switch(step)
+        if (_player.isGettingWet)
         {
-            case 0:
-                AudioManager.instance.PlayRandom("Pasos_Kami_01", "Pasos_Kami_03");
-                break;
-            case 1:
-                AudioManager.instance.PlayRandom("Pasos_Kami_02", "Pasos_Kami_04");
-                break;
-            case 2:
-                AudioManager.instance.PlayByName("Pasos_Kami_03", 1f, 0.01f);
-                break;
-            case 3:
-                AudioManager.instance.PlayByName("Pasos_Kami_04", 1f, 0.01f);
-                break;
-            default:
-                AudioManager.instance.PlayRandom("Pasos_Kami_01", "Pasos_Kami_02", "Pasos_Kami_03", "Pasos_Kami_04");
-                break;
+            switch (step)
+            {
+                case 0:
+                    AudioManager.instance.PlayRandom("Pasos_KamiMojados_01", "Pasos_KamiMojados_03");
+                    break;
+                case 1:
+                    AudioManager.instance.PlayRandom("Pasos_KamiMojados_02", "Pasos_KamiMojados_04");
+                    break;
+                default:
+                    break;
+            }
+            _player.particleShooter.Shoot(3); //la 3 es la particula de splash
         }
+        else
+        {
+            switch(step)
+            {
+                case 0:
+                    AudioManager.instance.PlayRandom("Pasos_Kami_01", "Pasos_Kami_03");
+                    break;
+                case 1:
+                    AudioManager.instance.PlayRandom("Pasos_Kami_02", "Pasos_Kami_04");
+                    break;
+                default:
+                    AudioManager.instance.PlayRandom("Pasos_Kami_01", "Pasos_Kami_02", "Pasos_Kami_03", "Pasos_Kami_04");
+                    break;
+            }
+        }
+
     }
 
     public void EnableTijeraParticles()
