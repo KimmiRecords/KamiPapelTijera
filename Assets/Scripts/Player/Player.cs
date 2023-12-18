@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
@@ -340,6 +341,18 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     {
         _model.ForcedMove(windDirection * windForce);
     }
+    public void StartAffectedByWind(float windForce, Vector3 windDirection)
+    {
+        Debug.Log("player start affected");
+
+        _view.StartAffectedByWind(windForce, windDirection);
+    }
+    public void EndAffectedByWind()
+    {
+        Debug.Log("player end affected");
+        _view.EndAffectedByWind();
+    }
+    
     public void BrieflySlowDown()
     {
         StartCoroutine(SlowDownCoroutine(landingLagModifier, landingLagTime));

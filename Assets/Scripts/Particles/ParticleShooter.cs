@@ -17,6 +17,7 @@ public class ParticleShooter : MonoBehaviour
     //la 1 es jump particles
     //la 2 va a ser reward received particles
     //la 3 es splash (pisar sobre agua)
+    //la 4 es getaffectedbywind viento particles
 
     private void Start()
     {
@@ -43,6 +44,7 @@ public class ParticleShooter : MonoBehaviour
         foreach (ParticleSystem item in particleSystemsDict[particleSystemGameObject[index]])
         {
             item.gameObject.SetActive(value);
+            //Debug.Log("enableo " + item.gameObject.name);
         }
     }
 

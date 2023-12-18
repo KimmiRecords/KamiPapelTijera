@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PlayerView
 {
@@ -212,4 +213,35 @@ public class PlayerView
         _player.particleShooter.Enable(2, false);
         //_player.rewardSticker.gameObject.SetActive(false);
     }
+
+    internal void StartAffectedByWind(float windForce, Vector3 windDirection)
+    {
+        Debug.Log("view start affected by wind // windDirection: " + windDirection);
+        _player.particleShooter.Enable(4, true);
+
+        //rotate _player.particleShooter.particleSystemGameObject[4] so that it faces the wind direction
+        _player.particleShooter.particleSystemGameObject[4].transform.forward = -windDirection;
+
+
+        float minWindForce = 0f;
+        float maxWindForce = 0.5f;
+        float minParticleSize = 0f;
+        float maxParticleSize = 10f;
+
+        float windForceNormalized = (windForce - minWindForce) / (maxWindForce - minWindForce);
+
+        //now scale windforcenormalized to the range of minparticlesize to maxparticlesize
+        windForceNormalized = minParticleSize + (windForceNormalized * (maxParticleSize - minParticleSize));
+
+        _player.particleShooter.particleSystemGameObject[4].GetComponent<ParticleSizeUpdater>()?.UpdateSize(windForceNormalized);
+        Debug.Log("windforcenormalized = " + windForceNormalized);
+
+    }
+    internal void EndAffectedByWind()
+    {
+        //Debug.Log("view end affected by wind");
+        _player.particleShooter.Enable(4, false);
+    }
+
+   
 }
