@@ -102,6 +102,7 @@ MonoBehaviour:
   blueParticleActiveColor: {r: 0.15686275, g: 0.18039216, b: 0.50980395, a: 0.5372549}
   activeSpeed: 1.5
   activeSize: 2
+  orbitalZ: 2
 --- !u!1001 &1983794156916600905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,6 +169,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PedestalParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751667689718451458, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6310065071649380702, guid: 30a22737b1dbca347b4086af4fa8494e,
         type: 3}

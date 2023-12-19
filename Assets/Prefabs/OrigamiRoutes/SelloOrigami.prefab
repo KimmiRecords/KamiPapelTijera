@@ -68,8 +68,9 @@ MonoBehaviour:
     type: 3}
   particleSystemGO: {fileID: 1293152911158955150}
   blueParticleActiveColor: {r: 0, g: 0.0666666, b: 1, a: 0.7372549}
-  activeSpeed: 1.6
-  activeSize: 0.8
+  activeSpeed: 1
+  activeSize: 0.4
+  orbitalZ: -3
 --- !u!1 &7900591175985214724
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +320,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4286898676
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158900432739752130, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6310065071649380702, guid: 30a22737b1dbca347b4086af4fa8494e,
         type: 3}
