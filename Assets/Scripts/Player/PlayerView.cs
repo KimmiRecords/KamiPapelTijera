@@ -220,7 +220,7 @@ public class PlayerView
         _player.particleShooter.Enable(4, true);
 
         //rotate _player.particleShooter.particleSystemGameObject[4] so that it faces the wind direction
-        _player.particleShooter.particleSystemGameObject[4].transform.forward = -windDirection;
+        _player.particleShooter.particleSystemGameObject[4].transform.forward = windDirection;
 
 
         float minWindForce = 0f;
