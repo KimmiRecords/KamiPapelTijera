@@ -7,12 +7,21 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
     //los cofres son un tipo de cortable que dispara animacion de abrirse cuando le cortas el candado
     //lo usamos para puertas tambien
 
-    //el trucazo: no es un cortable per se. pero bueno, quedó
+    //el trucazo: no es un cortable per se. pero bueno, quedó. lo cortable es el candado en realidad.
 
     [SerializeField] float initialDelay = 1;
     [SerializeField] Animator anim; //mi animator
     [SerializeField] GameObject particulitasDePapel;
     bool isOpening;
+    bool shouldStayOpen = false;
+
+    private void OnEnable()
+    {
+        if (shouldStayOpen)
+        {
+            anim.SetBool("isOpen", true);
+        }
+    }
 
     public void OpenChest() //este metodo lo dispara mi candado
     {
@@ -24,6 +33,7 @@ public class CofreCortable : MonoBehaviour/*, ICortable*/
         yield return new WaitForSeconds(initialDelay);
         anim.SetBool("isOpen", true);
         isOpening = true;
+        shouldStayOpen = true;
         AudioManager.instance.PlayByName("MagicSuccess", 1.4f);
         //lanzar particulas
         particulitasDePapel.SetActive(true);
