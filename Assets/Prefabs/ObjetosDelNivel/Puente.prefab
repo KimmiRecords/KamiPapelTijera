@@ -30,6 +30,7 @@ Transform:
   m_Children:
   - {fileID: 6398343466797497304}
   - {fileID: 8765669603216785692}
+  - {fileID: 7961599743832228026}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -282,9 +283,100 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81c68cbb8095aa34aac6f9b48817dc6c, type: 3}
+--- !u!23 &7633257029761694323 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 910226313775711513, guid: 81c68cbb8095aa34aac6f9b48817dc6c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7300054422596517738}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8765669603216785692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2083736017584488054, guid: 81c68cbb8095aa34aac6f9b48817dc6c,
     type: 3}
   m_PrefabInstance: {fileID: 7300054422596517738}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8481253711609030170
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6942802126043108117}
+    m_Modifications:
+    - target: {fileID: 1710079149702614934, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: ShapeModule.m_MeshRenderer
+      value: 
+      objectReference: {fileID: 7633257029761694323}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003608808250500783, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: m_Name
+      value: Glitter OrigamiModels
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286323552512320559, guid: 4d91d1fb58937c1458daba847d187e02,
+        type: 3}
+      propertyPath: ShapeModule.m_MeshRenderer
+      value: 
+      objectReference: {fileID: 7633257029761694323}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d91d1fb58937c1458daba847d187e02, type: 3}
+--- !u!4 &7961599743832228026 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2003608808250500768, guid: 4d91d1fb58937c1458daba847d187e02,
+    type: 3}
+  m_PrefabInstance: {fileID: 8481253711609030170}
   m_PrefabAsset: {fileID: 0}

@@ -81,7 +81,7 @@ public class DialogueManager : Singleton<DialogueManager>
             dialogueGlobeSpeaker.text = dialogue.events[i].speakerName;
             npcQueTeHablaImage.sprite = dialogue.events[i].sprite;
 
-            SetNativeSize(npcQueTeHablaImage.sprite); //??? esto es necesario si todos los sprites son del mismo tamaño?
+            SetNativeSize(npcQueTeHablaImage.sprite);
 
             yield return new WaitForEndOfFrame();
             waitingForInput = true;

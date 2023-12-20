@@ -17,6 +17,8 @@ public class MainMenuManager : MonoBehaviour
         EventManager.Subscribe(Evento.OnDialogueEnd, ChangeScene);
         AudioManager.instance.StopAll();
         AudioManager.instance.PlayByName("4S_IntroBigChords");
+        AudioManager.instance.PlayByName("ForestAtNight");
+
     }
 
     public void OnNewGameButtonDown()
@@ -26,6 +28,8 @@ public class MainMenuManager : MonoBehaviour
         {
             _autoDialogo.StartDialogue();
             AudioManager.instance.StopByName("4S_IntroBigChords");
+            AudioManager.instance.StopByName("ForestAtNight");
+
             AudioManager.instance.PlayByName("IntroStoryboardLoop");
 
             _dialogueStarted = true;
