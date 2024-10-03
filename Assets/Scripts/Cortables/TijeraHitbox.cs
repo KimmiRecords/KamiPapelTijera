@@ -8,7 +8,6 @@ public class TijeraHitbox : MonoBehaviour
     //la tijera necesita collider (trigger)
     //cuando toca a algo ICortable, adivina? si, lo corta. 
 
-    [HideInInspector]
     public float tijeraDamage;
     bool missed;
 

@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 20}
+  m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2937294576803951173
 MonoBehaviour:
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerBool: 0
+  showTooltip: 1
   tooltipTextToShow: Toca E para charlar
   postItColor: 1
   _burnAfterReading: 0
@@ -66,8 +67,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 11301b49eb0d9644cbd3a68fc4d698ea, type: 2}
   - {fileID: 11400000, guid: d7a76540cea6c0c4aa292c2a95be5cb1, type: 2}
   - {fileID: 11400000, guid: 4ac35343bb754574bacaa42af8a9cde1, type: 2}
-  floresRequeridas: 3
-  paperReward: 20
+  - {fileID: 11400000, guid: 150e5027b2371814da9fa00fe972c041, type: 2}
+  _paperReward: 50
+  _quest: {fileID: 11400000, guid: b2e9860e9e4c0d74f95eee1601a1be54, type: 2}
 --- !u!1 &1665400374212110288
 GameObject:
   m_ObjectHideFlags: 0

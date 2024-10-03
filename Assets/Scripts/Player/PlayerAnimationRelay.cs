@@ -34,15 +34,18 @@ public class PlayerAnimationRelay : MonoBehaviour
         //print("isAttacking es " + player.isAttacking);
     }
 
-    //public void SetIsReadyToJumpOn()
-    //{
-    //    player.isReadyToJump = true;
-    //    print("isReadyToJump es " + player.isReadyToJump);
-    //}
+    public void StartPasoSFX(int step)
+    {
+        player.StartPasoSFX(step);
+    }
 
-    //public void SetIsReadyToJumpOff()
-    //{
-    //    player.isReadyToJump = false;
-    //    print("isReadyToJump es " + player.isReadyToJump);
-    //}
+    public void StartTijeraParticles()
+    {
+        player.StartTijeraParticles();
+    }
+
+    public void StopTijeraParticles()
+    {
+        player.StopTijeraParticles();
+    }
 }

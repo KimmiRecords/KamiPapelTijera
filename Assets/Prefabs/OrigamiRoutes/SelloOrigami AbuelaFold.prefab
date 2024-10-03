@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5019034001922312300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5019034001922312301}
+  m_Layer: 0
+  m_Name: SelloOrigami AbuelaFold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5019034001922312301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019034001922312300}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5019034003175297759}
+  - {fileID: 1871950571364343263}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5019034003175297758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5019034003175297759}
+  - component: {fileID: 5019034003175297753}
+  - component: {fileID: 5019034003175297752}
+  m_Layer: 0
+  m_Name: TriggerOrigami
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5019034003175297759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019034003175297758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.64, z: 0}
+  m_LocalScale: {x: 5.554728, y: 5.554728, z: 5.554728}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5019034001922312301}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5019034003175297753
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019034003175297758}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5019034003175297752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019034003175297758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da5654dc6e785b4fb3d9694cc0531b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerBool: 0
+  showTooltip: 1
+  tooltipTextToShow: "Manten\xE9 E para comenzar un origami"
+  postItColor: 0
+  origami: {fileID: 0}
+  checkPrefab: {fileID: 5179789006546423716, guid: 60ad54eca839f334f9eb8baf62ee92cd,
+    type: 3}
+  particleSystemGO: {fileID: 2906438330741447121}
+  blueParticleActiveColor: {r: 0.15686275, g: 0.18039216, b: 0.50980395, a: 0.5372549}
+  activeSpeed: 1
+  activeSize: 0.4
+  orbitalZ: -3
+--- !u!1001 &1983794156916600905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5019034001922312301}
+    m_Modifications:
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 227065340839989841, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_Name
+      value: PedestalParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427629558346619298, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194551645250254429, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310065071649380702, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 73dae787d13d9da408bf34225b97d804,
+        type: 3}
+    - target: {fileID: 6310065071649380702, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148756059669502358, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: triggerOrigami
+      value: 
+      objectReference: {fileID: 5019034003175297752}
+    - target: {fileID: 8747860609549830176, guid: 30a22737b1dbca347b4086af4fa8494e,
+        type: 3}
+      propertyPath: myTriggerOrigami
+      value: 
+      objectReference: {fileID: 5019034003175297752}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30a22737b1dbca347b4086af4fa8494e, type: 3}
+--- !u!4 &1871950571364343263 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 179400053905993110, guid: 30a22737b1dbca347b4086af4fa8494e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1983794156916600905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2906438330741447121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3734157014351096216, guid: 30a22737b1dbca347b4086af4fa8494e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1983794156916600905}
+  m_PrefabAsset: {fileID: 0}

@@ -18,19 +18,35 @@ public class EncounterManager : MonoBehaviour
     {
         EventManager.Subscribe(Evento.OnDialogueEnd, SpawnEncounter);
         EventManager.Subscribe(Evento.OnEncounterEnd, EndEncounter);
+        EventManager.Subscribe(Evento.OnRocosoWokeUp, OnRocosoWakesUp);
     }
 
     public void SpawnEncounter(params object[] parameters)
     {
-        if (_isDialogueTriggered && (DialogueSO)parameters[1] == _triggeringDialogue && firstTime)
+        if (_isDialogueTriggered && 
+            (DialogueSO)parameters[1] == _triggeringDialogue)
         {
             _encounter.SetActive(true);
-            firstTime = false;
-            AudioManager.instance.PlayByName("MagicFail", 0.7f);
-            AudioManager.instance.StopByName("MemoFloraMainLoop01");
-            AudioManager.instance.PlayByName("MemoFloraBattleLoop01");
+            AudioManager.instance.PlayByName("MagicFail", 0.5f);
             EventManager.Trigger(Evento.OnEncounterStart, CameraMode.General);
         }
+    }
+
+    public void OnRocosoWakesUp(params object[] parameters)
+    {
+        if (!(bool)parameters[0]) //si no es el boss
+        {
+            return;
+        }
+
+        if (!firstTime)
+        {
+            return;
+        }
+
+        AudioManager.instance.StopByName("MemoFloraMainLoop01");
+        AudioManager.instance.PlayByName("MemoFloraBattleLoop01");
+        firstTime = false;
     }
 
     private void EndEncounter(params object[] parameters)
@@ -47,7 +63,7 @@ public class EncounterManager : MonoBehaviour
         {
             EventManager.Unsubscribe(Evento.OnDialogueEnd, SpawnEncounter);
             EventManager.Unsubscribe(Evento.OnEncounterEnd, EndEncounter);
-
+            EventManager.Unsubscribe(Evento.OnRocosoWokeUp, OnRocosoWakesUp);
         }
     }
 }

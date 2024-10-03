@@ -2,20 +2,19 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Rocoso : Enemy, IMojable
+public class Rocoso : Enemy
 {
-    //este script tiene que estar en donde esta el animator
-    //asi las animaciones pueden llamar a metodos de este script.
-    //unity, no lo entenderias.
-
+    public Rigidbody myRigidbody;
     public Animator anim; //mi animator
     public RocosoHeadbuttHitBox _hitBox;
-    public float attackRange = 11;
-    public float disengageRange = 30;
-    [SerializeField] GameObject _particulasSplash;
+    [SerializeField] float hitboxDuration = 0.2f;
+    public float enterAttackRange = 11; //si el pj se acerca a 11, le pego
+    public float exitAttackRange = 30; //si se aleja a 30, dejo de pegarle y lo vuelvo a perseguir
+    public float viewRange = 60; //me despierto si el pj se acerca a 50 o menos. me duermo si se aleja eso
+    [SerializeField] protected GameObject _particulasSplash;
 
-    [HideInInspector] public bool wasAwoken; //si el player ya se acerco y me despertó
-    [HideInInspector] public bool startAnimationHasFinished = false; //si el player ya se acerco y me despertó
+    public bool startAnimationHasFinished = false;
+    public bool playerEnteredWakeUpCollider = false;
     [HideInInspector] public Vector3 target;
     [HideInInspector] public bool isHitting;
     [HideInInspector] public bool isDead = false;
@@ -23,10 +22,11 @@ public class Rocoso : Enemy, IMojable
 
     Player _player;
     protected FiniteStateMachine _fsm;
-    private bool isDrowning;
+    protected bool isDrowning;
 
-    private void Start()
+    protected virtual void Start()
     {
+        //Debug.Log("Rocoso Start");
         _fsm = new FiniteStateMachine();
         _fsm.AddState(State.RocosoSleep, new RocosoSleepState(_fsm, this));
         _fsm.AddState(State.RocosoStart, new RocosoStartState(_fsm, this));
@@ -34,11 +34,10 @@ public class Rocoso : Enemy, IMojable
         _fsm.AddState(State.RocosoAttack, new RocosoAttackState(_fsm, this));
         _fsm.AddState(State.RocosoDeath, new RocosoDeathState(_fsm, this));
         _fsm.ChangeState(State.RocosoSleep);
-
         _hitBox.headbuttDamage = _attackDamage;
     }
 
-    private void Update()
+    protected void Update()
     {
         _fsm.Update();
 
@@ -48,36 +47,32 @@ public class Rocoso : Enemy, IMojable
         }
     }
 
-    public override void TakeDamage(float dmg)
-    {
-        _hp -= dmg;
-        if (_hp <= 0)
-        {
-            StartCoroutine(MorirCoroutine());
-        }
-        StartCoroutine(EnrojecerSprite());
-    }
-
-    public void RocosoDespierta(Player player) //este metodo es disparado por el trigger, solo la primera vez
-    {
-        if (!wasAwoken)
-        {
-            _player = player;
-            wasAwoken = true;
-        }
-    }
-
-    public void RocosoCamina() //disparada por el final de la animacion de start
+    //triggered by animator
+    public void OnStartAnimationEnd() //disparada por el final de la animacion de start
     {
         startAnimationHasFinished = true;
     }
-
-    IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo
+    protected void PlayHeadbuttSound() //se dispara por la animacion
+    {
+        AudioManager.instance.PlayByName("RocosoHeadbutt", 1f, 0.02f);
+    }
+    protected void PlayPasoSound()
+    {
+        AudioManager.instance.PlayByName("RocosoPaso", 1f, 0.05f);
+    }
+    protected IEnumerator HeadbuttCoroutine() //esto se dispara en el momento correcto de la animacion de cabezazo
     {
         EnableHeadbuttHitbox();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(hitboxDuration);
         DisableHeadbuttHitbox();
     }
+    public void DeathAnimationEnd() //esto lo dispara el animator (especificamente, el final de clip de death)
+    {
+        //Debug.Log("termina el clip de muerte");
+        deathAnimationEnded = true;
+    }
+    
+    //utilities
     public void EnableHeadbuttHitbox()
     {
         //Debug.Log("prendo el headbutt");
@@ -90,22 +85,26 @@ public class Rocoso : Enemy, IMojable
         isHitting = false;
     }
 
+    //interfaces and triggers
+    public virtual void OnPlayerEnterWakeUpCollider(Player player) //este metodo es disparado por el trigger, solo la primera vez
+    {
+        _player = player;
+        playerEnteredWakeUpCollider = true;
+    }
     public void GetWet(float wetDamage) //esto se dispara cuando collisiona con el rio
     {
-        Debug.Log("rocoso se moja");
+        //Debug.Log("rocoso se moja");
 
         _particulasSplash.SetActive(true);
-        AudioManager.instance.PlayByName("BigWaterSplash");
+        AudioManager.instance.PlayByName("RocosoMojado");
 
         isDrowning = true;
         StartCoroutine(DrowningCoroutine(wetDamage));
     }
-
     public void StopGettingWet()
     {
         isDrowning = false;
     }
-
     public IEnumerator DrowningCoroutine(float wetDamage)
     {
         while (isDrowning)
@@ -115,12 +114,17 @@ public class Rocoso : Enemy, IMojable
         }
     }
 
-    public void DeathAnimationEnd() //esto lo dispara el animator (especificamente, el final de clip de death)
+    //dmg and death
+    public override void TakeDamage(float dmg)
     {
-        //Debug.Log("termina el clip de muerte");
-        deathAnimationEnded = true;
+        AudioManager.instance.PlayByName("PaperCut01", 0.8f);
+        _hp -= dmg;
+        if (_hp <= 0)
+        {
+            StartCoroutine(MorirCoroutine());
+        }
+        StartCoroutine(EnrojecerSprite());
     }
-
     public IEnumerator MorirCoroutine() //la corrutina esta es solo para esperar a la anim antes de disparar Die()
     {
         //Debug.Log("arranco corrutina de morir");
@@ -133,5 +137,45 @@ public class Rocoso : Enemy, IMojable
         }
 
         Die();
+    }
+    protected void OnDisable()
+    {
+        //cuando cambias de pagina el rocoso se apaga
+        //cuando volves a la pagina en la que estaba, el animator se reinicia y vuelve a estar dormido
+        //esta linea es para que despues de reiniciarse, vuelva al estado en el que estaba antes
+
+        if (isDead)
+        {
+            Die();
+            return;
+        }
+
+        //Debug.Log("me deshabilitaron");
+        _fsm.ChangeState(State.RocosoSleep);
+    }
+
+    //protected void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, enterAttackRange);
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, exitAttackRange);
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(transform.position, viewRange);
+
+    //    if (_player != null)
+    //    {
+    //        Gizmos.color = Color.blue;
+    //        Gizmos.DrawLine(transform.position, _player.transform.position);
+    //    }
+    //}
+
+    public float DistanceToPlayer()
+    {
+        return Vector3.Distance(target, transform.position);
+    }
+    public bool PlayerIsInViewRange()
+    {
+        return DistanceToPlayer() < viewRange;
     }
 }

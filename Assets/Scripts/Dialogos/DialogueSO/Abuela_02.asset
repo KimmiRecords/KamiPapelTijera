@@ -12,22 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7dbce3668a28f42bb62a3c585866f0, type: 3}
   m_Name: Abuela_02
   m_EditorClassIdentifier: 
-  textos:
-  - "[ABUELA]: Gracias por acompa\xF1arme. "
-  - '[...]'
-  - "[ABUELA]: De casualidad no viste donde dej\xE9 mi salero? Norberto siempre se
-    olvida de condimentar la ensalada."
-  - '[ESTE ES EL FIN DE ESTE NIVEL]'
   wasRead: 0
-  sprite: {fileID: 21300000, guid: 96935c3b69deed1488f8f78bb5ebc459, type: 3}
   events:
-  - text: "[ABUELA]: Gracias por acompa\xF1arme. "
+  - text: Bueno, ya volvamos a casa que tengo hambre.
     sprite: {fileID: 21300000, guid: 96935c3b69deed1488f8f78bb5ebc459, type: 3}
+    speakerName: Abuela
   - text: '[...]'
-    sprite: {fileID: 21300000, guid: 96935c3b69deed1488f8f78bb5ebc459, type: 3}
-  - text: "[ABUELA]: De casualidad no viste donde dej\xE9 mi salero? Norberto siempre
-      se olvida de condimentar la ensalada."
-    sprite: {fileID: 21300000, guid: 96935c3b69deed1488f8f78bb5ebc459, type: 3}
-  - text: '[ESTE ES EL FIN DE ESTE NIVEL]'
-    sprite: {fileID: 21300000, guid: 96935c3b69deed1488f8f78bb5ebc459, type: 3}
-  currentText: 0
+    sprite: {fileID: 21300000, guid: 796720c0e2f160448b41a8968088a9e1, type: 3}
+    speakerName: 
+  - text: "[ABUELA]: Querida, estoy muy vieja y cansada. No me dobl\xE1s y me llev\xE1s
+      en tu morralcito?"
+    sprite: {fileID: 21300000, guid: dc517b3457993be4aa8a9f4a9206bf7a, type: 3}
+    speakerName: Abuela
+  - text: "[Manten\xE9 E para doblar a la abuela.]"
+    sprite: {fileID: 21300000, guid: dc517b3457993be4aa8a9f4a9206bf7a, type: 3}
+    speakerName: 
+  currentText: 3

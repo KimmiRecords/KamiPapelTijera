@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ObjetoCortable : MonoBehaviour, ICortable
 {
@@ -16,13 +17,20 @@ public class ObjetoCortable : MonoBehaviour, ICortable
 
     protected bool isCortable = true;
     protected Vector3 posicionInicial;
+    protected Vector3 escalaInicialSpriteTop;
     protected float tiempoDeVuelo;
     protected readonly float gravedad = 9.81f;
 
-    protected void Start()
+    [SerializeField] protected bool doesRespawn;
+    [SerializeField] protected float respawnTime = 30;
+    [SerializeField] protected bool doesShrink = true; //si se achica al ser cortado. todos si, menos el arbols2d por ahora.
+
+    protected float selfDestructTime = 1;
+
+    protected virtual void Start()
     {
         posicionInicial = spriteTop.gameObject.transform.localPosition;
-
+        escalaInicialSpriteTop = spriteTop.gameObject.transform.localScale;
         //calculo el tiempo que me tomaria todo este saltito
     }
 
@@ -45,6 +53,11 @@ public class ObjetoCortable : MonoBehaviour, ICortable
 
         //el pickup pega saltito y cae wujuuuu
         StartCoroutine(MoverEnTiroOblicuo());
+
+        if (doesShrink)
+        {
+            StartCoroutine(AchicarSpriteQueSaleVolando());
+        }
         isCortable = false;
     }
 
@@ -74,5 +87,49 @@ public class ObjetoCortable : MonoBehaviour, ICortable
             yield return null;
         }
     }
+
+    protected virtual IEnumerator AchicarSpriteQueSaleVolando()
+    {
+        float tiempoPasado = 0.0f;
+
+        while (tiempoPasado < selfDestructTime)
+        {
+            //lerp scale from currentScale to *almost* zero
+            spriteTop.gameObject.transform.localScale = Vector3.Lerp(escalaInicialSpriteTop, Vector3.zero, tiempoPasado / selfDestructTime);
+
+
+            tiempoPasado += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    
+    protected void Respawn()
+    {
+        //print("respawn");
+        //apago las partes y prendo el entero
+        ReunirSprites();
+        isCortable = true;
+    }
+    protected void SelfDestruct()
+    {
+        //Debug.Log("selfdestruct");
+        spriteTop.gameObject.transform.gameObject.SetActive(false);
+    }
+    protected void ReunirSprites()
+    {
+        spriteEntero.gameObject.SetActive(true);
+        spriteBase.gameObject.SetActive(false);
+        spriteTop.gameObject.transform.position = posicionInicial;
+        spriteTop.gameObject.transform.localScale = escalaInicialSpriteTop;
+        spriteTop.gameObject.SetActive(false);
+    }
+
+    protected IEnumerator WaitForActionCoroutine(float time, Action action)
+    {
+        yield return new WaitForSeconds(time);
+        action();
+    }
+
 
 }

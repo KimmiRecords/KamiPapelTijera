@@ -19,7 +19,7 @@ public class TriggerText : TriggerScript
         else
         {
             triggerBool = true;
-            TooltipManager.instance.ShowTooltip(tooltipTextToShow, postItColor);
+            TooltipManager.Instance.ShowTooltip(tooltipTextToShow, postItColor);
             wasShown = true;
         }
     }

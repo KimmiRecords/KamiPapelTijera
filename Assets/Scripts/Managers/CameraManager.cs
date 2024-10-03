@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ public enum CameraMode
     CloseUp,
     Normal,
     General,
-    BookCenter
+    BookCenter,
+    ReceiveReward
 }
 
 public class CameraManager : Singleton<CameraManager>
@@ -26,15 +28,12 @@ public class CameraManager : Singleton<CameraManager>
     [SerializeField] DialogueSO[] dialoguesEspeciales;
     [SerializeField] CameraMode[] camarasEspeciales;
 
-    private void Start()
+    protected override void Awake()
     {
-        EventManager.Subscribe(Evento.OnDialogueStart, SetCamera);
-        EventManager.Subscribe(Evento.OnDialogueEnd, PrepareCamera);
+        base.Awake();
+
         EventManager.Subscribe(Evento.OnEncounterStart, SetCamera);
-        EventManager.Subscribe(Evento.OnEncounterEnd, SetCamera);
         EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
-
-
         currentCamera = startingCamera;
         StartCoroutine(LevelStartCameraMovement());
     }
@@ -53,11 +52,11 @@ public class CameraManager : Singleton<CameraManager>
         }
     }
 
-    public void PrepareCamera(params object[] parameter)
+    public void PrepareCamera(params object[] parameters)
     {
         for (int i = 0; i < dialoguesEspeciales.Count(); i++)
         {
-            if ((DialogueSO)parameter[1] == dialoguesEspeciales[i]) //el dialogue
+            if ((DialogueSO)parameters[1] == dialoguesEspeciales[i]) //el dialogue
             {
                 //Debug.Log("prepare camera. era caso especial: no hago nada");
                 //SetCamera(camarasEspeciales[i]);
@@ -65,9 +64,8 @@ public class CameraManager : Singleton<CameraManager>
             }
         }
         //Debug.Log("prepare camera: no era caso especial. set camera");
-        SetCamera((CameraMode)parameter[0]);
+        SetCamera((CameraMode)parameters[0]);
     }
-
     public void ToggleNextCamera()
     {
         //prendo la nueva. uso un index para saber cual tengo que encender.
@@ -87,17 +85,10 @@ public class CameraManager : Singleton<CameraManager>
         }
 
         _virtualCameras[previousCamera].gameObject.SetActive(false);
-    }
+        EventManager.Trigger(Evento.OnCameraChange, currentCamera);
+        PlaySetCameraSound();
 
-    public void SetCamera(int index)
-    {
-        //_virtualCameras[currentCamera].gameObject.SetActive(false);
-        TurnOffAllVirtualCameras();
-
-        currentCamera = index;
-        _virtualCameras[currentCamera].gameObject.SetActive(true);
     }
-    
     public void TurnOffAllVirtualCameras()
     {
         foreach (Cinemachine.CinemachineVirtualCamera cam in _virtualCameras)
@@ -105,39 +96,45 @@ public class CameraManager : Singleton<CameraManager>
             cam.gameObject.SetActive(false);
         }
     }
+    public void SetCamera(int index)
+    {
+        TurnOffAllVirtualCameras();
+        currentCamera = index;
+        _virtualCameras[currentCamera].gameObject.SetActive(true);
 
+    }
     public void SetCamera(CameraMode cam)
     {
-        //Debug.Log("cambio la camara a " + cam);
         TurnOffAllVirtualCameras();
-
         currentCamera = (int)cam;
         _virtualCameras[currentCamera].gameObject.SetActive(true);
     }
-
-    public void SetCamera(params object[] parameter)
+    public void SetCamera(params object[] parameters)
     {
         TurnOffAllVirtualCameras();
 
-        if (parameter[0] is int || parameter[0] is CameraMode)
+        if (parameters[0] is int || parameters[0] is CameraMode)
         {
             //Debug.Log("cambio la camara a " + (int)parameter[0]);
-            SetCamera((int)parameter[0]);
+            SetCamera((int)parameters[0]);
         }
-        else if (parameter[0] is CameraMode)
+        else if (parameters[0] is CameraMode)
         {
             //Debug.Log("cambio la camara a " + (CameraMode)parameter[0]);
-            SetCamera((CameraMode)parameter[0]);
+            SetCamera((CameraMode)parameters[0]);
         }
+    }
+
+    public void PlaySetCameraSound()
+    {
+        AudioManager.instance.PlayByName("PickupSFX", 1.8f - (currentCamera / 100f));
     }
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnDialogueStart, SetCamera);
-            EventManager.Unsubscribe(Evento.OnDialogueEnd, SetCamera);
-            EventManager.Unsubscribe(Evento.OnEncounterEnd, SetCamera);
             EventManager.Unsubscribe(Evento.OnEncounterStart, SetCamera);
+            EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
         }
     }
 }

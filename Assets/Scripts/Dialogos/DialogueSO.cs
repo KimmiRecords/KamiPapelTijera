@@ -8,6 +8,7 @@ public struct DialogueEvent
 {
     [TextAreaAttribute] public string text;
     public Sprite sprite;
+    public string speakerName;
 }
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Dialogue", order = 1)]

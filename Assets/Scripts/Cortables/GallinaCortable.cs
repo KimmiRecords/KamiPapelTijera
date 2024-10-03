@@ -5,7 +5,7 @@ using UnityEngine;
 public class GallinaCortable : MonoBehaviour, ICortable
 {
     [SerializeField]
-    Gallina _thisGallina;
+    GallinaAI _thisGallina;
 
     public virtual void GetCut(float dmg)
     {

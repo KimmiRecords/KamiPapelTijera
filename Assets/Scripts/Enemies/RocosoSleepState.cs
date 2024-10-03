@@ -15,21 +15,21 @@ public class RocosoSleepState : IState
 
     public void OnEnter()
     {
-        //Debug.Log("rocoso entre a sleep");
-        //_rocoso.RocosoCamina();
-
+        _rocoso.playerEnteredWakeUpCollider = false;
+        _rocoso.startAnimationHasFinished = false;
+        _rocoso.anim.SetTrigger("isEepy");
     }
 
     public void OnUpdate()
     {
-        if (_rocoso.wasAwoken)
+        if (_rocoso.playerEnteredWakeUpCollider)
         {
+            //Debug.Log("sleep: me paso a start");
             _fsm.ChangeState(State.RocosoStart);
         }
 
         if (_rocoso.isDead)
         {
-            Debug.Log("sleep - ONUPDATE - me cambio a death porque me mori");
             _fsm.ChangeState(State.RocosoDeath);
         }
     }

@@ -15,9 +15,7 @@ public class RocosoWalkState : IState
 
     public void OnEnter()
     {
-        //Debug.Log("entre a walk");
-        _rocoso.anim.SetBool("isWalk", true);
-
+        _rocoso.anim.SetTrigger("isWalks");
     }
 
     public void OnUpdate()
@@ -33,18 +31,23 @@ public class RocosoWalkState : IState
             _rocoso.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
-        if (Vector3.Distance(_rocoso.target, _rocoso.transform.position) < _rocoso.attackRange)
+        if (_rocoso.DistanceToPlayer() < _rocoso.enterAttackRange)
         {
-            //Debug.Log("ONUPDATE - me cambio a attack");
             _fsm.ChangeState(State.RocosoAttack);
+        }
+
+        if (!_rocoso.PlayerIsInViewRange())
+        {
+            //Debug.Log("walk: me paso a sleep");
+            _fsm.ChangeState(State.RocosoSleep);
         }
 
         if (_rocoso.isDead)
         {
-            //Debug.Log("Walk - ONUPDATE - me cambio a death porque me mori");
             _fsm.ChangeState(State.RocosoDeath);
         }
     }
+
 
     public void OnExit()
     {
@@ -56,13 +59,6 @@ public class RocosoWalkState : IState
     {
         Vector3 dir = _rocoso.target - _rocoso.transform.position;
         dir.y = 0;
-        //_rocoso.transform.forward = dir;
-        _rocoso.transform.position +=  _rocoso.Speed * Time.deltaTime * dir.normalized;
-
-        if (dir.magnitude < 0.1f)
-        {
-            Debug.Log("WALK METHOD - me cambio a attack");
-            _fsm.ChangeState(State.RocosoAttack);
-        }
+        _rocoso.myRigidbody.AddForce(_rocoso.Speed * Time.deltaTime * dir.normalized, ForceMode.VelocityChange);
     }
 }

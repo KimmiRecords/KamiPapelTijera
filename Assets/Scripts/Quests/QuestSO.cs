@@ -7,6 +7,9 @@ public class QuestSO : ScriptableObject
     public string questName;
     [TextArea] public string questDescription;
     public Condition condition;
+    public RewardType rewardType;
+    public Sprite questSprite;
+    public ResourceType rewardRt;
 
     //eventualmente podrian tener un reward,
     //tambien podrian tener un string descripcion de cada condicion

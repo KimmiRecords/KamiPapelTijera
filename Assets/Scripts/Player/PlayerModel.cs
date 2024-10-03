@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerModel
@@ -10,32 +9,27 @@ public class PlayerModel
     Player _player;
     float _groundedTimer;
     float _verticalVelocity;
-    float _speedModifier;
-    float _playerSpeed;
 
     Vector3 _move; //el vector en el que guardo la suma de todo el movimiento para finalmente aplicarsela al character controller
     Vector3 auxForwardVector;
     float auxOriginalImpulse;
 
+    bool isFalling = false;
+
+    float fallingTimer = 0f;
 
     public PlayerModel(Player player)
     {
         _player = player;
-        _playerSpeed = _player.Speed; 
-        _speedModifier = 1;
         auxOriginalImpulse = _player.planeoImpulse;
     }
+
     public void NewMove(float hor, float ver)
     {
         bool groundedPlayer = _player.cc.isGrounded;
         if (groundedPlayer)
         {
-            _groundedTimer = 0.2f; //mientras este en el suelo
-            _player._view.StopJump();
-            //_player._view.StartIdleAnimation();
-            //pAnims.StopJumping();
-            //pAnims.StopFalling();
-            //pAnims.PlayLanding();
+            OnGrounded();
         }
 
         if (_groundedTimer > 0)
@@ -43,20 +37,14 @@ public class PlayerModel
             _groundedTimer -= Time.deltaTime;
         }
 
-        //if (!groundedPlayer && _verticalVelocity <= -2f) //si esta cayendo pero no tocando el suelo empieza a caer
-        //{
-        //    pAnims.StopJumping();
-        //    pAnims.PlayFalling();
-        //}
-
-        if (groundedPlayer && _verticalVelocity <= 0) //corta la caida cuando toco el suelo
+        if (!groundedPlayer && _verticalVelocity <= -2f) //si esta cayendo pero no tocando el suelo empieza a caer
         {
-            _verticalVelocity = 0f;
-            //AudioManager.instance.PlayJumpDown();
-            if (_player.augmentedJumpsLeft == 0)
-            {
-                _player.DestroyPaperPlaneHat();
-            }
+            OnStartFalling();
+        }
+
+        if (groundedPlayer && _verticalVelocity <= 0) //si acabo de estar grounded
+        {
+            OnTouchGround();
         }
 
         _verticalVelocity -= _player.gravityValue * Time.deltaTime; //aplica gravedad extra
@@ -72,32 +60,79 @@ public class PlayerModel
         {
             if (_groundedTimer > 0)
             {
-                _groundedTimer = 0;
-                _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
-                _player.isJumpButtonDown = false;
-                //AudioManager.instance.StopPasos();
-                _player._view.StartJumpAnimation();
-                //pAnims.StopLanding();
-                if (_player.isPaperPlaneHat)
-                {
-                    //Debug.Log("Move: salte con hat. add planing porfaa");
-                    _player.AddPlaning();
-                    _player.augmentedJumpsLeft--;
-                }
+                OnJump();
             }
         }
 
-
-        _move *= _playerSpeed * _speedModifier;
+        _move *= _player.Speed;
         _move.y = _verticalVelocity; //sigo cargando el vector movieminto
         _player.cc.Move(_move * Time.deltaTime); //aplico el vector movieminto al character controller, con el metodo .Move
 
         if (hor != 0 || ver != 0)
         {
-            _player._view.RotateModel(_move);
+            _player._view.CheckCanRotateModel(_move);
         }
 
         //Debug.Log(_move);
+    }
+
+    private void OnGrounded()
+    {
+        //Debug.Log("on grounded");
+        _groundedTimer = 0.2f; //mientras este en el suelo
+        _player._view.StopJump();
+
+        if (isFalling)
+        {
+            //Debug.Log("jump land sfx - falling");
+            AudioManager.instance.PlayByName("JumpLand", 1f, 0.02f);
+
+            if (fallingTimer > 0.2f)
+            {
+                _player.BrieflySlowDown();
+            }
+
+            fallingTimer = 0f;
+        }
+        isFalling = false;
+
+        _player._view.StopFalling();
+        _player._view.StartLanding();
+    }
+    private void OnStartFalling()
+    {
+        //Debug.Log("on start falling");
+        isFalling = true;
+        _player._view.StopJump();
+        _player._view.StartFalling();
+        //Debug.Log("falling timer" + fallingTimer);
+        fallingTimer += Time.deltaTime;
+    }
+    private void OnTouchGround()
+    {
+        //Debug.Log("ongrounded y vertical velocity => 0");
+        _verticalVelocity = 0f;
+
+        //_player._view.StopLanding();
+
+        if (_player.augmentedJumpsLeft == 0)
+        {
+            _player.DestroyPaperPlaneHat();
+        }
+    }
+    private void OnJump()
+    {
+        _groundedTimer = 0;
+        _verticalVelocity += Mathf.Sqrt(_player.jumpForce * 2 * _player.gravityValue); //saltar en realidad le da velocidad vertical nomas
+        _player.isJumpButtonDown = false;
+        _player._view.StartJumpAnimation(_player.isPaperPlaneHat);
+        _player._view.StopLanding();
+
+        if (_player.isPaperPlaneHat)
+        {
+            _player.AddPlaning();
+            _player.augmentedJumpsLeft--;
+        }
     }
 
     public void EnableTijeraHitbox()
@@ -105,34 +140,35 @@ public class PlayerModel
         //Debug.Log("prendo la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(true);
     }
-
     public void DisableTijeraHitbox()
     {
         //Debug.Log("apago la tijera");
         _player.miTijeraHitbox.gameObject.SetActive(false);
     }
 
-    public IEnumerator AddExtraForwardForce(float delayTime, float duration)
+    public IEnumerator AddExtraForwardForce(float delayTime, float duration, float planeoImpulse, Vector3 lastDirection)
     {
         yield return new WaitForSeconds(delayTime);
 
-        _player.planeoImpulse = auxOriginalImpulse;
+        planeoImpulse = auxOriginalImpulse;
         float elapsedTime = 0f;
-        float startImpulse = _player.planeoImpulse;
+        float startImpulse = planeoImpulse;
 
         while (elapsedTime < duration)
         {
-            auxForwardVector = _player.lastDirection * _player.planeoImpulse;
+            auxForwardVector = lastDirection * planeoImpulse;
             _player.cc.Move(auxForwardVector * Time.deltaTime);
 
-            // Reducción lineal del planeoImpulse en función del tiempo transcurrido
-            _player.planeoImpulse = Mathf.Lerp(startImpulse, 0f, elapsedTime / duration);
+            planeoImpulse = Mathf.Lerp(startImpulse, 0f, elapsedTime / duration);
 
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        // Asegurarse de que el planeoImpulse sea exactamente 0 al final de la corrutina
-        _player.planeoImpulse = 0f;
+        planeoImpulse = 0f;
+    }
+    public void ForcedMove(Vector3 move)
+    {
+        _player.cc.Move(move);
     }
 }

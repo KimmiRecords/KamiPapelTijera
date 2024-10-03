@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7dbce3668a28f42bb62a3c585866f0, type: 3}
   m_Name: Chino_01
   m_EditorClassIdentifier: 
-  textos:
-  - '[EL CHINO]: La abuela? No la vi.'
-  - '[EL CHINO]: Siempre se pierde entre los arbustos...'
   wasRead: 0
-  sprite: {fileID: 21300000, guid: 20a50ba374e2e1f4a878724ffa1cbd91, type: 3}
   events:
-  - text: '[EL CHINO]: La abuela? No la vi.'
-    sprite: {fileID: 21300000, guid: 20a50ba374e2e1f4a878724ffa1cbd91, type: 3}
-  - text: '[EL CHINO]: Siempre se pierde entre los arbustos...'
+  - text: Buenas buenas...
     sprite: {fileID: 21300000, guid: b887ca28fa281534ca4c8863b5f0d158, type: 3}
+    speakerName: Chino
+  - text: "Che, sab\xE9s que no estoy pudiendo prender el horno? Hay demasiado viento..."
+    sprite: {fileID: 21300000, guid: 20a50ba374e2e1f4a878724ffa1cbd91, type: 3}
+    speakerName: Chino
+  - text: "No me har\xEDas el favor de conseguirme 100 papeles? Con eso me arreglo.
+      Si lo hac\xE9s te puedo preparar un regalo muy copado."
+    sprite: {fileID: 21300000, guid: b887ca28fa281534ca4c8863b5f0d158, type: 3}
+    speakerName: Chino
   currentText: 0

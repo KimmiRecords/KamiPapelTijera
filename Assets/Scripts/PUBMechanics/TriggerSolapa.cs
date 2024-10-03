@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class TriggerSolapa : TriggerScript
 {
-    [SerializeField]
-    Solapa solapaAfectada;
+    //esto se lo pones a una solapa
+    //cuando la interactuas 
 
-    [SerializeField]
-    GameObject objetoParaMostrar;
-
-    [SerializeField]
-    float tiempoHastaMostrarObjeto;
-
+    [SerializeField] Solapa solapaAfectada;
+    [SerializeField] GameObject objetoParaMostrar;
+    [SerializeField] float tiempoHastaMostrarObjeto;
     bool isShowing;
 
     public override void Interact(params object[] parameter)

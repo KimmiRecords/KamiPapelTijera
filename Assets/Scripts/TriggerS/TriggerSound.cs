@@ -11,7 +11,7 @@ public class TriggerSound : TriggerScript
     {
         //print("entro el player");
         triggerBool = true;
-        TooltipManager.instance.ShowTooltip(tooltipTextToShow, PostItColor.Verde);
+        TooltipManager.Instance.ShowTooltip(tooltipTextToShow, PostItColor.Verde);
         
         if (soundName == "4S_MarimbaLoopConPiano")
         {

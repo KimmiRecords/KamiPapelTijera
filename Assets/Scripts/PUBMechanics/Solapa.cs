@@ -6,7 +6,6 @@ using UnityEngine;
 public class Solapa : MonoBehaviour
 {
     protected bool isOn;
-
     protected Animator anim;
 
     private void Start()
@@ -17,9 +16,7 @@ public class Solapa : MonoBehaviour
     public virtual void CambiarEstado()
     {
         isOn = !isOn;
+        anim.SetBool("isOpen", isOn);
+        AudioManager.instance.PlayByName("PaperFold01", 1.5f, 0.1f);
     }
-
-    
-
-    
 }

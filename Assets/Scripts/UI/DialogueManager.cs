@@ -7,78 +7,81 @@ public class DialogueManager : Singleton<DialogueManager>
 {
     //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto
 
-    //public static DialogueManager instance;
-
     [SerializeField] GameObject dialogueGlobe;
-    [SerializeField] TMPro.TextMeshProUGUI dialogueTextComponent;
+    [SerializeField] TMPro.TextMeshProUGUI dialogueGlobeText;
+    [SerializeField] TMPro.TextMeshProUGUI dialogueGlobeSpeaker;
     [SerializeField] Image npcQueTeHablaImage;
 
     bool input = false;
     bool waitingForInput = false;
     [HideInInspector] public bool isShowing = false;
+    public bool lockedByAnimation = false;
 
-    //private void Awake()
-    //{
-    //    if (instance != null && instance != this)
-    //    {
-    //        Destroy(this);
-    //    }
-    //    else
-    //    {
-    //        instance = this;
-    //    }
-    //    //DontDestroyOnLoad(this);
-    //}
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         EventManager.Subscribe(Evento.OnPlayerPressedE, CheckPlayerInput);
     }
 
     public void CheckPlayerInput(params object[] parameter)
     {
-        if (waitingForInput)
+        if (waitingForInput && !lockedByAnimation)
         {
             //print("recibi input true");
             input = true;
-            AudioManager.instance.PlayByName("PickupSFX", 2.5f);
+            PlayEToInteractSound();
         }
     }
+
+    public void BUTTON_NextText() //para que el button lo dispare. unity "2021"
+    {
+        CheckPlayerInput();
+    }
+
 
     public void ShowDialogue(DialogueSO dialogue)
     {
-        if (!isShowing)
+        if (OverlayManager.Instance != null && OverlayManager.Instance.isLocked)
+        {
+            return;
+        }
+
+        if (!isShowing && !LevelManager.Instance.inDialogue)
         {
             //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
             dialogue.currentText = 0;
-
-
             dialogueGlobe.SetActive(true);
+            PlayEToInteractSound();
             LevelManager.Instance.inDialogue = true;
             isShowing = true;
-            EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
+            //EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
             StartCoroutine(WriteText(dialogue));
         }
     }
+
     public void HideDialogue(DialogueSO dialogue)
     {
-        //print("hide dialogue " + dialogue.name);
-        dialogueTextComponent.text = ""; //esto es lo que deberia estar animado despues
+        dialogueGlobeText.text = "";
+        dialogueGlobeSpeaker.text = "";
         LevelManager.Instance.inDialogue = false;
         dialogueGlobe.SetActive(false);
         isShowing = false;
         EventManager.Trigger(Evento.OnDialogueEnd, CameraMode.Normal, dialogue);
     }
+
     public IEnumerator WriteText(DialogueSO dialogue)
     {
         for (int i = 0; i < dialogue.events.Length; i++)
         {
             //print("ARRANCA EL WRITE TEXT ");
-            dialogue.currentText++;
+            dialogue.currentText++; //??? empieza desde el 1
+            EventManager.Trigger(Evento.OnDialogueWriteText, dialogue);
 
-            dialogueTextComponent.text = dialogue.events[i].text;
-            npcQueTeHablaImage.sprite = dialogue.events[i].sprite; 
+            dialogueGlobeText.text = dialogue.events[i].text;
+            dialogueGlobeSpeaker.text = dialogue.events[i].speakerName;
+            npcQueTeHablaImage.sprite = dialogue.events[i].sprite;
 
-            SetNativeSize(npcQueTeHablaImage.sprite); //??? esto es necesario si todos los sprites son del mismo tamaño?
+            SetNativeSize(npcQueTeHablaImage.sprite);
 
             yield return new WaitForEndOfFrame();
             waitingForInput = true;
@@ -95,8 +98,14 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void SetNativeSize(Sprite sprite)
     {
-          float spriteRatio = sprite.rect.width / sprite.rect.height;
-          npcQueTeHablaImage.rectTransform.sizeDelta = new Vector2(npcQueTeHablaImage.rectTransform.sizeDelta.y * spriteRatio, npcQueTeHablaImage.rectTransform.sizeDelta.y);
+        float spriteRatio = sprite.rect.width / sprite.rect.height;
+        npcQueTeHablaImage.rectTransform.sizeDelta = new Vector2(npcQueTeHablaImage.rectTransform.sizeDelta.y * spriteRatio, npcQueTeHablaImage.rectTransform.sizeDelta.y);
+    }
+
+    public void PlayEToInteractSound()
+    {
+        AudioManager.instance.PlayByName("PickupSFX", 0.5f);
+
     }
 
     private void OnDestroy()

@@ -14,8 +14,8 @@ public abstract class TriggerScript : MonoBehaviour
 
     [HideInInspector] public bool triggerBool = false;
 
+    [SerializeField] protected bool showTooltip = true;
     [SerializeField] protected string tooltipTextToShow;
-
     [SerializeField] protected PostItColor postItColor;
 
     protected virtual void Start()
@@ -44,14 +44,18 @@ public abstract class TriggerScript : MonoBehaviour
     {
         //print("entro el player");
         triggerBool = true;
-        TooltipManager.instance.ShowTooltip(tooltipTextToShow, postItColor);
+
+        if (showTooltip)
+        {
+            TooltipManager.Instance.ShowTooltip(tooltipTextToShow, postItColor);
+        }
     }
 
     public virtual void OnExitBehaviour()
     {
         //print("se salio el player de " + gameObject.name);
         triggerBool = false;
-        TooltipManager.instance.HideTooltip();
+        TooltipManager.Instance.HideTooltip();
     }
 
     public virtual void Interact(params object[] parameter) //interact se dispara cuando tocas E

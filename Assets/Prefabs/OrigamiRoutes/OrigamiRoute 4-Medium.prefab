@@ -30,10 +30,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4866452596700526401}
-  - {fileID: 8302011917997908317}
-  - {fileID: 466084445036581786}
-  - {fileID: 188118648514101718}
+  - {fileID: 1726218787435943134}
+  - {fileID: 1377902921253602962}
+  - {fileID: 7376401302641046613}
+  - {fileID: 6260437682827715145}
   - {fileID: 1892766823237598760}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -70,8 +70,8 @@ MonoBehaviour:
   - {fileID: 3999566267189717441}
   paperCost: 4
   isReusable: 0
-  tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
-    rojo. No te salgas del camino indicado!"
+  tooltipMessage: "Arrastr\xE1 la flecha verde hasta el objetivo y solt\xE1. No te
+    salgas del camino!"
   postItColor: 1
   currentRouteIndex: 0
   wasUsed: 0
@@ -360,9 +360,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69219c6d096d19f48b780a5f0a02c485, type: 3}
---- !u!4 &188118648514101718 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3042680441206690045, guid: 69219c6d096d19f48b780a5f0a02c485,
+--- !u!224 &1726218787435943134 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
     type: 3}
   m_PrefabInstance: {fileID: 2928906937861411115}
   m_PrefabAsset: {fileID: 0}
@@ -565,6 +565,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
       objectReference: {fileID: 0}
+    - target: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5061278643690110774, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
       propertyPath: m_Name
@@ -612,9 +617,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69219c6d096d19f48b780a5f0a02c485, type: 3}
---- !u!4 &466084445036581786 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3042680441206690045, guid: 69219c6d096d19f48b780a5f0a02c485,
+--- !u!224 &1377902921253602962 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
     type: 3}
   m_PrefabInstance: {fileID: 3192516574231315303}
   m_PrefabAsset: {fileID: 0}
@@ -817,6 +822,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5061278643690110774, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
       propertyPath: m_Name
@@ -876,9 +886,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8302011917997908317 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3042680441206690045, guid: 69219c6d096d19f48b780a5f0a02c485,
+--- !u!224 &7376401302641046613 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
     type: 3}
   m_PrefabInstance: {fileID: 6417469386754650528}
   m_PrefabAsset: {fileID: 0}
@@ -1054,6 +1064,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5061278643690110774, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
       propertyPath: m_Name
@@ -1101,9 +1116,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69219c6d096d19f48b780a5f0a02c485, type: 3}
---- !u!4 &4866452596700526401 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3042680441206690045, guid: 69219c6d096d19f48b780a5f0a02c485,
+--- !u!224 &6260437682827715145 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
     type: 3}
   m_PrefabInstance: {fileID: 7615826010209773500}
   m_PrefabAsset: {fileID: 0}

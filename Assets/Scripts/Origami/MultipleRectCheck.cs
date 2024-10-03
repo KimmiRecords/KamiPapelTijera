@@ -21,19 +21,19 @@ public class MultipleRectCheck : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             StartOrigami(desiredOrigami);
         }
-        if (Input.GetKeyUp(KeyCode.Tab))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             EndOrigami(desiredOrigami);
             //print("invocacion cancelada x soltar tab");
         }
 
-        if (invocando && Input.GetMouseButtonDown(1))
+        if (invocando && Input.GetMouseButtonDown(0))
         {
-            //chequeo si el mouse esta dentro de la imagen roja, y habilito el arranque
+            //chequeo si el mouse esta dentro de la imagen de inicio, y habilito el arranque
             if (RectTransformUtility.RectangleContainsScreenPoint(desiredOrigami.origamiRoutes[desiredOrigami.currentRouteIndex].inicioRectangle, Input.mousePosition))
             {
                 arrastrando = true;
@@ -49,7 +49,7 @@ public class MultipleRectCheck : MonoBehaviour
         }
 
         //chequeo si el jugador solto el mouse mientras arrastraba
-        if (Input.GetMouseButtonUp(1))
+        if (invocando && arrastrando && Input.GetMouseButtonUp(0))
         {
             CursorManager.Instance.SetCursor(CursorType.OpenHand);
 
@@ -69,7 +69,7 @@ public class MultipleRectCheck : MonoBehaviour
             else
             {
                 //Debug.Log("invocación cancelada x soltar mal");
-                AudioManager.instance.PlayByName("MagicFail", 1, 0.05f);
+                AudioManager.instance.PlayByName("Origami_Fail_Crumble", 1, 0.05f);
                 EndOrigami(desiredOrigami);
             }
 
@@ -90,11 +90,12 @@ public class MultipleRectCheck : MonoBehaviour
                 break;
             }
         }
+
         if (arrastrando && !encimaDeAlgunRectangulo) //si no, end origami
         {
             //me salí de la ruta
             arrastrando = false;
-            AudioManager.instance.PlayByName("MagicFail", 1, 0.05f);
+            AudioManager.instance.PlayByName("Origami_Fail_Crumble", 1, 0.05f);
             Debug.Log("invocación cancelada x salir de la ruta");
             EndOrigami(desiredOrigami);
         }
@@ -108,11 +109,13 @@ public class MultipleRectCheck : MonoBehaviour
             //print("arranca la invocacion");
             origami.gameObject.SetActive(true);
             invocando = true;
-            TooltipManager.instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
+            TooltipManager.Instance.ShowTooltip(origami.tooltipMessage, origami.postItColor);
             AudioManager.instance.PlayRandom("MagicChannelingLoop01", "MagicChannelingLoop02");
             EventManager.Trigger(Evento.OnOrigamiStart);
             //print("rect check: mando a actualizar");
             origami.TriggerPliegueTextUpdater();
+            CursorManager.Instance.ShowCursor(true);
+
         }
 
     }
@@ -124,10 +127,12 @@ public class MultipleRectCheck : MonoBehaviour
         origami.FailOrigami();
         origami.gameObject.SetActive(false);
         //print("invocacion cancelada");
-        TooltipManager.instance.HideTooltip();
+        TooltipManager.Instance.HideTooltip();
         AudioManager.instance.StopByName("PaperFoldLoop");
         AudioManager.instance.StopByName("MagicChannelingLoop01", "MagicChannelingLoop02");
         CursorManager.Instance.SetCursor(CursorType.OpenHand);
         EventManager.Trigger(Evento.OnOrigamiEnd);
+        CursorManager.Instance.ShowCursor(false);
+
     }
 }

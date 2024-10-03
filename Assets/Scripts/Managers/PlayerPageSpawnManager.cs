@@ -1,61 +1,97 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
-[System.Serializable]
-public struct PageSpawnPositions
-{
-    public Vector3 entrySpawn;
-    public Vector3 exitSpawn;
-}
 
 public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 {
     //decime a que pagina pasaste, y yo te dire donde deberia spawnear el player.
-    [SerializeField] PageSpawnPositions[] _pageSpawnCollection;
+    //tambien usan este script cuando el pj muere y debe respawnear
+
+    //isNext es true cuando estoy pasando a la SIGUIENTE pagina.
+    //isNext seria como lo opuesto a isPrev.
+
     [SerializeField] Player _player;
+    [SerializeField] float pageEntryX;
+    [SerializeField] float pageExitX;
+    [SerializeField] float spawnY = 5;
     CharacterController _playerCC;
+    Vector3 lastUsedSpawn; //para recordar el ultimo usado para cuando el player muera
+    Vector3 targetPos = Vector3.zero; //para cuando el player cambia de pagina, saber a donde debe ir
 
     void Start()
     {
-        EventManager.Subscribe(Evento.OnPlayerChangePage, PlacePlayer);
+        EventManager.Subscribe(Evento.OnPlayerChangePage, PlacePlayerInNewPage);
+        EventManager.Subscribe(Evento.OnEncounterStart, SaveCurrentPosition);
+        EventManager.Subscribe(Evento.OnPageTurned, SetPlayerTargetPosition);
         _playerCC = _player.GetComponent<CharacterController>();
+        lastUsedSpawn = _player.transform.position; //en principio, tu ultimo spawn es donde arranca el juego
     }
 
-    public void PlacePlayer(params object[] parameter)
+    public void SetPlayerTargetPosition(params object[] parameters)
     {
-        Debug.Log("place player");
+        targetPos = GetProjectedPositionInNewPage(_player.transform.position, (bool)parameters[1]);
+    }
 
-        if (parameter[0] is int)
+    //subscribing methods
+    public void PlacePlayerInNewPage(params object[] parameter)
+    {
+        //Debug.Log("place player");
+        PositionPlayerAtPoint(targetPos);
+        SavePosition(_player.transform.position);
+    }
+    public void SaveCurrentPosition(params object[] parameter)
+    {
+        SavePosition(_player.transform.position);
+    }
+
+    //methods called from other managers
+    public void RespawnPlayer(params object[] parameter)
+    {
+        //Debug.Log("respawn player");
+        PositionPlayerAtPoint(lastUsedSpawn);
+    }
+
+    //utilities
+    public void PositionPlayerAtPoint(Vector3 point)
+    {
+        _playerCC.enabled = false;
+        _player.transform.position = point;
+        _playerCC.enabled = true;
+        EventManager.Trigger(Evento.OnPlayerPlaced);
+    }
+    public Vector3 GetProjectedPositionInNewPage(Vector3 playerCurrentPosition, bool isNext)
+    {
+        float desiredX;
+        Vector3 newPosition;
+
+        if (isNext)
         {
-            if (parameter[1] is bool)
-            {
-                int currentPage = (int)parameter[0];
-                //print("pongo al player en el spawn de la pagina " + currentPage);
-                _playerCC.enabled = false;
-
-                if ((bool)parameter[1]) //si isNext
-                {
-                    Debug.Log("lo pongo en el entry");
-                    _player.transform.position = _pageSpawnCollection[currentPage - 1].entrySpawn;
-                }
-                else
-                {
-                    Debug.Log("lo pongo en el exit");
-                    _player.transform.position = _pageSpawnCollection[currentPage - 1].exitSpawn;
-                }
-
-                _playerCC.enabled = true;
-                EventManager.Trigger(Evento.OnPlayerPlaced);
-            }
+            desiredX = pageEntryX;
         }
+        else
+        {
+            desiredX = pageExitX;
+
+        }
+
+        newPosition = new Vector3(desiredX, spawnY, playerCurrentPosition.z);
+        //Debug.Log(newPosition);
+        return newPosition;
+    }
+    public void SavePosition(Vector3 pos)
+    {
+        lastUsedSpawn = pos;
     }
 
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPlayerChangePage, PlacePlayer);
+            EventManager.Unsubscribe(Evento.OnPlayerChangePage, PlacePlayerInNewPage);
+            EventManager.Unsubscribe(Evento.OnEncounterStart, SaveCurrentPosition);
+            EventManager.Unsubscribe(Evento.OnPageTurned, SetPlayerTargetPosition);
         }
     }
 }

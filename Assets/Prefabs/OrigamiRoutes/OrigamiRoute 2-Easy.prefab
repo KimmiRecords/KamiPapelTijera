@@ -30,8 +30,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4866452596700526401}
-  - {fileID: 8302011917997908317}
+  - {fileID: 7376401302641046613}
+  - {fileID: 6260437682827715145}
   - {fileID: 693376843400710286}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,13 +61,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ff8952435bea94f9fce5f00e3c4f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origamiForm: 2
   origamiRoutes:
   - {fileID: 8544481211637669718}
   - {fileID: 5056327851396434250}
   paperCost: 2
-  tooltipMessage: "Arratr\xE1 con clic derecho desde la flecha verde hasta el circulo
-    rojo. No te salgas del camino indicado!"
+  isReusable: 0
+  tooltipMessage: "Arrastr\xE1 la flecha verde hasta el objetivo y solt\xE1. No te
+    salgas del camino!"
   postItColor: 1
   currentRouteIndex: 0
   wasUsed: 0
@@ -333,9 +333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32db92f21dbc7d540a1d382c671083ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8302011917997908317 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3042680441206690045, guid: 69219c6d096d19f48b780a5f0a02c485,
+--- !u!224 &7376401302641046613 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
     type: 3}
   m_PrefabInstance: {fileID: 6417469386754650528}
   m_PrefabAsset: {fileID: 0}
@@ -511,6 +511,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5061278643690110774, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}
       propertyPath: m_Name
@@ -558,9 +563,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69219c6d096d19f48b780a5f0a02c485, type: 3}
---- !u!4 &4866452596700526401 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3042680441206690045, guid: 69219c6d096d19f48b780a5f0a02c485,
+--- !u!224 &6260437682827715145 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
     type: 3}
   m_PrefabInstance: {fileID: 7615826010209773500}
   m_PrefabAsset: {fileID: 0}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692a75f9da8fbd047ac062f0a359c87f, type: 3}
+  m_Name: Quest04_Chino
+  m_EditorClassIdentifier: 
+  questName: Chino I
+  questDescription: Traele 100 de papel al Chino para que pueda prender su horno
+    y mejorar tu tijera.
+  condition:
+    conditionType: 0
+    resourceType: 2
+    requiredAmount: 100
+    evento: 0
+  rewardType: 2
+  questSprite: {fileID: 21300000, guid: ff38d6c8be6a105409cffdb4c254b2f7, type: 3}
+  rewardRt: 6

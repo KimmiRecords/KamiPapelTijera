@@ -15,6 +15,10 @@ public class MainMenuManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         EventManager.Subscribe(Evento.OnDialogueEnd, ChangeScene);
+        AudioManager.instance.StopAll();
+        AudioManager.instance.PlayByName("4S_IntroBigChords");
+        AudioManager.instance.PlayByName("ForestAtNight");
+
     }
 
     public void OnNewGameButtonDown()
@@ -24,6 +28,8 @@ public class MainMenuManager : MonoBehaviour
         {
             _autoDialogo.StartDialogue();
             AudioManager.instance.StopByName("4S_IntroBigChords");
+            AudioManager.instance.StopByName("ForestAtNight");
+
             AudioManager.instance.PlayByName("IntroStoryboardLoop");
 
             _dialogueStarted = true;
@@ -49,6 +55,7 @@ public class MainMenuManager : MonoBehaviour
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnDialogueEnd, ChangeScene);
+            //AudioManager.instance.StopByName("IntroStoryboardLoop");
         }
     }
 

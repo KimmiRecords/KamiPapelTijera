@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Overlay : MonoBehaviour
 {
-   
+    [HideInInspector] public bool isShowing = false;
 }

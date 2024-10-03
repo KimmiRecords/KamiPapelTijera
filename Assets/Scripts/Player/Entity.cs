@@ -39,7 +39,7 @@ public abstract class Entity : MonoBehaviour
     public virtual void Die()
     {
         //print("entity: me mori");
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
 }

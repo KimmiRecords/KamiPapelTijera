@@ -12,12 +12,11 @@ public class Rio : TriggerScript
         base.OnTriggerEnter(other);
         if (other.gameObject.GetComponent<IMojable>() != null)
         {
-            Debug.Log("rio: mojo a alguien");
+            //Debug.Log("rio: mojo a " + other.gameObject.name);
             IMojable mojable = other.gameObject.GetComponent<IMojable>();
             mojable.GetWet(wetDamage);
         }
     }
-
 
     protected override void OnTriggerExit(Collider other)
     {
@@ -28,11 +27,4 @@ public class Rio : TriggerScript
             mojable.StopGettingWet();
         }
     }
-
-    //public override void OnEnterBehaviour(Collider other)
-    //{
-    //    triggerBool = true;
-    //    MojarPlayer(other);
-    //}
-
 }

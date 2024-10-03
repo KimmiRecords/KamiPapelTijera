@@ -9,24 +9,26 @@ public class QuestEffector : MonoBehaviour
     [SerializeField] List<GameObject> gameObjectsToActivate = new List<GameObject>();
     [SerializeField] List<GameObject> gameObjectsToDeactivate = new List<GameObject>();
     [SerializeField] QuestSO _quest;
+    [SerializeField] bool activateOnDeliver; //si no, es onCompleted 
+
 
     private void Start()
     {
-        EventManager.Subscribe(Evento.OnQuestCompleted, Activate); //esto significa que sucede al completar, no al entregar. pero podria cambiarlo
+        if (!activateOnDeliver)
+        {
+            EventManager.Subscribe(Evento.OnQuestCompleted, Activate);
+        }
+        else
+        {
+            EventManager.Subscribe(Evento.OnQuestDelivered, Activate);
+        }
     }
 
     public void Activate(params object[] parameters)
     {
         if ((QuestSO)parameters[0] == _quest) 
         {
-            foreach (GameObject go in gameObjectsToActivate)
-            {
-                go.SetActive(true);
-            }
-            foreach (GameObject go in gameObjectsToDeactivate)
-            {
-                go.SetActive(false);
-            }
+            LevelManager.Instance.GameObjectActivator(gameObjectsToActivate, gameObjectsToDeactivate);
         }
     }
 
@@ -34,7 +36,14 @@ public class QuestEffector : MonoBehaviour
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnQuestCompleted, Activate);
+            if (!activateOnDeliver)
+            {
+                EventManager.Unsubscribe(Evento.OnQuestCompleted, Activate);
+            }
+            else
+            {
+                EventManager.Unsubscribe(Evento.OnQuestDelivered, Activate);
+            }
         }
     }
 }

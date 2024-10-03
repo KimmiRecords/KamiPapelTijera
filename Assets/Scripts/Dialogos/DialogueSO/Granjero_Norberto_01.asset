@@ -12,32 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7dbce3668a28f42bb62a3c585866f0, type: 3}
   m_Name: Granjero_Norberto_01
   m_EditorClassIdentifier: 
-  textos:
-  - '[Kami se acerca al granjero
-
-    que parece preocupado]'
-  - '[GRANJERO NORBERTO]: Kami, Kami!'
-  - "[GRANJERO NORBERTO]: Me ten\xE9s que ayudar!"
-  - "[GRANJERO NORBERTO]: La abuela se perdi\xF3 de nuevo. Fue a caminar hace rato
-    y desde entonces no vuelve."
-  - "[GRANJERO NORBERTO]: Podr\xEDas buscarla? Yo voy a prender el fuego para el
-    asado."
-  - '[GRANJERO NORBERTO]: Agarrate la TIJERA del cobertizo por las dudas. '
   wasRead: 0
-  sprite: {fileID: 21300000, guid: 382c57280faf7ca4cbfbb11b2daa1c24, type: 3}
   events:
-  - text: '[Kami se acerca al granjero
-
-      que parece preocupado]'
+  - text: "Kami, Kami! Me ten\xE9s que ayudar!"
+    sprite: {fileID: 21300000, guid: 42b1bc505733def48a2afb4b808f927d, type: 3}
+    speakerName: "T\xEDo Norberto"
+  - text: "La abuela se perdi\xF3 de nuevo. Fue a caminar hace rato y desde entonces
+      no vuelve."
     sprite: {fileID: 21300000, guid: 3698bbeecad12f44b9c630c60f908859, type: 3}
-  - text: "[GRANJERO NORBERTO]: Kami, Kami! Me ten\xE9s que ayudar!"
+    speakerName: "T\xEDo Norberto"
+  - text: "Podr\xEDas buscarla? Yo estoy justo por tirar los choris."
     sprite: {fileID: 21300000, guid: 42b1bc505733def48a2afb4b808f927d, type: 3}
-  - text: "[GRANJERO NORBERTO]: La abuela se perdi\xF3 de nuevo. Fue a caminar hace
-      rato y desde entonces no vuelve."
-    sprite: {fileID: 21300000, guid: 3698bbeecad12f44b9c630c60f908859, type: 3}
-  - text: "[GRANJERO NORBERTO]: Podr\xEDas buscarla? Yo voy a prender el fuego para
-      el asado."
+    speakerName: "T\xEDo Norberto"
+  - text: "Agarrate la TIJERA, est\xE1 al lado del cobertizo. Seguro te va a hacer
+      falta."
     sprite: {fileID: 21300000, guid: 42b1bc505733def48a2afb4b808f927d, type: 3}
-  - text: '[GRANJERO NORBERTO]: Agarrate la TIJERA del cobertizo por las dudas. '
-    sprite: {fileID: 21300000, guid: 42b1bc505733def48a2afb4b808f927d, type: 3}
-  currentText: 0
+    speakerName: "T\xEDo Norberto"
+  currentText: 4

@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverlayManager : MonoBehaviour
+public class OverlayManager : Singleton<OverlayManager>
 {
-    [SerializeField]
-    Overlay _defeatOverlay, _victoryOverlay, _mainQuestOverlay;
+    [SerializeField] Overlay _defeatOverlay, _victoryOverlay, _mainQuestOverlay;
 
-    bool _isLocked;
+    public bool isLocked;
 
-    [SerializeField]
-    DialogueSO victoryTriggeringDialogue, mainQuestTriggeringDialogue;
+    [SerializeField] DialogueSO victoryTriggeringDialogue, mainQuestTriggeringDialogue;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        DontDestroyOnLoad(this);
         EventManager.Subscribe(Evento.OnPlayerDie, ShowDefeatOverlay);
         EventManager.Subscribe(Evento.OnDialogueEnd, ShowOverlay);
-        EventManager.Subscribe(Evento.OnPlayerPressedR, Unlock);
+        EventManager.Subscribe(Evento.OnPlayerPressedE, RequestUnlock);
     }
 
     public void ShowDefeatOverlay(params object[] parameter)
@@ -31,7 +31,9 @@ public class OverlayManager : MonoBehaviour
 
         if ((DialogueSO)parameter[1] == victoryTriggeringDialogue)
         {
+            //Debug.Log("overlay manager: show victory overlay");
             _victoryOverlay.gameObject.SetActive(true);
+            _victoryOverlay.isShowing = true;
             Lock();
         }
 
@@ -42,25 +44,56 @@ public class OverlayManager : MonoBehaviour
         }
     }
 
-
     public void Lock(params object[] parameter)
     {
+        //Debug.Log("overlay manager: lock");
         LevelManager.Instance.inDialogue = true;
-        _isLocked = true;
+        isLocked = true;
     }
 
-    public void Unlock(params object[] parameter)
+    public void RequestUnlock(params object[] parameter)
     {
-        if (_isLocked)
+        if (_victoryOverlay.isShowing) //pues yo quiero q no se pueda desbloquear el victory con E, sino solo con los botones
         {
-            LevelManager.Instance.inDialogue = false;
-            _isLocked = false;
+            return;
         }
+        else if (isLocked)
+        {
+            Unlock();
+        }
+    }
+
+    public void Unlock()
+    {
+        //Debug.Log("overlay unlock: set indialogue y islocked false");
+        LevelManager.Instance.inDialogue = false;
+        isLocked = false;
+        AudioManager.instance.PlayByName("PickupSFX", 0.66f);
 
         _defeatOverlay.gameObject.SetActive(false);
-        _victoryOverlay.gameObject.SetActive(false);
         _mainQuestOverlay.gameObject.SetActive(false);
-        AudioManager.instance.PlayByName("PickupSFX", 2.5f);
+    }
+
+    public void BTN_ContinueGame()
+    {
+        //Debug.Log("continua el juego");
+        _victoryOverlay.gameObject.SetActive(false);
+        _victoryOverlay.isShowing = false;
+        EventManager.Trigger(Evento.OnPlayerChooseContinueGame);
+        Unlock();
+    }
+
+    public void BTN_GoToCutscene()
+    {
+        //Debug.Log("go to cutscene");
+        _victoryOverlay.gameObject.SetActive(false);
+        InitializeCutscene();
+    }
+
+    public void InitializeCutscene()
+    {
+        //Debug.Log("arranca la cutscene");
+        LevelManager.Instance.GoToScene("Nivel1_EndCutscene");
     }
 
     void OnDestroy()
@@ -69,7 +102,7 @@ public class OverlayManager : MonoBehaviour
         {
             EventManager.Unsubscribe(Evento.OnPlayerDie, ShowDefeatOverlay);
             EventManager.Unsubscribe(Evento.OnDialogueEnd, ShowOverlay);
-            EventManager.Unsubscribe(Evento.OnPlayerPressedR, Unlock);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, RequestUnlock);
         }
     }
 }
