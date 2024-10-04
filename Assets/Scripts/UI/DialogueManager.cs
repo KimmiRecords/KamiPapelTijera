@@ -92,11 +92,10 @@ public class DialogueManager : Singleton<DialogueManager>
         HideDialogue(dialogue);
     }
 
-    // Este método ahora recibe el texto fallback (si no encuentra la clave de localización válida, usa el texto original)
     private IEnumerator SetLocalizedText(string fallbackText, TMPro.TextMeshProUGUI textElement)
     {
         // Primero asignamos el texto por defecto
-        textElement.text = fallbackText;
+        //textElement.text = fallbackText;
 
         if (!string.IsNullOrEmpty(fallbackText))
         {
@@ -113,7 +112,15 @@ public class DialogueManager : Singleton<DialogueManager>
                 {
                     textElement.text = entry.GetLocalizedString();
                 }
+                else
+                {
+                    textElement.text = fallbackText;
+                }
             }
+        }
+        else
+        {
+            textElement.text = fallbackText;
         }
     }
 

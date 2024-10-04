@@ -1,3 +1,4 @@
+using AmplifyShaderEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
     bool _soundOn = true;
+    private Coroutine gallinaCoroutine = null; // Variable para almacenar la coroutine
+    private bool isGallinaPlaying = false; // Estado del sonido de la gallina
 
     public bool SoundOn
     {
@@ -72,44 +75,24 @@ public class AudioManager : MonoBehaviour
     {
         AudioSource sound;
         sound = this.soundDict[clipName];
-
-        //float originalVolume = sound.volume;
-        //sound.volume *= globalVolume;
-
         sound.Play();
-
-
-        //StartCoroutine(SetVolumeToOriginal(sound, originalVolume));
-
     }
     public void PlayByName(string clipName, float pitch) //ahora con cambio de pitch.
     {
         AudioSource sound;
         sound = this.soundDict[clipName]; //establezco que voy a estar laburando con el audio cuyo nombre es clipname
-        
-        //float originalVolume = sound.volume;
-        //sound.volume *= globalVolume;
         float originalPitch = sound.pitch; //pido el pitch original y lo guardo
         sound.pitch = pitch; //cambio al pitch deseado
-        
         sound.Play(); //doy play
-
-        //StartCoroutine(SetVolumeToOriginal(sound, originalVolume));
         StartCoroutine(SetPitchToOriginal(sound, originalPitch)); //le vuelvo a poner el pitch que tenia antes
     }
     public void PlayByName(string clipName, float centralPitch, float pitchVariation) //ahora con variacion random de pitch.
     {
         AudioSource sound;
         sound = this.soundDict[clipName];
-
-        //float originalVolume = sound.volume;
-        //sound.volume *= globalVolume;
         float originalPitch = sound.pitch; 
         sound.pitch = Random.Range(centralPitch - pitchVariation, centralPitch + pitchVariation);
-        
         sound.Play();
-
-        //StartCoroutine(SetVolumeToOriginal(sound, originalVolume));
         StartCoroutine(SetPitchToOriginal(sound, originalPitch));
     }
     public void PlayRandom(params string[] clipNames)
@@ -207,8 +190,26 @@ public class AudioManager : MonoBehaviour
 
             sound.volume = originalVolume * globalVolume;
         }
+        OnGlobalVolumeChanged();
+
+
     }
-    
+
+    public void OnGlobalVolumeChanged()
+    {
+        if (!soundDict["Gallina_Evade_VolumeTest"].isPlaying)
+        {
+            PlayGallinaSound();
+        }
+    }
+
+
+    public void PlayGallinaSound()
+    {
+        Debug.Log("play gallina sound");
+        PlayByName("Gallina_Evade_VolumeTest");
+    }
+
     public void SetBGMVolumes(float volume)
     {
         foreach (AudioSource bgm in bgms)
