@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
+using UnityEngine.Localization.Settings;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    //esto hace aparecer el cuadro de dialogo y luego lo pinta de texto
-
     [SerializeField] GameObject dialogueGlobe;
     [SerializeField] TMPro.TextMeshProUGUI dialogueGlobeText;
     [SerializeField] TMPro.TextMeshProUGUI dialogueGlobeSpeaker;
@@ -27,17 +27,15 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         if (waitingForInput && !lockedByAnimation)
         {
-            //print("recibi input true");
             input = true;
             PlayEToInteractSound();
         }
     }
 
-    public void BUTTON_NextText() //para que el button lo dispare. unity "2021"
+    public void BUTTON_NextText()
     {
         CheckPlayerInput();
     }
-
 
     public void ShowDialogue(DialogueSO dialogue)
     {
@@ -48,13 +46,11 @@ public class DialogueManager : Singleton<DialogueManager>
 
         if (!isShowing && !LevelManager.Instance.inDialogue)
         {
-            //print("DIALOGUE MANAGER: show dialogue " + dialogue.name);
             dialogue.currentText = 0;
             dialogueGlobe.SetActive(true);
             PlayEToInteractSound();
             LevelManager.Instance.inDialogue = true;
             isShowing = true;
-            //EventManager.Trigger(Evento.OnDialogueStart, CameraMode.CloseUp);
             StartCoroutine(WriteText(dialogue));
         }
     }
@@ -73,12 +69,13 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         for (int i = 0; i < dialogue.events.Length; i++)
         {
-            //print("ARRANCA EL WRITE TEXT ");
-            dialogue.currentText++; //??? empieza desde el 1
+            dialogue.currentText++;
             EventManager.Trigger(Evento.OnDialogueWriteText, dialogue);
 
-            dialogueGlobeText.text = dialogue.events[i].text;
-            dialogueGlobeSpeaker.text = dialogue.events[i].speakerName;
+            // Setear el texto del diálogo y el nombre del speaker usando localización si existe
+            yield return StartCoroutine(SetLocalizedText(dialogue.events[i].text, dialogueGlobeText));
+            yield return StartCoroutine(SetLocalizedText(dialogue.events[i].speakerName, dialogueGlobeSpeaker));
+
             npcQueTeHablaImage.sprite = dialogue.events[i].sprite;
 
             SetNativeSize(npcQueTeHablaImage.sprite);
@@ -87,13 +84,37 @@ public class DialogueManager : Singleton<DialogueManager>
             waitingForInput = true;
 
             while (!input)
-                yield return null; //va a salir del while cuando toques E
+                yield return null;
 
-            //print("termine de esperar, waitforinput false");
             input = false;
             waitingForInput = false;
         }
         HideDialogue(dialogue);
+    }
+
+    // Este método ahora recibe el texto fallback (si no encuentra la clave de localización válida, usa el texto original)
+    private IEnumerator SetLocalizedText(string fallbackText, TMPro.TextMeshProUGUI textElement)
+    {
+        // Primero asignamos el texto por defecto
+        textElement.text = fallbackText;
+
+        if (!string.IsNullOrEmpty(fallbackText))
+        {
+            // Obtenemos la tabla de localización
+            var tableOperation = LocalizationSettings.StringDatabase.GetTableAsync("DialogueTable");
+            yield return tableOperation;
+
+            StringTable stringTable = tableOperation.Result;
+            if (stringTable != null)
+            {
+                // Verificamos si la clave existe en la tabla
+                var entry = stringTable.GetEntry(fallbackText);
+                if (entry != null && !string.IsNullOrEmpty(entry.GetLocalizedString()))
+                {
+                    textElement.text = entry.GetLocalizedString();
+                }
+            }
+        }
     }
 
     public void SetNativeSize(Sprite sprite)
@@ -105,7 +126,6 @@ public class DialogueManager : Singleton<DialogueManager>
     public void PlayEToInteractSound()
     {
         AudioManager.instance.PlayByName("PickupSFX", 0.5f);
-
     }
 
     private void OnDestroy()
