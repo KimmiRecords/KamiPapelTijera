@@ -162,8 +162,7 @@ MonoBehaviour:
   - {fileID: 8544481211637669718}
   paperCost: 1
   isReusable: 0
-  tooltipMessage: "Arrastr\xE1 la flecha verde hasta el objetivo y solt\xE1. No te
-    salgas del camino!"
+  tooltipMessage: origami_guide
   postItColor: 1
   currentRouteIndex: 0
   wasUsed: 0
@@ -456,6 +455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSizeBase
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825842076667109537, guid: 8dd55512aa92eb142bb2f37704c216d0,
+        type: 3}
+      propertyPath: textoInicial
+      value: origami_fold
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dd55512aa92eb142bb2f37704c216d0, type: 3}

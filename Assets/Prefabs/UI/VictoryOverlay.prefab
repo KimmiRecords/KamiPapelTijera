@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 1383568638518030614}
   - component: {fileID: 31465545493621953}
   - component: {fileID: 4437830743764280681}
+  - component: {fileID: 4825042578008757483}
   m_Layer: 5
   m_Name: queres quedarte Text
   m_TagString: Untagged
@@ -180,8 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Encontraste a la abuela pero quedan secretos por revelar.\nQuer\xE9s dar
-    por terminado este libro o prefer\xEDs quedarte a explorar?"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 74b2c459710079945b6ae2d51c16c527, type: 2}
   m_sharedMaterial: {fileID: -6341692012103470525, guid: 74b2c459710079945b6ae2d51c16c527,
@@ -251,6 +251,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4825042578008757483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747330826781976707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:3f7880f4636f86e46b2057e5e270fdcf
+    m_TableEntryReference:
+      m_KeyId: 38029492862976
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4437830743764280681}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &7937921103247803436
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +354,7 @@ PrefabInstance:
     - target: {fileID: 1427127597222629830, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}
       propertyPath: m_text
-      value: Quedarme a explorar
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1427127597222629830, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}
@@ -501,6 +541,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8178289302608470445, guid: 92f86c811e0bb354db3188324b924ce3,
+        type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 38147315056640
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92f86c811e0bb354db3188324b924ce3, type: 3}
 --- !u!224 &1427127599002562343 stripped
@@ -519,7 +564,7 @@ PrefabInstance:
     - target: {fileID: 1427127597222629830, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}
       propertyPath: m_text
-      value: Terminar este libro
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1427127597222629830, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}
@@ -735,6 +780,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.9805004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178289302608470445, guid: 92f86c811e0bb354db3188324b924ce3,
+        type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 38296867160064
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92f86c811e0bb354db3188324b924ce3, type: 3}

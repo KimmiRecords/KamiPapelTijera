@@ -71,7 +71,6 @@ public class DialogueManager : Singleton<DialogueManager>
             dialogue.currentText++;
             EventManager.Trigger(Evento.OnDialogueWriteText, dialogue);
 
-            // Setear el texto del diálogo y el nombre del speaker usando localización si existe
             yield return StartCoroutine(SetLocalizedText(dialogue.events[i].text, dialogueGlobeText));
             yield return StartCoroutine(SetLocalizedText(dialogue.events[i].speakerName, dialogueGlobeSpeaker));
 

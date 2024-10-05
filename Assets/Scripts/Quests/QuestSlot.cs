@@ -32,7 +32,6 @@ public class QuestSlot : MonoBehaviour
 
         imageComponent.sprite = currentQuest.questSprite; //seteo carita del npc
 
-
         if (gameObject.activeInHierarchy)
         {
             StartCoroutine(SetLocalizedText(currentQuest.questName, nameTextComponent));

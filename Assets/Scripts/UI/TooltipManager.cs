@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
 
 public enum PostItColor
 {
@@ -26,10 +28,45 @@ public class TooltipManager : Singleton<TooltipManager>
     {
         //print("show tooltip");
         postIts[(int)postIt].gameObject.SetActive(true); //prendo el postit. esto se reemplazara por una animacion
-        postIts[(int)postIt].tmPro.text = text; //le cambio el texto
+
+        //postIts[(int)postIt].tmPro.text = text; //le cambio el texto
+        StartCoroutine(SetLocalizedText(text, postIts[(int)postIt].tmPro));
+
 
         killAllPostitsTimer = 0; //reseteo el timer y arranco la corru
         StartCoroutine(KillAllPostItsCoroutine());
+    }
+
+    protected IEnumerator SetLocalizedText(string fallbackText, TMPro.TextMeshProUGUI textElement)
+    {
+        // Primero asignamos el texto por defecto
+        //textElement.text = fallbackText;
+
+        if (!string.IsNullOrEmpty(fallbackText))
+        {
+            // Obtenemos la tabla de localización
+            var tableOperation = LocalizationSettings.StringDatabase.GetTableAsync("TooltipTable");
+            yield return tableOperation;
+
+            StringTable stringTable = tableOperation.Result;
+            if (stringTable != null)
+            {
+                // Verificamos si la clave existe en la tabla
+                var entry = stringTable.GetEntry(fallbackText);
+                if (entry != null && !string.IsNullOrEmpty(entry.GetLocalizedString()))
+                {
+                    textElement.text = entry.GetLocalizedString();
+                }
+                else
+                {
+                    textElement.text = fallbackText;
+                }
+            }
+        }
+        else
+        {
+            textElement.text = fallbackText;
+        }
     }
 
     public void HideTooltip()  
