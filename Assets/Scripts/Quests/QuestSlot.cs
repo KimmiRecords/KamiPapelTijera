@@ -3,26 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Localization.Tables;
+using UnityEngine.Localization.Settings;
 
 public class QuestSlot : MonoBehaviour
 {
     [HideInInspector] public QuestSO currentQuest;
     [SerializeField] TextMeshProUGUI nameTextComponent, descriptionTextComponent, amountTextComponent;
     [SerializeField] Image imageComponent;
+    bool setNamePromised = false;
 
     private void Start()
     {
         EventManager.Subscribe(Evento.OnResourceUpdated, UpdateResource);
     }
-
+    private void OnEnable()
+    {
+        if (setNamePromised)
+        {
+            StartCoroutine(SetLocalizedText(currentQuest.questName, nameTextComponent));
+            StartCoroutine(SetLocalizedText(currentQuest.questDescription, descriptionTextComponent));
+            setNamePromised = false;
+        }
+    }
     public virtual void SetQuest(QuestSO quest)
     {
         currentQuest = quest;
 
         imageComponent.sprite = currentQuest.questSprite; //seteo carita del npc
-        nameTextComponent.text = currentQuest.questName; //nombre y descripcion
-        descriptionTextComponent.text = currentQuest.questDescription;
 
+
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(SetLocalizedText(currentQuest.questName, nameTextComponent));
+            StartCoroutine(SetLocalizedText(currentQuest.questDescription, descriptionTextComponent));
+        }
+        else
+        {
+            setNamePromised = true;
+        }
+        
         if (currentQuest.condition.conditionType == ConditionType.Resource) //si es una quest de recolectar cosas
         {
             amountTextComponent.text = LevelManager.Instance.recursosRecolectados[currentQuest.condition.resourceType].ToString()
@@ -54,5 +74,34 @@ public class QuestSlot : MonoBehaviour
         Debug.Log("self destruct");
         //QuestManager.Instance.RemoveQuest(currentQuest);
         Destroy(gameObject);
+    }
+
+    private IEnumerator SetLocalizedText(string fallbackText, TMPro.TextMeshProUGUI textElement)
+    {
+
+        if (!string.IsNullOrEmpty(fallbackText))
+        {
+            var tableOperation = LocalizationSettings.StringDatabase.GetTableAsync("QuestTable");
+            yield return tableOperation;
+
+            StringTable stringTable = tableOperation.Result;
+            if (stringTable != null)
+            {
+                // Verificamos si la clave existe en la tabla
+                var entry = stringTable.GetEntry(fallbackText);
+                if (entry != null && !string.IsNullOrEmpty(entry.GetLocalizedString()))
+                {
+                    textElement.text = entry.GetLocalizedString();
+                }
+                else
+                {
+                    textElement.text = fallbackText;
+                }
+            }
+        }
+        else
+        {
+            textElement.text = fallbackText;
+        }
     }
 }

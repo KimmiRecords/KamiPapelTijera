@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: QuestTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: QuestTable
+  m_TableCollectionNameGuidString: 0d6d4b2c4a194eb409c06f6c04991231
+  m_Entries:
+  - m_Id: 86589947904
+    m_Key: chinoquest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 182454960128
+    m_Key: daliaquest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 205943062528
+    m_Key: daliaquest_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70215385088
+    m_Key: mainquest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12325601280
+    m_Key: mainquest_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 148044890112
+    m_Key: chinoquest_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 269067337728
+    m_Key: 'tiburcioquest
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 226763587584
+    m_Key: tiburcioquest_title
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7508039449160974357
+  references:
+    version: 2
+    RefIds:
+    - rid: 7508039449160974357
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1728084780185

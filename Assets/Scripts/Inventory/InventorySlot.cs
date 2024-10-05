@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -15,13 +17,22 @@ public class InventorySlot : MonoBehaviour
     protected Color _originalTextColor, _originalSlotColor, _originalIconColor;
     public float upwardsSpeed = 100;
 
-
+    bool setNamePromised = false;
 
     private void Start()
     {
         _originalTextColor = nameTextComponent.color;
         _originalSlotColor = slotStickerImageComponent.color;
         _originalIconColor = itemImageComponent.color;
+    }
+
+    private void OnEnable()
+    {
+        if (setNamePromised)
+        {
+            StartCoroutine(SetLocalizedText(currentItem.itemName, nameTextComponent));
+            setNamePromised = false;
+        }
     }
 
     public void SetTransparency(float alpha)
@@ -46,7 +57,18 @@ public class InventorySlot : MonoBehaviour
 
         itemImageComponent.sprite = currentItem.itemSprite;
         slotStickerImageComponent.color = currentItem.itemColor;
-        nameTextComponent.text = currentItem.itemName;
+
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(SetLocalizedText(currentItem.itemName, nameTextComponent));
+        }
+        else
+        {
+            setNamePromised = true;
+        }
+            
+
+        //StartCoroutine(SetLocalizedText(currentItem.itemName, nameTextComponent));
 
         if (currentItem.amount < 1)
         {
@@ -121,6 +143,36 @@ public class InventorySlot : MonoBehaviour
         ResourceParticleManager.Instance.isShowingRewardSticker = false;
     }
 
+    protected IEnumerator SetLocalizedText(string fallbackText, TMPro.TextMeshProUGUI textElement)
+    {
+        // Primero asignamos el texto por defecto
+        //textElement.text = fallbackText;
 
+        if (!string.IsNullOrEmpty(fallbackText))
+        {
+            // Obtenemos la tabla de localización
+            var tableOperation = LocalizationSettings.StringDatabase.GetTableAsync("ItemTable");
+            yield return tableOperation;
+
+            StringTable stringTable = tableOperation.Result;
+            if (stringTable != null)
+            {
+                // Verificamos si la clave existe en la tabla
+                var entry = stringTable.GetEntry(fallbackText);
+                if (entry != null && !string.IsNullOrEmpty(entry.GetLocalizedString()))
+                {
+                    textElement.text = entry.GetLocalizedString();
+                }
+                else
+                {
+                    textElement.text = fallbackText;
+                }
+            }
+        }
+        else
+        {
+            textElement.text = fallbackText;
+        }
+    }
 
 }
