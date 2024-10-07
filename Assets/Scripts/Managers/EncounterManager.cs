@@ -27,7 +27,9 @@ public class EncounterManager : MonoBehaviour
             (DialogueSO)parameters[1] == _triggeringDialogue)
         {
             _encounter.SetActive(true);
-            AudioManager.instance.PlayByName("MagicFail", 0.5f);
+            //AudioManager.instance.PlayByName("MagicFail", 0.5f);
+            AudioManager.instance.StopByName("MemoFloraMainLoop01");
+
             EventManager.Trigger(Evento.OnEncounterStart, CameraMode.General);
         }
     }
@@ -44,14 +46,15 @@ public class EncounterManager : MonoBehaviour
             return;
         }
 
-        AudioManager.instance.StopByName("MemoFloraMainLoop01");
-        AudioManager.instance.PlayByName("MemoFloraBattleLoop01");
+        AudioManager.instance.PlayByName("EstampesPagodes_Battle_Intro");
+        AudioManager.instance.PlayOnEnd("EstampesPagodes_Battle_Intro", "MemoFloraBattleLoop01");
         firstTime = false;
     }
 
     private void EndEncounter(params object[] parameters)
     {
         AudioManager.instance.StopByName("MemoFloraBattleLoop01");
+        AudioManager.instance.StopByName("EstampesPagodes_Battle_Intro");
         AudioManager.instance.PlayByName("MemoFloraPostBattle01");
         AudioManager.instance.PlayOnEnd("MemoFloraPostBattle01", "MemoFloraMainLoop01");
         //EventManager.Trigger(Evento.OnEncounterEnd, Camara.Normal);

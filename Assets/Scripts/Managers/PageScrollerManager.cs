@@ -99,7 +99,7 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     void StartChangePageFX()
     {
         CameraManager.Instance.SetCamera(CameraMode.BookCenter);
-        AudioManager.instance.PlayByName("MagicSuccess", 0.42f, 0.01f);
+        AudioManager.instance.PlayByName("MagicSuccess", 0.5f, 0.01f);
         StartCoroutine(PostProcessManager.Instance.LerpBloomIntensity());
         StartCoroutine(CerrarPaginaCoroutine(delayTime));
         StartCoroutine(AbrirPaginaCoroutine(popupDelayTime));
