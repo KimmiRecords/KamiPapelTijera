@@ -16,19 +16,21 @@ public class PUB : MonoBehaviour
     void Start()
     {
         _anim = GetComponent<Animator>();
+
+        Debug.Log("pub start: adding myself to pubmanager");
         PUBManager.Instance.AddPUB(this);
         init = true;
     }
 
     public void ClosePUB()
     {
-        //_anim.Play("CasaDown");
+        Debug.Log("close pub");
         _anim.SetBool("isOpen", false);
     }
     
     public void OpenPUB()
     {
-        //_anim.Play("CasaUp");
+        Debug.Log("open pub");
         _anim.SetBool("isOpen", true);
     }
 
@@ -36,12 +38,14 @@ public class PUB : MonoBehaviour
     {
         if (init)
         {
+            Debug.Log("pub enable: init true. adding myself to pubmanager");
             PUBManager.Instance.AddPUB(this);
         }
     }
 
     private void OnDisable()
     {
+        Debug.Log("pub disable: removing myself from pubmanager");
         PUBManager.Instance.RemovePUB(this);
     }
 }
