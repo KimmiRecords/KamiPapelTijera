@@ -22,9 +22,9 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 
     void Start()
     {
-        EventManager.Subscribe(Evento.OnPlayerChangePage, PlacePlayerInNewPage);
         EventManager.Subscribe(Evento.OnEncounterStart, SaveCurrentPosition);
-        EventManager.Subscribe(Evento.OnPageTurned, SetPlayerTargetPosition);
+        EventManager.Subscribe(Evento.OnPageTurnStart, SetPlayerTargetPosition);
+        EventManager.Subscribe(Evento.OnNewPageOpen, PlacePlayerInNewPage);
         _playerCC = _player.GetComponent<CharacterController>();
         lastUsedSpawn = _player.transform.position; //en principio, tu ultimo spawn es donde arranca el juego
     }
@@ -89,9 +89,9 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPlayerChangePage, PlacePlayerInNewPage);
+            EventManager.Unsubscribe(Evento.OnNewPageOpen, PlacePlayerInNewPage);
             EventManager.Unsubscribe(Evento.OnEncounterStart, SaveCurrentPosition);
-            EventManager.Unsubscribe(Evento.OnPageTurned, SetPlayerTargetPosition);
+            EventManager.Unsubscribe(Evento.OnPageTurnStart, SetPlayerTargetPosition);
         }
     }
 }

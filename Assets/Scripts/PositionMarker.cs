@@ -9,14 +9,14 @@ public class PositionMarker : MonoBehaviour
     //por ahora, el PageScrollerManager se encarga de dispararle los metodos
 
     [SerializeField] SpriteRenderer _spriteRenderer;
-    [SerializeField] float powerFactor = 32;
+    [SerializeField] float _powerFactor = 32;
 
     float distanceToPlayer;
     float desiredAlpha;
 
     private void Start()
     {
-        EventManager.Subscribe(Evento.OnPlayerChangePage, OnChangePage);
+        EventManager.Subscribe(Evento.OnNewPageOpen, OnChangePage);
     }
 
     public void ShowMarker()
@@ -36,12 +36,17 @@ public class PositionMarker : MonoBehaviour
 
         //uso la distance to player para calcular el alpha
         distanceToPlayer = Vector3.Distance(transform.position, playerPos);
-        desiredAlpha = powerFactor / (distanceToPlayer * distanceToPlayer);
+        desiredAlpha = _powerFactor / (distanceToPlayer * distanceToPlayer);
         _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, desiredAlpha);
     }
 
     public void OnChangePage(params object[] parameters)
     {
         HideMarker();
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(Evento.OnNewPageOpen, OnChangePage);
     }
 }

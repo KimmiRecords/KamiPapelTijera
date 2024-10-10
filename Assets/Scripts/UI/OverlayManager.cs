@@ -13,7 +13,7 @@ public class OverlayManager : Singleton<OverlayManager>
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         EventManager.Subscribe(Evento.OnPlayerDie, ShowDefeatOverlay);
         EventManager.Subscribe(Evento.OnDialogueEnd, ShowOverlay);
         EventManager.Subscribe(Evento.OnPlayerPressedE, RequestUnlock);

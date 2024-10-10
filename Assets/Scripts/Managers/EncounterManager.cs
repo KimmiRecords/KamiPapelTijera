@@ -53,9 +53,11 @@ public class EncounterManager : MonoBehaviour
 
     private void EndEncounter(params object[] parameters)
     {
+        AudioManager.instance.StopAllCoroutines();
         AudioManager.instance.StopByName("MemoFloraBattleLoop01");
         AudioManager.instance.StopByName("EstampesPagodes_Battle_Intro");
         AudioManager.instance.PlayByName("MemoFloraPostBattle01");
+        AudioManager.instance.PlayByName("QuestCompleted02", 2f);
         AudioManager.instance.PlayOnEnd("MemoFloraPostBattle01", "MemoFloraMainLoop01");
         //EventManager.Trigger(Evento.OnEncounterEnd, Camara.Normal);
     }

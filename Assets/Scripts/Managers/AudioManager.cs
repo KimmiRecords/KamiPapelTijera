@@ -13,8 +13,6 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
     bool _soundOn = true;
-    private Coroutine gallinaCoroutine = null; // Variable para almacenar la coroutine
-    private bool isGallinaPlaying = false; // Estado del sonido de la gallina
 
     public bool SoundOn
     {

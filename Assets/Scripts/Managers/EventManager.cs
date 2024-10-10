@@ -24,7 +24,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnDialogueEnd, //param0 es camara, param1 es dialogueso
 
     OnPlayerChangeVida, //param 0 es float hp. param1 es max hp
-    OnPlayerChangePage,//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
+    OnNewPageOpen,//param 0 currentpage. param 1 si isnext (si voy para adelante o pa atras)
     OnAbuelaDropoff, //param 0 es el transform dropoffpoint
     OnPlayerPlaced, //triggereado por PlacePlayer. cuando muere, o cambia de pag, etc
 
@@ -61,7 +61,7 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnPlayerPressedI,
     OnPlayerPressedU,
     OnCameraChange, //param0 es current camera
-    OnPageTurned, //param0 es activeindex, param1 es isnext
+    OnPageTurnStart, //param0 es activeindex, param1 es isnext
     OnAbuelaFold,
     OnAbuelaUnfold,
     OnRocosoWokeUp, //param0 es bool endsEncounter

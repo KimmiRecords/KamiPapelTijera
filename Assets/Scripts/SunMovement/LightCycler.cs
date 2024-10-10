@@ -25,7 +25,7 @@ public class LightCycler : MonoBehaviour
         light = GetComponent<Light>();
         _currentLightState = _lightStates[0];
         OnChangeLightState(PageScrollerManager.Instance.activePageIndex);
-        EventManager.Subscribe(Evento.OnPageTurned, OnChangeLightState); //param0 es activeindex
+        EventManager.Subscribe(Evento.OnPageTurnStart, OnChangeLightState); //param0 es activeindex
     }
 
     public void OnChangeLightState(params object[] parameters)
@@ -120,7 +120,7 @@ public class LightCycler : MonoBehaviour
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPageTurned, OnChangeLightState);
+            EventManager.Unsubscribe(Evento.OnPageTurnStart, OnChangeLightState);
         }
     }
 }

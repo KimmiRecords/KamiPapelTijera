@@ -9,8 +9,8 @@ public class InventoryItem : ScriptableObject
     public string itemDescription;
     public Sprite itemSprite;
     public Color itemColor; //para q cambie el color del sticker jeje :P
-    public int amount;
     public ResourceType resourceType;
+    //public int amount;
     //public bool isRecortable;
     //public InventoryItem possibleCutChild;
 }

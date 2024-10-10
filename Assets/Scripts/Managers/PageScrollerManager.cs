@@ -42,6 +42,11 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         GetAllParticleSystemsInChildren(glitterParent);
     }
 
+    private void Start()
+    {
+        
+    }
+
     public void GetAllParticleSystemsInChildren(GameObject glitterParent)
     {
         glitterSystems = glitterParent.GetComponentsInChildren<ParticleSystem>();
@@ -78,8 +83,11 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         _isNext = false; //isNext es una variable piola que mucha gente necesita
         _isTurning = true;
         esferaPrev.triggerBool = false;
-        EventManager.Trigger(Evento.OnPageTurned, activePageIndex, _isNext);
+        EventManager.Trigger(Evento.OnPageTurnStart, activePageIndex, _isNext);
         StartChangePageFX();
+
+        StartCoroutine(CerrarPaginaCoroutine(delayTime));
+        StartCoroutine(AbrirPaginaCoroutine(popupDelayTime));
     }
 
     private void ChangeToNextPage()
@@ -92,8 +100,11 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         _isNext = true; //isNext es una variable piola que mucha gente necesita
         _isTurning = true;
         esferaNext.triggerBool = false;
-        EventManager.Trigger(Evento.OnPageTurned, activePageIndex, _isNext);
+        EventManager.Trigger(Evento.OnPageTurnStart, activePageIndex, _isNext);
         StartChangePageFX();
+
+        StartCoroutine(CerrarPaginaCoroutine(delayTime));
+        StartCoroutine(AbrirPaginaCoroutine(popupDelayTime));
     }
 
     void StartChangePageFX()
@@ -101,8 +112,6 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         CameraManager.Instance.SetCamera(CameraMode.BookCenter);
         AudioManager.instance.PlayByName("MagicSuccess", 0.5f, 0.01f);
         StartCoroutine(PostProcessManager.Instance.LerpBloomIntensity());
-        StartCoroutine(CerrarPaginaCoroutine(delayTime));
-        StartCoroutine(AbrirPaginaCoroutine(popupDelayTime));
         PlayGlitter();
     }
     public void CheckSpheres(int activePageIndex)
@@ -132,8 +141,6 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     public IEnumerator CerrarPaginaCoroutine(float cerrarDelayTime) //cierro la pag actual
     {
         yield return new WaitForSeconds(cerrarDelayTime);
-
-        //despues de esperar un toque
         LevelManager.Instance.inDialogue = true;  //freezeo a kami
         PUBManager.Instance.ClosePUBs();
         CreateHoja(_isNext); //instancio la hoja que corresponda
@@ -143,10 +150,10 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     public IEnumerator AbrirPaginaCoroutine(float abrirDelayTime)
     {
         yield return new WaitForSeconds(abrirDelayTime);
-        EventManager.Trigger(Evento.OnPlayerChangePage, activePageIndex + 1, _isNext);
+        EventManager.Trigger(Evento.OnNewPageOpen, activePageIndex + 1, _isNext);
         PUBManager.Instance.OpenPUBs();
         TogglePages(activePageIndex);
-        //Debug.Log("enlarge page index " + activePageIndex);
+
         pagesAnimators[activePageIndex].SetBool("isShrink", false);
         pagesAnimators[activePageIndex].SetBool("isEnlarge", true);
     } //abro la nueva pag
@@ -165,7 +172,6 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
             }
         }
     }
-
     void CreateHoja(bool isNext)
     {
         if (isNext)
@@ -188,14 +194,13 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     {
         if (_isNext)
         {
-            AudioManager.instance.PlayByName("PageTurn01", 0.9f, 0.03f);
+            AudioManager.instance.PlayByName("PageTurn01", 1f, 0.03f);
         }
         else
         {
-            AudioManager.instance.PlayByName("PageTurn02", 0.9f, 0.03f);
+            AudioManager.instance.PlayByName("PageTurn02", 1f, 0.03f);
         }
     }
-
     public void PlayGlitter()
     {
         foreach (ParticleSystem ps in glitterSystems)
@@ -203,7 +208,6 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
             ps.Play();
         }
     }
-
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)

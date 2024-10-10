@@ -12,6 +12,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public Dictionary<ResourceType, InventoryItem> itemsByResourceType = new Dictionary<ResourceType, InventoryItem>();
 
+    public Dictionary<InventoryItem, int> itemsAmount = new Dictionary<InventoryItem, int>();
+
     public Sprite emptyItemSprite;
 
     private void Start()
@@ -29,15 +31,20 @@ public class InventoryManager : Singleton<InventoryManager>
             itemsByResourceType.Add(item.resourceType, item);
         }
 
-        EventManager.Subscribe(Evento.OnResourceUpdated, AddItem);
-
-
         //clear all slots
         _showcaseSlot.ClearSlot();
         for (int i = 0; i < _slots.Length; i++)
         {
             _slots[i].ClearSlot();
         }
+
+        //fill the itemsamount dictionary
+        foreach (InventoryItem item in _allItems)
+        {
+            itemsAmount.Add(item, 0);
+        }
+
+        EventManager.Subscribe(Evento.OnResourceUpdated, AddItem);
     }
 
     public void ShowcaseItem(InventoryItem item)
@@ -45,10 +52,19 @@ public class InventoryManager : Singleton<InventoryManager>
         _showcaseSlot.SetItem(item);
     }
 
+    //a comfy method that sets the value for a given key of the itemsmaount dictionary
+
+    public void SetItemAmount(InventoryItem item, int amount)
+    {
+        itemsAmount[item] = amount;
+
+
+    }
+
     public void AddItem(params object[] parameters)
     {
         ResourceType rt = (ResourceType)parameters[0];
-        itemsByResourceType[rt].amount = (int)parameters[1];
+        SetItemAmount(itemsByResourceType[rt], (int)parameters[1]);
 
         bool shouldClear = false;
 
@@ -69,7 +85,6 @@ public class InventoryManager : Singleton<InventoryManager>
                     return;
                 }
 
-                _slots[i].currentItem.amount = (int)parameters[1];
                 _slots[i].SetItem(_slots[i].currentItem);
                 return;
             }
@@ -103,7 +118,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void OnDestroy()
     {
-        if (gameObject.scene.isLoaded)
+        if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnResourceUpdated, AddItem);
         }

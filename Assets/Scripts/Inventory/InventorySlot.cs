@@ -67,20 +67,17 @@ public class InventorySlot : MonoBehaviour
             setNamePromised = true;
         }
             
-
-        //StartCoroutine(SetLocalizedText(currentItem.itemName, nameTextComponent));
-
-        if (currentItem.amount < 1)
+        if (InventoryManager.Instance.itemsAmount[currentItem] < 1)
         {
             ClearSlot();
         }
-        else if (currentItem.amount == 1)
+        else if (InventoryManager.Instance.itemsAmount[currentItem] == 1)
         {
             amountTextComponent.text = "";
         }
         else
         {
-            amountTextComponent.text = currentItem.amount.ToString();
+            amountTextComponent.text = InventoryManager.Instance.itemsAmount[currentItem].ToString();
         }
     }
 
