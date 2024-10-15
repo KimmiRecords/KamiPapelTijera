@@ -34,6 +34,8 @@ public class CameraManager : Singleton<CameraManager>
 
         EventManager.Subscribe(Evento.OnEncounterStart, SetCamera);
         EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
+        EventManager.Subscribe(Evento.OnOrigamiCameraChange, SetCamera);
+
         currentCamera = startingCamera;
         StartCoroutine(LevelStartCameraMovement());
     }
@@ -135,6 +137,7 @@ public class CameraManager : Singleton<CameraManager>
         {
             EventManager.Unsubscribe(Evento.OnEncounterStart, SetCamera);
             EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, SetCamera);
+            EventManager.Unsubscribe(Evento.OnOrigamiCameraChange, SetCamera);
         }
     }
 }

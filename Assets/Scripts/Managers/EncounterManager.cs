@@ -14,6 +14,9 @@ public class EncounterManager : MonoBehaviour
     [SerializeField] GameObject _encounter;
     bool firstTime = true;
 
+    [SerializeField] GameObject[] _objectsToDeactivateDuringEncounter; //page scroller, etc
+    [SerializeField] GameObject[] _objectsToActivateDuringEncounter; //paredes invisibles, etc. 
+
     void Start()
     {
         EventManager.Subscribe(Evento.OnDialogueEnd, SpawnEncounter);
@@ -27,10 +30,19 @@ public class EncounterManager : MonoBehaviour
             (DialogueSO)parameters[1] == _triggeringDialogue)
         {
             _encounter.SetActive(true);
-            //AudioManager.instance.PlayByName("MagicFail", 0.5f);
             AudioManager.instance.StopByName("MemoFloraMainLoop01");
 
             EventManager.Trigger(Evento.OnEncounterStart, CameraMode.General);
+
+            foreach (GameObject go in _objectsToDeactivateDuringEncounter)
+            {
+                go.SetActive(false);
+            }
+
+            foreach (GameObject go in _objectsToActivateDuringEncounter)
+            {
+                go.SetActive(true);
+            }
         }
     }
 
@@ -60,6 +72,16 @@ public class EncounterManager : MonoBehaviour
         AudioManager.instance.PlayByName("QuestCompleted02", 2f);
         AudioManager.instance.PlayOnEnd("MemoFloraPostBattle01", "MemoFloraMainLoop01");
         //EventManager.Trigger(Evento.OnEncounterEnd, Camara.Normal);
+
+        foreach (GameObject go in _objectsToDeactivateDuringEncounter)
+        {
+            go.SetActive(true);
+        }
+
+        foreach (GameObject go in _objectsToActivateDuringEncounter)
+        {
+            go.SetActive(false);
+        }
     }
 
     private void OnDestroy()

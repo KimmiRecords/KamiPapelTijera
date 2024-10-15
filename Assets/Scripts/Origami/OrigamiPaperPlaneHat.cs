@@ -8,7 +8,7 @@ public class OrigamiPaperPlaneHat : Origami
 
     public override void Apply()
     {
-        base.Apply();
+        LevelManager.Instance.AddResource(ResourceType.papel, -paperCost);
         EventManager.Trigger(Evento.OnOrigamiGivePaperPlaneHat, CameraMode.General);
         //particulas
         //estaria genial un GlitterManager, que le decis donde y tuki, pone un glitter ahi

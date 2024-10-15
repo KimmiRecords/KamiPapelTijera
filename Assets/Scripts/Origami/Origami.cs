@@ -14,6 +14,9 @@ public abstract class Origami : MonoBehaviour
 
     [HideInInspector] public int currentRouteIndex = 0;
     [HideInInspector] public bool wasUsed;
+    [SerializeField] bool _doesCameraChangeOnApply = false;
+    [SerializeField] CameraMode _cameraModeOnApply = CameraMode.Normal;
+
 
     public void FailOrigami()
     {
@@ -83,8 +86,13 @@ public abstract class Origami : MonoBehaviour
     public virtual void Apply()
     {
         //todos los origamis, al terminarlos, aplican algo
-        //print("origami apply");
         LevelManager.Instance.AddResource(ResourceType.papel, -paperCost);
+
+        if (_doesCameraChangeOnApply)
+        {
+            EventManager.Trigger(Evento.OnOrigamiCameraChange, _cameraModeOnApply);
+        }
+
     }
 
     public void TriggerPliegueTextUpdater()

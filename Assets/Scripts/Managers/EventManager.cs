@@ -67,7 +67,8 @@ public enum Evento //LOS EVENTOS SE AGREGAN AL FINAL. NO EN EL MEDIO, PORQUE ARR
     OnRocosoWokeUp, //param0 es bool endsEncounter
     OnQuestRewardedEnd, //param0 es quest
     OnDialogueWriteText, //param0 es dialogue (pro tip: podes pedir dialogue.currentText)
-    OnQuestRewardedStart //param0 es quest
+    OnQuestRewardedStart, //param0 es quest
+    OnOrigamiCameraChange
 }
 
 public class EventManager

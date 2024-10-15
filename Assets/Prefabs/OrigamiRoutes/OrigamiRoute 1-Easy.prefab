@@ -166,6 +166,8 @@ MonoBehaviour:
   postItColor: 1
   currentRouteIndex: 0
   wasUsed: 0
+  _doesCameraChangeOnApply: 0
+  _cameraModeOnApply: 1
   objetoParaSpawnear: {fileID: 0}
 --- !u!1001 &7615826010209773500
 PrefabInstance:
@@ -333,6 +335,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562519710327997941, guid: 69219c6d096d19f48b780a5f0a02c485,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5061278643690110774, guid: 69219c6d096d19f48b780a5f0a02c485,
         type: 3}

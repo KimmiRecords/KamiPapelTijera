@@ -29,6 +29,10 @@ public class AbuelaDialogueTrigger : TriggerDialogue
     [SerializeField] GameObject globitoDialogo;
     [SerializeField] QuestSO requiredQuest; //la quest necesaria para desbloquear el segundo dialogo
     [SerializeField] GameObject foldOrigamiSeal, unfoldOrigamiSeal;
+    bool _isFirstTimeEntering = true;
+
+
+    //la abuela triggerea su primer dialogo de una, sin esperar a que apretes E
 
     protected override void Start()
     {
@@ -101,6 +105,14 @@ public class AbuelaDialogueTrigger : TriggerDialogue
     public override void OnEnterBehaviour(Collider other)
     {
         triggerBool = true;
+
+        if (_isFirstTimeEntering)
+        {
+            DialogueManager.Instance.ShowDialogue(_dialogues[currentDialogue]);
+            _isFirstTimeEntering = false;
+            return;
+        }
+
         if (!isLocked)
         {
             TooltipManager.Instance.ShowTooltip(tooltipTextToShow, postItColor);
