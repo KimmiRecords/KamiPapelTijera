@@ -52,12 +52,26 @@ public class LevelManager : Singleton<LevelManager>
         if (gameObject.scene.name == "SampleScene")
         {
             AudioManager.instance.StopByName("IntroStoryboardLoop");
-
             AudioManager.instance.PlayByName("MemoFloraMainLoop01");
             AudioManager.instance.PlayByName("ForestAtDay");
         }
+    }
 
-        //CursorManager.Instance.ShowCursor(false);
+    public void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && player != null)
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                AllItemsCheat();
+            }
+
+            if (Input.GetKeyDown(KeyCode.F12))
+            {
+                GoToScene("MainMenu");
+            }
+        }
+
     }
 
     public void GiveSprintBoots()
@@ -84,20 +98,17 @@ public class LevelManager : Singleton<LevelManager>
     {
         SceneManager.LoadScene(sceneName);
     }
-    public void Update()
+
+    public void AllItemsCheat()
     {
-        //CHEAT CODES
-        if (Input.GetKeyDown(KeyCode.P) && player != null)
-        {
-            AddResource(ResourceType.hongos, 100);
-            AddResource(ResourceType.papel, 100);
-            AddResource(ResourceType.flores, 100);
-            //AddResource(ResourceType.abuela, 1);
-            GiveWaterBoots();
-            GiveSprintBoots();
-            GiveTijeraMejorada();
-        }
+        AddResource(ResourceType.hongos, 100);
+        AddResource(ResourceType.papel, 100);
+        AddResource(ResourceType.flores, 100);
+        GiveWaterBoots();
+        GiveSprintBoots();
+        GiveTijeraMejorada();
     }
+
     public void AddResource(ResourceType pickupType, int valueToAdd)
     {
         //agrega la cantidad valuetoadd al total. si quiero restar, valuetoadd deberia ser negativo

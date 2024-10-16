@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386566045809580733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.95, z: 0}
+  m_LocalPosition: {x: 0.43, y: -0.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8, y: 5.249808, z: 2}
-  m_Center: {x: 0, y: 0.37510216, z: 0}
+  m_Size: {x: 4.5440574, y: 4.8185654, z: 2}
+  m_Center: {x: -0.1455071, y: 0.30122423, z: 0}
 --- !u!114 &2389647684597178931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 7897264121734106303}
   - component: {fileID: 2429854604947804655}
   - component: {fileID: 2698636374348165167}
-  - component: {fileID: 2394261472926446910}
+  - component: {fileID: 6576101012121055159}
   m_Layer: 0
   m_Name: Rocoso
   m_TagString: Untagged
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 300
-  _maxSpeed: 15
+  _maxSpeed: 8
   _attackDamage: 10
   _sr: {fileID: 7897264121734106302}
   endsEncounter: 0
@@ -516,8 +516,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &2394261472926446910
-BoxCollider:
+--- !u!136 &6576101012121055159
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -526,9 +526,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.6161137, y: 6.3588276, z: 0.2}
-  m_Center: {x: 0.39567003, y: -0.24433045, z: 0.0000004746724}
+  m_Radius: 2.37
+  m_Height: 6.36
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1996276656420371745
 PrefabInstance:
   m_ObjectHideFlags: 0
