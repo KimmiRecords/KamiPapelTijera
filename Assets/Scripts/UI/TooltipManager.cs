@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
+using System;
 
 public enum PostItColor
 {
@@ -21,6 +22,7 @@ public class TooltipManager : Singleton<TooltipManager>
     [SerializeField] int killTime = 10;
     [SerializeField] int azulKillTime, naranjaKillTime, rosaKillTime, amarilloKillTime, verdeKillTime;
     [SerializeField] PostIt[] postIts;
+    [SerializeField] string getPaperPlaneText;
 
     float killAllPostitsTimer;
 

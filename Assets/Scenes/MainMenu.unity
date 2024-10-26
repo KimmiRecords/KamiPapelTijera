@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 69834710}
-  m_IndirectSpecularColor: {r: 0.12966412, g: 0.13386539, b: 0.31943288, a: 1}
+  m_IndirectSpecularColor: {r: 0.12966405, g: 0.13386539, b: 0.31943288, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -702,6 +702,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Espa\xF1ol"
       objectReference: {fileID: 0}
+    - target: {fileID: 1427127598671099296, guid: 92f86c811e0bb354db3188324b924ce3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1427127598671099297, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -895,7 +900,7 @@ PrefabInstance:
     - target: {fileID: 1427127598671099310, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1427127598671099310, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}
@@ -11344,6 +11349,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: English
       objectReference: {fileID: 0}
+    - target: {fileID: 1427127598671099296, guid: 92f86c811e0bb354db3188324b924ce3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1427127598671099297, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -11533,6 +11543,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: LocaleSelector, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427127598671099310, guid: 92f86c811e0bb354db3188324b924ce3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1427127598671099310, guid: 92f86c811e0bb354db3188324b924ce3,
         type: 3}

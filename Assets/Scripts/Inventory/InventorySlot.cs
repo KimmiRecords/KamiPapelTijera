@@ -106,6 +106,7 @@ public class InventorySlot : MonoBehaviour
 
     public void StartLerpSequence(float duration)
     {
+        slotStickerImageComponent.gameObject.SetActive(true);
         StartCoroutine(AlphaLerpSequence(duration));
     }
     public IEnumerator AlphaLerpSequence(float duration)
@@ -138,6 +139,7 @@ public class InventorySlot : MonoBehaviour
             yield return null;
         }
         ResourceParticleManager.Instance.isShowingRewardSticker = false;
+        slotStickerImageComponent.gameObject.SetActive(false);
     }
 
     protected IEnumerator SetLocalizedText(string fallbackText, TMPro.TextMeshProUGUI textElement)

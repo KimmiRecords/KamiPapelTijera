@@ -59,6 +59,12 @@ public class LevelManager : Singleton<LevelManager>
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            AllItemsCheat();
+        }
+
+
         if (Input.GetKey(KeyCode.LeftControl) && player != null)
         {
             if (Input.GetKeyDown(KeyCode.P))

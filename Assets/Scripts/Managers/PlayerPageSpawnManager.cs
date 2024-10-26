@@ -22,19 +22,20 @@ public class PlayerPageSpawnManager : Singleton<PlayerPageSpawnManager>
 
     void Start()
     {
-        EventManager.Subscribe(Evento.OnEncounterStart, SaveCurrentPosition);
+        //EventManager.Subscribe(Evento.OnEncounterStart, SaveCurrentPosition);
         EventManager.Subscribe(Evento.OnPageTurnStart, SetPlayerTargetPosition);
         EventManager.Subscribe(Evento.OnNewPageOpen, PlacePlayerInNewPage);
         _playerCC = _player.GetComponent<CharacterController>();
         lastUsedSpawn = _player.transform.position; //en principio, tu ultimo spawn es donde arranca el juego
     }
 
+    //subscribing methods
+
     public void SetPlayerTargetPosition(params object[] parameters)
     {
         targetPos = GetProjectedPositionInNewPage(_player.transform.position, (bool)parameters[1]);
     }
 
-    //subscribing methods
     public void PlacePlayerInNewPage(params object[] parameter)
     {
         //Debug.Log("place player");

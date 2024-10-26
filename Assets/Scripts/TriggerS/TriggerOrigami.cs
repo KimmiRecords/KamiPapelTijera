@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +41,22 @@ public class TriggerOrigami : TriggerScript
         originalStartSize = mainModule.startSize.constant;
         originalorbitalZ = velocityModule.orbitalZ.constant;
         //originalEmissionRate = mainModule.emission.rateOverTime.constant;
+
+        EventManager.Subscribe(Evento.OnPlayerDie, ForceTriggerExit);
+    }
+
+    protected override void OnDestroy()
+    {
+        if (!gameObject.scene.isLoaded)
+        {
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
+            EventManager.Unsubscribe(Evento.OnPlayerDie, ForceTriggerExit);
+        }
+    }
+
+    private void ForceTriggerExit(object[] parameters)
+    {
+        OnExitBehaviour();
     }
 
     public override void OnEnterBehaviour(Collider other)

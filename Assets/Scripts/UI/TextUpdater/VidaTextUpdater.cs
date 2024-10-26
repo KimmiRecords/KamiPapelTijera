@@ -23,7 +23,7 @@ public class VidaTextUpdater : TextUpdater
         if (parameters[1] is float) //y este la vida max
         {
             vidaFillable.fillAmount = (float)parameters[0] / (float)parameters[1];
-            vidaFillable.color = Color.Lerp(Color.red, verdeGrinch, vidaFillable.fillAmount);
+            //vidaFillable.color = Color.Lerp(Color.red, verdeGrinch, vidaFillable.fillAmount);
         }
     }
 }

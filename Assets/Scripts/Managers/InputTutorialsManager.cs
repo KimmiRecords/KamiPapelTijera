@@ -69,6 +69,7 @@ public class InputTutorialsManager : MonoBehaviour
         {
             EventManager.Unsubscribe(Evento.OnPlayerMove, HideWASDTutorial);
             EventManager.Unsubscribe(Evento.OnPlayerPressedSpace, HideSPACETutorial);
+            EventManager.Unsubscribe(Evento.OnAbuelaFold, HideABUELATutorial);
         }
     }
 }

@@ -69,6 +69,9 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
     [HideInInspector] public PlayerView _view;
     PlayerController _controller;
 
+    public GameObject nuevoTooltipPapelSalto;
+
+
     //Properties
     public float Speed
     {
@@ -136,13 +139,6 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         _model = new PlayerModel(this);
         _view = new PlayerView(this);
         _controller = new PlayerController(this);
-
-        EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
-        EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
-        EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
-        EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
-        EventManager.Subscribe(Evento.OnQuestRewardedStart, StartReceiveReward);
-        EventManager.Subscribe(Evento.OnQuestRewardedEnd, EndReceiveReward);
     }
 
     private void Start()
@@ -155,6 +151,12 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         augmentedJumpsLeft = augmentedJumpsMax;
         originalJumpForce = jumpForce;
         originalMaxSpeed = _maxSpeed;
+        EventManager.Subscribe(Evento.OnOrigamiStart, StartOrigamiCast);
+        EventManager.Subscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
+        EventManager.Subscribe(Evento.OnPlayerGetTijera, GetTijera);
+        EventManager.Subscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
+        EventManager.Subscribe(Evento.OnQuestRewardedStart, StartReceiveReward);
+        EventManager.Subscribe(Evento.OnQuestRewardedEnd, EndReceiveReward);
     }
     private void Update()
     {
@@ -308,7 +310,7 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         augmentedJumpsLeft = augmentedJumpsMax;
         myPaperPlaneHat.SetActive(true);
         AudioManager.instance.PlayByName("ShipSpawn", 2f);
-
+        nuevoTooltipPapelSalto.SetActive(true);
     }
     public void DestroyPaperPlaneHat(params object[] parameters)
     {
@@ -316,6 +318,8 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
         jumpForce = originalJumpForce;
         //sfx de hacer bollo y destruir
         myPaperPlaneHat.SetActive(false);
+        TooltipManager.Instance.HideTooltip();
+        nuevoTooltipPapelSalto.SetActive(false);
     }
     private void StartReceiveReward(object[] parameters)
     {
@@ -373,6 +377,8 @@ public class Player : Entity, IMojable, IGolpeable, ICurable, IWindable
             EventManager.Unsubscribe(Evento.OnOrigamiEnd, EndOrigamiCast);
             EventManager.Unsubscribe(Evento.OnPlayerGetTijera, GetTijera);
             EventManager.Unsubscribe(Evento.OnOrigamiGivePaperPlaneHat, GetPaperPlaneHat);
+            EventManager.Unsubscribe(Evento.OnQuestRewardedStart, StartReceiveReward);
+            EventManager.Unsubscribe(Evento.OnQuestRewardedEnd, EndReceiveReward);
         }
     }
 }

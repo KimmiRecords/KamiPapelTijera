@@ -11,6 +11,7 @@ public class TriggerViento : TriggerScript
     {
         base.OnTriggerEnter(other);
         other.GetComponent<IWindable>()?.StartAffectedByWind(windForce, windDirection);
+        //AudioManager.instance.PlayByName("viento_loop");
     }
 
     private void OnTriggerStay(Collider other)
@@ -22,5 +23,6 @@ public class TriggerViento : TriggerScript
     {
         base.OnTriggerExit(other);
         other.GetComponent<IWindable>()?.EndAffectedByWind();
+        //AudioManager.instance.StopByName("viento_loop");
     }
 }

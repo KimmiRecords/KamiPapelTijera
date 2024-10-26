@@ -131,12 +131,15 @@ public class ResourceParticleManager : Singleton<ResourceParticleManager>
         float elapsedTime = 0;
         sticker.SetTransparency(1);
 
-        while (elapsedTime < duration)
+        while (elapsedTime <= duration)
         {
             sticker.SetTransparency(Mathf.Lerp(1, 0, elapsedTime / duration));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        sticker.SetTransparency(0);
+
     }
     #endregion
 
