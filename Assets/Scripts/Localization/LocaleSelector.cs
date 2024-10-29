@@ -11,7 +11,7 @@ public class LocaleSelector : MonoBehaviour
    
     private void Start()
     {
-        StartCoroutine(SetLocale(0));
+        StartCoroutine(SetLocale(1));
     }
     public void BUTTON_ChangeLocale(int localeId)
     {
