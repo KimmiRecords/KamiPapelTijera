@@ -22,9 +22,6 @@ public class QuestDialogueTrigger : TriggerDialogue
         EventManager.Subscribe(Evento.OnDialogueWriteText, OnDialogueTextWritten);
     }
 
-
-
-
     //dialogos: 
     //el 0 es pedir la quest (first time)
     //el 1 es el fijo mientras la quest esta prendida
@@ -123,9 +120,10 @@ public class QuestDialogueTrigger : TriggerDialogue
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact);
+            EventManager.Unsubscribe(Evento.OnPlayerPressedE, Interact); //los triggers siempre estan atentos a que el player aprete E
             EventManager.Unsubscribe(Evento.OnQuestCompleted, CompleteQuest);
             EventManager.Unsubscribe(Evento.OnDialogueEnd, OnDialogueEnded);
+            EventManager.Unsubscribe(Evento.OnDialogueWriteText, OnDialogueTextWritten);
         }
     }
 }

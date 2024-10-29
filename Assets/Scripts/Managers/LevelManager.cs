@@ -30,6 +30,8 @@ public class LevelManager : Singleton<LevelManager>
 
     public Player player;
 
+    public bool enableCheats = true;
+
     protected override void Awake()
     {
         if (Instance != this && Instance != null)
@@ -59,25 +61,27 @@ public class LevelManager : Singleton<LevelManager>
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            AllItemsCheat();
-        }
 
-
-        if (Input.GetKey(KeyCode.LeftControl) && player != null)
+        if (enableCheats)
         {
             if (Input.GetKeyDown(KeyCode.P))
             {
                 AllItemsCheat();
             }
 
-            if (Input.GetKeyDown(KeyCode.F12))
+            if (Input.GetKey(KeyCode.LeftControl) && player != null)
             {
-                GoToScene("MainMenu");
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    AllItemsCheat();
+                }
+
+                if (Input.GetKeyDown(KeyCode.F12))
+                {
+                    GoToScene("MainMenu");
+                }
             }
         }
-
     }
 
     public void GiveSprintBoots()

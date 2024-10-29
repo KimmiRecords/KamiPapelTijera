@@ -35,6 +35,8 @@ public class QuestManager : Singleton<QuestManager>
         EventManager.Subscribe(Evento.OnResourceUpdated, CheckQuests);
         EventManager.Subscribe(Evento.OnAbuelaDropoff, SetAbuelaDropoff);
         EventManager.Subscribe(Evento.OnQuestDelivered, GiveReward);
+        //clear all quests
+        //quests.Clear();
     }
 
     private void GiveReward(params object[] parameters)
