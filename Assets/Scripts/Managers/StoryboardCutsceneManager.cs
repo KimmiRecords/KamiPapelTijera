@@ -14,6 +14,7 @@ public class StoryboardCutsceneManager : MonoBehaviour
     [SerializeField] GameObject _endingSplash; //aparece cuando termina el dialogo
 
     bool _waitingForInput;
+    public bool closeAppOnDialogueEnd = true;
 
     private void Start()
     {
@@ -42,17 +43,6 @@ public class StoryboardCutsceneManager : MonoBehaviour
         }
     }
 
-    public void FakePlayerInput()
-    {
-        if (_waitingForInput)
-        {
-            _waitingForInput = false;
-            ChangeScene();
-        }
-
-        EventManager.Trigger(Evento.OnPlayerPressedE);
-    }
-
     public void ShowEndingSplash(params object[] parameter)
     {
         //funciona sin parametros
@@ -66,7 +56,24 @@ public class StoryboardCutsceneManager : MonoBehaviour
     public void ChangeScene(params object[] parameter)
     {
         //print("change scene");
-        LevelManager.Instance.GoToScene(_sceneToLoadOnDialogueEnd);
+
+        if (closeAppOnDialogueEnd)
+        {
+            StartCoroutine(CloseApp());
+        }
+        else
+        {
+            LevelManager.Instance.GoToScene(_sceneToLoadOnDialogueEnd);
+        }
+
+    }
+
+    //a couroutine that waits 1 second and closes the app
+    public IEnumerator CloseApp()
+    {
+        yield return new WaitForSeconds(1);
+        Debug.Log("app closed");
+        Application.Quit();
     }
 
     private void OnDestroy()
