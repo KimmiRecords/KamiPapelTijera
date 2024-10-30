@@ -21,12 +21,11 @@ public class StoryboardCutsceneManager : MonoBehaviour
         Debug.Log("storyboardmanager start");
         Cursor.lockState = CursorLockMode.Confined;
         EventManager.Subscribe(Evento.OnDialogueEnd, ShowEndingSplash);
+        AudioManager.instance.StopAll();
+        AudioManager.instance.PlayByName("IntroStoryboardLoop");
 
         //arranca el dialogo de una
         _autoDialogo.StartDialogue();
-
-        AudioManager.instance.StopAll();
-        AudioManager.instance.PlayByName("IntroStoryboardLoop");
     }
 
     void Update()

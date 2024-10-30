@@ -65,7 +65,7 @@ public class InputTutorialsManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (gameObject.scene.isLoaded)
+        if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerMove, HideWASDTutorial);
             EventManager.Unsubscribe(Evento.OnPlayerPressedSpace, HideSPACETutorial);

@@ -30,7 +30,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public Player player;
 
-    public bool enableCheats = true;
+    public bool enablePCheat = false;
 
     protected override void Awake()
     {
@@ -62,24 +62,24 @@ public class LevelManager : Singleton<LevelManager>
     public void Update()
     {
 
-        if (enableCheats)
+        if (enablePCheat)
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                AllItemsCheat();
+            }
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl) && player != null)
         {
             if (Input.GetKeyDown(KeyCode.P))
             {
                 AllItemsCheat();
             }
 
-            if (Input.GetKey(KeyCode.LeftControl) && player != null)
+            if (Input.GetKeyDown(KeyCode.F12))
             {
-                if (Input.GetKeyDown(KeyCode.P))
-                {
-                    AllItemsCheat();
-                }
-
-                if (Input.GetKeyDown(KeyCode.F12))
-                {
-                    GoToScene("MainMenu");
-                }
+                GoToScene("MainMenu");
             }
         }
     }

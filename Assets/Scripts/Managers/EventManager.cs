@@ -99,10 +99,8 @@ public class EventManager
 
     public static void Trigger(Evento evento, params object[] parameters)
     {
-        //Debug.Log("event manager - trigger");
-        if (_events.ContainsKey(evento))
+        if (_events.ContainsKey(evento) && _events[evento] != null) // Verifica null
         {
-            //Debug.Log("tengo al evento en dict, lo disparo");
             _events[evento](parameters);
         }
     }

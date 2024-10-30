@@ -16,9 +16,9 @@ public class DialogueManager : Singleton<DialogueManager>
     [HideInInspector] public bool isShowing = false;
     public bool lockedByAnimation = false;
 
-    protected override void Awake()
+
+    void Start()
     {
-        base.Awake();
         EventManager.Subscribe(Evento.OnPlayerPressedE, CheckPlayerInput);
     }
 
@@ -69,14 +69,11 @@ public class DialogueManager : Singleton<DialogueManager>
         for (int i = 0; i < dialogue.events.Length; i++)
         {
             dialogue.currentText++;
-            EventManager.Trigger(Evento.OnDialogueWriteText, dialogue);
-
             yield return StartCoroutine(SetLocalizedText(dialogue.events[i].text, dialogueGlobeText));
             yield return StartCoroutine(SetLocalizedText(dialogue.events[i].speakerName, dialogueGlobeSpeaker));
-
             npcQueTeHablaImage.sprite = dialogue.events[i].sprite;
-
             SetNativeSize(npcQueTeHablaImage.sprite);
+            EventManager.Trigger(Evento.OnDialogueWriteText, dialogue);
 
             yield return new WaitForEndOfFrame();
             waitingForInput = true;
@@ -92,19 +89,16 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private IEnumerator SetLocalizedText(string fallbackText, TMPro.TextMeshProUGUI textElement)
     {
-        // Primero asignamos el texto por defecto
         //textElement.text = fallbackText;
 
         if (!string.IsNullOrEmpty(fallbackText))
         {
-            // Obtenemos la tabla de localización
             var tableOperation = LocalizationSettings.StringDatabase.GetTableAsync("DialogueTable");
             yield return tableOperation;
 
             StringTable stringTable = tableOperation.Result;
             if (stringTable != null)
             {
-                // Verificamos si la clave existe en la tabla
                 var entry = stringTable.GetEntry(fallbackText);
                 if (entry != null && !string.IsNullOrEmpty(entry.GetLocalizedString()))
                 {

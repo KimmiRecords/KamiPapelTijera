@@ -129,10 +129,11 @@ public class Rocoso : Enemy
     {
         //Debug.Log("arranco corrutina de morir");
         isDead = true; //necesito un bool para que se haga el cambio de state. pero todavia no quiero morir posta
-
+        float timer = 0;
         //espero a que termine la animacion de muerte
-        while (!deathAnimationEnded)
+        while (!deathAnimationEnded && timer < 3)
         {
+            timer += Time.deltaTime;
             yield return null;
         }
 
