@@ -58,8 +58,8 @@ public class EncounterManager : MonoBehaviour
             return;
         }
 
-        AudioManager.instance.PlayByName("EstampesPagodes_Battle_Intro");
-        AudioManager.instance.PlayOnEnd("EstampesPagodes_Battle_Intro", "MemoFloraBattleLoop01");
+        AudioManager.instance.PlayByName("MemoFloraBattleLoop01");
+        //AudioManager.instance.PlayOnEnd("EstampesPagodes_Battle_Intro", "MemoFloraBattleLoop01");
         firstTime = false;
     }
 
@@ -67,7 +67,7 @@ public class EncounterManager : MonoBehaviour
     {
         AudioManager.instance.StopAllCoroutines();
         AudioManager.instance.StopByName("MemoFloraBattleLoop01");
-        AudioManager.instance.StopByName("EstampesPagodes_Battle_Intro");
+        //AudioManager.instance.StopByName("EstampesPagodes_Battle_Intro");
         AudioManager.instance.PlayByName("MemoFloraPostBattle01");
         AudioManager.instance.PlayByName("QuestCompleted02", 2f);
         AudioManager.instance.PlayOnEnd("MemoFloraPostBattle01", "MemoFloraMainLoop01");

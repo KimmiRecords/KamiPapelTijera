@@ -4,14 +4,24 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
+public enum LocaleId
+{
+    Spanish = 0,
+    English = 1
+}
 public class LocaleSelector : MonoBehaviour
 {
     bool _active = false;
+    public bool SetStartingLocale = true;
+    public LocaleId StartingLocale = LocaleId.Spanish;
 
-   
+
     private void Start()
     {
-        StartCoroutine(SetLocale(1));
+        if (SetStartingLocale)
+        {
+            StartCoroutine(SetLocale((int)StartingLocale));
+        }
     }
     public void BUTTON_ChangeLocale(int localeId)
     {
