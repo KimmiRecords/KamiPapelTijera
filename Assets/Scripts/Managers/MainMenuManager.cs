@@ -11,6 +11,8 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] string sceneToLoadOnDialogueEnd;
 
+    public GameObject LoadingAnimationCanvas;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -47,6 +49,8 @@ public class MainMenuManager : MonoBehaviour
     public void ChangeScene(params object[] parameter)
     {
         //print("change scene");
+
+        LoadingAnimationCanvas.SetActive(true);
         LevelManager.Instance.GoToScene(sceneToLoadOnDialogueEnd);
     }
 
