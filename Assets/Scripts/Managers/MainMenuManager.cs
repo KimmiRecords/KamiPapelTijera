@@ -16,11 +16,14 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        EventManager.Subscribe(Evento.OnDialogueEnd, ChangeScene);
+
+        //events
+        EventManager.Subscribe(Evento.OnDialogueEnd, OnDialogueEnd);
+
+
         AudioManager.instance.StopAll();
         AudioManager.instance.PlayByName("4S_IntroBigChords");
         AudioManager.instance.PlayByName("ForestAtNight");
-
     }
 
     public void OnNewGameButtonDown()
@@ -29,9 +32,9 @@ public class MainMenuManager : MonoBehaviour
         if (_isNewGameButtonDown && !_dialogueStarted)
         {
             _autoDialogo.StartDialogue();
+            StartAsyncLoadingOfNextScene();
             AudioManager.instance.StopByName("4S_IntroBigChords");
             AudioManager.instance.StopByName("ForestAtNight");
-
             AudioManager.instance.PlayByName("IntroStoryboardLoop");
 
             _dialogueStarted = true;
@@ -46,19 +49,22 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void ChangeScene(params object[] parameter)
+    public void StartAsyncLoadingOfNextScene()
     {
-        //print("change scene");
+        LevelManager.Instance.StartAsyncLoadingOfNextScene(sceneToLoadOnDialogueEnd);
+    }
 
+    public void OnDialogueEnd(params object[] parameter)
+    {
         LoadingAnimationCanvas.SetActive(true);
-        LevelManager.Instance.GoToScene(sceneToLoadOnDialogueEnd);
+        LevelManager.Instance.LoadThePreLoadedScene();
     }
 
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
-            EventManager.Unsubscribe(Evento.OnDialogueEnd, ChangeScene);
+            EventManager.Unsubscribe(Evento.OnDialogueEnd, OnDialogueEnd);
             //AudioManager.instance.StopByName("IntroStoryboardLoop");
         }
     }

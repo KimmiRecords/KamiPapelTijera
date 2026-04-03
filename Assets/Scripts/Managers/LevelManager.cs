@@ -31,6 +31,7 @@ public class LevelManager : Singleton<LevelManager>
     public Player player;
 
     public bool enablePCheat = false;
+    private bool _readyToGo;
 
     protected override void Awake()
     {
@@ -107,6 +108,39 @@ public class LevelManager : Singleton<LevelManager>
     public void GoToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void StartAsyncLoadingOfNextScene(string sceneName)
+    {
+        StartCoroutine(AsyncLoadScene(sceneName));
+    }
+
+    IEnumerator AsyncLoadScene(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
+    
+        while (!asyncLoad.isDone)
+        {
+            Debug.Log("Loading progress: " + (asyncLoad.progress * 100) + "%");
+
+            if (asyncLoad.progress >= 0.9f && _readyToGo)
+            {
+                // La escena está cargada, pero no se ha activado
+                // Aquí puedes mostrar una pantalla de carga o realizar otras acciones antes de activar la escena
+                // Por ejemplo, podrías esperar a que el diálogo termine antes de activar la escena
+                // yield return new WaitUntil(() => dialogueHasEnded);
+                asyncLoad.allowSceneActivation = true; // Activa la escena cuando estés listo
+            }
+    
+            yield return null; // Espera un frame antes de continuar el bucle
+        }
+    }
+
+    public void LoadThePreLoadedScene()
+    {
+        //we gotta tell the ienumerator that we're ready to go
+        _readyToGo = true;
     }
 
     public void AllItemsCheat()
