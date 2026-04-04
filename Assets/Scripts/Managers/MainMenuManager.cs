@@ -51,12 +51,39 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartAsyncLoadingOfNextScene()
     {
+        // Verificar que LevelManager exista
+        if (LevelManager.Instance == null)
+        {
+            Debug.LogError("LevelManager.Instance es NULL en MainMenuManager");
+            return;
+        }
+
+        Debug.Log("[MainMenuManager] Llamando a LevelManager.StartAsyncLoadingOfNextScene()");
         LevelManager.Instance.StartAsyncLoadingOfNextScene(sceneToLoadOnDialogueEnd);
     }
 
     public void OnDialogueEnd(params object[] parameter)
     {
+        Debug.Log("[MainMenuManager] OnDialogueEnd() llamado - Activando pantalla de carga");
         LoadingAnimationCanvas.SetActive(true);
+
+        // Forzar un frame para asegurar que la UI se actualice
+        StartCoroutine(ActivateSceneAfterUIRefresh());
+    }
+
+    private IEnumerator ActivateSceneAfterUIRefresh()
+    {
+        yield return null; // Esperar un frame
+        yield return null; // Un frame más por seguridad
+
+        Debug.Log("[MainMenuManager] Llamando a LoadThePreLoadedScene()");
+
+        if (LevelManager.Instance == null)
+        {
+            Debug.LogError("LevelManager.Instance es NULL al intentar cargar escena");
+            yield break;
+        }
+
         LevelManager.Instance.LoadThePreLoadedScene();
     }
 
