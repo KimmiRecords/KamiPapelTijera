@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEngine.Rendering.Universal;
 
 public class PostProcessManager : Singleton<PostProcessManager>
@@ -10,8 +9,8 @@ public class PostProcessManager : Singleton<PostProcessManager>
     [SerializeField] Volume bloomVolume;
 
     [SerializeField] float bloomLerpTime = 3;
-    [SerializeField] float maxBloom = 30f;
-    [SerializeField] float baseBloom = 3f;
+    [SerializeField] float maxBloomOnChangePage = 80f;
+    float baseBloom;
 
     ColorAdjustments colorAdjustment;
     Bloom bloom;
@@ -23,12 +22,15 @@ public class PostProcessManager : Singleton<PostProcessManager>
 
         if (bloomVolume.profile.TryGet<ColorAdjustments>(out colorAdj))
         {
+            Debug.Log("got color adjustment");
             colorAdjustment = colorAdj;
         }
 
         if (bloomVolume.profile.TryGet<Bloom>(out bloomAdj))
         {
+            Debug.Log("got bloom");
             bloom = bloomAdj;
+            baseBloom = bloom.intensity.value;
         }
     }
 
@@ -49,14 +51,14 @@ public class PostProcessManager : Singleton<PostProcessManager>
         float t = 0;
         while (t < bloomLerpTime)
         {
-            bloom.intensity.value = Mathf.Lerp(baseBloom, maxBloom, t);
+            bloom.intensity.value = Mathf.Lerp(baseBloom, maxBloomOnChangePage, t);
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         t = 0;
         while (t < bloomLerpTime)
         {
-            bloom.intensity.value = Mathf.Lerp(maxBloom, baseBloom, t);
+            bloom.intensity.value = Mathf.Lerp(maxBloomOnChangePage, baseBloom, t);
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
