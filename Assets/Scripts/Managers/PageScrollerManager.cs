@@ -31,15 +31,21 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
     GameObject hojaAux; //solo la guardo para luego poder destruirla
 
+    bool _bossfightWasCompleted;
+
 
     protected override void Awake()
     {
         base.Awake();
         EventManager.Subscribe(Evento.OnPlayerPressedE, TriggerPageScroll);
         EventManager.Subscribe(Evento.OnPageFinishTurning, FinishTurning);
+        EventManager.Subscribe(Evento.OnEncounterEnd, OnEncounterEnd);
+
         activePageIndex = startingPage - 1;
         CheckSpheres(activePageIndex);
         GetAllParticleSystemsInChildren(glitterParent);
+        //esferaPrev.gameObject.SetActive(false);
+
     }
 
     private void Start()
@@ -58,14 +64,14 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         {
             if (esferaNext.triggerBool 
                 && !_isTurning 
-                && activePageIndex < pagesToToggle.Length - 1)
+                /*&& activePageIndex < pagesToToggle.Length - 1*/)
             {
                 ChangeToNextPage();
             }
 
             if (esferaPrev.triggerBool 
                 && !_isTurning 
-                && activePageIndex > 0)
+                /*&& activePageIndex > 0*/)
             {
                 ChangeToPrevPage();
             }
@@ -80,6 +86,9 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         pagesAnimators[activePageIndex].SetBool("isShrink", true);
 
         activePageIndex--; //el paso de pagina posta, para atras
+        //convert active page index teniendo en cuenta la cantidad total de paginas. tal que si estoy en la primera pagina y voy para atras  me mande a la ultima
+        activePageIndex = (activePageIndex + pagesToToggle.Length) % pagesToToggle.Length;
+
         _isNext = false; //isNext es una variable piola que mucha gente necesita
         _isTurning = true;
         esferaPrev.triggerBool = false;
@@ -97,6 +106,10 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
         pagesAnimators[activePageIndex].SetBool("isShrink", true);
 
         activePageIndex++; //el paso de pagina posta
+        //convert active page index teniendo en cuenta la cantidad total de paginas. tal que si me paso, cicle de vuelta a la primera. asi cuando estoy en la ultima pagina, me manda a la primera. 
+        activePageIndex = activePageIndex % pagesToToggle.Length;
+
+
         _isNext = true; //isNext es una variable piola que mucha gente necesita
         _isTurning = true;
         esferaNext.triggerBool = false;
@@ -117,10 +130,15 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
     public void CheckSpheres(int activePageIndex)
     {
         //este metodo chequea, segun la currentPage, que esferas deberian estar activas
-        if (activePageIndex <= 0)
+        if (activePageIndex <= 0) //si estoy en la primera pagina...
         {
             esferaPrev.OnExitBehaviour();
             esferaPrev.gameObject.SetActive(false);
+            if (_bossfightWasCompleted)
+            {
+                esferaPrev.gameObject.SetActive(true);
+            }
+            
         }
         else
         {
@@ -128,15 +146,20 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
 
         }
 
-        if (activePageIndex >= pagesToToggle.Length - 1)
+        if (activePageIndex >= pagesToToggle.Length - 1) //si estoy en la ultima pagina...
         {
             esferaNext.OnExitBehaviour();
             esferaNext.gameObject.SetActive(false);
+            if (_bossfightWasCompleted)
+            {
+                esferaNext.gameObject.SetActive(true);
+            }
         }
         else
         {
             esferaNext.gameObject.SetActive(true);
         }
+
     }
     public IEnumerator CerrarPaginaCoroutine(float cerrarDelayTime) //cierro la pag actual
     {
@@ -208,12 +231,21 @@ public class PageScrollerManager : Singleton<PageScrollerManager>
             ps.Play();
         }
     }
+    void OnEncounterEnd(params object[] parameters)
+     {
+        if (!_bossfightWasCompleted)
+        {
+            _bossfightWasCompleted = true;
+            //CheckSpheres(activePageIndex);
+        }
+    }
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded)
         {
             EventManager.Unsubscribe(Evento.OnPlayerPressedE, TriggerPageScroll);
             EventManager.Unsubscribe(Evento.OnPageFinishTurning, FinishTurning);
+            EventManager.Unsubscribe(Evento.OnEncounterEnd, OnEncounterEnd);
         }
     }
 }

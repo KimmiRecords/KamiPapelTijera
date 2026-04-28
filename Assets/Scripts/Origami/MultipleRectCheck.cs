@@ -91,14 +91,14 @@ public class MultipleRectCheck : MonoBehaviour
             }
         }
 
-        if (arrastrando && !encimaDeAlgunRectangulo) //si no, end origami
-        {
-            //me salí de la ruta
-            arrastrando = false;
-            AudioManager.instance.PlayByName("Origami_Fail_Crumble", 1, 0.05f);
-            Debug.Log("invocación cancelada x salir de la ruta");
-            EndOrigami(desiredOrigami);
-        }
+        //if (arrastrando && !encimaDeAlgunRectangulo) //si no, end origami
+        //{
+        //    //me salí de la ruta
+        //    arrastrando = false;
+        //    AudioManager.instance.PlayByName("Origami_Fail_Crumble", 1, 0.05f);
+        //    Debug.Log("invocación cancelada x salir de la ruta");
+        //    EndOrigami(desiredOrigami);
+        //}
 
     }
 
